@@ -1,0 +1,99 @@
+{
+  "journey": [
+    {
+      "year": "11/2021-Present",
+      "location": "Woodinville, WA",
+      "title": "Drone Systems Engineer",
+      "description": "Led cross-team projects from requirements to deployment. Led technical support operations for the drone division, analyzing drone crashes and working with cross-functional teams to identify root causes and troubleshoot systems for manufacturing teams and customers. Streamlined production processes and automated support workflows.",
+      "type": "career",
+      "company": "Freefly Systems",
+      "projects": [
+        {
+          "name": "Technical Support Operations",
+          "description": "Built log reviewers and issue trackers",
+          "projectId": "support-tools"
+        },
+        {
+          "name": "Support Workflow Automation",
+          "description": "Automated support workflows for faster response",
+          "projectId": "support-tools"
+        },
+        {
+          "name": "Production Process Optimization",
+          "description": "Streamlined manufacturing processes",
+          "projectId": "support-tools"
+        }
+      ]
+    },
+    {
+      "year": "07/2020-10/2022",
+      "location": "Sarasota, FL",
+      "title": "Software Engineer",
+      "description": "Developed custom PX4 flight modes and integrated sensors using MAVLink/UAVCAN. Led software development and optimized GPS/obstacle avoidance systems.",
+      "type": "career",
+      "company": "Lumenier",
+      "projects": [
+        {
+          "name": "Custom Flight Modes",
+          "description": "Developed Toss to Launch and other PX4 modes",
+          "projectId": "flight-control"
+        },
+        {
+          "name": "Sensor Integration",
+          "description": "Integrated sensors using MAVLink and UAVCAN",
+          "projectId": "flight-control"
+        },
+        {
+          "name": "GPS & Obstacle Avoidance",
+          "description": "Optimized GPS and obstacle avoidance systems",
+          "projectId": "flight-control"
+        }
+      ]
+    },
+    {
+      "year": "08/2018-03/2020",
+      "location": "York, PA",
+      "title": "Robotics R&D Engineer",
+      "description": "Developed prototype software for autonomous surveillance robots. Implemented vision & navigation algorithms. Built HMI for collaborative robotic arm programming.",
+      "type": "career",
+      "company": "York Exponential",
+      "projects": [
+        {
+          "name": "Autonomous Surveillance Robots",
+          "description": "Developed prototype software for mobile robots",
+          "projectId": "york-exponential-robotics"
+        },
+        {
+          "name": "Vision & Navigation",
+          "description": "Implemented vision and navigation algorithms",
+          "projectId": "york-exponential-robotics"
+        },
+        {
+          "name": "Collaborative Robotics Interface",
+          "description": "Developed HMI for Universal Robot programming",
+          "projectId": "york-exponential-robotics"
+        }
+      ]
+    },
+    {
+      "year": "2015-2017",
+      "location": "Pullman, WA",
+      "title": "Master of Science in Computer Science",
+      "description": "Thesis: 'Development of Baton: A Novel Precision Delivery Drone' - combining data mining with precision engineering for autonomous systems.",
+      "type": "education",
+      "institution": "Washington State University",
+      "degree": "Master of Science in Computer Science",
+      "advisor": "Dr. Matthew E. Taylor, Assistant Professor",
+      "projectId": "precision-drone"
+    },
+    {
+      "year": "2011-2015",
+      "location": "Visakhapatnam, India",
+      "title": "Bachelor of Technology in Information Technology",
+      "description": "Bachelor's degree in Information Technology, developing passion for solving complex engineering problems and understanding system fundamentals.",
+      "type": "education",
+      "institution": "GITAM University",
+      "degree": "Bachelor of Technology in Information Technology"
+    }
+  ]
+}

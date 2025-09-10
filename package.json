@@ -1,0 +1,33 @@
+{
+  "name": "viresh-portfolio",
+  "version": "1.0.0",
+  "description": "Professional portfolio website for Viresh Duvvuri - Building Intelligence That Works",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "dev": "python3 -m http.server 8000",
+    "build": "echo 'No build step required for static site'",
+    "docker:build": "docker build -t viresh-portfolio .",
+    "docker:run": "docker run -p 8080:8080 viresh-portfolio",
+    "docker:compose": "docker-compose up -d",
+    "docker:stop": "docker-compose down",
+    "docker:logs": "docker-compose logs -f",
+    "deploy:runpod": "./scripts/deploy-runpod.sh",
+    "deploy:dockerhub": "./scripts/deploy-dockerhub.sh"
+  },
+  "keywords": [
+    "portfolio",
+    "website",
+    "robotics",
+    "ai-agents",
+    "engineering",
+    "automation"
+  ],
+  "author": "Viresh Duvvuri",
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {},
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

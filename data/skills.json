@@ -1,0 +1,20 @@
+{
+  "categories": [
+    {
+      "name": "Programming",
+      "skills": ["Python", "C++", "React", "SQL", "Android"]
+    },
+    {
+      "name": "Embedded Framework",
+      "skills": ["RTOS", "I2C", "UART", "SPI", "CAN", "STM32"]
+    },
+    {
+      "name": "Robotics Frameworks",
+      "skills": ["ROS", "ROS2", "PX4", "ArduPilot", "MAVLink", "MAVSDK", "PyMAVLink", "UAVCAN"]
+    },
+    {
+      "name": "OS & Version Control",
+      "skills": ["Linux", "Bash Scripting", "Windows", "Git", "TestRails", "Notion"]
+    }
+  ]
+}

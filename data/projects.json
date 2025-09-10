@@ -1,0 +1,202 @@
+{
+  "projects": [
+    {
+      "id": "drone-log-analysis",
+      "title": "AI-Powered Drone Log Analysis Tool",
+      "subtitle": "Real-time ULog processing with interactive AI chat - Transforms drone debugging from hours to minutes",
+      "description": "Web-based flight data analysis tool that processes PX4 drone ULog files with real-time AI analysis, comprehensive health checks, and interactive chat interface for flight-specific insights.",
+      "technologies": ["React", "Python Flask", "Ollama", "Llama 3.2", "Socket.IO", "Docker", "ULog Processing"],
+      "impact": "Transforms drone debugging from hours to minutes with automated analysis across 11+ health categories",
+      "timeline": "2024",
+      "category": "AI Agents",
+      "videos": [
+        {
+          "title": "AI-Powered Drone Flight Log Analysis in Action",
+          "url": "https://youtu.be/0mGi4_23IrY",
+          "description": "Live demonstration showing how the tool analyzes PX4 flight logs, provides instant health checks, and enables interactive chat with flight data using local AI."
+        }
+      ],
+      "links": [
+        {
+          "title": "GitHub Repository",
+          "url": "https://github.com/dviresh93/drone_log_assistant/tree/dev-main",
+          "description": "Complete source code and documentation"
+        }
+      ],
+      "details": {
+        "overview": "A comprehensive web-based solution for analyzing PX4 drone flight logs using AI. The tool processes ULog files in real-time, provides automated health checks across 11+ critical systems, and features an interactive chat interface powered by local Llama 3.2 AI model for flight-specific insights.",
+        "features": [
+          "Real-time AI analysis with streaming token-by-token responses",
+          "Comprehensive health checks for IMU, GPS, battery, actuators, and more",
+          "Interactive AI chat interface with flight data context",
+          "Visual pass/fail indicators with timestamp-precise error detection",
+          "ULog file parsing optimized for PX4 flight controllers",
+          "Exportable parameter diffs and application logs",
+          "Smart caching to avoid redundant analysis",
+          "Batch and single file processing support"
+        ],
+        "architecture": "Built with React frontend and Python Flask backend, connected via WebSocket for real-time updates. Uses Ollama server running local Llama 3.2 model for AI analysis. Deployed using Docker Compose for easy scaling and maintenance."
+      }
+    },
+    {
+      "id": "smart-grid",
+      "title": "Smart Grid Analytics",
+      "subtitle": "Energy systems optimization - Improved energy distribution efficiency, predictive maintenance",
+      "description": "AI agent for smart grid data analysis, optimizing energy distribution patterns and predicting system performance.",
+      "technologies": ["AI Agents", "Data Processing", "Optimization", "Predictive Analytics"],
+      "impact": "Improved energy distribution efficiency, predictive maintenance",
+      "timeline": "2024 - Present",
+      "category": "AI Agents",
+      "details": {
+        "overview": "Created an AI agent system for analyzing smart grid data to optimize energy distribution patterns and predict system performance. The solution processes real-time grid data to make intelligent decisions about energy routing and load balancing.",
+        "features": [
+          "Real-time grid data processing and analysis",
+          "Predictive modeling for demand forecasting",
+          "Automated load balancing optimization",
+          "System health monitoring and maintenance alerts"
+        ]
+      }
+    },
+    {
+      "id": "travel-app",
+      "title": "Travel Recommendation App",
+      "subtitle": "Personalized AI planning system - Personalized travel experiences, automated itinerary generation",
+      "description": "Intelligent recommendation engine combining user preferences with real-time information for personalized experiences.",
+      "technologies": ["React", "AI/ML", "Recommendation Systems", "API Integration"],
+      "impact": "Personalized travel experiences, automated itinerary generation",
+      "timeline": "2024 - Present",
+      "category": "AI Agents",
+      "details": {
+        "overview": "Built an intelligent recommendation engine that combines user preferences, historical travel data, and real-time information to create personalized travel experiences and automated itinerary suggestions.",
+        "features": [
+          "Personalized destination recommendations",
+          "Automated itinerary planning and optimization",
+          "Real-time price and availability tracking",
+          "User preference learning and adaptation"
+        ]
+      }
+    },
+    {
+      "id": "precision-drone",
+      "title": "Precision Delivery Drone (Baton)",
+      "subtitle": "Master's thesis project - Research foundation for autonomous delivery systems",
+      "description": "Coaxial copter designed for precise payload delivery using controlled descent mechanism. Developed as Master's thesis at WSU under Dr. Matthew E. Taylor's supervision.",
+      "technologies": ["Robotics", "Autonomous Systems", "C++", "Navigation Algorithms", "PX4", "Flight Control"],
+      "impact": "Research foundation for autonomous delivery systems",
+      "timeline": "2015-2017",
+      "category": "Robotics",
+      "videos": [
+        {
+          "title": "Just for FUN : My ever drone",
+          "url": "https://www.youtube.com/watch?v=BxXmi9S9dr0",
+          "description": "First ever RC drone built - coax motor with lipo battery, RC receiver. Goes straight up with throttle command. First mock-up of the Baton drone project."
+        },
+        {
+          "title": "Baton Drone - Drop and recovery - Functionality test simulation",
+          "url": "https://www.youtube.com/watch?v=SCrroi1DFfE",
+          "description": "Real-world simulation demonstrating controlled descent mechanism. Control loops activate when dropped from aerial vehicle, regains control, then descends to programmed target location."
+        }
+      ],
+      "media": [
+        {
+          "type": "image",
+          "title": "Baton Drone Hardware",
+          "url": "media/IMG_20180330_131540391.jpg",
+          "description": "Physical prototype of the Baton precision delivery drone showing coaxial rotor design and payload delivery mechanism."
+        },
+        {
+          "type": "image",
+          "title": "JCATI Conference Poster 2018",
+          "url": "media/JCATI_Poster_2018.jpg",
+          "description": "Research poster presenting Baton: A Low-Cost Aerial Delivery Vehicle at JCATI Conference 2018, showcasing evolution of design and flight control software."
+        }
+      ],
+      "details": {
+        "overview": "Master's thesis project developing 'Baton', a precision delivery drone with advanced navigation algorithms and autonomous decision-making capabilities. The objective was to deliver payloads precisely using controlled descent mechanism. This project marked the beginning of my journey into robotics and autonomous systems.",
+        "features": [
+          "Autonomous navigation and path planning",
+          "Precision delivery mechanisms with controlled descent",
+          "Drop and recovery functionality",
+          "Target location programming and navigation",
+          "Coaxial rotor design for stability"
+        ]
+      }
+    },
+    {
+      "id": "flight-control",
+      "title": "Advanced Flight Control Systems (Lumenier)",
+      "subtitle": "Custom modes & sensor integration - Enhanced flight capabilities in challenging environments, GPS-denied operations",
+      "description": "Developed custom PX4 flight modes including Toss-to-Launch and room surveillance systems with 360° obstacle avoidance capabilities.",
+      "technologies": ["PX4", "MAVLink", "UAVCAN", "LiDAR", "Optical Flow", "Sensor Integration"],
+      "impact": "Enhanced flight capabilities in challenging environments, GPS-denied operations",
+      "timeline": "2020-2022",
+      "category": "Robotics",
+      "videos": [
+        {
+          "title": "Room surveillance simulation PX4 - obstacle avoidance, gps/gps denied position hold",
+          "url": "https://www.youtube.com/watch?v=SHDK3_jQy_o",
+          "description": "Surveillance drone with 3 LiDAR sensors per arm for 360° coverage, optical flow sensors for z-plane obstacle avoidance. Enables position hold under different lighting conditions with/without GPS."
+        },
+        {
+          "title": "Toss to launch - custom flight mode - PX4",
+          "url": "https://www.youtube.com/watch?v=8Z5y0LJhlJo",
+          "description": "Custom flight mode implementation: drone detects freefall when tossed, applies high throttle to break falling velocity, stabilizes, then transitions to programmed actions. Implemented in 2021 before official PX4 support."
+        }
+      ],
+      "details": {
+        "overview": "Developed custom flight modes in PX4 flight controller for surveillance and specialized launch operations. Created room surveillance system for abandoned buildings and rescue operations, plus innovative toss-to-launch functionality.",
+        "features": [
+          "Toss-to-launch custom flight mode with freefall detection",
+          "360° obstacle avoidance with multiple LiDAR sensors",
+          "GPS-denied position hold with optical flow",
+          "Multi-lighting condition operation capability",
+          "Room surveillance automation for first responders"
+        ]
+      }
+    },
+    {
+      "id": "support-tools",
+      "title": "Support Automation Tools",
+      "subtitle": "Cross-functional integration systems - 40% reduction in support tickets, 30% improvement in team productivity",
+      "description": "Developed diagnostic infrastructure and automated workflows, achieving 40% reduction in support tickets.",
+      "technologies": ["Python", "Automation", "Diagnostic Tools", "Documentation Systems"],
+      "impact": "40% reduction in support tickets, 30% improvement in team productivity",
+      "timeline": "2021-Present",
+      "category": "Automation",
+      "details": {
+        "overview": "Engineered comprehensive diagnostic tools and automated workflows to streamline customer support operations. This experience revealed the potential for automation in customer-facing roles, sparking the transition to AI agent development.",
+        "features": [
+          "Automated diagnostic systems",
+          "Workflow automation tools",
+          "Comprehensive documentation generation",
+          "Integration with existing support systems"
+        ]
+      }
+    },
+    {
+      "id": "york-exponential-robotics",
+      "title": "Robotics R&D Engineer",
+      "subtitle": "York Exponential projects - Multi-Robot Control System focusing on platform independence",
+      "description": "Developed prototype software for autonomous surveillance mobile robots and Human Machine Interface for collaborative robotic arm welding application.",
+      "technologies": ["Python", "ROS2", "Kivy", "Universal Robot"],
+      "impact": "Multi-Robot Control System focusing on platform independence",
+      "timeline": "2018-2020",
+      "category": "Robotics",
+      "videos": [
+        {
+          "title": "Weld bot HMI (Human Machine Interface)",
+          "url": "https://www.youtube.com/watch?v=GWhB5x7PyIE",
+          "description": "Interface designed to help welding robot operators program robots with minimal clicks. UI developed using Kivy framework in Python, communicating with robot controller via ROS2."
+        }
+      ],
+      "details": {
+        "overview": "Developed prototype software for in-house autonomous surveillance mobile robots and Human Machine Interface for collaborative robotic arm welding applications.",
+        "features": [
+          "Prototype software for autonomous surveillance mobile robots",
+          "Human Machine Interface for Universal Robot welding application",
+          "Multi-Robot Control System with platform independence"
+        ]
+      }
+    }
+  ]
+}
