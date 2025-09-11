@@ -204,8 +204,16 @@ class PortfolioApp {
             
             if (profile.contact.email) {
                 contactLinks.innerHTML += `
-                    <a href="mailto:${profile.contact.email}" title="Email">
+                    <a href="#" onclick="showEmailPopup('${profile.contact.email}')" title="Show Email">
                         <i class="fas fa-envelope"></i>
+                    </a>
+                `;
+            }
+            
+            if (profile.contact.resume) {
+                contactLinks.innerHTML += `
+                    <a href="${profile.contact.resume}" title="Download Resume" download>
+                        <i class="fas fa-download"></i>
                     </a>
                 `;
             }
@@ -497,8 +505,9 @@ class PortfolioApp {
             profileImage: "VD",
             contact: {
                 linkedin: "https://linkedin.com/in/viresh-duvvuri/",
-                github: "#",
-                email: "viresh@example.com"
+                github: "https://github.com/dviresh93",
+                email: "vireshduvvuri@gmail.com",
+                resume: "resume/Viresh_Duvvuri_Resume.pdf"
             }
         };
     }
@@ -612,3 +621,117 @@ window.addEventListener('resize', () => {
 });
 
 // Timeline Detail Functions - Handled by timeline_detail.js
+
+// Email popup function
+function showEmailPopup(email) {
+    // Remove existing popup if any
+    const existingPopup = document.getElementById('email-popup');
+    if (existingPopup) {
+        existingPopup.remove();
+    }
+    
+    // Create popup
+    const popup = document.createElement('div');
+    popup.id = 'email-popup';
+    popup.innerHTML = `
+        <div class="email-popup-overlay" onclick="closeEmailPopup()">
+            <div class="email-popup-content" onclick="event.stopPropagation()">
+                <h3>Contact Email</h3>
+                <div class="email-display">${email}</div>
+                <div class="email-actions">
+                    <button onclick="copyEmailToClipboard('${email}')" class="copy-btn">
+                        <i class="fas fa-copy"></i> Copy Email
+                    </button>
+                    <button onclick="window.open('mailto:${email}', '_blank')" class="mail-btn">
+                        <i class="fas fa-envelope"></i> Send Email
+                    </button>
+                </div>
+                <button onclick="closeEmailPopup()" class="close-btn">×</button>
+            </div>
+        </div>
+    `;
+    
+    popup.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 10000;
+    `;
+    
+    document.body.appendChild(popup);
+}
+
+function closeEmailPopup() {
+    const popup = document.getElementById('email-popup');
+    if (popup) {
+        popup.remove();
+    }
+}
+
+function copyEmailToClipboard(email) {
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(email).then(() => {
+            showToast('Email copied to clipboard!');
+            closeEmailPopup();
+        }).catch(() => {
+            fallbackCopyToClipboard(email);
+        });
+    } else {
+        fallbackCopyToClipboard(email);
+    }
+}
+
+function fallbackCopyToClipboard(text) {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-999999px';
+    textArea.style.top = '-999999px';
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    
+    try {
+        document.execCommand('copy');
+        showToast('Email copied to clipboard!');
+        closeEmailPopup();
+    } catch (err) {
+        showToast('Please copy manually: ' + text);
+    }
+    
+    document.body.removeChild(textArea);
+}
+
+function showToast(message) {
+    // Create toast notification
+    const toast = document.createElement('div');
+    toast.className = 'toast-notification';
+    toast.textContent = message;
+    toast.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: var(--accent-color);
+        color: white;
+        padding: 12px 20px;
+        border-radius: 6px;
+        z-index: 10000;
+        animation: slideInUp 0.3s ease;
+        box-shadow: var(--shadow-lg);
+        font-weight: 500;
+    `;
+    
+    document.body.appendChild(toast);
+    
+    // Remove after 3 seconds
+    setTimeout(() => {
+        toast.style.animation = 'slideOutDown 0.3s ease';
+        setTimeout(() => {
+            if (document.body.contains(toast)) {
+                document.body.removeChild(toast);
+            }
+        }, 300);
+    }, 3000);
+}

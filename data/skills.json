@@ -14,7 +14,7 @@
     },
     {
       "name": "Robotics Frameworks",
-      "skills": ["ROS", "ROS2", "PX4", "ArduPilot", "MAVLink", "MAVSDK", "PyMAVLink", "UAVCAN"]
+      "skills": ["ROS", "ROS2", "PX4", "ArduPilot", "MAVLink", "MAVSDK", "PyMAVLink", "UAVCAN", "PlotJuggler", "Wireshark", "Rerun"]
     },
     {
       "name": "OS & Version Control",
