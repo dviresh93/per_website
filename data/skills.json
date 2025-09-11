@@ -5,6 +5,10 @@
       "skills": ["Python", "C++", "React", "SQL", "Android"]
     },
     {
+      "name": "Agentic AI Frameworks",
+      "skills": ["Langchain", "Langraph", "MCP", "RAG", "Prompt Engineering", "Orchestration", "Vibe Coding (Cursor, Claude CLI)"]
+    },
+    {
       "name": "Embedded Framework",
       "skills": ["RTOS", "I2C", "UART", "SPI", "CAN", "STM32"]
     },

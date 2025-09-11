@@ -40,40 +40,57 @@
     },
     {
       "id": "smart-grid",
-      "title": "Smart Grid Analytics",
-      "subtitle": "Energy systems optimization - Improved energy distribution efficiency, predictive maintenance",
+      "title": "GridCOP: Smart Grid Analytics",
+      "subtitle": "Agentic AI system for smart grid data analysis and operator decision support",
       "description": "AI agent for smart grid data analysis, optimizing energy distribution patterns and predicting system performance.",
-      "technologies": ["AI Agents", "Data Processing", "Optimization", "Predictive Analytics"],
+      "technologies": ["Python", "Langchain", "MCP", "Agentic RAG", "Orchestration", "Claude CLI", "Cursor"],
       "impact": "Improved energy distribution efficiency, predictive maintenance",
       "timeline": "2024 - Present",
       "category": "AI Agents",
+      "videos": [
+        {
+          "title": "Smart Grid Analytics Agent in Action",
+          "url": "https://youtu.be/lbg38E8qwRk",
+          "description": "Demonstration of the AI agent analyzing power data from smart grid utility database using Langchain framework."
+        }
+      ],
       "details": {
-        "overview": "Created an AI agent system for analyzing smart grid data to optimize energy distribution patterns and predict system performance. The solution processes real-time grid data to make intelligent decisions about energy routing and load balancing.",
+        "overview": "Developed using Langchain framework, this AI agent works on power data from the smart grid (utility data) stored in a SQL database. When users enter queries, the LLM first analyzes the query, queries the SQL database if additional context is needed, validates both the SQL query and fetched data, then generates responses with complete data and context.",
         "features": [
-          "Real-time grid data processing and analysis",
-          "Predictive modeling for demand forecasting",
-          "Automated load balancing optimization",
-          "System health monitoring and maintenance alerts"
+          "LLM-powered query analysis and understanding",
+          "Intelligent SQL database querying for additional context",
+          "Dual validation system for SQL queries and fetched data",
+          "Context-aware response generation with complete data analysis",
+          "Smart grid utility data processing and insights"
         ]
       }
     },
     {
       "id": "travel-app",
-      "title": "Travel Recommendation App",
-      "subtitle": "Personalized AI planning system - Personalized travel experiences, automated itinerary generation",
-      "description": "Intelligent recommendation engine combining user preferences with real-time information for personalized experiences.",
-      "technologies": ["React", "AI/ML", "Recommendation Systems", "API Integration"],
+      "title": "AI Travel Planner",
+      "subtitle": "Conversational AI travel agent - AI-powered itinerary generation with real-time travel information",
+      "description": "AI-powered travel planning application using Anthropic's Claude 3.5 Sonnet to generate personalized itineraries with conversational interface for modifications.",
+      "technologies": ["Python", "Streamlit", "LangChain", "Anthropic Claude", "DuckDuckGo Search"],
       "impact": "Personalized travel experiences, automated itinerary generation",
       "timeline": "2024 - Present",
       "category": "AI Agents",
+      "links": [
+        {
+          "title": "GitHub Repository",
+          "url": "https://github.com/dviresh93/travel_agent",
+          "description": "Complete source code and documentation"
+        }
+      ],
       "details": {
-        "overview": "Built an intelligent recommendation engine that combines user preferences, historical travel data, and real-time information to create personalized travel experiences and automated itinerary suggestions.",
+        "overview": "AI-powered travel planning application that generates personalized itineraries using Anthropic's Claude 3.5 Sonnet, LangChain, and Streamlit. Features a conversational interface allowing users to refine their travel plans through interactive chat, integrated with real-time web search for current travel information.",
         "features": [
-          "Personalized destination recommendations",
-          "Automated itinerary planning and optimization",
-          "Real-time price and availability tracking",
-          "User preference learning and adaptation"
-        ]
+          "AI-powered itinerary generation using Claude 3.5 Sonnet",
+          "Interactive chat interface for itinerary modifications",
+          "Real-time web search for travel and weather information",
+          "Responsive Streamlit web UI with modular architecture",
+          "Conversational refinement of travel plans"
+        ],
+        "architecture": "Built with Streamlit frontend and centralized TravelPlannerAgent backend, integrated with LangChain for AI orchestration and DuckDuckGo for real-time travel data retrieval."
       }
     },
     {
@@ -155,27 +172,8 @@
       }
     },
     {
-      "id": "support-tools",
-      "title": "Support Automation Tools",
-      "subtitle": "Cross-functional integration systems - 40% reduction in support tickets, 30% improvement in team productivity",
-      "description": "Developed diagnostic infrastructure and automated workflows, achieving 40% reduction in support tickets.",
-      "technologies": ["Python", "Automation", "Diagnostic Tools", "Documentation Systems"],
-      "impact": "40% reduction in support tickets, 30% improvement in team productivity",
-      "timeline": "2021-Present",
-      "category": "Automation",
-      "details": {
-        "overview": "Engineered comprehensive diagnostic tools and automated workflows to streamline customer support operations. This experience revealed the potential for automation in customer-facing roles, sparking the transition to AI agent development.",
-        "features": [
-          "Automated diagnostic systems",
-          "Workflow automation tools",
-          "Comprehensive documentation generation",
-          "Integration with existing support systems"
-        ]
-      }
-    },
-    {
       "id": "york-exponential-robotics",
-      "title": "Robotics R&D Engineer",
+      "title": "Human Machine Interface (HMI) for Weldbot",
       "subtitle": "York Exponential projects - Multi-Robot Control System focusing on platform independence",
       "description": "Developed prototype software for autonomous surveillance mobile robots and Human Machine Interface for collaborative robotic arm welding application.",
       "technologies": ["Python", "ROS2", "Kivy", "Universal Robot"],

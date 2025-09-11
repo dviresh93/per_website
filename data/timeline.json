@@ -1,27 +1,64 @@
 {
   "journey": [
     {
+      "year": "07/2024-Present",
+      "location": "Seattle, WA",
+      "title": "Agentic AI Consultant",
+      "description": "Architecting intelligent AI agents for smart grid analytics and decision-making systems at GRID-COOP.",
+      "detailedDescription": "As an Agentic AI consultant at GRID-COOP, I architect AI agents that can answer questions, present reports, and raise alerts on smart grid data. I developed GridCOP agent, which is part of GRID-COOP's RECOVER tool - a comprehensive analytics platform that models smart grid data to make predictions on power outages, helping operators and analysts plan troop deployment for power restoration.<br><br>GridCOP serves as an agentic extension of the RECOVER tool, enabling operators to chat about smart grid data and assisting in critical decision-making. The agent first understands the operator's question, then gathers relevant context to provide accurate answers. I developed GridCOP using agentic AI principles, allowing it to independently query databases, make additional tool calls as needed to gather relevant context, validate the data, and present comprehensive answers to users.<br><br>This role represents the culmination of my transition from robotics and drone systems engineering to intelligent automation, applying my systems engineering background to create AI agents that operate reliably in mission-critical environments.",
+      "responsibilities": [
+        "Architected AI agents for smart grid analytics and decision-making systems",
+        "Developed GridCOP agent as part of GRID-COOP's RECOVER analytics platform",
+        "Implemented agentic AI principles for autonomous database querying and context gathering"
+      ],
+      "detailedResponsibilities": [
+        "Architected AI agents capable of answering questions, presenting reports, and raising alerts on smart grid data",
+        "Developed GridCOP agent as an agentic extension of GRID-COOP's RECOVER analytics platform",
+        "Implemented intelligent query understanding and context gathering systems for operator decision-making support",
+        "Built autonomous database querying capabilities with additional tool call integration for comprehensive context",
+        "Designed data validation systems to ensure accuracy before presenting answers to users",
+        "Applied agentic AI principles to create independent, reliable AI agents for mission-critical smart grid operations"
+      ],
+      "type": "career",
+      "company": "GRID-COOP",
+      "projects": [
+        {
+          "name": "GridCOP: Smart Grid Analytics",
+          "description": "Agentic AI system for smart grid data analysis and operator decision support",
+          "projectId": "smart-grid",
+          "type": "featured",
+          "hasContent": true
+        }
+      ]
+    },
+    {
       "year": "11/2021-Present",
       "location": "Woodinville, WA",
       "title": "Drone Systems Engineer",
-      "description": "Led cross-team projects from requirements to deployment. Led technical support operations for the drone division, analyzing drone crashes and working with cross-functional teams to identify root causes and troubleshoot systems for manufacturing teams and customers. Streamlined production processes and automated support workflows.",
+      "description": "Systems engineer at a leading aerial cinematography company, leveraging PX4 expertise across drone platforms serving global customer base.",
+      "detailedDescription": "Freefly Systems is a leader in developing drone and camera systems for aerial cinematography, with two flagship drone platforms - Altax and Astro - both running PX4 opensource flight control software. Joining as a Systems Engineer, I leveraged my extensive experience with drone systems and the PX4 codebase to support their growing customer base across the USA and internationally.<br><br>Throughout my career at Freefly, I wore multiple hats - from integrating third-party payloads and modifying flight control systems to developing comprehensive test plans for software releases and automating production workflows. This diverse role exposed me to the full spectrum of drone system engineering, from low-level flight controller implementation to customer-facing technical support.<br><br>During my time at Freefly, I developed a keen interest in agentic AI systems, drawing parallels between autonomous drone operations and intelligent automation. This realization that workflows could be streamlined through intelligent systems sparked my transition into AI agent development, where I now apply my systems engineering background to create reliable, production-ready automation solutions.",
+      "responsibilities": [
+        "Led technical support operations analyzing drone crashes and troubleshooting field issues",
+        "Developed diagnostic tools and automated workflows for production and customer support",
+        "Implemented flight controller features and integrated third-party payloads with Freefly ecosystem"
+      ],
+      "detailedResponsibilities": [
+        "Implemented features in flight controller and integrated third-party payloads with Freefly's ecosystem",
+        "Developed tools to simulate and reproduce issues for enhanced analysis and diagnosis",
+        "Designed and executed exhaustive test plans to validate systems before every release cycle",
+        "Led initial efforts toward Remote ID compliance and developed app store for Freefly drones",
+        "Identified workflow gaps and developed tools to streamline production and customer support processes",
+        "Led technical support operations to analyze root causes of crashes and troubleshoot customer field issues"
+      ],
       "type": "career",
       "company": "Freefly Systems",
       "projects": [
         {
-          "name": "Technical Support Operations",
-          "description": "Built log reviewers and issue trackers",
-          "projectId": "support-tools"
-        },
-        {
-          "name": "Support Workflow Automation",
-          "description": "Automated support workflows for faster response",
-          "projectId": "support-tools"
-        },
-        {
-          "name": "Production Process Optimization",
-          "description": "Streamlined manufacturing processes",
-          "projectId": "support-tools"
+          "name": "Drone Log Analysis Tool",
+          "description": "AI-powered diagnostic system for automated drone log analysis",
+          "projectId": "drone-log-analysis",
+          "type": "featured",
+          "hasContent": true
         }
       ]
     },
@@ -29,24 +66,37 @@
       "year": "07/2020-10/2022",
       "location": "Sarasota, FL",
       "title": "Software Engineer",
-      "description": "Developed custom PX4 flight modes and integrated sensors using MAVLink/UAVCAN. Led software development and optimized GPS/obstacle avoidance systems.",
+      "description": "Lead software developer for drone systems operating in harsh conditions, collaborating with PX4 maintainers on cutting-edge solutions for first responders.",
+      "detailedDescription": "Lumenier is a daughter company of GetFPV, a leader in selling FPV drone parts online for hobbyists. I joined as a software developer for the drone team with the ambitious goal of developing a drone capable of operating in harsh conditions - GPS-denied environments, various lighting conditions, with advanced obstacle avoidance capabilities.<br><br>This role perfectly aligned with my passion for innovation and working on cutting-edge technologies in fast-paced environments. During my time at Lumenier, I had the exceptional opportunity to work closely with the maintainers of PX4 - the open source flight control software for drones and robotics. This collaboration deepened my understanding of drone systems while contributing to solutions that help first responders during their critical operations.<br><br>As lead software developer, I was part of a core 5-member team responsible for pushing the boundaries of what autonomous drone systems could achieve in challenging operational environments.",
+      "responsibilities": [
+        "Developed Toss-to-Launch and custom PX4 flight modes",
+        "Created room surveillance system with 360° obstacle avoidance",
+        "Led software development process and coordinated with PX4 maintainers"
+      ],
+      "detailedResponsibilities": [
+        "Wrote embedded code to integrate LiDAR and optical flow sensors for obstacle avoidance and position holding with/without GPS under various lighting conditions",
+        "Collaborated with engineering teams on sensor placement and conducted tests to determine operational thresholds of various drone components",
+        "Worked closely with PX4 maintainers for clean integration, testing, and deployment of flight control algorithms",
+        "Defined and executed comprehensive system tests to validate functional capabilities and implemented processes to identify and report bugs",
+        "Prototyped innovative features like toss-to-launch for future product roadmap development",
+        "Documented production workflows for microcontroller programming and drone software deployment"
+      ],
       "type": "career",
       "company": "Lumenier",
       "projects": [
         {
-          "name": "Custom Flight Modes",
-          "description": "Developed Toss to Launch and other PX4 modes",
-          "projectId": "flight-control"
+          "name": "Custom Toss-To-Launch implementation",
+          "description": "Developed Toss-to-Launch and custom PX4 flight modes",
+          "projectId": "flight-control",
+          "type": "featured",
+          "hasContent": true
         },
         {
-          "name": "Sensor Integration",
-          "description": "Integrated sensors using MAVLink and UAVCAN",
-          "projectId": "flight-control"
-        },
-        {
-          "name": "GPS & Obstacle Avoidance",
-          "description": "Optimized GPS and obstacle avoidance systems",
-          "projectId": "flight-control"
+          "name": "Obstacle avoidance & GPS denied navigation",
+          "description": "Drone surveillance system with 360° obstacle avoidance",
+          "projectId": "flight-control",
+          "type": "featured",
+          "hasContent": true
         }
       ]
     },
@@ -54,24 +104,22 @@
       "year": "08/2018-03/2020",
       "location": "York, PA",
       "title": "Robotics R&D Engineer",
-      "description": "Developed prototype software for autonomous surveillance robots. Implemented vision & navigation algorithms. Built HMI for collaborative robotic arm programming.",
+      "description": "Developed prototype software for autonomous surveillance robots and collaborative robotic systems.",
+      "detailedDescription": "Right after graduating from Washington State University with my Master's in Computer Science, I joined York Exponential's R&D team as a software developer. York Exponential specialized in automating small scale manufacturing facilities using collaborative robotic arms (Universal Robots). This was a new challenge for me as I had never worked with collaborative robotic arms before.<br><br>During my time there, I was exposed to various technologies like SLAM, ROS/ROS2 (Robot Operating System - publish/subscribe framework for robots), and computer vision. I used these technologies for rapid prototyping surveillance robots and developing human machine interface for Weld Bot - an application York Exponential developed to automate welding processes using collaborative robotic arms.",
+      "responsibilities": [
+        "Developed prototype software for in-house autonomous surveillance mobile robots",
+        "Built Human Machine Interface for Universal Robot welding applications",
+        "Implemented multi-robot control systems with platform independence"
+      ],
       "type": "career",
       "company": "York Exponential",
       "projects": [
         {
-          "name": "Autonomous Surveillance Robots",
-          "description": "Developed prototype software for mobile robots",
-          "projectId": "york-exponential-robotics"
-        },
-        {
-          "name": "Vision & Navigation",
-          "description": "Implemented vision and navigation algorithms",
-          "projectId": "york-exponential-robotics"
-        },
-        {
-          "name": "Collaborative Robotics Interface",
-          "description": "Developed HMI for Universal Robot programming",
-          "projectId": "york-exponential-robotics"
+          "name": "Human machine interface - Weld Bot",
+          "description": "Collaborative robotics interface and autonomous surveillance systems",
+          "projectId": "york-exponential-robotics",
+          "type": "featured",
+          "hasContent": true
         }
       ]
     },
@@ -79,12 +127,38 @@
       "year": "2015-2017",
       "location": "Pullman, WA",
       "title": "Master of Science in Computer Science",
-      "description": "Thesis: 'Development of Baton: A Novel Precision Delivery Drone' - combining data mining with precision engineering for autonomous systems.",
+      "description": "Graduate studies in Computer Science developing precision delivery drone from concept to working prototype.",
+      "detailedDescription": "After graduating with my bachelor's degree in Information Technology, my curiosity for the field of computers remained unsatisfied—there was so much more to learn. I decided to pursue a Master's in Computer Science at Washington State University, where I began working under Dr. Matthew E. Taylor in the Intelligent Robotics Learning Lab.<br><br>Initially focused on data science, I quickly became captivated by the world of robotics and realized the transformative power of automation to solve real-world problems. This exposure fundamentally shifted my perspective on what technology could achieve.<br><br>I began working on the development of the Baton Drone—a collaboration between three departments at Washington State University and a startup based in Seattle, WA. Leading this project from requirements gathering to a working prototype became the cornerstone of my Master's thesis and marked the beginning of my journey into robotics and autonomous systems.",
+      "responsibilities": [
+        "Led system design and cross-disciplinary collaboration, delivering proof-of-concept that secured second round of funding",
+        "Integrated Pixracer flight controller and implemented control algorithms for controlled descent to target location",
+        "Delivered working prototype capable of UAV-dropped precision delivery, securing third round of funding approval"
+      ],
+      "detailedResponsibilities": [
+        "Gathered initial requirements and designed system architecture for precision delivery drone",
+        "Collaborated with mechanical and electrical engineering students to experiment with various designs and component placements",
+        "Conducted proof-of-concept testing that secured second round of funding",
+        "Integrated Pixracer flight controller running ArduCopter firmware on coaxial drone platform",
+        "Implemented control equations in flight controller for controlled descent to target location",
+        "Defined comprehensive test plans and validated performance under various environmental conditions",
+        "Delivered working prototype capable of controlled descent from UAV drop to target location",
+        "Project approved for third round of funding before transitioning to full-time role at York Exponential"
+      ],
       "type": "education",
       "institution": "Washington State University",
       "degree": "Master of Science in Computer Science",
       "advisor": "Dr. Matthew E. Taylor, Assistant Professor",
-      "projectId": "precision-drone"
+      "thesis": "Development of Baton: A Novel Precision Delivery Drone",
+      "projectId": "precision-drone",
+      "projects": [
+        {
+          "name": "Precision Delivery Drone (Baton)",
+          "description": "Master's thesis project developing autonomous delivery drone with controlled descent mechanism",
+          "projectId": "precision-drone",
+          "type": "featured",
+          "hasContent": true
+        }
+      ]
     },
     {
       "year": "2011-2015",

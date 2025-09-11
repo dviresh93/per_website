@@ -1,0 +1,54 @@
+{
+  "certificates": [
+    {
+      "id": "agentic-ai-systems",
+      "title": "Agentic AI System Architectures and Design Patterns",
+      "issuer": "Analytics Vidhya",
+      "issueDate": "September 2025",
+      "credentialUrl": "https://courses.analyticsvidhya.com/certificates/2tkmadgrla",
+      "description": "Advanced course covering agentic AI system design patterns, architecture principles, and implementation strategies for building intelligent autonomous systems",
+      "skills": ["Agentic AI", "System Architecture", "Design Patterns", "AI Systems"],
+      "category": "AI/ML"
+    },
+    {
+      "id": "multi-agent-systems", 
+      "title": "Project: Building a Multi-Agent System for Software Engineering and Testing",
+      "issuer": "Analytics Vidhya",
+      "issueDate": "September 2025",
+      "credentialUrl": "https://courses.analyticsvidhya.com/certificates/v7tip2xxoq",
+      "description": "Hands-on project-based course focused on developing multi-agent systems for software engineering workflows, including automated testing and development processes",
+      "skills": ["Multi-Agent Systems", "Software Engineering", "Automated Testing", "Agent Orchestration"],
+      "category": "AI/ML"
+    },
+    {
+      "id": "rag-systems",
+      "title": "RAG Systems Essentials",
+      "issuer": "Analytics Vidhya", 
+      "issueDate": "May 2025",
+      "credentialUrl": "https://courses.analyticsvidhya.com/certificates/7i6ixzb0kn",
+      "description": "Comprehensive course covering Retrieval-Augmented Generation (RAG) systems, including vector databases, embedding techniques, and advanced retrieval strategies",
+      "skills": ["RAG", "Vector Databases", "Embeddings", "Information Retrieval"],
+      "category": "AI/ML"
+    },
+    {
+      "id": "coding-agents",
+      "title": "Coding Essentials for Agents",
+      "issuer": "Analytics Vidhya",
+      "issueDate": "March 2025", 
+      "credentialUrl": "https://courses.analyticsvidhya.com/certificates/iycndrsuvb",
+      "description": "Specialized programming course focusing on coding practices and patterns essential for developing AI agents and autonomous systems",
+      "skills": ["Agent Programming", "Python", "Autonomous Systems", "AI Development"],
+      "category": "Programming"
+    },
+    {
+      "id": "supervised-ml",
+      "title": "Supervised Machine Learning: Regression and Classification",
+      "issuer": "DeepLearning.AI (Coursera)",
+      "issueDate": "August 2024",
+      "credentialUrl": "https://www.coursera.org/account/accomplishments/verify/FXIX2QS9EDTZ",
+      "description": "Comprehensive machine learning course covering supervised learning algorithms, regression analysis, and classification techniques using Python, NumPy, and scikit-learn",
+      "skills": ["Machine Learning", "Python", "Scikit-learn", "Regression Analysis", "Classification", "NumPy"],
+      "category": "AI/ML"
+    }
+  ]
+}

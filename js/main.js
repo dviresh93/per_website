@@ -30,6 +30,7 @@ class PortfolioApp {
             console.log("Timeline rendered");
             
             this.renderProjects();
+            this.renderCertificates();
             console.log("Projects rendered");
             
             this.setupNavigation();
@@ -52,7 +53,8 @@ class PortfolioApp {
             'data/profile.json',
             'data/skills.json',
             'data/timeline.json',
-            'data/projects.json'
+            'data/projects.json',
+            'data/certificates.json'
         ];
 
         const promises = dataFiles.map(async (file) => {
@@ -66,13 +68,14 @@ class PortfolioApp {
             }
         });
 
-        const [profile, skills, timeline, projects] = await Promise.all(promises);
+        const [profile, skills, timeline, projects, certificates] = await Promise.all(promises);
         
         this.data = {
             profile: profile || this.getDefaultProfile(),
             skills: skills || this.getDefaultSkills(),
             timeline: timeline || this.getDefaultTimeline(),
-            projects: projects || this.getDefaultProjects()
+            projects: projects || this.getDefaultProjects(),
+            certificates: certificates || this.getDefaultCertificates()
         };
     }
 
@@ -254,22 +257,47 @@ class PortfolioApp {
 
             const timeline = this.data.timeline;
             let timelineHTML = "";
+            let currentSection = null;
 
             timeline.journey.forEach((item, index) => {
                 try {
+                    // Add section header if we're starting a new section
+                    if (item.type !== currentSection) {
+                        if (item.type === 'career') {
+                            timelineHTML += `
+                                <h2 class="timeline-section-header">
+                                    <i class="fas fa-briefcase"></i> Career
+                                </h2>
+                            `;
+                        } else if (item.type === 'education') {
+                            timelineHTML += `
+                                <h2 class="timeline-section-header">
+                                    <i class="fas fa-graduation-cap"></i> Education
+                                </h2>
+                            `;
+                        }
+                        currentSection = item.type;
+                    }
+                    
                     const companyInfo = item.company || item.institution || "";
                     
-                    // Create a shorter, cleaner description
-                    const descriptions = item.description ? item.description.split('.') : [];
-                    const shortDescription = descriptions.length > 0 ? descriptions[0] + '.' : "";
-                    const bulletPoints = descriptions.slice(1, 4).filter(d => d.trim().length > 0).map(d => d.trim()).slice(0, 3);
+                    // Use responsibilities if available, otherwise fall back to description parsing
+                    const responsibilityHTML = item.responsibilities ? `
+                        <ul class="role-responsibilities">
+                            ${item.responsibilities.map(resp => `<li>${resp}</li>`).join('')}
+                        </ul>
+                    ` : '';
                     
-                    const keyProjectsHTML = item.projects ? `
+                    const keyProjectsHTML = item.projects && item.projects.length > 0 ? `
                         <div class="timeline-projects">
-                            <h4>🔗 Key Projects:</h4>
-                            <div class="project-tags">
+                            <h4>Featured Projects:</h4>
+                            <div class="featured-projects-simple">
                                 ${item.projects.map(project => `
-                                    <span class="project-tag-small">${project.name}</span>
+                                    <div class="featured-project-card" onclick="event.stopPropagation(); showProject('${project.projectId}')">
+                                        <h5>${project.name}</h5>
+                                        <p>${project.description}</p>
+                                        <span class="learn-more">Click to learn more →</span>
+                                    </div>
                                 `).join("")}
                             </div>
                         </div>
@@ -287,19 +315,18 @@ class PortfolioApp {
                             </div>
                             <div class="project-card-body">
                                 <div class="career-summary">
-                                    ${shortDescription ? `<p class="career-highlight">${shortDescription}</p>` : ""}
-                                    ${bulletPoints.length > 0 ? `
-                                        <ul class="career-bullets">
-                                            ${bulletPoints.map(point => `<li>${point}</li>`).join("")}
-                                        </ul>
-                                    ` : ""}
+                                    <p class="career-highlight">${item.description}</p>
+                                    ${responsibilityHTML}
+                                </div>
+                                <div class="learn-more-section">
+                                    <button class="learn-more-btn" onclick="event.stopPropagation(); showTimelineDetail('${item.title.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")}')">Click me to learn more →</button>
                                 </div>
                                 ${keyProjectsHTML}
                             </div>
                         </div>
                     `;
                 } catch (itemError) {
-                    console.error("Error rendering timeline item:", item, itemError);
+                    console.error("Error rendering timeline item:", itemError, item);
                 }
             });
 
@@ -367,6 +394,41 @@ class PortfolioApp {
         if (dropdownContainer) {
             dropdownContainer.innerHTML = dropdownHTML;
         }
+    }
+
+    renderCertificates() {
+        const certificatesContainer = document.getElementById('certificates-container');
+        
+        if (!certificatesContainer || !this.data.certificates) return;
+
+        const certificates = this.data.certificates;
+        
+        // Render certificates list
+        let certificatesHTML = '';
+
+        certificates.certificates.forEach(certificate => {
+            certificatesHTML += `
+                <div class="certificate-card" data-category="${certificate.category}">
+                    <div class="certificate-card-header">
+                        <h3>${certificate.title}</h3>
+                        <p class="certificate-issuer">${certificate.issuer} • ${certificate.issueDate}</p>
+                    </div>
+                    <div class="certificate-card-body">
+                        <p>${certificate.description}</p>
+                        <div class="certificate-skills">
+                            ${certificate.skills.map(skill => `<span class="skill-tag">${skill}</span>`).join('')}
+                        </div>
+                        <div class="certificate-actions">
+                            <a href="${certificate.credentialUrl}" target="_blank" class="certificate-link">
+                                <i class="fas fa-external-link-alt"></i> View Certificate
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+
+        certificatesContainer.innerHTML = certificatesHTML;
     }
 
     setupNavigation() {
@@ -478,6 +540,20 @@ class PortfolioApp {
                     description: "A sample project description.",
                     category: "AI Agents",
                     timeline: "2024"
+                }
+            ]
+        };
+    }
+
+    getDefaultCertificates() {
+        return {
+            certificates: [
+                {
+                    id: "sample-cert",
+                    title: "Sample Certificate",
+                    issuer: "Sample Institution",
+                    issueDate: "2024",
+                    category: "Sample"
                 }
             ]
         };

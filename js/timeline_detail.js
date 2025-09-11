@@ -49,18 +49,16 @@ async function showTimelineDetail(title) {
                     </div>
                     
                     <div class="project-content">
-                        <h3><i class="fas fa-tasks"></i> Key Responsibilities</h3>
-                        <p>${roleData.description}</p>
+                        <h3><i class="fas fa-briefcase"></i> Role Overview</h3>
+                        <div class="academic-description">${roleData.detailedDescription || roleData.description}</div>
                         
-                        <h3><i class="fas fa-project-diagram"></i> Key Projects</h3>
-                        <div class="timeline-projects">
-                            ${roleData.projects.map(project => `
-                                <div class="career-project-item ${project.projectId ? 'clickable-project' : ''}" ${project.projectId ? `onclick="showProject('${project.projectId}')"` : ''}>
-                                    <h4>${project.name} ${project.projectId ? '<i class="fas fa-external-link-alt project-link-icon"></i>' : ''}</h4>
-                                    <p>${project.description}</p>
-                                </div>
-                            `).join('')}
-                        </div>
+                        <br>
+                        <h3><i class="fas fa-tasks"></i> Key Responsibilities</h3>
+                        <ul class="responsibilities-list">
+                            ${roleData.detailedResponsibilities ? roleData.detailedResponsibilities.map(resp => `<li>${resp}</li>`).join('') : roleData.responsibilities ? roleData.responsibilities.map(resp => `<li>${resp}</li>`).join('') : ''}
+                        </ul>
+                        
+                        ${renderProjectSections(roleData.projects)}
                         
                         <h3><i class="fas fa-trophy"></i> Impact & Achievements</h3>
                         <div class="achievements-grid">
@@ -99,19 +97,38 @@ async function showTimelineDetail(title) {
                             <p>${roleData.advisor}</p>
                         </div>
                         ` : ''}
+                        ${roleData.thesis ? `
+                        <div class="meta-item">
+                            <h4><i class="fas fa-scroll"></i> Thesis</h4>
+                            <p>${roleData.thesis}</p>
+                        </div>
+                        ` : ''}
                     </div>
                     
                     <div class="project-content">
-                        <h3><i class="fas fa-book"></i> Academic Focus</h3>
-                        <p>${roleData.description}</p>
+                        <h3><i class="fas fa-book"></i> Academic Journey</h3>
+                        <div class="academic-description">${roleData.detailedDescription || roleData.description}</div>
+                        
+                        <br>
+                        <h3><i class="fas fa-tasks"></i> Key Contributions</h3>
+                        <ul class="responsibilities-list">
+                            ${roleData.detailedResponsibilities ? roleData.detailedResponsibilities.map(resp => `<li>${resp}</li>`).join('') : roleData.responsibilities ? roleData.responsibilities.map(resp => `<li>${resp}</li>`).join('') : ''}
+                        </ul>
                         
                         ${roleData.projectId ? `
-                            <h3><i class="fas fa-project-diagram"></i> Related Project</h3>
+                            <h3><i class="fas fa-folder-open"></i> Project Details</h3>
                             <div class="career-project-item clickable-project" onclick="showProject('${roleData.projectId}')">
-                                <h4>View Thesis Project <i class="fas fa-external-link-alt project-link-icon"></i></h4>
-                                <p>See detailed project information, videos, and research materials</p>
+                                <h4>Precision Delivery Drone (Baton) <i class="fas fa-external-link-alt project-link-icon"></i></h4>
+                                <p>View thesis project details, videos, and research materials</p>
                             </div>
                         ` : ''}
+                        
+                        <br>
+                        
+                        <h3><i class="fas fa-trophy"></i> Impact & Achievements</h3>
+                        <div class="achievements-grid">
+                            ${getEducationAchievements(roleData.title)}
+                        </div>
                     </div>
                 </div>
             `;
@@ -140,25 +157,74 @@ async function showTimelineDetail(title) {
     }
 }
 
+function renderProjectSections(projects) {
+    if (!projects || projects.length === 0) return '';
+    
+    const featuredProjects = projects.filter(project => project.type === 'featured');
+    
+    if (featuredProjects.length === 0) return '';
+    
+    return `
+        <h3><i class="fas fa-project-diagram"></i> Project Details</h3>
+        <div class="timeline-projects">
+            ${featuredProjects.map(project => `
+                <div class="career-project-item clickable-project" onclick="showProject('${project.projectId}')">
+                    <h4>${project.name} <i class="fas fa-external-link-alt project-link-icon"></i></h4>
+                    <p>${project.description}</p>
+                </div>
+            `).join('')}
+        </div>
+    `;
+}
+
 function getAchievements(title) {
     const achievements = {
+        'Agentic AI Consultant': [
+            { icon: 'fas fa-brain', text: 'Architected GridCOP agent as intelligent extension of GRID-COOP\'s RECOVER analytics platform' },
+            { icon: 'fas fa-database', text: 'Implemented autonomous database querying with intelligent context gathering capabilities' },
+            { icon: 'fas fa-shield-alt', text: 'Built data validation systems ensuring accuracy in mission-critical smart grid operations' },
+            { icon: 'fas fa-comments', text: 'Created conversational AI interface enabling natural language interaction with smart grid data' },
+            { icon: 'fas fa-cogs', text: 'Applied agentic AI principles to create independent, reliable agents for power grid decision support' }
+        ],
         'Drone Systems Engineer': [
-            { icon: 'fas fa-cogs', text: 'Led cross-team technical projects from requirements to deployment' },
-            { icon: 'fas fa-bug', text: 'Analyzed and resolved complex drone crash investigations' },
-            { icon: 'fas fa-chart-line', text: 'Streamlined production processes for manufacturing efficiency' },
-            { icon: 'fas fa-robot', text: 'Automated support workflows reducing response time by 60%' }
+            { icon: 'fas fa-mobile-alt', text: 'Led initial Remote ID compliance efforts and developed one-stop app store for Freefly drones' },
+            { icon: 'fas fa-tools', text: 'Developed comprehensive diagnostic tools for crash analysis and issue reproduction' },
+            { icon: 'fas fa-shield-alt', text: 'Designed exhaustive test plans validating system integrity before every software release' },
+            { icon: 'fas fa-robot', text: 'Automated production and support workflows, reducing response time by 60%' },
+            { icon: 'fas fa-brain', text: 'Pioneered transition from drone systems engineering to AI agent development' }
         ],
         'Software Engineer': [
-            { icon: 'fas fa-code', text: 'Developed custom PX4 flight modes including Toss to Launch' },
-            { icon: 'fas fa-satellite', text: 'Integrated advanced sensors using MAVLink and UAVCAN protocols' },
-            { icon: 'fas fa-route', text: 'Optimized GPS and obstacle avoidance systems for autonomous flight' },
-            { icon: 'fas fa-microchip', text: 'Enhanced flight controller performance and reliability' }
+            { icon: 'fas fa-users', text: 'Part of core 5-member team that secured funding for multiple project rounds' },
+            { icon: 'fas fa-clock', text: 'Met all deliverables within defined timeline for harsh-environment drone system' },
+            { icon: 'fas fa-shield-alt', text: 'Enabled drone operations in GPS-denied environments and various lighting conditions' },
+            { icon: 'fas fa-eye', text: 'Achieved 360° obstacle avoidance capabilities for surveillance applications' },
+            { icon: 'fas fa-rocket', text: 'Contributed to open-source PX4 flight control software used globally by drone community' }
         ],
         'Robotics R&D Engineer': [
             { icon: 'fas fa-eye', text: 'Developed computer vision algorithms for autonomous surveillance' },
             { icon: 'fas fa-compass', text: 'Implemented advanced navigation systems for mobile robots' },
             { icon: 'fas fa-handshake', text: 'Built intuitive HMI for collaborative robotic arm programming' },
             { icon: 'fas fa-flask', text: 'Prototyped innovative solutions for autonomous robotic systems' }
+        ]
+    };
+    
+    const roleAchievements = achievements[title] || [];
+    return roleAchievements.map(achievement => `
+        <div class="achievement-item">
+            <i class="${achievement.icon}"></i>
+            <span>${achievement.text}</span>
+        </div>
+    `).join('');
+}
+
+function getEducationAchievements(title) {
+    const achievements = {
+        'Master of Science in Computer Science': [
+            { icon: 'fas fa-users', text: 'Successfully led cross-disciplinary collaboration with mechanical and electrical engineering teams' },
+            { icon: 'fas fa-rocket', text: 'Secured 2nd round of funding through successful proof-of-concept demonstration' },
+            { icon: 'fas fa-trophy', text: 'Awarded 2nd place at JCATI Symposium 2016 for precision delivery drone presentation' },
+            { icon: 'fas fa-check-circle', text: 'Delivered working prototype capable of UAV-dropped controlled descent to target location' },
+            { icon: 'fas fa-money-bill-wave', text: 'Project approved for 3rd round of funding based on prototype success' }
         ]
     };
     
