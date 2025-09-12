@@ -34,7 +34,7 @@
     {
       "year": "11/2021-Present",
       "location": "Woodinville, WA",
-      "title": "Drone Systems Engineer",
+      "title": "Software & Systems Engineer",
       "description": "Systems engineer at a leading aerial cinematography company, leveraging PX4 expertise across drone platforms serving global customer base.",
       "detailedDescription": "Freefly Systems is a leader in developing drone and camera systems for aerial cinematography, with two flagship drone platforms - Altax and Astro - both running PX4 opensource flight control software. Joining as a Systems Engineer, I leveraged my extensive experience with drone systems and the PX4 codebase to support their growing customer base across the USA and internationally.<br><br>Throughout my career at Freefly, I wore multiple hats - from integrating third-party payloads and modifying flight control systems to developing comprehensive test plans for software releases and automating production workflows. This diverse role exposed me to the full spectrum of drone system engineering, from low-level flight controller implementation to customer-facing technical support.<br><br>During my time at Freefly, I developed a keen interest in agentic AI systems, drawing parallels between autonomous drone operations and intelligent automation. This realization that workflows could be streamlined through intelligent systems sparked my transition into AI agent development, where I now apply my systems engineering background to create reliable, production-ready automation solutions.",
       "responsibilities": [

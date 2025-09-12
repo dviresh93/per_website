@@ -210,13 +210,6 @@ class PortfolioApp {
                 `;
             }
             
-            if (profile.contact.resume) {
-                contactLinks.innerHTML += `
-                    <a href="${profile.contact.resume}" title="Download Resume" download>
-                        <i class="fas fa-download"></i>
-                    </a>
-                `;
-            }
         }
         } catch (error) {
             console.error("Error in renderProfile:", error);
