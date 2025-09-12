@@ -180,7 +180,7 @@ function renderProjectSections(projects) {
 function getAchievements(title) {
     const achievements = {
         'Agentic AI Consultant': [
-            { icon: 'fas fa-brain', text: 'Architected GridCOP agent as intelligent extension of GRID-COOP\'s RECOVER analytics platform' },
+            { icon: 'fas fa-brain', text: 'Architected GridCOP agent as intelligent extension of Grid CoOperator\'s RECOVER analytics platform' },
             { icon: 'fas fa-database', text: 'Implemented autonomous database querying with intelligent context gathering capabilities' },
             { icon: 'fas fa-shield-alt', text: 'Built data validation systems ensuring accuracy in mission-critical smart grid operations' },
             { icon: 'fas fa-comments', text: 'Created conversational AI interface enabling natural language interaction with smart grid data' },

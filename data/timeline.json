@@ -4,23 +4,23 @@
       "year": "07/2024-Present",
       "location": "Seattle, WA",
       "title": "Agentic AI Consultant",
-      "description": "Architecting intelligent AI agents for smart grid analytics and decision-making systems at GRID-COOP.",
-      "detailedDescription": "As an Agentic AI consultant at GRID-COOP, I architect AI agents that can answer questions, present reports, and raise alerts on smart grid data. I developed GridCOP agent, which is part of GRID-COOP's RECOVER tool - a comprehensive analytics platform that models smart grid data to make predictions on power outages, helping operators and analysts plan troop deployment for power restoration.<br><br>GridCOP serves as an agentic extension of the RECOVER tool, enabling operators to chat about smart grid data and assisting in critical decision-making. The agent first understands the operator's question, then gathers relevant context to provide accurate answers. I developed GridCOP using agentic AI principles, allowing it to independently query databases, make additional tool calls as needed to gather relevant context, validate the data, and present comprehensive answers to users.<br><br>This role represents the culmination of my transition from robotics and drone systems engineering to intelligent automation, applying my systems engineering background to create AI agents that operate reliably in mission-critical environments.",
+      "description": "Architecting intelligent AI agents for smart grid analytics and decision-making systems at Grid CoOperator.",
+      "detailedDescription": "As an Agentic AI consultant at Grid CoOperator, I architect AI agents that can answer questions, present reports, and raise alerts on smart grid data. I developed GridCOP agent, which is part of Grid CoOperator's RECOVER tool - a comprehensive analytics platform that models smart grid data to make predictions on power outages, helping operators and analysts plan troop deployment for power restoration.<br><br>GridCOP serves as an agentic extension of the RECOVER tool, enabling operators to chat about smart grid data and assisting in critical decision-making. The agent first understands the operator's question, then gathers relevant context to provide accurate answers. I developed GridCOP using agentic AI principles, allowing it to independently query databases, make additional tool calls as needed to gather relevant context, validate the data, and present comprehensive answers to users.<br><br>This role represents the culmination of my transition from robotics and drone systems engineering to intelligent automation, applying my systems engineering background to create AI agents that operate reliably in mission-critical environments.",
       "responsibilities": [
         "Architected AI agents for smart grid analytics and decision-making systems",
-        "Developed GridCOP agent as part of GRID-COOP's RECOVER analytics platform",
+        "Developed GridCOP agent as part of Grid CoOperator's RECOVER analytics platform",
         "Implemented agentic AI principles for autonomous database querying and context gathering"
       ],
       "detailedResponsibilities": [
         "Architected AI agents capable of answering questions, presenting reports, and raising alerts on smart grid data",
-        "Developed GridCOP agent as an agentic extension of GRID-COOP's RECOVER analytics platform",
+        "Developed GridCOP agent as an agentic extension of Grid CoOperator's RECOVER analytics platform",
         "Implemented intelligent query understanding and context gathering systems for operator decision-making support",
         "Built autonomous database querying capabilities with additional tool call integration for comprehensive context",
         "Designed data validation systems to ensure accuracy before presenting answers to users",
         "Applied agentic AI principles to create independent, reliable AI agents for mission-critical smart grid operations"
       ],
       "type": "career",
-      "company": "GRID-COOP",
+      "company": "Grid CoOperator",
       "projects": [
         {
           "name": "GridCOP: Smart Grid Analytics",
