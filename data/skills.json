@@ -1,24 +1,28 @@
 {
   "categories": [
     {
-      "name": "Programming",
-      "skills": ["Python", "C++", "React", "SQL", "Android"]
+      "name": "Programming & Development",
+      "skills": ["Python", "C++", "React", "SQL", "JavaScript", "FastAPI", "Flask"]
     },
     {
       "name": "Agentic AI Frameworks",
-      "skills": ["LangChain", "LangGraph", "MCP", "RAG", "Multi-Agent Systems", "Prompt Engineering", "Agent Orchestration", "Vector Databases", "Context Management", "Workflow Automation"]
+      "skills": ["LangChain", "LangGraph", "MCP", "RAG", "Multi-Agent Systems", "Prompt Engineering", "Agent Orchestration", "Vector Databases", "Local AI Deployment", "Ollama"]
     },
     {
-      "name": "Embedded Framework",
-      "skills": ["RTOS", "I2C", "UART", "SPI", "CAN", "STM32"]
+      "name": "Embedded & Firmware",
+      "skills": ["RTOS", "FreeRTOS", "Bootloaders", "Secure Boot", "OTA Updates", "STM32", "I2C", "UART", "SPI", "CAN"]
     },
     {
-      "name": "Robotics Frameworks",
-      "skills": ["ROS", "ROS2", "PX4", "ArduPilot", "MAVLink", "MAVSDK", "PyMAVLink", "UAVCAN", "PlotJuggler", "Wireshark", "Rerun"]
+      "name": "Robotics & Autonomous Systems",
+      "skills": ["ROS2", "PX4", "ArduPilot", "MAVLink", "MAVSDK", "Computer Vision", "Sensor Fusion", "LiDAR", "Real-time Systems", "Autonomous Navigation"]
     },
     {
-      "name": "OS & Version Control",
-      "skills": ["Linux", "Bash Scripting", "Windows", "Git", "TestRails", "Notion"]
+      "name": "Testing & Simulation",
+      "skills": ["SIH (Software-in-the-loop)", "HITL (Hardware-in-the-loop)", "Gazebo", "Docker", "Automated Testing", "System Validation"]
+    },
+    {
+      "name": "OS & Development Tools",
+      "skills": ["Linux", "Bash Scripting", "Git", "Docker", "CI/CD", "TestRails", "Wireshark", "PlotJuggler"]
     }
   ]
 }
