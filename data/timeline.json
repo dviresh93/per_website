@@ -116,7 +116,7 @@
       ],
       "type": "career",
       "company": "York Exponential",
-      "skills": ["Python", "ROS2", "Computer Vision", "SLAM", "Kivy", "Universal Robots", "Multi-Robot Systems", "HMI Development", "Collaborative Robotics", "Robotic System Testing", "Integration Testing"],
+      "skills": ["Python", "ROS2", "Computer Vision", "SLAM", "Kivy", "Universal Robots", "Multi-Robot Systems", "HMI Development", "Collaborative Robotics", "System Validation", "Integration Testing"],
       "projects": [
         {
           "name": "Human machine interface - Weld Bot",
