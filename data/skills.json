@@ -6,7 +6,7 @@
     },
     {
       "name": "Agentic AI Frameworks",
-      "skills": ["Langchain", "Langraph", "MCP", "RAG", "Prompt Engineering", "Context Engineering", "Orchestration", "Vibe Coding (Cursor, Claude CLI)"]
+      "skills": ["LangChain", "LangGraph", "MCP", "RAG", "Multi-Agent Systems", "Prompt Engineering", "Agent Orchestration", "Vector Databases", "Context Management", "Workflow Automation"]
     },
     {
       "name": "Embedded Framework",
