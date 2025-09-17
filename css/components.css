@@ -338,6 +338,10 @@
     margin-bottom: 2rem;
 }
 
+.skills-meta-item {
+    grid-column: 1 / -1;
+}
+
 .meta-item {
     background: var(--bg-card);
     padding: 1.75rem;

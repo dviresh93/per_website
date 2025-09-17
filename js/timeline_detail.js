@@ -42,7 +42,7 @@ async function showTimelineDetail(title) {
                             <h4><i class="fas fa-calendar"></i> Duration</h4>
                             <p>${roleData.year}</p>
                         </div>
-                        <div class="meta-item">
+                        <div class="meta-item skills-meta-item">
                             <h4><i class="fas fa-tools"></i> Technologies Used</h4>
                             <div class="skills-list">
                                 ${roleData.skills ? roleData.skills.map(skill => `<span class="skill-tag">${skill}</span>`).join('') : '<p>No specific technologies listed</p>'}
