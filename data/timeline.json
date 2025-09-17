@@ -21,7 +21,7 @@
       ],
       "type": "career",
       "company": "Grid CoOperator",
-      "skills": ["LangChain", "Python", "SQL", "MCP", "RAG", "Multi-Agent Systems", "Prompt Engineering"],
+      "skills": ["LangChain", "Python", "SQL", "MCP", "RAG", "Multi-Agent Systems", "Prompt Engineering", "Agent Validation", "System Testing"],
       "projects": [
         {
           "name": "GridCOP: Smart Grid Analytics",
@@ -53,7 +53,7 @@
       ],
       "type": "career",
       "company": "Freefly Systems",
-      "skills": ["Python", "React", "PX4", "MAVLink", "AI/LLM Integration", "Bootloaders", "OTA Updates", "SIH Testing", "Real-time Systems", "UART", "I2C", "Customer Support"],
+      "skills": ["Python", "React", "PX4", "MAVLink", "AI/LLM Integration", "Bootloaders", "OTA Updates", "SIH Testing", "HITL Testing", "Agent Validation", "Real-time Systems", "UART", "I2C"],
       "projects": [
         {
           "name": "Drone Log Analysis Tool",
@@ -85,7 +85,7 @@
       ],
       "type": "career",
       "company": "Lumenier",
-      "skills": ["C++", "PX4", "Embedded Systems", "LiDAR", "Computer Vision", "Sensor Fusion", "Real-time Systems", "UART", "I2C"],
+      "skills": ["C++", "PX4", "Embedded Systems", "LiDAR", "Computer Vision", "Sensor Fusion", "Flight Testing", "System Validation", "Real-time Systems", "UART", "I2C"],
       "projects": [
         {
           "name": "Custom Toss-To-Launch implementation",
@@ -116,7 +116,7 @@
       ],
       "type": "career",
       "company": "York Exponential",
-      "skills": ["Python", "ROS2", "Computer Vision", "SLAM", "Kivy", "Universal Robots", "Multi-Robot Systems", "HMI Development", "Collaborative Robotics"],
+      "skills": ["Python", "ROS2", "Computer Vision", "SLAM", "Kivy", "Universal Robots", "Multi-Robot Systems", "HMI Development", "Collaborative Robotics", "Robotic System Testing", "Integration Testing"],
       "projects": [
         {
           "name": "Human machine interface - Weld Bot",
