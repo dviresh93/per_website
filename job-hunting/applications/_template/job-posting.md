@@ -1,3 +1,11 @@
+<!--
+TEMPLATE FILE - PERSONAL USE ONLY
+Copy this folder to create a new application:
+  cp -r _template/ {company-role}/
+
+Then customize all [PLACEHOLDERS] below for the specific role.
+-->
+
 ---
 company: [COMPANY NAME]
 role: [ROLE TITLE]

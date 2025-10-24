@@ -1,9 +1,17 @@
-# Job Hunting Command Center
+# Job Application Factory 🏭
+> Systematize your job search: Apply to 5+ tailored jobs/day in 20 minutes each
+
+**⚠️ PRIVATE REPOSITORY - PERSONAL USE ONLY**
+This repo contains my personal job applications, resume data, and job search materials.
+Not intended for public release (contains real contact info, applications, work history).
+
+---
 
 **Status:** Active job search
 **Focus:** AI Agent Engineer, Robotics Systems Engineer
 **Target Companies:** AI startups, robotics companies, tech giants
 **Strategy:** Dual-track (AI + Robotics), skills-first resume approach
+**System:** Template → Customize → Generate → Track (20 min per application)
 
 ---
 
@@ -141,6 +149,24 @@ See [applications/README.md](applications/README.md) for full workflow.
 - Track all applications in version control
 - Commit after each application: `git commit -m "Apply: {Company} - {Role}"`
 - Archive old applications to `_archive/`
+
+---
+
+## Future: Public Template Release
+
+This system could be valuable for other job seekers. To make it public-friendly:
+
+**What needs to change:**
+- [ ] Sanitize all personal data (name, email, phone, work history)
+- [ ] Create example applications with fake companies
+- [ ] Add LICENSE (MIT), CONTRIBUTING.md
+- [ ] Add screenshots/demo of workflow
+- [ ] Create `_examples/` with sanitized applications
+- [ ] Write "Getting Started" for strangers
+
+**Potential repo name:** `job-application-factory` or `resume-sprint-system`
+
+**For now:** This stays private for my active job search.
 
 ---
 
