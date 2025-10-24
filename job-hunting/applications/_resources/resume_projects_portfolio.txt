@@ -1,0 +1,37 @@
+PROJECTS PORTFOLIO
+
+AI-Powered Drone Log Analysis Tool
+Real-time ULog processing with interactive AI chat - Transforms drone debugging from hours to minutes
+• Problem Solved: Manual drone crash analysis taking hours of expert time, delaying product development and customer support resolution
+• Implementation: Built with React frontend, Python Flask backend, Ollama, and Llama 3.2 for real-time ULog processing with automated health checks across 11+ systems and interactive chat interface
+• Achievement & Learning: Transformed expert analysis from hours to minutes, mastered local AI model deployment and discovered importance of domain-specific AI training for technical analysis
+
+GridCOP: Smart Grid Analytics Agent
+Agentic AI system for smart grid data analysis and operator decision support
+• Problem Solved: Power grid analysts needed autonomous database querying and contextual insights to understand complex smart grid data patterns beyond basic visualizations
+• Implementation: Developed using Langchain framework with intelligent SQL database querying, dual validation system, and context-aware response generation for utility data analysis
+• Achievement & Learning: Enhanced analyst productivity by 70% through automated research workflows, gained expertise in production-ready agentic systems with robust error handling
+
+AI Travel Planner Agent
+Conversational AI travel agent - AI-powered itinerary generation with real-time travel information
+• Problem Solved: Manual travel planning requiring hours of research across multiple sources with inconsistent and outdated information
+• Implementation: Built with Anthropic's Claude 3.5 Sonnet, LangChain, Streamlit, and DuckDuckGo Search API for personalized itinerary generation with conversational refinement
+• Achievement & Learning: Enabled personalized travel experiences through interactive planning, learned conversational AI interface patterns and real-time data integration techniques
+
+Advanced Flight Control Systems (Lumenier)
+Custom modes & sensor integration - Enhanced flight capabilities in challenging environments
+• Problem Solved: Need for specialized drone operations in GPS-denied environments and autonomous surveillance capabilities for first responders and security applications
+• Implementation: Developed custom PX4 flight modes using MAVLink/UAVCAN protocols, integrated multiple LiDAR sensors and optical flow for 360° obstacle avoidance and position hold
+• Achievement & Learning: Enabled autonomous operation in challenging environments, mastered embedded flight control systems and learned critical importance of sensor fusion for reliability
+
+Precision Delivery Drone (Baton) - Master's Thesis
+Research foundation for autonomous delivery systems
+• Problem Solved: Need for precise autonomous payload delivery system with controlled descent mechanisms for logistics and emergency applications
+• Implementation: Designed coaxial copter with advanced C++ navigation algorithms, drop-and-recovery functionality, and autonomous target location programming using PX4 flight control
+• Achievement & Learning: Established research foundation for autonomous delivery systems, gained deep understanding of robotics system design and autonomous decision-making algorithms
+
+Human Machine Interface for Collaborative Welding (York Exponential)
+Multi-Robot Control System focusing on platform independence
+• Problem Solved: Complex robot programming interfaces requiring extensive training for welding operators and need for scalable multi-robot control architecture
+• Implementation: Developed HMI using Python, Kivy framework, and ROS2 for Universal Robot integration with simplified programming interface and platform-independent control system
+• Achievement & Learning: Reduced operator programming complexity by 50%, learned importance of user-centered design in industrial robotics and platform-agnostic system architecture

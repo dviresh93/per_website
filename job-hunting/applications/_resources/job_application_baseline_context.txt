@@ -1,0 +1,80 @@
+JOB APPLICATION BASELINE CONTEXT - VIRESH DUVVURI
+
+PROFESSIONAL JOURNEY:
+- Started as robotics systems engineer building production-level drones and autonomous systems
+- Worked on embedded integrations, user interfaces, and software for drones and robots
+- Built, maintained, and supported autonomous systems at production level
+- Gained first-hand experience with fault-tolerant robotics systems
+
+KEY TRANSITION MOMENT:
+- At Freefly Systems, identified manual bottlenecks in critical processes (flight log analysis, crash investigations taking hours of expert time)
+- Got exposed to LLMs and Gen AI developments early
+- Started using AI to clear bottlenecks and stayed updated with AI agent technologies
+- Began incorporating agentic systems into tools to solve real problems
+
+MAJOR PROJECTS & ACHIEVEMENTS:
+
+1. AI-Powered Drone Log Analysis Tool (Freefly Systems):
+   - Built with React frontend, Python Flask backend, Ollama, and Llama 3.2
+   - Real-time ULog processing with automated health checks across 11+ systems
+   - Interactive AI chat interface for flight data insights
+   - Transformed expert analysis from hours to minutes
+   - 80% reduction in manual log review workflows
+
+2. GridCOP: Smart Grid Analytics Agent (Grid CoOperator):
+   - Agentic AI system using LangChain, MCP, Python, SQL databases
+   - Intelligent SQL database querying with dual validation system
+   - Context-aware response generation for utility data analysis
+   - Reduced analyst research time by 70%
+   - Enhanced analyst productivity through automated research workflows
+
+3. Advanced Flight Control Systems (Lumenier):
+   - Custom PX4 flight modes including Toss-to-Launch and room surveillance
+   - GPS-denied navigation using LiDAR sensors and optical flow
+   - 360° obstacle avoidance and position hold
+   - MAVLink and UAVCAN protocol implementation
+
+4. Human Machine Interface for Collaborative Welding (York Exponential):
+   - Built using Python, Kivy framework, and ROS2
+   - Universal Robot integration with simplified programming interface
+   - Reduced operator programming complexity by 50%
+   - Platform-independent control system
+
+TECHNICAL SKILLS:
+- Programming: Python, C++, React, Docker, Git, SQL, Android, OOP, Multithreading, WebSockets
+- GenAI/LLMs: LangChain, LangGraph, MCP, RAG, Multi-Agent Systems, Prompt Engineering, Context Management, Agent Orchestration, VectorDB, LLMops
+- Robotics/Embedded: PX4, Ardupilot, MAVLink, MAVSDK, PyMAVLink, UAVCAN, RTOS, I2C, UART, SPI, CAN
+- Cloud/Platforms: AWS, Linux (bash scripting), Windows (bat files)
+
+CORE STRENGTHS:
+- Understanding both engineering problems and how to build AI systems that solve them in production
+- Experience building fault-tolerant robotics systems translates to AI agent architecture
+- Consistently turning manual bottlenecks into automated AI workflows
+- Full-stack development from embedded systems to user-facing applications
+- Domain expertise across aerospace, robotics, smart grid operations
+- Track record of 50-80% workflow improvements through automation
+
+UNIQUE VALUE PROPOSITION:
+- Robotics engineer turned AI specialist with deep domain knowledge
+- Understands both the engineering problems that need solving AND how to build AI systems that actually work in production
+- Experience spans embedded systems, flight control, sensor integration, and modern AI/ML frameworks
+- Proven ability to identify bottlenecks and build AI solutions that deliver measurable results
+
+PROFESSIONAL EXPERIENCE:
+- Agentic AI Consultant, Grid CoOperator (07/2025 – Present)
+- Software & Systems Engineer - Robotics, Freefly Systems (11/2021 – Present)
+- Drone Software Developer, Lumenier (07/2020 – 10/2021)
+- Software Engineer - R&D, York Exponential (08/2018 – 05/2020)
+
+EDUCATION:
+- Master of Science, Computer Science, Washington State University (2015-2017)
+- Bachelor of Technology, Information Technology, GITAM University (2011-2015)
+
+MESSAGING TONE & STYLE:
+- Direct, authentic, not overly promotional
+- Focus on specific achievements with quantified results
+- Show natural progression from robotics to AI
+- Emphasize dual perspective: understanding problems + building solutions
+- Avoid AI-generated sounding language
+- Keep messages concise but substantial enough to show genuine interest
+- Always include portfolio link: https://viresh-duvvuri.netlify.app/

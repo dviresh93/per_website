@@ -1,0 +1,60 @@
+Viresh Duvvuri
+From Drone Flight Controllers to Production Systems: 5+ Years Building Autonomous Robotics Solutions
+Portfolio: https://viresh-duvvuri.netlify.app/ • linkedin.com/in/viresh-duvvuri • vireshduvvuri@gmail.com
++1-509-964-5469 • Seattle, WA, USA
+
+Education
+
+2015 – 2017
+Pullman, WA, USA
+Master of Science, Computer Science, Washington State University
+• Thesis: "Development of Baton: A Novel Precision Delivery Drone"
+• Advisor: Dr. Matthew E. Taylor, Assistant Professor, Department of Electrical Engineering & Computer Science
+
+2011 – 2015
+Visakhapatnam, India
+Bachelor Of Technology, Information Technology, GITAM University
+
+Skills
+
+Programming
+Python, C++, React, Docker, Git, SQL, Android, OOP, Multithreading
+
+Robotics Framework
+PX4, Ardupilot, MAVLink, MAVSDK, PyMAVLink, Wireshark, UAVCAN, PlotJuggler
+
+Embedded Framework
+RTOS, I2C, UART, SPI, CAN, STM32
+
+OS & Version Control
+Linux (bash scripting), Windows (bat files), Git, TestRails, Notion
+
+Professional Experience
+
+11/2021 – Present
+Woodinville, WA, USA
+Senior Drone Systems Engineer, Freefly Systems
+
+• Led cross-functional diagnostic system development achieving 85% faster issue resolution for manufacturing teams and field support through automated log analysis and tracking systems
+• Built comprehensive flight control optimization suite reducing customer support tickets by 60% while enhancing payload integration capabilities across Altax and Astro drone platforms
+• Streamlined production workflows and automated support processes, improving team response times by 40% and establishing robust quality assurance protocols for drone manufacturing
+• Spearheaded technical crash analysis operations for enterprise clients, developing systematic root cause identification processes that reduced average troubleshooting time from days to hours
+• Coordinated multi-team projects from requirements gathering through deployment, maintaining 100% project visibility and stakeholder alignment across engineering, manufacturing, and support divisions
+
+07/2020 – 10/2022
+Sarasota, FL, USA
+Senior Flight Control Software Engineer, Lumenier
+
+• Architected and deployed specialized PX4 flight modes including Toss-to-Launch and autonomous surveillance systems, expanding drone application capabilities by 30% for specialized industrial use cases
+• Enhanced GPS-denied navigation performance by 50% through LiDAR sensor integration and advanced MAVLink/UAVCAN protocol implementation, enabling reliable operation in challenging environments
+• Led collaborative development with PX4 maintainers to optimize core flight systems, improving GPS accuracy, position-hold stability, and 360° obstacle avoidance across diverse lighting conditions
+• Established comprehensive firmware validation framework reducing critical bug deployment by 80% through systematic log analysis and automated testing procedures for each release cycle
+• Delivered robust flight control solutions enabling successful deployment in commercial surveillance and logistics applications
+
+08/2018 – 03/2020
+York, PA, USA
+Senior Robotics Research & Development Engineer, York Exponential
+
+• Developed autonomous surveillance robot prototype from concept to functional system, reducing manual security monitoring requirements by 70% through advanced computer vision and navigation algorithms
+• Created intuitive Human Machine Interface for collaborative welding robotics using Universal Robot platform, decreasing operator programming complexity by 50% and training time by 40%
+• Architected scalable robotics control framework supporting multi-robot coordination and platform-independent operation for industrial automation applications

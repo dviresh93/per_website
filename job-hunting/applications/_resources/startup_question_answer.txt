@@ -1,0 +1,19 @@
+STARTUP QUESTION ANSWER
+
+Question: Why are you attracted to the inherently chaotic and sink or swim nature of a startup?
+
+Answer:
+
+I've spent my entire career at startups—Freefly, Lumenier, York Exponential—all early stage. I keep choosing startups because I thrive on the autonomy that comes with the chaos.
+
+At Freefly, I noticed our engineers were spending hours manually analyzing drone crash logs. No one told me to fix it. I just saw the bottleneck and started building a solution—learned Ollama, figured out how to parse ULog files, built the whole diagnostic system. Shipped it within weeks, and it's actually being used daily now.
+
+That kind of end-to-end ownership is what keeps me at startups. When you see a problem, you can just fix it. You own the outcome, not just a ticket. I've done embedded C++, built React frontends, deployed to AWS, and written documentation all in the same week. That variety keeps me engaged, and the direct impact is addictive.
+
+The chaos doesn't scare me at this point. I've learned how to figure things out when there's no playbook, how to ship fast and iterate, and how to prioritize when everything feels urgent. After 5+ years, I know what I'm getting into.
+
+What I'm looking for now is a startup where the chaos is pointed at something meaningful. That's why [COMPANY NAME] caught my attention—[ADD SPECIFIC REASON ABOUT THEIR MISSION/PRODUCT].
+
+---
+
+NOTE: Fill in the last paragraph with specifics about the company you're applying to.

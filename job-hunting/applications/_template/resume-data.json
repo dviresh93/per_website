@@ -1,0 +1,120 @@
+{
+  "selectedTemplate": 1,
+  "basics": {
+    "name": "Viresh Duvvuri",
+    "label": "[ROLE TITLE - e.g., AI Software Engineer, Robotics Engineer, etc.]",
+    "summary": "[CUSTOMIZE: 2-3 sentence summary emphasizing relevant experience for THIS role]",
+    "email": "vireshduvvuri@gmail.com",
+    "phone": "+1-509-964-5469",
+    "website": "linkedin.com/in/viresh-duvvuri",
+    "location": {
+      "address": "Seattle, WA"
+    }
+  },
+  "work": [
+    {
+      "company": "Grid CoOperator",
+      "position": "AI Engineer",
+      "location": "Seattle, WA",
+      "startDate": "Mar 2025",
+      "endDate": "Present",
+      "highlights": [
+        "[CUSTOMIZE: Select 2-3 most relevant bullets for THIS role]",
+        "[Options: multi-agent systems, LangChain, cloud deployment, metrics, etc.]"
+      ]
+    },
+    {
+      "company": "Freefly Systems",
+      "position": "Senior Software Engineer",
+      "location": "Woodinville, WA",
+      "startDate": "Nov 2021",
+      "endDate": "Oct 2025",
+      "highlights": [
+        "[CUSTOMIZE: Select 2-3 most relevant bullets for THIS role]",
+        "[Options: AI co-pilot, embedded systems, cross-functional, etc.]"
+      ]
+    },
+    {
+      "company": "Lumenier",
+      "position": "Software Engineer - Embedded Systems",
+      "location": "Sarasota, FL",
+      "startDate": "Jul 2020",
+      "endDate": "Oct 2021",
+      "highlights": [
+        "[CUSTOMIZE: Include if relevant to embedded/robotics roles]"
+      ]
+    },
+    {
+      "company": "York Exponential",
+      "position": "Software Engineer - R&D",
+      "location": "York, PA",
+      "startDate": "Aug 2018",
+      "endDate": "May 2020",
+      "highlights": [
+        "[CUSTOMIZE: Include if relevant to robotics/automation roles]"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "name": "Programming",
+      "keywords": [
+        "[CUSTOMIZE: Reorder based on job requirements]",
+        "Python",
+        "C++",
+        "JavaScript",
+        "TypeScript",
+        "SQL"
+      ]
+    },
+    {
+      "name": "AI/ML Frameworks",
+      "keywords": [
+        "[CUSTOMIZE: Emphasize skills from job posting]",
+        "LangChain",
+        "RAG",
+        "Agentic AI",
+        "PyTorch",
+        "TensorFlow"
+      ]
+    },
+    {
+      "name": "Cloud & Infrastructure",
+      "keywords": [
+        "[CUSTOMIZE: Match their cloud platform]",
+        "AWS",
+        "Azure",
+        "Docker",
+        "Kubernetes"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "[CUSTOMIZE: Select 2-3 most relevant projects]",
+      "highlights": [
+        "Problem: [What problem did this solve?]",
+        "Solution: [Technologies and approach used]",
+        "Impact: [Quantified results and metrics]"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Washington State University",
+      "area": "Computer Science",
+      "studyType": "Master of Science",
+      "startDate": "Jan 2015",
+      "endDate": "Jan 2017",
+      "location": "Pullman, WA"
+    },
+    {
+      "institution": "GITAM University",
+      "area": "Information Technology",
+      "studyType": "Bachelor of Technology",
+      "startDate": "Jan 2011",
+      "endDate": "Jan 2015",
+      "location": "Visakhapatnam, India"
+    }
+  ]
+}
