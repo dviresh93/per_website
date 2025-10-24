@@ -18,7 +18,7 @@ per_wesite/
 │   ├── README.md, CONTENT_GUIDE.md, DEPLOYMENT.md
 │   └── Docker configuration files
 │
-├── job-hunting/                 [Active job hunting materials]
+├── job-prep/                 [Active job hunting materials]
 │   ├── README.md                [Overview and quick links]
 │   ├── guides/                  [Job search guides and strategies]
 │   ├── applications/            [One folder per application - STRUCTURED SYSTEM]
@@ -60,7 +60,7 @@ per_wesite/
 
 ### Content Management
 - **Website content:** Managed via JSON files in `data/` directory
-- **Job hunting context:** Organized in `job-hunting/` and `interview-prep/`
+- **Job hunting context:** Organized in `job-prep/` and `interview-prep/`
 - **Resume files:** Stored in `resume/` (AI-focused and Robotics-focused versions)
 
 ## What NOT to Modify
@@ -74,9 +74,9 @@ per_wesite/
 
 | Material Type | Location | Notes |
 |---------------|----------|-------|
-| **New job application** | `job-hunting/applications/{company-role}/` | Copy `_template/` folder, customize, generate resume |
-| Job hunting guides/strategies | `job-hunting/guides/` | Strategic planning, market research |
-| Interview Q&A banks | `job-hunting/context/` | Behavioral, technical, leadership questions |
+| **New job application** | `job-prep/applications/{company-role}/` | Copy `_template/` folder, customize, generate resume |
+| Job hunting guides/strategies | `job-prep/guides/` | Strategic planning, market research |
+| Interview Q&A banks | `job-prep/context/` | Behavioral, technical, leadership questions |
 | Company-specific interview prep | `interview-prep/companies/{company-name}/` | DB schema, coding exercises, ALL prep materials |
 | Mock interview practice | `interview-prep/mock-interviews/{type}/` | General practice by interview type |
 | General Python practice | `practice-problems/python/fundamentals/` | Warmup exercises, NOT company-specific |
@@ -84,7 +84,7 @@ per_wesite/
 **IMPORTANT WORKFLOWS:**
 
 **New Job Application (Fast Workflow):**
-1. `cp -r job-hunting/applications/_template/ job-hunting/applications/{company-role}/`
+1. `cp -r job-prep/applications/_template/ job-prep/applications/{company-role}/`
 2. Edit `job-posting.md` (requirements, fit assessment, customization strategy)
 3. Edit `resume-data.json` (customize summary, highlights, projects for THIS role)
 4. Generate resume with MCP tool → saves as `resume.pdf`
@@ -111,7 +111,7 @@ per_wesite/
 
 1. **Active Discussions:** Use `scratchpad.txt` for brainstorming and working through ideas
 2. **Context Preservation:** Extract valuable content from scratchpad into organized markdown files
-3. **Organization:** Keep materials categorized by purpose (job-hunting vs interview-prep vs practice)
+3. **Organization:** Keep materials categorized by purpose (job-prep vs interview-prep vs practice)
 4. **Portfolio Updates:** Only modify website files when explicitly requested by user
 5. **Git Tracking:** Everything is version-controlled; no need for manual .backup files
 
@@ -179,7 +179,7 @@ Create folder at `interview-prep/companies/{company-name}/` and include:
 
 ## Notes
 
-- User is actively interviewing - materials in `job-hunting/` and `interview-prep/` are current
+- User is actively interviewing - materials in `job-prep/` and `interview-prep/` are current
 - Archive folder contains completed work but is kept for reference
 - Resume has two versions: AI-focused and Robotics-focused (dual-track strategy)
 - Scratchpad is the primary collaboration space for job hunting discussions
