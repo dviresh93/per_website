@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile
     container_name: viresh-portfolio
     ports:
-      - "8080:8080"
+      - "9000:8080"
     environment:
       - NODE_ENV=production
     restart: unless-stopped
