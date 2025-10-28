@@ -1,10 +1,10 @@
 {
-  "_comment": "TEMPLATE - Copy this file to your application folder and customize | This contains real baseline content, not placeholders | Start here for new applications",
+  "_comment": "BASELINE RESUME - Source: Viresh-Duvvuri-Resume-AI-Engineer.pdf | This is the proven format to replicate for all applications | Copy this file and customize for each job",
   "selectedTemplate": 1,
   "basics": {
     "name": "Viresh Duvvuri",
-    "label": "[CUSTOMIZE: Match job title - e.g., AI Engineer, Software Engineer, Senior AI Engineer]",
-    "summary": "[CUSTOMIZE: 3-sentence summary - use baseline-resume-data.json as starting point, modify to match job requirements]",
+    "label": "AI Engineer",
+    "summary": "AI Engineer specializing in multi-agent systems and AI orchestration, with 5+ years developing production GenAI solutions through rapid prototyping, iteration, and context engineering. Led cross-functional teams in deploying AI agents that improved efficiency by 50-80% within 3 months, establishing MLOps pipelines and evaluation frameworks for scalable AI solutions on AWS/Azure.",
     "email": "vireshduvvuri@gmail.com",
     "phone": "+1-509-964-5469",
     "website": "linkedin.com/in/viresh-duvvuri",
@@ -65,7 +65,6 @@
     {
       "name": "Programming",
       "keywords": [
-        "[CUSTOMIZE: Reorder to match job - put their required languages first]",
         "Python",
         "C++",
         "JavaScript",
@@ -82,7 +81,6 @@
     {
       "name": "AI/ML Frameworks",
       "keywords": [
-        "[CUSTOMIZE: Reorder to emphasize job requirements - move their frameworks to top]",
         "Agentic AI",
         "LangChain",
         "LangGraph",
@@ -109,7 +107,6 @@
     {
       "name": "Cloud & Infrastructure",
       "keywords": [
-        "[CUSTOMIZE: Add their cloud platform if different - Azure, GCP, etc.]",
         "AWS",
         "Azure",
         "API Design",
@@ -126,7 +123,6 @@
     {
       "name": "Data & Analytics",
       "keywords": [
-        "[CUSTOMIZE: Can rename category for role-specific skills - e.g., 'Robotics & Embedded' for robotics roles]",
         "Data Integration",
         "Data Processing",
         "Data Science",
@@ -183,29 +179,5 @@
       "endDate": "Jan 2015",
       "location": "Visakhapatnam, India"
     }
-  ],
-  "_notes": {
-    "customization_checklist": [
-      "[ ] Update basics.label to match job title",
-      "[ ] Customize basics.summary (3 sentences, match job focus)",
-      "[ ] Reorder skills keywords to prioritize job requirements",
-      "[ ] Select 3 most relevant projects for role",
-      "[ ] Add job-specific keywords to work highlights if needed",
-      "[ ] Verify all dates match (Mar 2025, Nov 2021, Jul 2020, Aug 2018)",
-      "[ ] Verify format: 3-3-3-2 work bullets, 3 project bullets each"
-    ],
-    "what_never_changes": [
-      "Employment dates",
-      "Job titles at companies",
-      "Company names",
-      "Core metrics (70%, 80%, 200+ queries, 45%, 50%)",
-      "Bullet count structure (3-3-3-2 for work, 3 per project)"
-    ],
-    "references": {
-      "baseline": "../_resources/baseline-resume-data.json",
-      "format_rules": "../_resources/FORMAT-STANDARDS.md",
-      "workflow_guide": "../_resources/WORKFLOW.md",
-      "customization_strategies": "../_resources/resume-customization-guide.md"
-    }
-  }
+  ]
 }
