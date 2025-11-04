@@ -5,9 +5,9 @@
 
 ---
 
-**Last Updated:** 2025-10-24
-**Active Applications:** 1
-**Total Applied:** 5
+**Last Updated:** 2025-11-04
+**Active Applications:** 9
+**Total Applied:** 6
 **Average Time per Application:** 20 minutes
 **System Status:** Production-ready ✅
 
@@ -17,6 +17,14 @@
 
 | Company | Role | Status | Applied | Fit | Next Action |
 |---------|------|--------|---------|-----|-------------|
+| Fieldguide | AI Engineer | Researching | - | 95% | Apply via Fieldguide careers + research audit domain |
+| Capital One | AI Engineer (IFX) | Researching | - | 92% | Apply via Capital One careers + network with IFX team |
+| SaaS Marketplace (PE-backed) | Senior AI Engineer | Researching | - | 90% | Apply (company name not disclosed, wait for recruiter) |
+| Decagon | Product Engineer | Researching | - | 90% | Apply via Decagon careers + research product |
+| iFIT | AI Engineer | Researching | - | 90% | Apply + network on LinkedIn |
+| Speak | AI Product Engineer | Researching | - | 88% | Apply via Speak careers + try app + network with team |
+| Vercel | AI Engineer (v0) | Researching | - | 85% | Apply via Vercel careers + use v0.dev product |
+| Paradigm | Applied AI Engineer | Researching | - | 85% | Apply via MyParadigm.com/careers + network |
 | Azumo | AI Software Engineer | Applied | 2025-10-24 | 80% | Network follow-up (within 24h) |
 
 ---

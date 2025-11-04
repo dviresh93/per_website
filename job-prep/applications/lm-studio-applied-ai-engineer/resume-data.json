@@ -1,0 +1,227 @@
+{
+  "_comment": "AI ENGINEER TEMPLATE - Pre-optimized for AI/ML roles | Time savings: ~8-10 min per application | Just edit summary + optional tweaks",
+  "_usage": "This template is 90% ready for AI Engineer applications. Only customize summary to match specific job requirements. Skills, highlights, projects already optimized.",
+  "selectedTemplate": 1,
+  "basics": {
+    "name": "Viresh Duvvuri",
+    "label": "AI Engineer",
+    "summary": "Applied AI Engineer with 5+ years building production agentic systems and robust software using Python, C++, and TypeScript. Practitioner-first approach combining empirical research mindset (evaluation frameworks, ablation testing, systematic experimentation) with rapid prototyping to production—delivering 70-80% efficiency gains through scientifically-driven iteration. Strong algorithms background and product-minded focus, shipping user-facing AI features with continuous feedback loops and performance optimization.",
+    "email": "vireshduvvuri@gmail.com",
+    "phone": "+1-509-964-5469",
+    "website": "linkedin.com/in/viresh-duvvuri",
+    "location": {
+      "address": "Seattle, WA"
+    }
+  },
+  "work": [
+    {
+      "company": "Grid CoOperator",
+      "position": "AI Engineer",
+      "location": "Seattle, WA",
+      "startDate": "Mar 2025",
+      "endDate": "Present",
+      "highlights": [
+        "Architected production multi-agent system using LangGraph and LangChain for smart grid analytics, leading cross-functional teams to translate business requirements into specialized agents that coordinate complex tasks through AI orchestration, reducing analyst workflows by 70% within 2 months through rapid prototyping and iteration",
+        "Built evaluation frameworks and observability systems tracking model quality metrics, latency, cost monitoring, and performance across production AI deployment on AWS, achieving reliable enterprise performance within 6 weeks serving 50-100 daily queries with robust error handling and human-in-the-loop validation",
+        "Deployed production-quality code with CI/CD pipelines, monitoring, and performance optimization, accelerating deliverables by 60% within first quarter through rapid experimentation, iterative prompt engineering, and continuous improvement of agentic AI capabilities"
+      ]
+    },
+    {
+      "company": "Freefly Systems",
+      "position": "Senior Software Engineer",
+      "location": "Woodinville, WA",
+      "startDate": "Nov 2021",
+      "endDate": "Oct 2025",
+      "_CRITICAL": "ONLY BULLET 1 IS CUSTOMIZABLE - BULLETS 2-4 ARE LOCKED",
+      "_rule": "Bullet 1 emphasizes AI tool (varies by role), bullets 2-4 show progression and match LinkedIn",
+      "highlights": [
+        "[CUSTOMIZABLE FOR AI ENGINEER] Built and deployed GenAI-powered agent for automated log analysis from concept to production, integrating foundation model APIs (Ollama, Llama 3.2) with evaluation frameworks and model governance practices, serving 200+ daily queries",
+        "[LOCKED] Contributed to drone platform codebases implementing new features and optimizations for flight control systems and payload integration across multiple product lines, managed software integration projects from planning through release",
+        "[LOCKED] Led release management for drone platforms overseeing testing phases from alpha through production deployment, coordinating firmware updates and executing comprehensive testing protocols with cross-functional teams",
+        "[LOCKED] Built automated systems to process complex technical data and identify system failures, developing knowledge base enhancements and support tools that streamlined operations"
+      ]
+    },
+    {
+      "company": "Lumenier",
+      "position": "Drone Software Developer",
+      "location": "Sarasota, FL",
+      "startDate": "Jul 2020",
+      "endDate": "Oct 2021",
+      "_LOCKED": "THESE 2 BULLETS ARE LOCKED - NEVER MODIFY - FROM TIMELINE.JSON",
+      "_rule": "Shows embedded/robotics credibility, matches LinkedIn exactly",
+      "highlights": [
+        "Wrote embedded code in C++ to integrate LiDAR and optical flow sensors for obstacle avoidance and position holding with/without GPS under various lighting conditions",
+        "Collaborated with open-source flight control software maintainers for integration, testing, and deployment of autonomous flight algorithms, prototyped innovative features like toss-to-launch for product roadmap development"
+      ]
+    },
+    {
+      "company": "York Exponential",
+      "position": "Software Engineer - R&D",
+      "location": "York, PA",
+      "startDate": "Aug 2018",
+      "endDate": "May 2020",
+      "_LOCKED": "THESE 2 BULLETS ARE LOCKED - NEVER MODIFY - FROM TIMELINE.JSON",
+      "_rule": "Shows robotics foundation and breadth, matches LinkedIn exactly",
+      "highlights": [
+        "Developed prototype software for in-house autonomous surveillance mobile robots using ROS2, SLAM, and computer vision technologies",
+        "Built Human Machine Interface for Universal Robot welding applications using Python and Kivy framework, implemented multi-robot control systems with platform independence"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "name": "AI/ML Frameworks",
+      "keywords": [
+        "LangGraph",
+        "LangChain",
+        "Multi-Agent Systems",
+        "Agentic AI",
+        "RAG",
+        "Model Evaluation",
+        "MLOps",
+        "Observability",
+        "MCP (Model Context Protocol)",
+        "Prompt Engineering",
+        "Context Engineering",
+        "GenAI",
+        "FAISS",
+        "Pinecone",
+        "PyTorch",
+        "TensorFlow",
+        "Scikit-learn",
+        "Feature Engineering",
+        "Human-in-the-Loop (HIL)",
+        "Model Deployment",
+        "Vector Search"
+      ]
+    },
+    {
+      "name": "Programming",
+      "keywords": [
+        "Python",
+        "TypeScript",
+        "JavaScript",
+        "SQL",
+        "FastAPI",
+        "Flask",
+        "React",
+        "C++",
+        "NumPy",
+        "Pandas",
+        "OOP"
+      ]
+    },
+    {
+      "name": "Cloud & Infrastructure",
+      "keywords": [
+        "AWS",
+        "Azure",
+        "Production Deployment",
+        "CI/CD Pipelines",
+        "Monitoring",
+        "API Design",
+        "DevOps",
+        "Docker",
+        "Kubernetes",
+        "Performance Tuning",
+        "Scalability",
+        "Observability"
+      ]
+    },
+    {
+      "name": "Product & Collaboration",
+      "keywords": [
+        "Cross-functional Leadership",
+        "Rapid Prototyping",
+        "Consumer AI Products",
+        "Architectural Design",
+        "Mentorship",
+        "Agile Development",
+        "Technical Communication"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "GridCOP: Smart Grid Analytics Agent",
+      "highlights": [
+        "Problem: Power grid analysts needed automated database querying and intelligent insights to understand complex data patterns beyond basic visualizations",
+        "Solution: Architected production multi-agent system using LangGraph and LangChain orchestration where specialized agents coordinate complex analytics tasks, implemented RAG and vector search (FAISS) for intelligent querying, built model evaluation frameworks tracking quality metrics and cost, deployed on AWS with observability and monitoring",
+        "Impact: Enhanced analyst productivity by 70% through AI co-pilot that augments domain experts, implemented human-in-the-loop (HIL) evaluation and testing pipelines for production-ready AI systems with robust error handling, achieved enterprise performance within 6 weeks through rapid prototyping and iteration"
+      ],
+      "keywords": ["LangGraph", "LangChain", "Multi-Agent Systems", "RAG", "FAISS", "AWS", "Python", "FastAPI", "MLOps"]
+    },
+    {
+      "name": "Production System Optimization Tool",
+      "highlights": [
+        "Problem: Manual system analysis taking hours of expert time, creating bottlenecks in product development and customer support resolution",
+        "Solution: Built production-quality full-stack AI application with TypeScript/React frontend, Python Flask backend, integrated LLM APIs (Ollama, Llama 3.2) for real-time log processing and interactive analysis using prompt engineering, model evaluation, and observability",
+        "Impact: Transformed expert analysis from hours to minutes, deployed to production serving 200+ daily queries with continuous monitoring and optimization, demonstrated rapid prototyping and iterative development for consumer-facing AI experiences"
+      ],
+      "keywords": ["TypeScript", "React", "Python", "Flask", "Ollama", "Llama", "Production Deployment", "Model Evaluation"]
+    },
+    {
+      "name": "AI Travel Planner Agent",
+      "highlights": [
+        "Problem: Manual travel planning requiring hours of research across multiple sources with inconsistent and outdated information",
+        "Solution: Built AI agent using Claude 3.5 Sonnet, LangChain, Streamlit, and DuckDuckGo Search API for personalized itinerary generation using prompt engineering techniques",
+        "Impact: Demonstrated end-to-end AI application development, learned conversational AI patterns and real-time data integration techniques through iterative development"
+      ],
+      "keywords": ["Claude", "LangChain", "Streamlit", "Python", "API Integration"]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Washington State University",
+      "area": "Computer Science",
+      "studyType": "Master of Science",
+      "startDate": "Jan 2015",
+      "endDate": "Jan 2017",
+      "location": "Pullman, WA"
+    },
+    {
+      "institution": "GITAM University",
+      "area": "Information Technology",
+      "studyType": "Bachelor of Technology",
+      "startDate": "Jan 2011",
+      "endDate": "Jan 2015",
+      "location": "Visakhapatnam, India"
+    }
+  ],
+  "_quick_customization_guide": {
+    "time_saved": "~8-10 minutes per application vs baseline template",
+    "required_edits": [
+      "1. basics.summary - Rewrite 2-3 sentences to match job requirements (2 min)"
+    ],
+    "optional_edits": [
+      "2. Add 1-2 job-specific keywords to work highlights if needed (1 min)",
+      "3. Reorder projects if one is more relevant than GridCOP (30 sec)"
+    ],
+    "already_optimized": [
+      "✓ Skills: AI/ML Frameworks first, LangGraph/LangChain leading",
+      "✓ Work: All highlights emphasize production AI, multi-agent, observability",
+      "✓ Projects: Best 3 selected (GridCOP, Production Tool, AI Travel)",
+      "✓ Label: Set to 'AI Engineer'",
+      "✓ Programming: Python, TypeScript prioritized"
+    ],
+    "when_to_use": [
+      "AI Engineer roles",
+      "Multi-agent system engineer",
+      "LLM/GenAI engineer",
+      "Production AI roles",
+      "MLOps engineer",
+      "AI Infrastructure roles"
+    ],
+    "when_to_use_baseline_instead": [
+      "Robotics Engineer (emphasize embedded/ROS/PX4)",
+      "Software Engineer non-AI (de-emphasize AI frameworks)",
+      "Forward Deployed Engineer (emphasize cross-functional)"
+    ],
+    "example_workflow": [
+      "1. cp -r _template-ai-engineer/ company-role/",
+      "2. Edit summary in resume-data.json (2 min)",
+      "3. Generate resume with MCP tool (instant)",
+      "4. Total time: ~3-5 minutes vs 15 minutes with baseline"
+    ]
+  }
+}

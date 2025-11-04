@@ -1,0 +1,24 @@
+CONNECTION REQUEST (300 char limit):
+=====================================
+
+Hi Callum, just applied for the Senior AI Engineer role at Calyptus. I've built production multi-agent systems with MCP and RAG that are actually deployed and running. Would love to connect.
+
+
+LINKEDIN MESSAGE (can send directly or after connection):
+=========================================================
+
+Hi Callum,
+
+I just applied for the Senior AI Engineer role at Calyptus and wanted to reach out directly.
+
+Quick background - I've been building production AI systems for the last few years. Most recently a multi-agent system at Grid CoOperator using LangChain and MCP for smart grid analytics (deployed on AWS, cut research time by 70%). Before that an AI diagnostic chatbot at Freefly with WebSocket streaming that's processing 200+ queries daily.
+
+The role caught my eye because it's basically the full stack of what I've been working on - multi-agent orchestration, RAG, MCP servers, building chatbots that work in production.
+
+Portfolio with demos: https://viresh-duvvuri.netlify.app/
+
+Would love to chat if there's a fit. You can reach me here or at vireshduvvuri@gmail.com.
+
+Best,
+Viresh
++1-509-964-5469

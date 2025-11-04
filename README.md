@@ -10,6 +10,9 @@ This repository serves two purposes:
 
 **Click to jump to a section:**
 
+### 🏗️ [System Architecture](SYSTEM_ARCHITECTURE.md)
+Complete system diagram with workflows, data flows, and integration points
+
 ### 🌐 [Portfolio Website](#-portfolio-website)
 Production website showcasing journey from robotics to AI
 
@@ -209,6 +212,7 @@ git push
 
 ## 📚 Additional Resources
 
+- **[SYSTEM_ARCHITECTURE.md](SYSTEM_ARCHITECTURE.md)** - Complete system diagram, workflows, and data flows
 - **SYSTEM_AUDIT.md** - Complete validation of all capabilities
 - **.claude/CLAUDE.md** - Instructions for Claude Code assistant
 - **interview-prep/** - Company-specific interview preparation

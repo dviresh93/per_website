@@ -1,0 +1,235 @@
+================================================================================
+PRACTICE SESSION 5: INVOICE PAYMENT TRACKER
+================================================================================
+
+Date: October 10, 2025
+Problem: Track Invoice Payments with Partial Payments (Medium, 35-40 min)
+Interview Simulation - Realistic Format
+
+================================================================================
+PROBLEM
+================================================================================
+
+You're building an invoice payment tracking system. Clients can make multiple
+partial payments toward an invoice. You need to calculate the outstanding
+balance and payment status.
+
+BUSINESS RULES:
+
+- Invoices have a total amount due
+- Clients can make multiple payments over time
+- Payments are applied in chronological order (by payment date)
+- Invoice statuses:
+  - "paid" - total payments >= invoice amount
+  - "partial" - at least one payment made, but total < invoice amount
+  - "unpaid" - no payments made
+  - "overpaid" - total payments > invoice amount
+
+INPUT FORMAT:
+
+invoice = {
+    "invoice_id": "INV-001",
+    "client_name": "Acme Corp",
+    "amount": 5000.00,
+    "issue_date": "2024-09-01"
+}
+
+payments = [
+    {"date": "2024-09-15", "amount": 2000.00},
+    {"date": "2024-09-20", "amount": 1500.00},
+    {"date": "2024-10-01", "amount": 1000.00}
+]
+
+YOUR TASK:
+
+Implement: calculate_invoice_status(invoice, payments)
+
+This should return:
+{
+    "invoice_id": "INV-001",
+    "client_name": "Acme Corp",
+    "invoice_amount": 5000.00,
+    "total_paid": 4500.00,
+    "outstanding_balance": 500.00,
+    "status": "partial",
+    "payment_count": 3,
+    "payment_history": [
+        {"date": "2024-09-15", "amount": 2000.00, "balance_after": 3000.00},
+        {"date": "2024-09-20", "amount": 1500.00, "balance_after": 1500.00},
+        {"date": "2024-10-01", "amount": 1000.00, "balance_after": 500.00}
+    ]
+}
+
+EXAMPLES:
+
+# Example 1: Fully paid
+calculate_invoice_status(
+    {"invoice_id": "INV-001", "client_name": "Acme", "amount": 1000.00, "issue_date": "2024-09-01"},
+    [{"date": "2024-09-15", "amount": 1000.00}]
+)
+# Returns status: "paid", outstanding_balance: 0
+
+# Example 2: Overpaid
+calculate_invoice_status(
+    {"invoice_id": "INV-002", "client_name": "Tech Co", "amount": 500.00, "issue_date": "2024-09-01"},
+    [{"date": "2024-09-10", "amount": 600.00}]
+)
+# Returns status: "overpaid", outstanding_balance: -100.00
+
+# Example 3: No payments
+calculate_invoice_status(
+    {"invoice_id": "INV-003", "client_name": "StartUp Inc", "amount": 2000.00, "issue_date": "2024-09-01"},
+    []
+)
+# Returns status: "unpaid", outstanding_balance: 2000.00
+
+# Example 4: Multiple partial payments
+calculate_invoice_status(
+    {"invoice_id": "INV-004", "client_name": "BigCorp", "amount": 10000.00, "issue_date": "2024-08-01"},
+    [
+        {"date": "2024-08-15", "amount": 3000.00},
+        {"date": "2024-09-01", "amount": 2000.00},
+        {"date": "2024-09-15", "amount": 2500.00}
+    ]
+)
+# Returns status: "partial", total_paid: 7500.00, outstanding_balance: 2500.00
+
+================================================================================
+START CODING
+================================================================================
+
+[Work below]
+
+
+We need to implement this function calculate_invoice_status(invoice, payments)
+
+invoice and payments dict 
+
+payments are a list of dict invoices - so they will be ordered 
+
+- we will have an invoice, and issue date 
+- we have payments history - need to determine the staus of the invoide following the conditions: 
+
+  Invoice statuses:
+  - "paid" - total payments >= invoice amount
+  - "partial" - at least one payment made, but total < invoice amount
+  - "unpaid" - no payments made
+  - "overpaid" - total payments > invoice amount
+
+
+- payments need to assigned in chronological order - so the dict may be unordered 
+
+
+Edgecases: 
+- there is there is chance of dulicate payment 
+- check for empty payment / payments
+- check for empty invoice 
+- check for negative amount - what would you prefer in such cases ? make it 0? 
+
+questions: 
+- are we handling only single invoice requests at a time 
+- do we care about deadlines / timelines? 
+- is there a minimum payment they need to make? what if they keep making empty payments 
+- can there be multiple invoices
+
+
+>> Example rundown
+
+# Example 1: Fully paid
+calculate_invoice_status(
+    {"invoice_id": "INV-001", "client_name": "Acme", "amount": 1000.00, "issue_date": "2024-09-01"}, # this is the invoice
+    [{"date": "2024-09-15", "amount": 1000.00}] # payments 
+)
+# Returns status: "paid", outstanding_balance: 0, because 1000 - 1000 == 0
+calculate_invoice_status(
+    {"invoice_id": "INV-001", "client_name": "Acme", "amount": 1000.00, "issue_date": "2024-09-01"}, # this is the invoice
+    [{"date": "2024-09-15", "amount": 500.00}, 
+    {"date": "2024-09-15", "amount": 500.00}] # payments 
+)
+# Returns status: "paid", outstanding_balance: 0, because 1000 - 1000 == 0
+
+calculate_invoice_status(
+    {"invoice_id": "INV-001", "client_name": "Acme", "amount": 1000.00, "issue_date": "2024-09-01"}, # this is the invoice
+    [{"date": "2024-09-15", "amount": 500.00}, 
+    {"date": "2024-09-15", "amount": 100.00}] # payments 
+)
+# Returns status: "parital", outstanding_balance: 400, because 1000 - 600 == 0
+
+
+>> initial draft / psuedocode 
+
+def calculate_invoice_status(invoice, payments)
+    # get the invoice amount and the issue date
+    # check to make sure both are valid 
+    # - both are not empty, if they are empty then log the error and return early
+
+
+    # get the payments & make sure they are valid
+    # - no empty payment
+    # - payment date should not be before the issue date -- not requiered 
+    # - payment should not be negative 
+    # if no payments made, then return status as unpaid and return the data structure 
+
+    # sort the payments by date 
+
+    # compute the balance here:
+
+    # total_paid = 0 
+    # initialize a payment history
+    # for payment in payments:
+        # extract the payment 
+        # total_paid += payment amount
+        # update payment history
+    
+    # it total == total_paid # status paid
+    # elif total > total_paid : # underpaid, remaining balance 
+    # elif total < total_paid: overpaid 
+
+    # update the datastructure dict and return 
+
+
+>> actual code 
+
+from timedate import timedate
+
+def calculate_invoice_status(invoice, payments): 
+    inv_issue_date = timedate.strptime(invoice["issue_date"], "%Y-%m-%d")
+    inv_amount = float(invoice["amount"])
+
+    sorted_payments = sorted(payments, key=lambda p: datetime.strptime(p["date"], "%m/%d/%Y"))
+
+    total_paid = 0
+    payment_history = []
+    balance = inv_amount
+    for payment in sorted_payments: 
+        total_paid += float(payment["amount"])
+        balance -= float(payment["amount"]) 
+        payment_history.append({"date": payment["date"]. "amount": payment["amount"]. "balance_after": string(balance)})
+    
+    outstanding_balance =  inv_amount - total_paid
+    
+    # compute status
+    status = None
+    
+    if total_paid == 0: 
+        status = "unpaid"
+    elif total_paid < inv_amount: 
+        status = "underpaid"
+    elif total_paid > inv_amount:
+        status = "overpaid"
+    elif total_paid == inv_amount:
+        status = "paid"
+
+    
+    output = {
+        "invoice_id": invoice["invoice_id],
+        "client_name": invoice["client_name],
+        "invoice_amount": invoice["amount],
+        "total_paid": string(total_paid),
+        "outstanding_balance": string(outstanding_balance),
+        "status": staus,
+        "payment_count": len(payments),
+        "payment_history": payment_history
+    }
+
+    return output

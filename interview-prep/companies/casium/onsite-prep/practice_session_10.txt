@@ -1,0 +1,316 @@
+================================================================================
+LIVE CODING SESSION 10 - IMMIGRATION CASE PRIORITY RANKING
+================================================================================
+
+Date: October 15, 2025
+Time Limit: 1 hour
+Format: Real interview simulation (continuous flow, no rigid steps)
+
+Interviewer: Claude
+Candidate: Viresh
+
+================================================================================
+PROBLEM STATEMENT
+================================================================================
+
+At Casium, we manage hundreds of immigration cases simultaneously, and our
+attorneys need to prioritize which cases to work on each day. Your task is to
+build a case priority ranking system.
+
+You'll receive a list of immigration cases, and you need to calculate a
+priority score for each case, then return the cases sorted by priority
+(highest first).
+
+Priority scoring rules:
+1. Base score starts at 0
+2. Add points based on visa type:
+   - "O-1": +50 points
+   - "H-1B": +30 points
+   - "TN": +20 points
+   - "EB-1A": +40 points
+   - "EB-2": +35 points
+
+3. Add urgency points based on days until deadline:
+   - If deadline is within 7 days: +100 points
+   - If deadline is within 14 days: +50 points
+   - If deadline is within 30 days: +25 points
+   - If deadline is more than 30 days away: +0 points
+   - If deadline has passed: +200 points (URGENT!)
+
+4. Add status multiplier:
+   - "pending_documents": multiply total score by 0.8
+   - "ready_for_filing": multiply total score by 1.5
+   - "filed": multiply total score by 0.5
+   - "approved": multiply total score by 0.1
+
+Input:
+------
+A list of dictionaries, where each dictionary represents a case:
+
+[
+    {
+        "case_id": "CASE-001",
+        "client_name": "John Smith",
+        "visa_type": "O-1",
+        "deadline": "2025-10-20",
+        "status": "ready_for_filing"
+    },
+    {
+        "case_id": "CASE-002",
+        "client_name": "Maria Garcia",
+        "visa_type": "H-1B",
+        "deadline": "2025-10-12",
+        "status": "pending_documents"
+    },
+    ...
+]
+
+Current date: "2025-10-15" (for deadline calculations)
+
+Output:
+-------
+Return a list of dictionaries sorted by priority score (highest first). Each
+dictionary should include:
+- All original case fields
+- "priority_score": the calculated priority score (rounded to 2 decimal places)
+- "days_until_deadline": number of days until deadline (negative if passed)
+
+Example output structure:
+[
+    {
+        "case_id": "CASE-001",
+        "client_name": "John Smith",
+        "visa_type": "O-1",
+        "deadline": "2025-10-20",
+        "status": "ready_for_filing",
+        "priority_score": 225.0,
+        "days_until_deadline": 5
+    },
+    ...
+]
+
+Function signature:
+-------------------
+def rank_cases(cases: list[dict], current_date: str) -> list[dict]:
+    """
+    Calculate priority scores for immigration cases and return sorted by priority.
+
+    Args:
+        cases: List of case dictionaries
+        current_date: Current date as string in format "YYYY-MM-DD"
+
+    Returns:
+        List of case dictionaries sorted by priority (highest first),
+        with added priority_score and days_until_deadline fields
+    """
+    pass
+
+
+Example:
+--------
+cases = [
+    {
+        "case_id": "CASE-001",
+        "client_name": "John Smith",
+        "visa_type": "O-1",
+        "deadline": "2025-10-20",
+        "status": "ready_for_filing"
+    },
+    {
+        "case_id": "CASE-002",
+        "client_name": "Maria Garcia",
+        "visa_type": "H-1B",
+        "deadline": "2025-10-12",
+        "status": "pending_documents"
+    },
+    {
+        "case_id": "CASE-003",
+        "client_name": "Wei Chen",
+        "visa_type": "EB-1A",
+        "deadline": "2025-11-01",
+        "status": "filed"
+    }
+]
+
+current_date = "2025-10-15"
+
+result = rank_cases(cases, current_date)
+
+# Expected output (sorted by priority):
+# [
+#     {
+#         "case_id": "CASE-002",
+#         "priority_score": 104.0,  # (30 + 100) * 0.8
+#         "days_until_deadline": -3,
+#         ...
+#     },
+#     {
+#         "case_id": "CASE-001",
+#         "priority_score": 225.0,  # (50 + 100) * 1.5
+#         "days_until_deadline": 5,
+#         ...
+#     },
+#     {
+#         "case_id": "CASE-003",
+#         "priority_score": 32.5,  # (40 + 25) * 0.5
+#         "days_until_deadline": 17,
+#         ...
+#     }
+# ]
+
+================================================================================
+INTERVIEW STARTS NOW - TIMER STARTED
+================================================================================
+
+Go ahead! Start by asking any clarifying questions you have, then work through
+the solution. I'll be here to answer questions and observe your approach.
+
+Remember: Think out loud, explain your thought process, and write clean code.
+
+
+================================================================================
+YOUR WORK BELOW
+================================================================================
+Priority scoring rules:
+1. Base score starts at 0
+2. Add points based on visa type:
+   - "O-1": +50 points
+   - "H-1B": +30 points
+   - "TN": +20 points
+   - "EB-1A": +40 points
+   - "EB-2": +35 points
+
+3. Add urgency points based on days until deadline:
+   - If deadline is within 7 days: +100 points
+   - If deadline is within 14 days: +50 points
+   - If deadline is within 30 days: +25 points
+   - If deadline is more than 30 days away: +0 points
+   - If deadline has passed: +200 points (URGENT!)
+
+4. Add status multiplier:
+   - "pending_documents": multiply total score by 0.8
+   - "ready_for_filing": multiply total score by 1.5
+   - "filed": multiply total score by 0.5
+   - "approved": multiply total score by 0.1
+
+
+cases = [
+    {
+        "case_id": "CASE-001",
+        "client_name": "John Smith",
+        "visa_type": "O-1",
+        "deadline": "2025-10-20",
+        "status": "ready_for_filing"
+    },
+    {
+        
+    },
+    {
+        "case_id": "CASE-003",
+        "client_name": "Wei Chen",
+        "visa_type": "EB-1A",
+        "deadline": "2025-11-01",
+        "status": "filed"
+    }
+]
+
+[
+    {
+        "case_id": "CASE-001",
+        "client_name": "John Smith",
+        "visa_type": "O-1",
+        "deadline": "2025-10-20",
+        "status": "ready_for_filing",
+        "priority_score": 225.0,
+        "days_until_deadline": 5
+    },
+    ...
+]
+
+- making a case priority system 
+- calculate the prio scrore beased on 
+
+- any of the fields are empty 
+- invalid visa type 
+- garbage date 
+
+import datetime 
+
+def rank_cases(cases: list[dict], current_date: str) -> list[dict]:
+    """
+    Calculate priority scores for immigration cases and return sorted by priority.
+
+    Args:
+        cases: List of case dictionaries
+        current_date: Current date as string in format "YYYY-MM-DD"
+
+    Returns:
+        List of case dictionaries sorted by priority (highest first),
+        with added priority_score and days_until_deadline fields
+    """
+    current_date = datetime.strptime(current_date,"%Y-%m-%d") 
+    prioritized_cases = []
+
+    visa_type_score_map = {
+        O-1 : +50, 
+        H-1B : 30, 
+        EB-1A : 40, 
+        EB-2 : 35
+    }
+  
+    for case in cases:
+
+        deadline = datetime.strptime(case["deadline"], "%Y-%m-%d")=
+
+        # get the visa type and the score 
+        v_score = 0
+
+        if sub_score_holder["visa_type] in visa_type_score_map.keys():
+            v_score +=  visa_type_score_map[sub_score_holder["visa_type]]
+
+        # calculate days to deadline
+
+        days_to_deadline = (deadline - current).days 
+        d_score = 0
+        # update deadline score 
+        if days_to_deadline <= 0: 
+            d_score += 200
+        elif days_to_deadline <= 7: 
+            d_score += 100 
+        elif days_to_deadline > 7 and days_to_deadline <=14: 
+            d_score +=50
+        elif days_to_deadline > 14 and days_to_deadline <=30:
+            d_score+=25
+        elif  days_to_deadline > 30:
+            d_score += 0
+        
+        sub_score = v_score + d_score
+        total_score = 0
+        # get the status and update the status multiplier score 
+        if case["status"] == "pending_documents": 
+            total_score = sub_score * 0.8
+        elif case["status"] == "ready_for_filing": 
+            total_score = sub_score * 1.5
+        elif case["status"] == "filed":
+            total_score = sub_score * 0.5
+        elif case["status"] == "approved": 
+            total_score = sub_score * 0.1
+        
+
+        # create and update output dict and then append that to the original list
+        output = {
+            "case_id": case[""case_id""],
+            "client_name": case["client_name"],
+            "visa_type": case["visa_type"],
+            "deadline": case["deadline"],
+            "status": case["status"],
+            "priority_score": round(total_score, 2),
+            "days_until_deadline": days_to_deadline
+        }
+
+        prioritized_cases.append(output)
+
+    # sort it by priority 
+    sorted_priority_list = sorted(prioritized_cases, key = lamda x: x["priority_score"], reverse=True)
+
+    return sorted_priority_list

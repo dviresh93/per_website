@@ -1,0 +1,162 @@
+================================================================================
+PRACTICE SESSION 3: EMPLOYEE PTO ACCRUAL CALCULATOR
+================================================================================
+
+Date: October 10, 2025
+Problem: Custom - Employee PTO Accrual (Medium, 35-45 min)
+Coach: Claude
+Student: Viresh
+
+Format: Realistic interview simulation - work naturally
+
+================================================================================
+PROBLEM STATEMENT
+================================================================================
+
+You're building a PTO (Paid Time Off) accrual system for an HR platform.
+Employees accrue vacation days based on their employment status and tenure.
+
+ACCRUAL RULES:
+
+1. Full-time employees:
+   - 0-2 years: 15 days/year (1.25 days/month)
+   - 2-5 years: 20 days/year (1.67 days/month)
+   - 5+ years: 25 days/year (2.08 days/month)
+
+2. Part-time employees:
+   - Accrue at 50% of full-time rate
+   - Same tier structure based on tenure
+
+3. Contractors:
+   - No PTO accrual (0 days)
+
+IMPORTANT BUSINESS RULES:
+
+- Employees accrue PTO on a daily basis (prorated by days worked)
+- If hired mid-month, only accrue for days from hire date to month end
+- If terminated mid-month, only accrue until termination date
+- Both hire date and termination date are inclusive (count both days)
+- Accrual starts on hire date (not the day after)
+- Handle employees hired in previous years correctly
+
+SAMPLE INPUT:
+
+employees = [
+    {
+        "id": 1,
+        "name": "Alice Johnson",
+        "employment_type": "full-time",
+        "hire_date": "2023-03-15",
+        "termination_date": None,  # Still employed
+        "pto_used": 12.5
+    },
+    {
+        "id": 2,
+        "name": "Bob Smith",
+        "employment_type": "part-time",
+        "hire_date": "2024-01-10",
+        "termination_date": "2024-08-20",
+        "pto_used": 5.0
+    },
+    {
+        "id": 3,
+        "name": "Carol Williams",
+        "employment_type": "contractor",
+        "hire_date": "2024-06-01",
+        "termination_date": None,
+        "pto_used": 0
+    }
+]
+
+calculation_date = "2024-10-15"  # Calculate accrued PTO as of this date
+
+YOUR TASK:
+
+Implement calculate_pto_balances(employees, calculation_date)
+
+This function should:
+1. Calculate total PTO accrued for each employee from hire date to calculation_date
+2. Subtract PTO used to get current balance
+3. Handle different employment types and tenure tiers
+4. Handle mid-month hires and terminations correctly
+5. Return summary with per-employee breakdown
+
+EXPECTED OUTPUT:
+
+{
+    "calculation_date": "2024-10-15",
+    "employees": [
+        {
+            "id": 1,
+            "name": "Alice Johnson",
+            "employment_type": "full-time",
+            "hire_date": "2023-03-15",
+            "days_employed": 580,  # From Mar 15, 2023 to Oct 15, 2024
+            "tenure_years": 1.59,
+            "accrual_rate": "15 days/year (0-2 years tier)",
+            "pto_accrued": 23.84,  # 580 days * (15/365)
+            "pto_used": 12.5,
+            "pto_balance": 11.34
+        },
+        {
+            "id": 2,
+            "name": "Bob Smith",
+            "employment_type": "part-time",
+            "days_employed": 223,  # Jan 10 to Aug 20, 2024
+            "tenure_years": 0.61,
+            "accrual_rate": "7.5 days/year (part-time, 0-2 years tier)",
+            "pto_accrued": 4.58,  # 223 days * (7.5/365)
+            "pto_used": 5.0,
+            "pto_balance": -0.42  # Negative balance!
+        },
+        {
+            "id": 3,
+            "name": "Carol Williams",
+            "employment_type": "contractor",
+            "days_employed": 137,
+            "tenure_years": 0.38,
+            "accrual_rate": "0 days/year (contractor)",
+            "pto_accrued": 0,
+            "pto_used": 0,
+            "pto_balance": 0
+        }
+    ],
+    "summary": {
+        "total_employees": 3,
+        "total_pto_accrued": 28.42,
+        "total_pto_used": 17.5,
+        "total_pto_balance": 10.92
+    }
+}
+
+EDGE CASES TO CONSIDER:
+
+- Employee hired and terminated in the same year
+- Calculation date before hire date (shouldn't happen, but handle gracefully)
+- Termination date before hire date (invalid data)
+- None/missing fields
+- Leap years (2024 has 366 days!)
+- Employee crosses tenure tier during employment (2 year mark, 5 year mark)
+
+HELPER FUNCTIONS (you can use these or write your own):
+
+from datetime import datetime
+
+def parse_date(date_string):
+    """Parse YYYY-MM-DD string to datetime object"""
+    return datetime.strptime(date_string, '%Y-%m-%d')
+
+def days_between(start_date, end_date):
+    """Calculate days between two dates (inclusive)"""
+    delta = (end_date - start_date).days
+    return delta + 1  # +1 because both dates are inclusive
+
+================================================================================
+INTERVIEW STARTS
+================================================================================
+
+Take a minute to read through this. Any questions before you start?
+
+[Student works below]
+
+

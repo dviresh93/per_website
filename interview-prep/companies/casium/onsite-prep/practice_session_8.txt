@@ -1,0 +1,130 @@
+================================================================================
+PRACTICE SESSION 8: DOCUMENT TRANSLATION COST CALCULATOR
+================================================================================
+
+Date: October 12, 2025
+Problem: Calculate Pro-Rated Translation Service Costs (Medium-Hard, 50 min)
+Interview Simulation - Realistic Format
+Pattern: Pro-rating + Date Logic + Cost Calculation
+
+================================================================================
+PROBLEM STATEMENT
+================================================================================
+
+You're building a billing system for a document translation service used by
+immigration law firms. Translation projects can start or complete at any time
+during the month. You need to calculate the total translation costs for a
+given billing month by pro-rating costs based on the days each project was
+in progress.
+
+BUSINESS CONTEXT:
+
+Translation services charge a monthly retainer for ongoing projects:
+- Standard rate: $50/page/month
+- Certified translation: $75/page/month
+- Rush service (expedited): Additional $200 flat fee per project
+
+When projects start or complete mid-month, clients are only charged for the
+days the project was in progress.
+
+Your job is to calculate billing for a specific month.
+
+================================================================================
+BUSINESS RULES
+================================================================================
+
+1. Clients are charged based on the number of days their project was in progress
+2. If project starts mid-month, charge only from start date onwards
+3. If project completes mid-month, charge only until completion date
+4. Handle projects that span multiple years
+5. Both start and completion dates are inclusive (charge for both days)
+6. Projects with completed_on = None are still in progress (charge through end of month)
+7. Rush fee is pro-rated along with page costs
+
+================================================================================
+INPUT FORMAT
+================================================================================
+
+projects = [
+    {
+        'project_id': 1,
+        'client_name': 'Alice Smith',
+        'page_count': 10,
+        'rate_per_page': 50.00,
+        'is_rush': False,
+        'started_on': '2024-01-01',
+        'completed_on': None  # Still in progress
+    },
+    {
+        'project_id': 2,
+        'client_name': 'Bob Johnson',
+        'page_count': 5,
+        'rate_per_page': 75.00,
+        'is_rush': True,  # +$200 rush fee
+        'started_on': '2024-01-15',
+        'completed_on': '2024-01-25'
+    },
+    {
+        'project_id': 3,
+        'client_name': 'Carol Martinez',
+        'page_count': 8,
+        'rate_per_page': 50.00,
+        'is_rush': False,
+        'started_on': '2023-12-20',
+        'completed_on': '2024-02-10'
+    }
+]
+
+billing_month = '2024-01'  # Calculate costs for January 2024
+
+================================================================================
+YOUR TASK
+================================================================================
+
+Implement: calculate_translation_costs(projects, billing_month)
+
+This function should return a dictionary with:
+- 'month': The billing month string
+- 'total_costs': Total costs across all projects (rounded to cents)
+- 'project_charges': List of charge details for each project
+
+================================================================================
+EXPECTED OUTPUT
+================================================================================
+
+{
+    'month': '2024-01',
+    'total_costs': 1358.06,
+    'project_charges': [
+        {
+            'project_id': 1,
+            'client_name': 'Alice Smith',
+            'page_count': 10,
+            'days_active': 31,
+            'charge': 500.00
+        },
+        {
+            'project_id': 2,
+            'client_name': 'Bob Johnson',
+            'page_count': 5,
+            'days_active': 11,
+            'charge': 210.48  # (75*5 + 200) * 11/31
+        },
+        {
+            'project_id': 3,
+            'client_name': 'Carol Martinez',
+            'page_count': 8,
+            'days_active': 31,
+            'charge': 400.00
+        }
+    ]
+}
+
+
+================================================================================
+START CODING
+================================================================================
+
+[Work below]
+
+

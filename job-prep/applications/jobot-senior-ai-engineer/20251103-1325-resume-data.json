@@ -1,0 +1,193 @@
+{
+  "selectedTemplate": 1,
+  "basics": {
+    "name": "Viresh Duvvuri",
+    "label": "Senior AI Software Engineer",
+    "email": "vireshduvvuri@gmail.com",
+    "phone": "+1-509-964-5469",
+    "location": {
+      "address": "Seattle, WA"
+    },
+    "website": "https://www.linkedin.com/in/viresh-duvvuri/",
+    "summary": "Senior AI Software Engineer specializing in prototype development and production AI systems, with 7+ years building scalable ML solutions from concept to deployment. Proven track record developing AI/ML prototypes that scale to production in small team environments, delivering 70-80% efficiency improvements through rapid iteration, MLOps practices, and AWS infrastructure. Strong full-stack capability with autonomous project ownership from initial concept through production deployment."
+  },
+  "headings": {
+    "work": "Work Experience",
+    "education": "Education",
+    "projects": "Projects",
+    "skills": "Skills"
+  },
+  "skills": [
+    {
+      "name": "Programming",
+      "keywords": [
+        "Python",
+        "C++",
+        "JavaScript",
+        "Java (learning)",
+        "SQL",
+        "FastAPI",
+        "Flask",
+        "React"
+      ]
+    },
+    {
+      "name": "AI/ML & Prototyping",
+      "keywords": [
+        "Machine Learning",
+        "Prototype Development",
+        "MLOps",
+        "Model Development",
+        "NLP",
+        "Model Deployment",
+        "Model Evaluation"
+      ]
+    },
+    {
+      "name": "Cloud & MLOps",
+      "keywords": [
+        "AWS",
+        "MLOps",
+        "CI/CD",
+        "Docker",
+        "Monitoring",
+        "Performance Tuning",
+        "Scalability"
+      ]
+    },
+    {
+      "name": "APIs & Integration",
+      "keywords": [
+        "FastAPI",
+        "Flask",
+        "REST APIs",
+        "WebSocket",
+        "API Design",
+        "LLM Integration"
+      ]
+    }
+  ],
+  "work": [
+    {
+      "company": "Grid CoOperator",
+      "position": "AI Engineer",
+      "location": "Seattle, WA",
+      "startDate": "03/2025",
+      "endDate": "Present",
+      "highlights": [
+        "Developed and scaled AI prototype from concept to production multi-agent system in 2 months, implemented MLOps practices including evaluation frameworks and monitoring, delivered 70% efficiency improvement through rapid iteration and testing with real users",
+        "Built production-ready AI system on AWS infrastructure with API backend using FastAPI, established monitoring tracking quality metrics, latency, and cost optimization across 50-100 daily queries",
+        "Independently led technical implementation collaborating with business stakeholders, designed evaluation frameworks and testing pipelines, provided technical guidance on AI capabilities and best practices"
+      ]
+    },
+    {
+      "company": "Freefly Systems",
+      "position": "Senior Software Engineer",
+      "location": "Woodinville, WA",
+      "startDate": "11/2021",
+      "endDate": "10/2025",
+      "highlights": [
+        "Independently designed and developed AI-powered diagnostic tool from prototype to production serving 200+ daily users, built full-stack solution with React and Flask with LLM integration, delivered 80% productivity improvement through autonomous project ownership",
+        "Contributed to drone platform codebases implementing new features and optimizations for flight control systems and payload integration across multiple product lines, managed software integration projects from planning through release",
+        "Led release management for drone platforms overseeing testing phases from alpha through production deployment, coordinating firmware updates and executing comprehensive testing protocols with cross-functional teams",
+        "Built automated systems to process complex technical data and identify system failures, developing knowledge base enhancements and support tools that streamlined operations"
+      ]
+    },
+    {
+      "company": "Lumenier",
+      "position": "Drone Software Developer",
+      "location": "Sarasota, FL",
+      "startDate": "07/2020",
+      "endDate": "10/2021",
+      "highlights": [
+        "Wrote embedded code in C++ to integrate LiDAR and optical flow sensors for obstacle avoidance and position holding with/without GPS under various lighting conditions",
+        "Collaborated with open-source flight control software maintainers for integration, testing, and deployment of autonomous flight algorithms, prototyped innovative features like toss-to-launch for product roadmap development"
+      ]
+    },
+    {
+      "company": "York Exponential",
+      "position": "Software Engineer - R&D",
+      "location": "York, PA",
+      "startDate": "08/2018",
+      "endDate": "05/2020",
+      "highlights": [
+        "Developed prototype software for in-house autonomous surveillance mobile robots using ROS2, SLAM, and computer vision technologies",
+        "Built Human Machine Interface for Universal Robot welding applications using Python and Kivy framework, implemented multi-robot control systems with platform independence"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Washington State University",
+      "location": "Pullman, WA",
+      "studyType": "Master of Science",
+      "area": "Computer Science",
+      "startDate": "01/2015",
+      "endDate": "01/2017"
+    },
+    {
+      "institution": "GITAM University",
+      "location": "Visakhapatnam, India",
+      "studyType": "Bachelor of Technology",
+      "area": "Information Technology",
+      "startDate": "01/2011",
+      "endDate": "01/2015"
+    }
+  ],
+  "projects": [
+    {
+      "name": "GridCOP: Smart Grid Analytics Agent",
+      "description": "Grid CoOperator",
+      "highlights": [
+        "Problem: Power grid analysts needed automated database querying and intelligent insights to understand complex data patterns beyond basic visualizations",
+        "Solution: Developed A2A multi-agent system using LangChain orchestration and MCP where specialized agents coordinate tasks through prompt engineering strategies, implemented RAG and vector search with FAISS for intelligent querying, implemented model evaluation frameworks to monitor quality and cost metrics, deployed on AWS with observability and logging",
+        "Impact: Enhanced analyst productivity by 70% through AI co-pilot that augments domain experts with automated workflows, implemented human-in-the-loop evaluation and testing pipelines for production-ready AI systems with robust error handling through rapid iteration"
+      ],
+      "keywords": [
+        "LangChain",
+        "MCP",
+        "Multi-Agent Systems",
+        "RAG",
+        "FAISS",
+        "AWS",
+        "Python",
+        "FastAPI",
+        "MLOps"
+      ]
+    },
+    {
+      "name": "Production System Optimization Tool",
+      "description": "Freefly Systems",
+      "highlights": [
+        "Problem: Manual system analysis taking hours of expert time, creating bottlenecks in product development and customer support resolution",
+        "Solution: Built full-stack application with React frontend, Python Flask backend, integrated foundation model APIs with Ollama and Llama 3.2 for real-time log processing and interactive analysis using prompt engineering and model evaluation",
+        "Impact: Transformed expert analysis from hours to minutes, deployed to production serving 200+ daily queries with significant performance improvements through rapid iteration and continuous optimization"
+      ],
+      "keywords": [
+        "React",
+        "Python",
+        "Flask",
+        "Ollama",
+        "Llama",
+        "RAG",
+        "Production Deployment"
+      ]
+    },
+    {
+      "name": "AI Travel Planner Agent",
+      "description": "Personal",
+      "highlights": [
+        "Problem: Manual travel planning requiring hours of research across multiple sources with inconsistent and outdated information",
+        "Solution: Built AI agent using Claude 3.5 Sonnet, LangChain, Streamlit, and DuckDuckGo Search API for personalized itinerary generation using prompt engineering techniques",
+        "Impact: Demonstrated end-to-end AI application development, learned conversational AI patterns and real-time data integration techniques through iterative development"
+      ],
+      "keywords": [
+        "Claude",
+        "LangChain",
+        "Streamlit",
+        "Python",
+        "API Integration"
+      ]
+    }
+  ]
+}

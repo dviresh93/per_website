@@ -1,0 +1,155 @@
+================================================================================
+PRACTICE SESSION 4: MEETING ROOM BOOKING SYSTEM
+================================================================================
+
+Date: October 10, 2025
+Problem: Meeting Room Availability (Medium, 35-40 min)
+Interview Simulation - Realistic Format
+
+================================================================================
+PROBLEM
+================================================================================
+
+We're building a meeting room booking system. Given a list of existing bookings,
+determine if a new meeting can be scheduled and suggest available time slots.
+
+BUSINESS RULES:
+
+- Meeting rooms can only host one meeting at a time
+- Bookings have a start time and end time
+- A room is available if there's no overlap with existing bookings
+- Meeting times are in 24-hour format (HH:MM)
+- All meetings are on the same day
+- Minimum meeting duration is 30 minutes
+- Booking end time is exclusive (if meeting ends at 10:00, room is available at 10:00)
+
+INPUT:
+
+existing_bookings = [
+    {"start": "09:00", "end": "10:30"},
+    {"start": "11:00", "end": "12:00"},
+    {"start": "14:00", "end": "15:30"}
+]
+
+business_hours = {"open": "08:00", "close": "18:00"}
+
+new_meeting = {"start": "10:00", "end": "11:00"}
+
+IMPLEMENT:
+
+1. can_book_meeting(existing_bookings, new_meeting)
+   Returns True if the meeting can be booked, False otherwise
+
+2. find_available_slots(existing_bookings, business_hours, duration_minutes)
+   Returns list of all available time slots of at least the given duration
+
+EXAMPLES:
+
+# Example 1
+can_book_meeting(
+    [{"start": "09:00", "end": "10:30"}],
+    {"start": "10:00", "end": "11:00"}
+)
+# Should return False (overlaps with existing booking)
+
+# Example 2
+can_book_meeting(
+    [{"start": "09:00", "end": "10:00"}],
+    {"start": "10:00", "end": "11:00"}
+)
+# Should return True (10:00 is available since previous meeting ends at 10:00)
+
+# Example 3
+find_available_slots(
+    [{"start": "09:00", "end": "10:00"}, {"start": "14:00", "end": "15:00"}],
+    {"open": "08:00", "close": "17:00"},
+    60
+)
+# Should return something like:
+# [
+#     {"start": "08:00", "end": "09:00"},
+#     {"start": "10:00", "end": "14:00"},
+#     {"start": "15:00", "end": "17:00"}
+# ]
+
+================================================================================
+START CODING
+================================================================================
+
+[Work below]
+
+From what I am understanding, we are trying to create a meeting booking system 
+
+They are just 2 fuctions: 
+1. can_book_meeting , will return True / False bases on weather a meeting can be booked or not 
+2. find_available_slots , will return all the available timeslots for the day 
+
+business rules: 
+- minimum meeting duration is 30 min
+- all the provided times are for the same day 
+- meeting can start immidiately the the other ends 
+
+edgecases:
+- some of the argument fields are incomplete
+- time in the arguments are not matching up like; they want to schedule a meeting at 4am, wheres all rest of the meetings are happening between the business hours 
+- dulplicate times in the inputs 
+
+questions: 
+- do we need to validate the input data or can we assume its clean? 
+- can_book_meeting ; does this function need to take into account the business hours or can we assume that argumets will be clean 
+
+
+=====================================
+
+form datetime import datetime
+
+def can_book_meeting(existing_bookings, new_meeting): 
+    # we are assuming that inputs are clean, hence not performing any checks
+    
+    nm_start = datetime.strptime(new_meeting["start"], "%H:%M")
+    nm_end = datetime.strptime(new_meeting["end"], "%H:%M")
+
+    for booking in existing_bookings:
+        booking_start = datetime.strptime(booking["start"], "%H:%M")
+        booking_end = datetime.strptime(booking["end"], "%H:%M")
+
+        if (nm_end > booking_start) and (nm_start < booking_end): 
+            return False 
+    return True 
+
+def find_available_slots(existing_bookings, business_hours, duration_minutes):
+    # check to make sure all the inputs are valid, and none of them are empty 
+    # we will skip this, assuming we have clean inputs
+
+    # here we will sort the existing bookings -- overkill, not needed 
+
+    # we will maintian a list of dict called as available timeslots 
+    available_slots = []
+
+    business_start = datatime.strftime(business_hours["start"], "%H:%M")
+    business_end = datatime.strftime(business_hours["end"], "%H:%M")
+    
+    idx = 0
+
+    while idx < len(existing_bookings)-1: 
+        eb_start = datetime.strftime(existing_bookings[idx]["start"], "%H:%M")
+        eb_end = datetime.strftime(existing_bookings[idx]["end"], "%H:%M")
+
+        if idx == 0:
+            # we will compute the difference between start time of existing booking and the start of business hours 
+            if abs(eb_start - business_start).minutes >= duration_minutes: 
+                available_slots.append({"start": business_start , "end": eb_start})
+        
+        else: 
+            # for eveything else in the middle: end time of the current slot - start time of the next slot >= duration, add to available slot  
+            eb_start_next = datetime.strftime(existing_bookings[idx+1]["start"], "%H:%M")
+            if abs(eb_start_next - eb_end) >= duration: 
+                available_slots.append({"start": eb_end , "end": eb_start_next})
+
+        idx+=1
+    
+    # for the last existing book, if the diff between; end time of existing booking and close time of business hrs >= duration add to available slot 
+    if abs(eb_end - business_end).minutes >= duration:
+        available_slots.append({"start": eb_end , "end": business_end})
+
+    return available_slots

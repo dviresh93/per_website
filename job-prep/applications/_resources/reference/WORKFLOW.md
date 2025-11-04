@@ -18,14 +18,14 @@ This system generates customized resumes using:
 
 ---
 
-## 📂 File Structure
+## 📂 File Structure (NEW - Company-Based Organization)
 
 ```
 job-prep/applications/
 ├── _resources/
 │   ├── baseline-resume-data.json          ← Proven format (start here)
-│   ├── FORMAT-STANDARDS.md                ← Rules to follow
-│   ├── resume-scratchpad-template.md      ← Review template
+│   ├── RESUME_TEMPLATE.md                 ← MASTER template with ALL rules
+│   ├── FORMAT-STANDARDS.md                ← Additional format rules
 │   ├── WORKFLOW.md                        ← This file
 │   ├── Viresh-Duvvuri-Master-Resume.md    ← Full content bank
 │   ├── resume-customization-guide.md      ← Strategy guide
@@ -35,15 +35,28 @@ job-prep/applications/
 │   ├── job-posting.md                     ← Job details template
 │   └── resume-data.json                   ← Resume template
 │
-├── {company-role}/                        ← Individual applications
-│   ├── job-posting.md                     ← Job requirements & notes
-│   ├── resume-scratchpad.md               ← Review draft (generated)
-│   ├── resume-data.json                   ← Final JSON (generated)
-│   └── resume.pdf                         ← Generated PDF
+├── {company-name}/                        ← One folder per company (NEW!)
+│   ├── {unique-id}-job-posting.md         ← Job description with metadata
+│   ├── {unique-id}-resume-draft.md        ← Review draft (generated)
+│   ├── {unique-id}-resume-data.json       ← Final JSON (generated)
+│   └── viresh-duvvuri-{unique-id}.pdf     ← Generated PDF
 │
 └── _archive/                              ← Completed applications
-    └── {company-role}/
+    └── {company-name}/
+        └── {unique-id}-*                  ← Archived applications
 ```
+
+**NEW: Unique ID Format**
+- Pattern: `{timestamp}-{role-slug}`
+- Example: `20251031-1445-ai-engineer`
+- Timestamp: `YYYYMMDD-HHMM` format
+- Role slug: lowercase, hyphenated
+
+**Benefits:**
+- Multiple applications to same company stay organized
+- All files for one application linked by unique ID
+- Easy to track which resume goes with which job posting
+- Chronological organization within each company folder
 
 ---
 

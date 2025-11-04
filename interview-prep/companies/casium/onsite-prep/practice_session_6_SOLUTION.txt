@@ -1,0 +1,295 @@
+================================================================================
+PRACTICE SESSION 6: ATTORNEY RETAINER FEE CALCULATOR - SOLUTION
+================================================================================
+
+This is how I would solve this problem in a real interview (50 minutes).
+
+================================================================================
+INTERVIEW APPROACH (First 5-10 minutes)
+================================================================================
+
+CLARIFYING QUESTIONS I WOULD ASK:
+
+1. "For the closed_on field - when it's None, that means the case is still
+   active through the end of the billing month, correct?"
+   → YES
+
+2. "Are both opened_on and closed_on dates inclusive? So if a case opens Jan 15
+   and closes Jan 20, we charge for 6 days (15,16,17,18,19,20)?"
+   → YES, both inclusive
+
+3. "For financial rounding - should I use Decimal to avoid floating point errors,
+   or is regular float acceptable?"
+   → Decimal is preferred for production, but float is acceptable for interview
+
+4. "Should I handle invalid inputs like empty cases list, or can I assume
+   valid inputs?"
+   → Handle empty cases list (return 0 fees), but can assume valid date formats
+
+5. "If a case wasn't active at all during the billing month, should I exclude
+   it from case_charges or include it with 0 days?"
+   → Exclude it (don't add to case_charges list)
+
+================================================================================
+HIGH-LEVEL APPROACH (Next 2-3 minutes)
+================================================================================
+
+"Here's my approach:
+
+1. Parse the billing_month to get the month boundaries (first and last day)
+2. Calculate how many days are in this billing month (for daily rate calculation)
+3. For each case:
+   - Parse the opened_on and closed_on dates
+   - Find the intersection of the case's active period with the billing month
+   - Calculate days active during the billing month
+   - Calculate charge = (monthly_retainer / days_in_month) * days_active
+   - Round to cents
+4. Build the output dictionary with total_fees and case_charges
+
+The key insight is finding the overlap between [case active period] and
+[billing month period]. I'll use max() and min() for the date boundaries.
+
+I'll create a helper function called calculate_active_days_in_month() to keep
+the main logic clean."
+
+================================================================================
+IMPLEMENTATION (Next 30-35 minutes)
+================================================================================
+
+from datetime import datetime
+from decimal import Decimal, ROUND_HALF_UP
+import calendar
+
+# Helper functions (provided in problem)
+def parse_date(date_string):
+    """Parse a date string in YYYY-MM-DD format to a datetime object."""
+    return datetime.strptime(date_string, '%Y-%m-%d')
+
+def get_days_in_month(year, month):
+    """Get the number of days in a given month. Handles leap years."""
+    return calendar.monthrange(year, month)[1]
+
+def get_month_boundaries(month_string):
+    """Get the first and last day of a month from a month string."""
+    year, month = map(int, month_string.split('-'))
+    first_day = datetime(year, month, 1)
+    last_day = datetime(year, month, get_days_in_month(year, month))
+    return first_day, last_day
+
+
+# Main solution
+def calculate_monthly_fees(cases, billing_month):
+    """
+    Calculate total attorney fees for a given billing month with pro-rated charges.
+
+    Args:
+        cases: List of case dictionaries with opened/closed dates and retainer fees
+        billing_month: Month string in format 'YYYY-MM'
+
+    Returns:
+        Dictionary with total fees and per-case charges
+    """
+    # Handle edge case: empty cases list
+    if not cases:
+        return {
+            'month': billing_month,
+            'total_fees': 0.00,
+            'case_charges': []
+        }
+
+    # Parse the billing month into date boundaries
+    month_start, month_end = get_month_boundaries(billing_month)
+    year, month_num = map(int, billing_month.split('-'))
+    days_in_month = get_days_in_month(year, month_num)
+
+    # Initialize accumulators
+    total_fees = Decimal('0.00')
+    case_charges = []
+
+    # Process each case
+    for case in cases:
+        case_id = case['case_id']
+        client_name = case['client_name']
+        case_type = case['case_type']
+        monthly_retainer = Decimal(str(case['monthly_retainer']))
+
+        # Parse dates
+        opened_on = parse_date(case['opened_on'])
+        closed_on = None
+        if case['closed_on'] is not None:
+            closed_on = parse_date(case['closed_on'])
+
+        # Calculate days active in this billing month
+        days_active = calculate_active_days_in_month(
+            opened_on,
+            closed_on,
+            month_start,
+            month_end
+        )
+
+        # Only charge if case was active during billing month
+        if days_active > 0:
+            # Calculate pro-rated charge
+            daily_rate = monthly_retainer / days_in_month
+            charge = daily_rate * days_active
+            charge = round_to_cents(charge)
+
+            # Add to total
+            total_fees += charge
+
+            # Add to case charges list
+            case_charges.append({
+                'case_id': case_id,
+                'client_name': client_name,
+                'case_type': case_type,
+                'days_active': days_active,
+                'charge': float(charge)
+            })
+
+    # Build result
+    return {
+        'month': billing_month,
+        'total_fees': float(round_to_cents(total_fees)),
+        'case_charges': case_charges
+    }
+
+
+def calculate_active_days_in_month(opened_on, closed_on, month_start, month_end):
+    """
+    Calculate the number of days a case was active in a given month.
+
+    Handles edge cases:
+    - Case opened before the month started
+    - Case opened during the month
+    - Case closed during the month
+    - Case still active (closed_on is None)
+    - Case not active during this month at all
+
+    Args:
+        opened_on: Date when case was opened
+        closed_on: Date when case was closed (None if still active)
+        month_start: First day of the billing month
+        month_end: Last day of the billing month
+
+    Returns:
+        Number of days active in the month (0 if not active at all)
+    """
+    # Find the effective start date (later of case opening or month start)
+    effective_start = max(opened_on, month_start)
+
+    # Find the effective end date
+    if closed_on is None:
+        # Case is still active, use month end
+        effective_end = month_end
+    else:
+        # Case closed, use earlier of closing date or month end
+        effective_end = min(closed_on, month_end)
+
+    # Check if case was active during this month at all
+    # Case NOT active if:
+    # - Case opened after month ended, OR
+    # - Case closed before month started
+    if effective_start > month_end or effective_end < month_start:
+        return 0
+
+    # Calculate days active (both dates inclusive)
+    days_active = (effective_end - effective_start).days + 1
+
+    # Safeguard against negative days (shouldn't happen with proper logic)
+    return max(0, days_active)
+
+
+def round_to_cents(amount):
+    """Round amount to nearest cent (2 decimal places)."""
+    return amount.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+
+
+================================================================================
+TESTING (Last 10 minutes - walk through examples)
+================================================================================
+
+"Let me walk through Example 9 to verify this works:
+
+Example 9: Multiple cases
+- Case 1: opened Jan 1, still active
+  - Days active: max(Jan 1, Jan 1) to min(None→Jan 31, Jan 31) = Jan 1 to Jan 31 = 31 days
+  - Charge: 500.00 / 31 * 31 = 500.00 ✓
+
+- Case 2: opened Jan 15, closed Jan 25
+  - Days active: max(Jan 15, Jan 1) to min(Jan 25, Jan 31) = Jan 15 to Jan 25 = 11 days
+  - Charge: 800.00 / 31 * 11 = 25.806... * 11 = 283.87 (rounded) ✓
+
+- Case 3: opened Dec 20, closed Feb 10
+  - Days active: max(Dec 20, Jan 1) to min(Feb 10, Jan 31) = Jan 1 to Jan 31 = 31 days
+  - Charge: 600.00 / 31 * 31 = 600.00 ✓
+
+Total: 500.00 + 283.87 + 600.00 = 1383.87 ✓
+
+Edge cases handled:
+✓ None for closed_on (Case 1)
+✓ Mid-month opening (Case 2)
+✓ Mid-month closing (Case 2)
+✓ Cross-year boundaries (Case 3 opened in 2023, billing in 2024)
+✓ Case active before and after billing month (Case 3)
+
+The solution looks correct!"
+
+================================================================================
+COMPLEXITY ANALYSIS (If time remains)
+================================================================================
+
+Time Complexity: O(n)
+- n = number of cases
+- We iterate through each case once
+- Date calculations are O(1)
+
+Space Complexity: O(n)
+- We store case_charges list with n entries (worst case)
+- Other variables are O(1)
+
+================================================================================
+FOLLOW-UP DISCUSSION POINTS (If interviewer asks)
+================================================================================
+
+1. "How would you handle invalid dates?"
+   → Add try-except around parse_date() calls, return error or skip invalid cases
+
+2. "What if we need to calculate fees for multiple months at once?"
+   → Create a wrapper function that loops through months and calls this function
+
+3. "How would you optimize if we had millions of cases?"
+   → Could parallelize processing with multiprocessing
+   → Could add database indexes on opened_on/closed_on for filtering
+   → Could batch process by year/quarter first
+
+4. "What if retainer fees could change mid-month?"
+   → Would need additional data structure tracking fee changes
+   → Calculate charge segments for each fee period
+
+5. "How would you handle refunds or credits?"
+   → Add a 'credits' field to cases
+   → Subtract credits from calculated charge
+   → Handle negative charges (refund scenarios)
+
+================================================================================
+KEY INTERVIEW BEHAVIORS DEMONSTRATED
+================================================================================
+
+✓ Asked clarifying questions before coding
+✓ Explained high-level approach before implementing
+✓ Extracted helper functions for clarity
+✓ Handled edge cases (None values, cross-year, empty list)
+✓ Used proper financial precision (Decimal)
+✓ Documented functions with docstrings
+✓ Walked through example to verify correctness
+✓ Discussed complexity and follow-up improvements
+
+Time breakdown:
+- Clarifying questions: 5 min
+- Approach explanation: 3 min
+- Implementation: 32 min
+- Testing/walkthrough: 8 min
+- Discussion: 2 min
+Total: 50 minutes ✓
+
+================================================================================

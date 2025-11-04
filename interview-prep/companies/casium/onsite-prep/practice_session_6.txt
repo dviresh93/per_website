@@ -1,0 +1,544 @@
+================================================================================
+PRACTICE SESSION 6: ATTORNEY RETAINER FEE CALCULATOR
+================================================================================
+
+Date: October 12, 2025
+Problem: Calculate Pro-Rated Attorney Fees for Immigration Cases (Medium-Hard, 50 min)
+Interview Simulation - Realistic Format
+Pattern: Pro-rating + Date Logic + Cost Calculation
+
+================================================================================
+PROBLEM STATEMENT
+================================================================================
+
+You're building a billing system for an immigration law firm. The firm charges
+clients monthly retainer fees for active immigration cases. Cases can be opened
+or closed at any time during the month. You need to calculate the total fees
+for a given billing month by pro-rating retainer fees based on the days each
+case was active.
+
+BUSINESS CONTEXT:
+
+Immigration cases require ongoing attorney support. The law firm charges a
+monthly retainer fee that varies by case type (H-1B, O-1, EB-2, etc.). When
+cases are opened or closed mid-month, clients are only charged for the days
+the case was active.
+
+Your job is to calculate billing for a specific month.
+
+================================================================================
+BUSINESS RULES
+================================================================================
+
+1. Clients are charged based on the number of days their case was active in the month
+2. Daily rate = Monthly retainer fee / Days in month
+3. If a case opens mid-month, charge only from opening date onwards
+4. If a case closes mid-month, charge only until closing date
+5. Handle cases that span multiple years
+6. Both opening and closing dates are inclusive (charge for both days)
+7. Cases with closing_date = None are still active (charge through end of month)
+
+================================================================================
+INPUT FORMAT
+================================================================================
+
+cases = [
+    {
+        'case_id': 1,
+        'client_name': 'Alice Smith',
+        'case_type': 'H-1B',
+        'opened_on': '2024-01-01',
+        'closed_on': None,  # Still active
+        'monthly_retainer': 500.00
+    },
+    {
+        'case_id': 2,
+        'client_name': 'Bob Johnson',
+        'case_type': 'O-1',
+        'opened_on': '2024-01-15',
+        'closed_on': '2024-01-25',
+        'monthly_retainer': 800.00
+    },
+    {
+        'case_id': 3,
+        'client_name': 'Carol Martinez',
+        'case_type': 'EB-2',
+        'opened_on': '2023-12-20',
+        'closed_on': '2024-02-10',
+        'monthly_retainer': 600.00
+    }
+]
+
+billing_month = '2024-01'  # Calculate fees for January 2024
+
+================================================================================
+EXPECTED OUTPUT
+================================================================================
+
+{
+    'month': '2024-01',
+    'total_fees': 1783.87,
+    'case_charges': [
+        {
+            'case_id': 1,
+            'client_name': 'Alice Smith',
+            'case_type': 'H-1B',
+            'days_active': 31,
+            'charge': 500.00
+        },
+        {
+            'case_id': 2,
+            'client_name': 'Bob Johnson',
+            'case_type': 'O-1',
+            'days_active': 11,
+            'charge': 283.87
+        },
+        {
+            'case_id': 3,
+            'client_name': 'Carol Martinez',
+            'case_type': 'EB-2',
+            'days_active': 31,
+            'charge': 600.00
+        }
+    ]
+}
+
+================================================================================
+HELPER FUNCTIONS PROVIDED
+================================================================================
+
+You can use these helper functions (implement them if needed):
+
+from datetime import datetime
+import calendar
+
+def parse_date(date_string):
+    """
+    Parse a date string in YYYY-MM-DD format to a datetime object.
+
+    Args:
+        date_string: String in format 'YYYY-MM-DD'
+
+    Returns:
+        datetime object
+    """
+    return datetime.strptime(date_string, '%Y-%m-%d')
+
+def get_days_in_month(year, month):
+    """
+    Get the number of days in a given month.
+    Handles leap years correctly.
+
+    Args:
+        year: Integer year (e.g., 2024)
+        month: Integer month (1-12)
+
+    Returns:
+        Integer number of days in the month
+    """
+    return calendar.monthrange(year, month)[1]
+
+def get_month_boundaries(month_string):
+    """
+    Get the first and last day of a month from a month string.
+
+    Args:
+        month_string: String in format 'YYYY-MM'
+
+    Returns:
+        Tuple of (first_day, last_day) as datetime objects
+    """
+    year, month = map(int, month_string.split('-'))
+    first_day = datetime(year, month, 1)
+    last_day = datetime(year, month, get_days_in_month(year, month))
+    return first_day, last_day
+
+================================================================================
+YOUR TASK
+================================================================================
+
+Implement: calculate_monthly_fees(cases, billing_month)
+
+This function should return a dictionary with:
+- 'month': The billing month string
+- 'total_fees': Total fees across all cases (rounded to cents)
+- 'case_charges': List of charge details for each case
+
+================================================================================
+EXAMPLES
+================================================================================
+
+# Example 1: Case active for full month
+calculate_monthly_fees(
+    [
+        {
+            'case_id': 1,
+            'client_name': 'Alice Smith',
+            'case_type': 'H-1B',
+            'opened_on': '2024-01-01',
+            'closed_on': None,
+            'monthly_retainer': 500.00
+        }
+    ],
+    '2024-01'
+)
+# Returns:
+# {
+#     'month': '2024-01',
+#     'total_fees': 500.00,
+#     'case_charges': [
+#         {
+#             'case_id': 1,
+#             'client_name': 'Alice Smith',
+#             'case_type': 'H-1B',
+#             'days_active': 31,
+#             'charge': 500.00
+#         }
+#     ]
+# }
+
+# Example 2: Case opened mid-month
+calculate_monthly_fees(
+    [
+        {
+            'case_id': 2,
+            'client_name': 'Bob Johnson',
+            'case_type': 'O-1',
+            'opened_on': '2024-01-15',
+            'closed_on': None,
+            'monthly_retainer': 620.00
+        }
+    ],
+    '2024-01'
+)
+# January has 31 days
+# Bob's case: Jan 15 - Jan 31 = 17 days
+# Daily rate = 620.00 / 31 = 20.00
+# Charge = 20.00 * 17 = 340.00
+# Returns:
+# {
+#     'month': '2024-01',
+#     'total_fees': 340.00,
+#     'case_charges': [
+#         {
+#             'case_id': 2,
+#             'client_name': 'Bob Johnson',
+#             'case_type': 'O-1',
+#             'days_active': 17,
+#             'charge': 340.00
+#         }
+#     ]
+# }
+
+# Example 3: Case closed mid-month
+calculate_monthly_fees(
+    [
+        {
+            'case_id': 3,
+            'client_name': 'Carol Martinez',
+            'case_type': 'EB-2',
+            'opened_on': '2024-01-01',
+            'closed_on': '2024-01-15',
+            'monthly_retainer': 620.00
+        }
+    ],
+    '2024-01'
+)
+# Carol's case: Jan 1 - Jan 15 = 15 days
+# Daily rate = 620.00 / 31 = 20.00
+# Charge = 20.00 * 15 = 300.00
+# Returns:
+# {
+#     'month': '2024-01',
+#     'total_fees': 300.00,
+#     'case_charges': [
+#         {
+#             'case_id': 3,
+#             'client_name': 'Carol Martinez',
+#             'case_type': 'EB-2',
+#             'days_active': 15,
+#             'charge': 300.00
+#         }
+#     ]
+# }
+
+# Example 4: Case opened and closed same month
+calculate_monthly_fees(
+    [
+        {
+            'case_id': 4,
+            'client_name': 'David Lee',
+            'case_type': 'H-1B',
+            'opened_on': '2024-01-10',
+            'closed_on': '2024-01-20',
+            'monthly_retainer': 620.00
+        }
+    ],
+    '2024-01'
+)
+# David's case: Jan 10 - Jan 20 = 11 days
+# Daily rate = 620.00 / 31 = 20.00
+# Charge = 20.00 * 11 = 220.00
+# Returns:
+# {
+#     'month': '2024-01',
+#     'total_fees': 220.00,
+#     'case_charges': [
+#         {
+#             'case_id': 4,
+#             'client_name': 'David Lee',
+#             'case_type': 'H-1B',
+#             'days_active': 11,
+#             'charge': 220.00
+#         }
+#     ]
+# }
+
+# Example 5: Case opened in previous year
+calculate_monthly_fees(
+    [
+        {
+            'case_id': 5,
+            'client_name': 'Eve Chen',
+            'case_type': 'O-1',
+            'opened_on': '2023-11-15',
+            'closed_on': None,
+            'monthly_retainer': 800.00
+        }
+    ],
+    '2024-01'
+)
+# Eve's case started in 2023 but is still active in Jan 2024
+# Charge for full month: Jan 1 - Jan 31 = 31 days
+# Charge = 800.00
+# Returns:
+# {
+#     'month': '2024-01',
+#     'total_fees': 800.00,
+#     'case_charges': [
+#         {
+#             'case_id': 5,
+#             'client_name': 'Eve Chen',
+#             'case_type': 'O-1',
+#             'days_active': 31,
+#             'charge': 800.00
+#         }
+#     ]
+# }
+
+# Example 6: Case opened before month, closed mid-month
+calculate_monthly_fees(
+    [
+        {
+            'case_id': 6,
+            'client_name': 'Frank Wilson',
+            'case_type': 'EB-2',
+            'opened_on': '2023-12-01',
+            'closed_on': '2024-01-20',
+            'monthly_retainer': 620.00
+        }
+    ],
+    '2024-01'
+)
+# Frank's case: Jan 1 - Jan 20 = 20 days
+# Daily rate = 620.00 / 31 = 20.00
+# Charge = 20.00 * 20 = 400.00
+# Returns:
+# {
+#     'month': '2024-01',
+#     'total_fees': 400.00,
+#     'case_charges': [
+#         {
+#             'case_id': 6,
+#             'client_name': 'Frank Wilson',
+#             'case_type': 'EB-2',
+#             'days_active': 20,
+#             'charge': 400.00
+#         }
+#     ]
+# }
+
+# Example 7: Case not active during billing month
+calculate_monthly_fees(
+    [
+        {
+            'case_id': 7,
+            'client_name': 'Grace Park',
+            'case_type': 'H-1B',
+            'opened_on': '2024-02-01',
+            'closed_on': '2024-02-28',
+            'monthly_retainer': 500.00
+        }
+    ],
+    '2024-01'
+)
+# Grace's case was only active in February, not January
+# Returns:
+# {
+#     'month': '2024-01',
+#     'total_fees': 0.00,
+#     'case_charges': []
+# }
+
+# Example 8: Leap year handling
+calculate_monthly_fees(
+    [
+        {
+            'case_id': 8,
+            'client_name': 'Henry Kim',
+            'case_type': 'O-1',
+            'opened_on': '2024-02-01',
+            'closed_on': None,
+            'monthly_retainer': 580.00
+        }
+    ],
+    '2024-02'
+)
+# February 2024 is a leap year (29 days)
+# Henry's case: Feb 1 - Feb 29 = 29 days
+# Charge = 580.00 (full month)
+# Returns:
+# {
+#     'month': '2024-02',
+#     'total_fees': 580.00,
+#     'case_charges': [
+#         {
+#             'case_id': 8,
+#             'client_name': 'Henry Kim',
+#             'case_type': 'O-1',
+#             'days_active': 29,
+#             'charge': 580.00
+#         }
+#     ]
+# }
+
+# Example 9: Multiple cases with different scenarios
+calculate_monthly_fees(
+    [
+        {
+            'case_id': 1,
+            'client_name': 'Alice Smith',
+            'case_type': 'H-1B',
+            'opened_on': '2024-01-01',
+            'closed_on': None,
+            'monthly_retainer': 500.00
+        },
+        {
+            'case_id': 2,
+            'client_name': 'Bob Johnson',
+            'case_type': 'O-1',
+            'opened_on': '2024-01-15',
+            'closed_on': '2024-01-25',
+            'monthly_retainer': 800.00
+        },
+        {
+            'case_id': 3,
+            'client_name': 'Carol Martinez',
+            'case_type': 'EB-2',
+            'opened_on': '2023-12-20',
+            'closed_on': '2024-02-10',
+            'monthly_retainer': 600.00
+        }
+    ],1. Parse the billing_month to get month boundaries (first day, last day)
+2. Get the number of days in the billing month
+3. For each case:
+   a. Parse opened_on and closed_on dates
+   b. Calculate the effective date range (intersection of case period and billing month)
+   c. Calculate days active in the billing month
+   d. Calculate charge = (monthly_retainer / days_in_month) * days_active
+   e. Round charge to cents
+4. Aggregate total fees and build case_charges list
+5. Return result dictionary
+
+KEY CALCULATION:
+
+To find days active in billing month:
+- effective_start = max(opened_on, month_start)
+- effective_end = min(closed_on or month_end, month_end)
+- If effective_start > month_end OR effective_end < month_start: days_active = 0
+- Otherwise: days_active = (effective_end - effective_start).days + 1
+
+FINANCIAL PRECISION:
+
+Use Decimal for calculations to avoid floating-point errors:
+- from decimal import Decimal, ROUND_HALF_UP
+- Convert monthly_retainer to Decimal
+- Round final charges to 2 decimal placeses': [
+#         {
+#             'case_id': 1,
+#             'client_name': 'Alice Smith',
+#             'case_type': 'H-1B',
+#             'days_active': 31,
+#             'charge': 500.00
+#         },
+#         {
+#             'case_id': 2,
+#             'client_name': 'Bob Johnson',
+#             'case_type': 'O-1',
+#             'days_active': 11,
+#             'charge': 283.87
+#         },
+#         {
+#             'case_id': 3,
+#             'client_name': 'Carol Martinez',
+#             'case_type': 'EB-2',
+#             'days_active': 31,
+#             'charge': 600.00
+#         }
+#     ]
+# }
+
+================================================================================
+EDGE CASES TO CONSIDER
+================================================================================
+
+1. Cases with closed_on = None (still active)
+2. Cases opened before the billing month started
+3. Cases closed after the billing month ended
+4. Cases opened and closed in the same month
+5. Cases not active during the billing month at all
+6. Cross-year boundaries (opened in 2023, billing in 2024)
+7. Leap years (February with 29 days)
+8. Same-day opening and closing (opened_on == closed_on)
+9. Empty cases list
+10. Financial rounding (charges must round to cents correctly)
+
+================================================================================
+HINTS & APPROACH
+================================================================================
+
+SUGGESTED APPROACH:
+
+1. Parse the billing_month to get month boundaries (first day, last day)
+2. Get the number of days in the billing month
+3. For each case:
+   a. Parse opened_on and closed_on dates
+   b. Calculate the effective date range (intersection of case period and billing month)
+   c. Calculate days active in the billing month
+   d. Calculate charge = (monthly_retainer / days_in_month) * days_active
+   e. Round charge to cents
+4. Aggregate total fees and build case_charges list
+5. Return result dictionary
+
+KEY CALCULATION:
+
+To find days active in billing month:
+- effective_start = max(opened_on, month_start)
+- effective_end = min(closed_on or month_end, month_end)
+- If effective_start > month_end OR effective_end < month_start: days_active = 0
+- Otherwise: days_active = (effective_end - effective_start).days + 1
+
+FINANCIAL PRECISION:
+
+Use Decimal for calculations to avoid floating-point errors:
+- from decimal import Decimal, ROUND_HALF_UP
+- Convert monthly_retainer to Decimal
+- Round final charges to 2 decimal places
+
+================================================================================
+START CODING
+================================================================================
+
+[Work below]
+
+

@@ -1,0 +1,219 @@
+"""
+CASIUM ASSESSMENT - ORIGINAL INTERVIEW QUESTION
+===============================================
+
+Assessment Link: https://www.qualified.io/assess/68c6b8c40593a31ecce56f27/review?invite=fibcsB8aJmLsCw
+
+Date: Recent (2025)
+Problem: Monthly Subscription Charge Calculator
+Status: Submitted Solution
+
+This is the actual code submitted during the Casium interview assessment.
+
+================================================================================
+PROBLEM STATEMENT (Reverse Engineered - No Computation Details)
+================================================================================
+
+OVERVIEW:
+---------
+You are building a subscription billing system for a SaaS company. The company
+charges customers based on the number of active users they have each month.
+
+Calculate the monthly charge for a customer's subscription, prorated based on
+the number of days each user was active during the month.
+
+REQUIREMENTS:
+-------------
+1. The subscription has a monthly_price_in_cents (cost per active user per month)
+2. Users can be activated/deactivated at any time during a month
+3. Charges are prorated daily
+4. Users are charged for both activation day AND deactivation day (inclusive)
+5. Handle users active before/after the billing month
+6. Return 0 if no users or subscription is None
+7. Round final total to nearest cent
+
+EXAMPLES:
+---------
+Example 1: User active for full month
+  Month: "2022-04" (30 days)
+  Subscription: 3000 cents/month
+  User: activated 2022-03-15, deactivated None
+  Expected: 3000 cents
+
+Example 2: User active for partial month
+  Month: "2022-04" (30 days)
+  Subscription: 3000 cents/month
+  User: activated 2022-04-10, deactivated 2022-04-20
+  Expected: 1100 cents
+
+Example 3: Multiple users
+  Month: "2022-04" (30 days)
+  Subscription: 3000 cents/month
+  Users:
+    - activated 2022-03-01, deactivated 2022-04-10
+    - activated 2022-04-15, deactivated None
+    - activated 2022-05-01, deactivated None
+  Expected: 2600 cents
+
+Example 4: No subscription
+  Expected: 0
+
+Example 5: No users
+  Expected: 0
+
+See function docstring below for full data structure details.
+
+================================================================================
+"""
+
+import datetime
+import calendar
+
+def monthly_charge(month, subscription, users):
+  """ Computes the monthly charge for a given subscription.
+
+  @rtype: int
+  @returns: the total monthly bill for the customer in cents, rounded
+    to the nearest cent. For example, a bill of $20.00 should return 2000.
+    If there are no active users or the subscription is None, returns 0.
+
+  @type month: str
+  @param month - Always present
+    Has the following structure:
+    "2022-04"  # April 2022 in YYYY-MM format
+
+  @type subscription: dict
+  @param subscription - May be None
+    If present, has the following structure:
+    {
+      'id': 763,
+      'customer_id': 328,
+      'monthly_price_in_cents': 359  # price per active user per month
+    }
+
+  @type users: list
+  @param users - May be empty, but not None
+    Has the following structure:
+    [
+      {
+        'id': 1,
+        'name': "Employee #1",
+        'customer_id': 1,
+
+        # when this user started
+        'activated_on': datetime.date(2021, 11, 4),
+
+        # last day to bill for user
+        # should bill up to and including this date
+        # since user had some access on this date
+        'deactivated_on': datetime.date(2022, 4, 10)
+      },
+      {
+        'id': 2,
+        'name': "Employee #2",
+        'customer_id': 1,
+
+        # when this user started
+        'activated_on': datetime.date(2021, 12, 4),
+
+        # hasn't been deactivated yet
+        'deactivated_on': None
+      },
+    ]
+  """
+  # your code here!
+
+
+ # fetch the plan details
+
+ # check date on which the subscribtion was activated and ended
+
+  if not users or not subscription:
+    return 0
+
+  # get the relevant month and date
+  year, month_num = map(int, month.split('-'))
+  month_start = datetime.date(year, month_num, 1)
+  month_end = last_day_of_month(month_start)
+
+  # now lets get the daily rate
+  days_in_month = (month_end - month_start).days + 1
+  daily_rate = subscription['monthly_price_in_cents'] / days_in_month
+
+  print(subscription['monthly_price_in_cents'])
+  # lets start the computing the cost here
+
+  total_cost = 0
+  for user in users:
+    if user['activated_on'] > month_end:
+      continue # user did not activate in this month, so there is no need to bill this
+
+    start_billing = user["activated_on"]
+
+    if start_billing < month_start: # start billing from starting of the month
+      start_billing = month_start
+
+    # now we need check when did user stop using the service
+    if user["deactivated_on"] is None:
+      # user did not deactivate the account
+      end_billing = month_end
+    else:
+      if user["deactivated_on"] < month_end:
+        continue
+
+      end_billing = user["deactivated_on"]
+
+      if end_billing > month_end:
+        end_billing = month_end
+
+    days_active = (end_billing - start_billing).days + 1
+    total_cost += daily_rate * days_active
+
+  return round(total_cost) # doing this to meet the requirement - rounding it to the nearest cent
+
+####################
+# Helper functions #
+####################
+
+def first_day_of_month(date):
+  """
+  Takes a datetime.date object and returns a datetime.date object
+  which is the first day of that month. For example:
+
+  >>> first_day_of_month(datetime.date(2022, 3, 17))  # Mar 17
+  datetime.date(2022, 3, 1)                           # Mar  1
+
+  Input type: datetime.date
+  Output type: datetime.date
+  """
+  return date.replace(day=1)
+
+def last_day_of_month(date):
+  """
+  Takes a datetime.date object and returns a datetime.date object
+  which is the last day of that month. For example:
+
+  >>> last_day_of_month(datetime.date(2022, 3, 17))  # Mar 17
+  datetime.date(2022, 3, 31)                         # Mar 31
+
+  Input type: datetime.date
+  Output type: datetime.date
+  """
+  last_day = calendar.monthrange(date.year, date.month)[1]
+  return date.replace(day=last_day)
+
+def next_day(date):
+  """
+  Takes a datetime.date object and returns a datetime.date object
+  which is the next day. For example:
+
+  >>> next_day(datetime.date(2022, 3, 17))   # Mar 17
+  datetime.date(2022, 3, 18)                 # Mar 18
+
+  >>> next_day(datetime.date(2022, 3, 31))  # Mar 31
+  datetime.date(2022, 4, 1)                 # Apr  1
+
+  Input type: datetime.date
+  Output type: datetime.date
+  """
+  return date + datetime.timedelta(days=1)

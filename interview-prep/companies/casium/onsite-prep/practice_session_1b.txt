@@ -1,0 +1,792 @@
+================================================================================
+PRACTICE SESSION 1B: VISA APPLICATION FEE CALCULATOR
+================================================================================
+
+Date: October 9, 2025
+Problem: Visa Application Fee Calculator (Medium, 30-40 min)
+Reference: interview-prep/companies/casium/onsite-prep/problem_1b_case_fees.md
+
+Coach: Claude
+Student: Viresh
+
+================================================================================
+PROBLEM STATEMENT
+================================================================================
+
+Build a fee calculator for visa applications with:
+
+BASE FEES:
+- O-1: $460
+- H-1B: $460
+- TN: $50
+- EB-1A: $700
+- EB-2 NIW: $700
+
+ADDITIONAL FEES:
+- Premium Processing: $2,500 (NOT available for TN)
+- Each Dependent: Same as base fee
+- Attorney Review: $3,000
+- Rush Attorney Review: $5,000
+
+BUSINESS RULES:
+1. TN visas do NOT support premium processing
+2. Cannot have both attorney_review AND rush_attorney_review
+3. Dependents must be 0 or positive
+4. Invalid visa types should return error
+5. Return ALL validation errors (not just first one)
+
+INPUT:
+{
+    "visa_type": "O-1",
+    "premium_processing": True,
+    "dependents": 2,
+    "attorney_review": False,
+    "rush_attorney_review": True
+}
+
+OUTPUT (if valid):
+{
+    "valid": True,
+    "errors": [],
+    "fee_breakdown": {
+        "base_fee": 460,
+        "premium_processing": 2500,
+        "dependents_fee": 920,
+        "attorney_fee": 5000,
+        "subtotals": {
+            "government_fees": 3880,
+            "attorney_fees": 5000
+        }
+    },
+    "total_fee": 8880
+}
+
+OUTPUT (if invalid):
+{
+    "valid": False,
+    "errors": ["error message 1", "error message 2"],
+    "fee_breakdown": None,
+    "total_fee": None
+}
+
+================================================================================
+7-STEP FRAMEWORK
+================================================================================
+
+✅ Step 1: Listen & Take Notes
+✅ Step 2: Ask Clarifying Questions
+✅ Step 3: Confirm Examples
+⏸️ Step 4: Explain Approach (IN PLAIN ENGLISH - wait for approval!)
+⏸️ Step 5: Write Pseudocode/Comments
+⏸️ Step 6: Code + Narrate
+⏸️ Step 7: Test Out Loud
+
+================================================================================
+STEP 1: LISTEN & TAKE NOTES
+================================================================================
+
+YOUR NOTES (write what you understand about the problem):
+
+BUSINESS RULES:
+1. TN visas do NOT support premium processing
+2. Cannot have both attorney_review AND rush_attorney_review
+3. Dependents must be 0 or positive
+4. Invalid visa types should return error
+5. Return ALL validation errors (not just first one)
+
+
+So from what I understand, we are creating an api, to calculate the fee
+
+we have different visa categories, each have  a base price 
+dependents base price is same as the applicants base price 
+
+there are some criteria we need to meet - we need to add this as part of pre-processing step, before actually calculating the fee: 
+TN visa do not support premium processing 
+Cannot have both attorney_review AND rush_attorney_review
+Dependents must be 0 or positive
+
+Once computed the value, we must return the result alog with ALL validation errors (not just first one)
+
+is my understanding correct about this problem ? 
+================================================================================
+STEP 2: ASK CLARIFYING QUESTIONS
+================================================================================
+
+YOUR QUESTIONS (ask about edge cases, assumptions, constraints):
+
+[Student writes here]
+
+-If there are errors, do I need to return the same dict? or can I just return False and exit? 
+
+edge cases: 
+- can one applicant have multiple visa's? 
+- Do we need to check if one attorney can review for multiple applicants? is that allowed? 
+- is the premium processing supported for the TN visa dependents? 
+
+- is there a preference on how you want to stucture this? do you prefere creating a class style approach or you want to handle this entirely inside the function? 
+I personally like classes, to keep things simple clean and abstracted, it can be observed as overkill sometimes - where are running on short timeline, so what would u prefer? 
+just keep it simple for now? or go all in?  
+
+================================================================================
+COACH RESPONSES TO YOUR QUESTIONS
+================================================================================
+
+Great questions! Let me answer them:
+
+Q1: "If there are errors, do I need to return the same dict? or can I just
+     return False and exit?"
+
+A1: YES, return the same dictionary structure always. The output format must be
+    consistent:
+    {
+        "valid": False,
+        "errors": ["error1", "error2"],
+        "fee_breakdown": None,
+        "total_fee": None
+    }
+
+    This makes it easy for the caller to always parse the same structure.
+    Don't just return False - that would require caller to handle two different
+    return types.
+
+Q2: "can one applicant have multiple visa's?"
+
+A2: No - this is for ONE application. The input is a single application dict
+    with one visa_type. Out of scope for this problem.
+
+Q3: "Do we need to check if one attorney can review for multiple applicants?"
+
+A3: Out of scope. This function handles ONE application at a time. Attorney
+    capacity checking would be a different function.
+
+Q4: "is the premium processing supported for the TN visa dependents?"
+
+A4: Good catch! If visa_type="TN", then premium_processing is NOT allowed
+    (for primary applicant OR dependents). The validation rule is:
+    "TN visa + premium_processing=True" → error
+
+Q5: "is there a preference on how you want to structure this? class vs function?"
+
+A5: **Keep it simple - just functions.** Here's why:
+    - Problem asks for ONE function: calculate_visa_fees()
+    - Class is overkill for single calculation (no state to maintain)
+    - In a 30-40 min interview, simple > complex
+    - You CAN use helper functions inside (that's good!)
+
+    Save classes for when you need:
+    - Multiple related operations
+    - Shared state across methods
+    - Object lifecycle management
+
+    For this problem: **Simple function-based solution is best.**
+
+GOOD QUESTIONS! You're thinking about edge cases and design - that's exactly
+what interviewers want to see. ✅
+
+Now you have clarity - ready for Step 3 (Confirm Examples)? 👍
+
+
+================================================================================
+STEP 3: CONFIRM EXAMPLES
+================================================================================
+
+YOUR EXAMPLE WALKTHROUGH (pick one example and trace through it):
+
+[Student writes here]
+
+input will be : 
+INPUT:
+{
+    "visa_type": "O-1",
+    "premium_processing": True,
+    "dependents": 2,
+    "attorney_review": False,
+    "rush_attorney_review": True
+}
+
+
+# perform application validity checks 
+# - is the visa type valid 
+- dependents is >= 0
+- ony of the two is selected - attorney, rush_attorney 
+- if the visa type is TN then check to make sure premium processing is set to false 
+
+- capture all the errors in list (list of strings)
+
+If the application is valid, and has no errors, then proceed to cost computation --- is this a valid thing to do? or do you want me compute any partial costs? 
+
+Cost computation: indivudual base cost + premium processing cost + cost per attorney preference +  depenedents cost 
+
+capture both the subtotal and the total fee
+
+populate the dict with the relevant values then return 
+
+============================= 2nd Attempt after the feedback =====================================
+
+here is the input: 
+{
+    "visa_type": "O-1",
+    "premium_processing": True,
+    "dependents": 2,
+    "attorney_review": False,
+    "rush_attorney_review": True
+}
+
+>> get the visa type, here its O1, check if its in the valid list of visas :
+
+this can be stored in a dict - easy for lookup and we dont care about the order, this can also come from some config file or db 
+Base price
+{
+- O-1: $460
+- H-1B: $460
+- TN: $50
+- EB-1A: $700
+- EB-2 NIW: $700
+}
+
+
+ADDITIONAL FEES { # another dict
+- Premium Processing: $2,500 (NOT available for TN)
+- Each Dependent: Same as base fee
+- Attorney Review: $3,000
+- Rush Attorney Review: $5,000
+
+}
+
+
+In this case visa type is valid, had it been O2, then we would have to capture this error
+
+to captuer errors we can maintain a list like: 
+errors = []
+
+>> premium processing is allowed for O1, either of attorney or rush attorney is selected, so we are good, we can proceed to cost computation
+
+>> cost computation: 
+
+base price : 460
+depedents : 2
+
+total base price = 460 + 2*460
+
+premiume processing fee: 2500
+rush attorney: 5000
+
+additional fee = 2500 + 5000
+
+total fee = total base price + addtional fee 
+
+>> finally populate these values in the dict and return
+
+if there are errors then return : 
+  {
+        "valid": False,
+        "errors": ["error1", "error2"],
+        "fee_breakdown": None,
+        "total_fee": None
+    }
+
+if no errors then return:
+{
+    "valid": True,
+    "errors": [],
+    "fee_breakdown": {
+        "base_fee": 460,
+        "premium_processing": 2500,
+        "dependents_fee": 920,
+        "attorney_fee": 5000,
+        "subtotals": {
+            "government_fees": 3880,
+            "attorney_fees": 5000
+        }
+    },
+    "total_fee": 8880
+}
+
+
+
+
+================================================================================
+COACH FEEDBACK ON YOUR UNDERSTANDING
+================================================================================
+
+Good start, but you're missing the KEY part of Step 3! ❌
+
+Step 3 is NOT about explaining your approach (that's Step 4).
+Step 3 is about WALKING THROUGH THE EXAMPLE with actual numbers.
+
+What you wrote:
+✅ Correct input example
+✅ Listed validation checks (good)
+✅ High-level cost computation logic
+
+What you're MISSING:
+❌ Actual calculation with numbers
+❌ Step-by-step trace through the example
+❌ Expected output with values
+
+Here's what Step 3 should look like:
+
+---
+EXAMPLE WALKTHROUGH:
+
+Input: O-1 visa, premium=True, dependents=2, attorney=False, rush_attorney=True
+
+Step 1: Validate
+- visa_type "O-1" → valid ✓
+- dependents = 2 → >= 0 ✓
+- attorney_review=False, rush_attorney_review=True → only one selected ✓
+- visa_type is NOT "TN", so premium processing is allowed ✓
+- No errors → valid=True
+
+Step 2: Calculate Fees
+- Base fee: O-1 = $460
+- Premium processing: True = $2,500
+- Dependents fee: 2 × $460 = $920
+- Attorney fee: rush_attorney_review=True = $5,000
+- Government fees subtotal: $460 + $2,500 + $920 = $3,880
+- Attorney fees subtotal: $5,000
+- Total fee: $3,880 + $5,000 = $8,880
+
+Step 3: Build Output
+{
+    "valid": True,
+    "errors": [],
+    "fee_breakdown": {
+        "base_fee": 460,
+        "premium_processing": 2500,
+        "dependents_fee": 920,
+        "attorney_fee": 5000,
+        "subtotals": {
+            "government_fees": 3880,
+            "attorney_fees": 5000
+        }
+    },
+    "total_fee": 8880
+}
+
+This matches the expected output from the problem! ✓
+---
+
+Your question: "is this a valid thing to do? or do you want me compute partial costs?"
+
+Answer: NO partial costs. If there are validation errors, return immediately:
+- valid=False
+- errors=[list of errors]
+- fee_breakdown=None
+- total_fee=None
+
+Only calculate fees if ALL validations pass.
+
+---
+
+ACTION REQUIRED: Redo Step 3 with actual numbers like the example above.
+Show me the math! 🧮
+
+
+================================================================================
+STEP 4: EXPLAIN YOUR APPROACH (IN PLAIN ENGLISH!)
+================================================================================
+
+REMINDER: Do NOT write code yet. Explain in words:
+- High-level approach
+- Helper functions you'll need (if any)
+- Edge cases you'll handle
+- Why this approach makes sense
+
+YOUR APPROACH:
+
+[Student writes here]
+
+>> validate the application : make sure it has all the valid details 
+- check for invalid values
+- if visa type is TN and premium processing is selected, then flag it 
+- number of depedents should be >= 0
+- only of the 2 attorney option is selected
+
+>> if there are errors: 
+- capture them in a list (of strings) 
+- return early, valid key in the dict must say false  
+- add the errors to the dict 
+
+
+>> if no errors, the continue to computation: 
+- get all the subtotal, then arrive a final cost 
+- in the final output, return both the subtoal and the final cost 
+
+>> base fee and costs can be stored in dict for easy lookup - can also be populated from a file or a db in the future 
+helper functions: 
+- validate the applicaition
+- computing the cost 
+- formulating the output dict 
+
+I still feel, using a class will make our life a lot easier and clean, just a suggestion
+
+
+================================================================================
+COACH FEEDBACK & APPROVAL
+================================================================================
+
+MUCH better! ✅ This is exactly the level of detail I needed.
+
+What you did well:
+1. ✅ Specific validations listed (TN+premium, dependents>=0, only one attorney)
+2. ✅ Clear error handling strategy (list of strings, return early)
+3. ✅ Mentioned using dict for fee lookup (good choice!)
+4. ✅ Listed helper functions (validate, compute, format output)
+5. ✅ Thought about extensibility (file/db in future)
+
+About helper functions:
+- ✅ validate_application() - GOOD
+- ⚠️ computing_cost() - OK but could be in main function (not too complex)
+- ❌ formulating_output_dict() - NOT needed, just build dict inline
+
+My recommendation: Keep it simple
+- ONE main function: calculate_visa_fees()
+- MAYBE one helper: validate_application() (optional, could be inline too)
+- Just build the output dict directly in main function
+
+About your class suggestion (line 422):
+I understand your preference, but for THIS problem: **NO, stick with functions.**
+
+Here's why:
+- Problem asks for ONE function
+- No state to maintain between calls
+- No related operations to group
+- In 30-40 min interview, simpler is better
+- Save classes for system design round
+
+**Classes are great when:**
+- Multiple related operations (FeeCalculator, DocumentValidator, CaseManager)
+- Shared state (config, database connection)
+- Object lifecycle matters
+
+**This problem:**
+- One input → one output
+- No state between calls
+- Functions are cleaner here
+
+**✅ GREEN LIGHT TO CODE!**
+
+Move to Step 5 (pseudocode) - outline your ONE main function with comments.
+Keep it SIMPLE - no classes, minimal helpers. 👍
+
+
+================================================================================
+STEP 5: WRITE PSEUDOCODE/COMMENTS
+================================================================================
+
+YOUR PSEUDOCODE (outline the structure with comments):
+
+[Student writes here]
+
+# defining global variables 
+
+base_cost_dict  = {
+        O-1: 460,
+        H-1B: 460,
+        TN: 50,
+        EB-1A: 700,
+        EB-2 NIW: 700,
+    }
+
+additional_cost_dict = {
+    Premium Processing: 2500, 
+    Attorney Review: 3,000,
+    Rush Attorney Review: 5,000
+}
+
+def compute_application_fee(application):
+
+    output_dict = {
+            "valid": False,
+            "errors": [],
+            "fee_breakdown": None,
+            "total_fee": None
+        }
+
+    # validate the application
+    errors = validate_application(application)
+    
+    if len(errors) > 0:
+        output_dictp["valid"] = False
+        output_dictp["errors"] = errors 
+    else: 
+        individal_base_cost, premium_processing, depedent_cost,  attorney_cost,  total = compute_fee(applicaition)
+        output_dict = {
+            "valid": True,
+            "errors": [],
+            "fee_breakdown": {
+                "base_fee": individal_base_cost,
+                "premium_processing": premium_processing,
+                "dependents_fee": depedent_cost,
+                "attorney_fee": attorney_cost,
+                "subtotals": {
+                    "government_fees": individal_base_cost + premium_processing + depedent_cost,
+                    "attorney_fees": attorney_cost
+                }
+            },
+            "total_fee": total
+        }
+    
+    return output_dict
+
+
+def _validate_application(application): 
+    errors = []
+    if application.type not in base_cost_dict.keys():
+        error.append("Invalid visa type: {application.type})
+    
+    elif application.type == "TN" and application.premium_processing: 
+        error.append("Cannot select premium processing for TN visa")
+    
+    if application.dependents is None or application.dependents < 0:
+        error.append(invalid dependents)
+    
+    if attorney and rush_attorney: 
+        error,append(cannot select both the attorneys)
+    
+    return errors
+
+
+def compute_fee(application):
+    individal_base_cost = base_cost_dict.get(applicaition.get("visa_type"))
+    premium_processing = 0
+    if applicaition.get("visa_type") != "TN": 
+        premium_processing = application.get("premium_processing")
+    
+    depedent_cost = applicaition.get("dependents") * individal_base_cost
+
+    attorney_cost = 0
+    if applicaition.get("attorney"): 
+        attorney_cost = additional_cost["attorney"]
+    else: 
+        attorney_cost = additional_cost["rush_attorney"]
+    
+    total = individal_base_cost + premium_processing + depedent_cost + attorney_cost
+
+    return individal_base_cost, premium_processing, depedent_cost,  attorney_cost,  total 
+================================================================================
+STEP 6: CODE + NARRATE
+================================================================================
+
+YOUR CODE (write the implementation):
+
+[Student writes here]
+
+
+================================================================================
+COACH FEEDBACK ON YOUR CODE
+================================================================================
+
+[Coach will review for bugs, edge cases, code quality]
+
+
+
+================================================================================
+COACH FEEDBACK ON PSEUDOCODE
+================================================================================
+
+⚠️ IMPORTANT DISCUSSION: Is this how real interviews work?
+
+**Your question: "I thought it would be more flexible where I will get to 
+explore different approaches"**
+
+You're ABSOLUTELY RIGHT! ✅
+
+Real interviews are MUCH more flexible and conversational:
+- Quick clarifying questions (2-3 min)
+- Brief approach explanation (30 sec - 2 min)
+- Start coding immediately
+- Talk through bugs as you code
+- Interviewer helps when stuck
+- More collaborative, less rigid
+
+What we've been doing:
+- Ultra-structured 7-step process
+- Forced separation of steps
+- Over-detailed at each phase
+- Too slow and rigid
+
+Why I did this: To build habits (think before coding, communicate, test).
+But you're right - it's taking too long.
+
+---
+
+SOLUTION PROVIDED BELOW:
+
+================================================================================
+PSEUDOCODE (What Step 5 should look like)
+================================================================================
+
+def calculate_visa_fees(application):
+    # Define fee constants
+    
+    # Extract and normalize input fields (handle None)
+    
+    # Validate - collect all errors:
+    #   - visa_type valid?
+    #   - TN + premium?
+    #   - both attorneys?
+    
+    # If errors exist, return error response
+    
+    # Calculate fees:
+    #   - base_fee from dict lookup
+    #   - premium_processing fee if True
+    #   - dependents_fee = count * base_fee
+    #   - attorney_fee (rush > regular > none)
+    
+    # Calculate subtotals (government vs attorney)
+    
+    # Return success response with breakdown
+
+================================================================================
+ACTUAL CODE (Clean, Working Solution)
+================================================================================
+
+def calculate_visa_fees(application):
+    """Calculate visa application fees with validation."""
+    
+    # Define fee constants
+    BASE_FEES = {
+        "O-1": 460,
+        "H-1B": 460,
+        "TN": 50,
+        "EB-1A": 700,
+        "EB-2 NIW": 700
+    }
+    PREMIUM_FEE = 2500
+    ATTORNEY_FEE = 3000
+    RUSH_ATTORNEY_FEE = 5000
+    
+    # Extract fields with defaults for None handling
+    visa_type = application.get("visa_type")
+    premium_processing = application.get("premium_processing", False)
+    dependents = application.get("dependents", 0)
+    attorney_review = application.get("attorney_review", False)
+    rush_attorney_review = application.get("rush_attorney_review", False)
+    
+    # Handle None values explicitly
+    if premium_processing is None:
+        premium_processing = False
+    if attorney_review is None:
+        attorney_review = False
+    if rush_attorney_review is None:
+        rush_attorney_review = False
+    if dependents is None or dependents < 0:
+        dependents = 0
+    
+    # Validate - collect ALL errors
+    errors = []
+    
+    if visa_type not in BASE_FEES:
+        valid_types = ", ".join(BASE_FEES.keys())
+        errors.append(f"Invalid visa type: {visa_type}. Supported types: {valid_types}")
+    
+    if visa_type == "TN" and premium_processing:
+        errors.append("Premium processing is not available for TN visas")
+    
+    if attorney_review and rush_attorney_review:
+        errors.append("Cannot select both attorney_review and rush_attorney_review")
+    
+    # If errors exist, return error response
+    if errors:
+        return {
+            "valid": False,
+            "errors": errors,
+            "fee_breakdown": None,
+            "total_fee": None
+        }
+    
+    # Calculate fees
+    base_fee = BASE_FEES[visa_type]
+    
+    premium_fee = PREMIUM_FEE if premium_processing else 0
+    
+    dependents_fee = dependents * base_fee
+    
+    # Determine attorney fee (rush takes precedence)
+    if rush_attorney_review:
+        attorney_fee = RUSH_ATTORNEY_FEE
+    elif attorney_review:
+        attorney_fee = ATTORNEY_FEE
+    else:
+        attorney_fee = 0
+    
+    # Calculate subtotals
+    government_fees = base_fee + premium_fee + dependents_fee
+    attorney_fees = attorney_fee
+    
+    # Calculate total
+    total_fee = government_fees + attorney_fees
+    
+    # Return success response
+    return {
+        "valid": True,
+        "errors": [],
+        "fee_breakdown": {
+            "base_fee": base_fee,
+            "premium_processing": premium_fee,
+            "dependents_fee": dependents_fee,
+            "attorney_fee": attorney_fee,
+            "subtotals": {
+                "government_fees": government_fees,
+                "attorney_fees": attorney_fees
+            }
+        },
+        "total_fee": total_fee
+    }
+
+================================================================================
+KEY LEARNINGS FROM THIS PROBLEM
+================================================================================
+
+1. ✅ SIMPLE > COMPLEX
+   - One function is better than 3 functions
+   - No classes needed for single-input-output problems
+   
+2. ✅ VALIDATE FIRST, COLLECT ALL ERRORS
+   - Don't return on first error
+   - Use a list to collect all validation issues
+   
+3. ✅ HANDLE NONE VALUES EXPLICITLY
+   - Use .get() with defaults
+   - Check for None before using values
+   
+4. ✅ CONSTANTS AT TOP
+   - Makes it easy to update fees
+   - Clear and maintainable
+   
+5. ✅ CLEAR VARIABLE NAMES
+   - base_fee, premium_fee, attorney_fee (self-documenting)
+
+6. ⚠️ 7-STEP FRAMEWORK IS TOO RIGID FOR PRACTICE
+   - Real interviews are more flexible
+   - Use lighter structure going forward
+
+================================================================================
+GOING FORWARD - CHOOSE YOUR PATH
+================================================================================
+
+**Option A:** Continue practicing with lighter structure
+- Ask questions (2 min)
+- Quick approach explanation (1 min)  
+- Code immediately (30 min)
+- Test (5 min)
+
+**Option B:** Stop this problem, move to next one with faster pace
+
+**Option C:** I give you 3-5 more problems to solve on your own, review later
+
+What do you prefer?
+
+================================================================================
+SESSION NOTES
+================================================================================
+
+Status: COMPLETED (with solution provided)
+Time spent: ~90 minutes (too long - need faster approach)
+Lessons learned: 7-step framework builds good habits but too slow for practice
+
+Next session should be more flexible and collaborative!
+

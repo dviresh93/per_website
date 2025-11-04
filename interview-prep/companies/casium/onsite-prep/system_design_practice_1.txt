@@ -1,0 +1,2434 @@
+================================================================================
+SYSTEM DESIGN MOCK INTERVIEW (COACHING STYLE)
+================================================================================
+
+Date: October 13, 2025
+Problem: Visa Eligibility Recommendation System (Medium difficulty, 60 minutes)
+Type: System Design Interview Practice
+Format: Coaching-style mock (guide actively, not wait until end)
+
+Coach: Claude
+Student: Viresh
+
+================================================================================
+PROBLEM STATEMENT
+================================================================================
+
+Design a visa eligibility recommendation system where:
+
+- **Immigration attorneys** input client information (education, work history,
+  achievements, salary, country of origin, etc.)
+
+- The system **analyzes the profile** and recommends which visa types the
+  client is eligible for (O-1, H-1B, EB-1A, EB-2 NIW, etc.)
+
+- For each recommended visa, the system provides:
+  - **Eligibility score** (how strong is the case?)
+  - **Required documents** list
+  - **Estimated timeline** to approval
+  - **Success probability** based on historical data
+
+- Attorneys can **save client profiles** and track multiple clients
+
+- The system uses **LLM/AI** to analyze qualifications against visa criteria
+
+- **Scale:** 150 immigration law firms, ~500 attorneys, ~50,000 client profiles
+
+- **Usage:** ~1,000 eligibility checks per day
+
+================================================================================
+INTERVIEW FLOW (60 MINUTES)
+================================================================================
+
+⏳ Minutes 0-10: Clarifying Questions
+⏳ Minutes 10-20: High-Level Architecture
+⏳ Minutes 20-35: Database Design Deep Dive (MOST IMPORTANT - 30% weight)
+⏳ Minutes 35-45: API Design (30% weight)
+⏳ Minutes 45-55: Scaling & Trade-offs (40% weight - distributed components)
+⏳ Minutes 55-60: Feedback & Wrap-up
+
+================================================================================
+PHASE 1: CLARIFYING QUESTIONS (Minutes 0-10)
+================================================================================
+
+YOUR CLARIFYING QUESTIONS:
+
+[Write your questions here - think about requirements, scale, constraints,
+integration points, data retention, security/compliance, etc.]
+
+so here we are building a system that will analyze the client profile to recommend the visa types they are eligible for
+
+Users: 
+- clients: upload their documents 
+- lawyers: will get to access the updloaded document - will ai be doing a review before and and the analysis will be shared to lawyer aswell? 
+what is role of attorney aside from Attorneys can **save client profiles** and track multiple clients
+- how frequently will the user be using this service? 
+
+system:
+- what is our stamce on data privacy ? are we allowed to use clould based llm's ? or stick to hosting locally
+- how much data are we going be storing,and what kind of data can we expect to store in the system? who is going to provide and maintain the storage 
+- what could be most frequent operations - mvp that needs to be achiveved for this? upload, preview, edit? 
+- what kind of latency / performance requirements do we need to hit - in terms of processing the docs ?  
+================================================================================
+INTERVIEWER RESPONSES
+================================================================================
+
+**Great questions! Let me clarify:**
+
+**Users & Roles:**
+- Good catch on the confusion! Let me clarify: **Attorneys INPUT the client
+  information** (they type it in, not clients uploading documents directly).
+  Think of it like a form they fill out about their client.
+- NO document upload in this system - this is purely about analyzing a profile
+  and recommending visa types.
+- Attorney role: They manage multiple clients, run eligibility checks when
+  needed, save profiles for later, compare different visa options for same client.
+- Usage frequency: An attorney might check 2-5 clients per day. Some checks
+  are for new clients, some are re-checking existing clients after their
+  profile changes.
+
+**System & Technical:**
+- **Data privacy:** You can use cloud-based LLMs (OpenAI, Anthropic). Client
+  data is sensitive (PII) but not government-classified. Assume standard
+  encryption at rest/transit.
+- **Data storage:** You'll store client profiles (structured data: text fields,
+  dates, numbers). Total data size is modest - maybe 50GB for 50K profiles.
+  You can use standard cloud storage (AWS, GCP, Azure).
+- **MVP operations:** Create profile, edit profile, run eligibility check,
+  view recommendations, save/retrieve profiles.
+- **Latency:** Eligibility check should complete in < 10 seconds. Profile
+  CRUD operations should be < 500ms.
+
+**COACHING FEEDBACK (in real interview, I'd just answer, but helping you learn):**
+✅ Good: Asked about users/roles, data privacy, latency requirements
+✅ Good: Thinking about MVP and frequent operations
+⚠️  Missed: You didn't ask about the **LLM integration** - is it real-time or
+   can it be async? What happens if LLM fails?
+⚠️  Missed: Data retention - how long do we keep profiles? Can attorneys delete them?
+⚠️  Missed: Multi-tenancy - are law firms isolated from each other? (YES!)
+⚠️  Missed: Historical data for "success probability" - where does that come from?
+
+These are good questions to ask in a real interview. Want to ask follow-ups
+before moving to architecture?
+
+how many lawers can be using this system at once?
+
+process lever question:
+here is what I am thinking,
+lawyer creates a profile and updates data => system processes, and flags certain documents - missing information or missing documents, contol goes back to lawyer, waiting to clarify correct?
+
+**INTERVIEWER ANSWERS:**
+
+**Concurrent users:** At peak, maybe 50-100 attorneys using the system
+simultaneously. Most of the time it's much lower. This is NOT high-concurrency
+like Twitter - it's a B2B tool.
+
+**Process flow:** Close! Here's the actual flow:
+1. Attorney **creates/edits a client profile** (fills in form fields)
+2. Attorney clicks **"Check Eligibility"** button
+3. System **sends profile to LLM**, which analyzes it against visa criteria
+4. System **returns recommendations** (visa types + scores + required docs + timeline)
+5. Attorney **reviews recommendations**, can re-run check if they update the profile
+
+There's NO document upload/flagging in this system - it's purely analyzing the
+structured profile data (text fields, dates, numbers) that the attorney typed in.
+
+Think of it like: Attorney has client info on paper → types it into our system
+→ clicks "analyze" → gets visa recommendations back.
+
+**Ready to move to architecture design?** Go ahead and draw your high-level
+system in Phase 2!
+
+**FOLLOW-UP QUESTION:** how frequently will the applicant be fetching the docs?
+
+**INTERVIEWER ANSWER:**
+Good question! Let me clarify the user roles again since there seems to be confusion:
+
+- **Attorneys** (500 total) are the PRIMARY users of this system
+- **Clients/applicants** do NOT directly use this system
+
+The attorney works WITH their client (in person, over phone, via email) to
+gather information, then the attorney logs into our system and:
+- Creates/updates the client's profile
+- Runs eligibility checks
+- Views recommendations
+- Saves profiles for later reference
+
+So the access pattern is:
+- Attorney creates profile → views recommendations immediately
+- Attorney might come back days/weeks later to view same client again
+- Attorney might update profile and re-run check
+
+**Caching consideration:** Same client profile might be viewed multiple times
+by same attorney. Same attorney might look at multiple clients in one session.
+
+Does this clarify the usage pattern? Ready for architecture now?
+
+================================================================================
+PHASE 2: HIGH-LEVEL ARCHITECTURE (Minutes 10-20)
+================================================================================
+
+YOUR ARCHITECTURE DIAGRAM:
+
+[Draw your high-level architecture here using ASCII art or describe the
+components and how they connect. Include: client, servers, databases, caches,
+queues, external services, etc.]
+
+
+
+
+
+YOUR EXPLANATION:
+
+[Explain the data flow - "When an attorney submits a client profile, here's
+what happens..." Walk through the main workflow step by step.]
+
+
+
+this is the flow i have descried 
+
+/home/virus/Pictures/Screenshots/Screenshot from 2025-10-13 17-59-32.png
+
+please let me know if any of this needs more understanding or clarification
+
+================================================================================
+INTERVIEWER FEEDBACK & PROBING QUESTIONS
+================================================================================
+
+**COACHING FEEDBACK ON YOUR ARCHITECTURE:**
+
+**STRENGTHS - What you did well:**
+✅ Load balancer for multiple API servers - good for availability
+✅ Cache layer (Redis) - smart for repeated profile views
+✅ CDN consideration for static assets
+✅ Database for persistence
+✅ LLM external service integration
+✅ Clear data flow through the system
+
+**CRITICAL ISSUES - Need to address:**
+
+❌ **PROBLEM 1: Document processing confusion**
+Your diagram mentions "validate input documents", "process docs using AI",
+"application code validates documents" - but this system does NOT handle
+document uploads! Attorneys type in TEXT DATA (name, education, work history).
+No PDFs, no images, no document processing.
+
+The LLM analyzes STRUCTURED DATA (JSON with profile fields), not documents.
+
+❌ **PROBLEM 2: Missing message queue**
+Your LLM call can take 5-10 seconds. Right now your flow is SYNCHRONOUS -
+attorney waits 10 seconds staring at loading spinner. This is bad UX.
+
+Should be: Request → Queue → Worker calls LLM → Updates DB → Attorney polls
+or gets notified when ready.
+
+❌ **PROBLEM 3: No multi-tenancy consideration**
+150 law firms use this system. How do you ensure Firm A can't see Firm B's
+client data? Need to think about company_id/firm_id in your database and
+access control.
+
+❌ **PROBLEM 4: "Prechecks passed?" decision**
+What prechecks? The attorney is filling in a form. You just need to validate
+form fields (required fields filled, valid formats). This doesn't need a
+complex decision tree.
+
+⚠️  **MINOR ISSUE: Cache usage unclear**
+You show cache but don't explain WHAT you're caching. Profile data? LLM
+results? Session data? Be specific about cache strategy.
+
+**INTERVIEWER PROBING QUESTIONS:**
+
+1. **"Walk me through what happens when an attorney clicks 'Check Eligibility'
+   on a client profile. Be specific about each component."**
+
+2. **"The LLM call takes 8 seconds. How does your system handle this without
+   blocking the attorney?"**
+
+3. **"Two attorneys from different law firms both have a client named 'John
+   Smith'. How does your system ensure they don't see each other's data?"**
+
+4. **"What are you caching in Redis, and why?"**
+
+5. **"If the LLM API fails (timeout, rate limit, service down), what happens?
+   How does the attorney know?"**
+
+================================================================================
+COACH'S ANSWERS (Learning Reference)
+================================================================================
+
+**Question 1: Walk me through what happens when an attorney clicks 'Check
+Eligibility' on a client profile.**
+
+Here's the CORRECT async flow:
+
+1. **Attorney clicks "Check Eligibility" button** on client profile page
+
+2. **Frontend sends POST request** to API server:
+   POST /api/clients/{client_id}/eligibility-checks
+   Body: { "client_id": "abc-123" }
+
+3. **API server validates request:**
+   - Checks attorney's authentication (JWT token)
+   - Verifies attorney has permission to access this client (same firm)
+   - Validates client profile has required fields filled
+
+4. **API server creates job record in database:**
+   ```sql
+   INSERT INTO eligibility_checks (id, client_id, status, created_at)
+   VALUES ('job-456', 'abc-123', 'pending', NOW())
+   ```
+
+5. **API server puts job in message queue:**
+   - Push message to RabbitMQ: { "job_id": "job-456", "client_id": "abc-123" }
+   - Returns immediately to frontend: **202 Accepted**
+   ```json
+   {
+     "job_id": "job-456",
+     "status": "processing",
+     "status_url": "/api/eligibility-checks/job-456"
+   }
+   ```
+
+6. **Frontend shows "Processing..." spinner** and polls status endpoint every 2 seconds
+
+7. **Background worker picks up job from queue:**
+   - Worker pulls message from RabbitMQ
+   - Fetches client profile from database
+   - Builds prompt with profile data
+
+8. **Worker calls LLM API:**
+   ```python
+   response = llm_client.chat.completions.create(
+       model="gpt-4",
+       messages=[{
+           "role": "system",
+           "content": "You are an immigration expert. Analyze this profile..."
+       }, {
+           "role": "user",
+           "content": json.dumps(client_profile)
+       }]
+   )
+   ```
+   This takes 5-10 seconds.
+
+9. **Worker processes LLM response:**
+   - Parses JSON response (visa types, scores, required docs, timeline)
+   - Validates response format
+   - Stores results in database
+
+10. **Worker updates job status:**
+    ```sql
+    UPDATE eligibility_checks
+    SET status = 'completed', results = {...}, completed_at = NOW()
+    WHERE id = 'job-456'
+    ```
+
+11. **Frontend polling detects completion:**
+    - GET /api/eligibility-checks/job-456
+    - Returns: 200 OK with results
+    - Frontend displays recommendations to attorney
+
+**Key points:**
+- **Async workflow** - attorney doesn't wait
+- **Job status tracking** - can see progress
+- **Polling** - simple approach (could also use WebSockets for real-time updates)
+
+---
+
+**Question 2: How does your system handle the 8-second LLM call without
+blocking the attorney?**
+
+**Answer: Message Queue + Background Workers**
+
+**Architecture:**
+```
+API Server → RabbitMQ Queue → Worker Processes → LLM API
+                ↓
+            Database (job status)
+```
+
+**Why this works:**
+1. **API server returns immediately** (202 Accepted) - doesn't wait for LLM
+2. **Message queue buffers requests** - can handle spikes in traffic
+3. **Workers process asynchronously** - scaled independently from API servers
+4. **Frontend polls for status** - checks every 2 seconds until complete
+
+**Alternative approaches:**
+- **WebSockets:** Real-time push notifications (more complex)
+- **Server-Sent Events (SSE):** One-way real-time updates (simpler than WebSockets)
+- **Webhooks:** Callback to frontend when done (if frontend hosted separately)
+
+**For this scale (1,000 checks/day), polling is simplest and sufficient.**
+
+**Scaling workers:**
+- Start with 5-10 worker processes
+- If queue backs up, add more workers (auto-scaling based on queue depth)
+- Workers can run on separate machines from API servers
+
+---
+
+**Question 3: Two attorneys from different law firms both have a client named
+'John Smith'. How does your system ensure they don't see each other's data?**
+
+**Answer: Multi-tenancy with firm_id isolation**
+
+**Database Schema Approach:**
+```sql
+-- Law firms table
+law_firms (
+  id UUID PRIMARY KEY,
+  name VARCHAR(255),
+  created_at TIMESTAMP
+)
+
+-- Attorneys table
+attorneys (
+  id UUID PRIMARY KEY,
+  firm_id UUID REFERENCES law_firms(id),  -- Links attorney to firm
+  email VARCHAR(255) UNIQUE,
+  name VARCHAR(255),
+  created_at TIMESTAMP
+)
+CREATE INDEX idx_attorneys_firm ON attorneys(firm_id);
+
+-- Clients table
+clients (
+  id UUID PRIMARY KEY,
+  firm_id UUID REFERENCES law_firms(id),  -- CRITICAL: Isolates data by firm
+  attorney_id UUID REFERENCES attorneys(id),
+  name VARCHAR(255),
+  education TEXT,
+  work_history TEXT,
+  created_at TIMESTAMP
+)
+CREATE INDEX idx_clients_firm ON clients(firm_id);
+CREATE INDEX idx_clients_attorney ON clients(attorney_id);
+
+-- Eligibility checks table
+eligibility_checks (
+  id UUID PRIMARY KEY,
+  client_id UUID REFERENCES clients(id),
+  firm_id UUID REFERENCES law_firms(id),  -- Denormalized for fast filtering
+  status VARCHAR(50),
+  results JSONB,
+  created_at TIMESTAMP
+)
+CREATE INDEX idx_checks_firm ON eligibility_checks(firm_id);
+```
+
+**Access Control in Application Code:**
+
+Every query MUST filter by firm_id:
+
+```python
+# When attorney logs in, JWT contains firm_id
+@app.get("/api/clients")
+def list_clients(attorney: Attorney):
+    # ALWAYS filter by attorney's firm_id
+    clients = db.query(Client).filter(
+        Client.firm_id == attorney.firm_id
+    ).all()
+    return clients
+
+@app.get("/api/clients/{client_id}")
+def get_client(client_id: str, attorney: Attorney):
+    # MUST verify client belongs to attorney's firm
+    client = db.query(Client).filter(
+        Client.id == client_id,
+        Client.firm_id == attorney.firm_id  # CRITICAL security check
+    ).first()
+
+    if not client:
+        raise HTTPException(status_code=404, detail="Client not found")
+
+    return client
+```
+
+**Security Measures:**
+1. **JWT contains firm_id** - verified on every request
+2. **Database queries always filter by firm_id** - enforced in code
+3. **Row-level security (optional)** - PostgreSQL RLS for extra safety
+4. **API gateway rate limiting per firm** - prevent one firm from DoS-ing system
+
+**Result:** Firm A and Firm B can both have a "John Smith" client, but they're
+completely isolated by firm_id.
+
+---
+
+**Question 4: What are you caching in Redis, and why?**
+
+**Answer: Cache frequently accessed, slowly changing data**
+
+**Cache Strategy:**
+
+**1. Client Profiles (Cache-Aside Pattern)**
+```python
+# Read flow
+def get_client_profile(client_id: str):
+    # Try cache first
+    cached = redis.get(f"client:{client_id}")
+    if cached:
+        return json.loads(cached)
+
+    # Cache miss - read from DB
+    client = db.query(Client).filter(Client.id == client_id).first()
+
+    # Store in cache (TTL 1 hour)
+    redis.setex(f"client:{client_id}", 3600, json.dumps(client))
+
+    return client
+
+# Write flow
+def update_client_profile(client_id: str, data: dict):
+    # Update database
+    db.query(Client).filter(Client.id == client_id).update(data)
+    db.commit()
+
+    # Invalidate cache
+    redis.delete(f"client:{client_id}")
+```
+
+**Why cache profiles?**
+- Attorney views same client multiple times in a session
+- Profile data doesn't change frequently
+- Reduces DB load
+
+**2. Eligibility Check Results (Read-Through Cache)**
+```python
+def get_eligibility_results(check_id: str):
+    cache_key = f"eligibility:{check_id}"
+
+    # Try cache first
+    cached = redis.get(cache_key)
+    if cached:
+        return json.loads(cached)
+
+    # Cache miss - read from DB
+    results = db.query(EligibilityCheck).filter(
+        EligibilityCheck.id == check_id
+    ).first()
+
+    # Cache completed results (TTL 24 hours)
+    if results.status == 'completed':
+        redis.setex(cache_key, 86400, json.dumps(results))
+
+    return results
+```
+
+**Why cache eligibility results?**
+- Once completed, results don't change
+- Attorney might view results multiple times
+- Expensive LLM call already done - no need to recompute
+
+**3. Session Data**
+```python
+# Attorney session (who's logged in, their permissions)
+redis.setex(f"session:{session_id}", 3600, json.dumps({
+    "attorney_id": "...",
+    "firm_id": "...",
+    "email": "..."
+}))
+```
+
+**What NOT to cache:**
+- Job status (changes frequently while processing)
+- Real-time data
+- Data that must be 100% consistent
+
+**Cache Configuration:**
+- **Max memory:** 2GB
+- **Eviction policy:** allkeys-lru (evict least recently used)
+- **Persistence:** None needed (cache is disposable)
+
+---
+
+**Question 5: If the LLM API fails, what happens? How does the attorney know?**
+
+**Answer: Graceful error handling with retries and user feedback**
+
+**Failure Scenarios & Handling:**
+
+**1. LLM API Timeout (takes > 30 seconds)**
+```python
+# In worker code
+try:
+    response = llm_client.chat.completions.create(
+        model="gpt-4",
+        messages=[...],
+        timeout=30  # 30 second timeout
+    )
+except Timeout:
+    # Update job status to 'failed'
+    db.query(EligibilityCheck).filter(
+        EligibilityCheck.id == job_id
+    ).update({
+        "status": "failed",
+        "error_message": "LLM service timeout. Please try again.",
+        "completed_at": NOW()
+    })
+    db.commit()
+```
+
+**2. LLM API Rate Limit (429 Too Many Requests)**
+```python
+try:
+    response = llm_client.chat.completions.create(...)
+except RateLimitError as e:
+    # Retry with exponential backoff
+    retry_count = job.retry_count + 1
+
+    if retry_count <= 3:
+        # Put back in queue with delay
+        queue.enqueue_in(
+            timedelta(seconds=2 ** retry_count),  # 2s, 4s, 8s
+            job_id=job_id
+        )
+
+        db.query(EligibilityCheck).filter(
+            EligibilityCheck.id == job_id
+        ).update({
+            "status": "retrying",
+            "retry_count": retry_count
+        })
+    else:
+        # Max retries exceeded
+        db.query(EligibilityCheck).filter(
+            EligibilityCheck.id == job_id
+        ).update({
+            "status": "failed",
+            "error_message": "Service temporarily unavailable. Please try again later."
+        })
+```
+
+**3. LLM API Service Down (Connection Error)**
+```python
+try:
+    response = llm_client.chat.completions.create(...)
+except ConnectionError:
+    # Circuit breaker pattern (don't overwhelm failing service)
+    circuit_breaker.open()  # Stop sending requests
+
+    # Update job status
+    db.query(EligibilityCheck).filter(
+        EligibilityCheck.id == job_id
+    ).update({
+        "status": "failed",
+        "error_message": "Service temporarily unavailable. Our team has been notified."
+    })
+
+    # Alert engineering team
+    send_alert("LLM service down", severity="high")
+```
+
+**4. Invalid LLM Response (malformed JSON, missing fields)**
+```python
+try:
+    response = llm_client.chat.completions.create(...)
+    results = json.loads(response.choices[0].message.content)
+
+    # Validate response structure
+    validate_eligibility_response(results)
+
+except (JSONDecodeError, ValidationError) as e:
+    # Log error for debugging
+    logger.error(f"Invalid LLM response: {e}")
+
+    # Update job with error
+    db.query(EligibilityCheck).filter(
+        EligibilityCheck.id == job_id
+    ).update({
+        "status": "failed",
+        "error_message": "Unable to process results. Please try again."
+    })
+```
+
+**How Attorney Knows:**
+
+**Frontend polling sees failed status:**
+```javascript
+// Frontend code
+async function pollJobStatus(jobId) {
+    const response = await fetch(`/api/eligibility-checks/${jobId}`);
+    const job = await response.json();
+
+    if (job.status === 'completed') {
+        showResults(job.results);
+    } else if (job.status === 'failed') {
+        showError(job.error_message);  // Display error to attorney
+        showRetryButton();  // Let them try again
+    } else if (job.status === 'processing') {
+        setTimeout(() => pollJobStatus(jobId), 2000);  // Poll again in 2s
+    }
+}
+```
+
+**User Experience:**
+- Clear error messages (not technical jargon)
+- "Retry" button to resubmit
+- Status indicator shows "Failed" with explanation
+
+**Monitoring & Alerting:**
+- Track LLM API success rate (alert if < 95%)
+- Track average response time (alert if > 15s)
+- Alert on-call engineer if service down
+- Dashboard showing real-time LLM health
+
+**Fallback Option (Advanced):**
+- If primary LLM (OpenAI) fails, automatically try backup LLM (Anthropic)
+- Requires code to work with multiple LLM providers
+
+---
+
+**KEY TAKEAWAYS FOR YOU:**
+
+1. **Always design for async** when operations take > 1 second
+2. **Multi-tenancy requires firm_id in every table** and every query
+3. **Cache what's read frequently and changes rarely**
+4. **Handle failures gracefully** - retry, inform user, alert team
+5. **Think about the user experience** - what does the attorney see?
+
+**Want to move to Phase 3 (Database Design) now?** This is the MOST IMPORTANT
+part of the interview (30% of evaluation). You'll design the actual tables.
+
+
+
+
+
+================================================================================
+PHASE 3: DATABASE DESIGN DEEP DIVE (Minutes 20-35) ⭐ MOST IMPORTANT
+================================================================================
+
+COACH'S COMPLETE DATABASE SCHEMA:
+
+```sql
+-- ============================================================================
+-- CORE ENTITIES
+-- ============================================================================
+
+-- 1. Law Firms (multi-tenancy root)
+CREATE TABLE law_firms (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name VARCHAR(255) NOT NULL,
+    subscription_tier VARCHAR(50) DEFAULT 'basic',  -- basic, pro, enterprise
+    max_attorneys INTEGER DEFAULT 10,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMP NOT NULL DEFAULT NOW()
+);
+
+-- 2. Attorneys (users of the system)
+CREATE TABLE attorneys (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    firm_id UUID NOT NULL REFERENCES law_firms(id) ON DELETE CASCADE,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    role VARCHAR(50) DEFAULT 'attorney',  -- attorney, admin, viewer
+    is_active BOOLEAN DEFAULT true,
+    last_login_at TIMESTAMP,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMP NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX idx_attorneys_firm ON attorneys(firm_id);
+CREATE INDEX idx_attorneys_email ON attorneys(email);
+CREATE INDEX idx_attorneys_active ON attorneys(firm_id, is_active);
+
+-- 3. Clients (visa applicants)
+CREATE TABLE clients (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    firm_id UUID NOT NULL REFERENCES law_firms(id) ON DELETE CASCADE,
+    attorney_id UUID NOT NULL REFERENCES attorneys(id),
+
+    -- Personal information
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    email VARCHAR(255),
+    phone VARCHAR(50),
+    date_of_birth DATE,
+    country_of_birth VARCHAR(100),
+    current_location VARCHAR(255),
+
+    -- Education
+    highest_degree VARCHAR(100),  -- PhD, Masters, Bachelors, etc.
+    field_of_study VARCHAR(255),
+    university VARCHAR(255),
+    graduation_year INTEGER,
+
+    -- Work history
+    current_job_title VARCHAR(255),
+    current_employer VARCHAR(255),
+    years_of_experience INTEGER,
+    annual_salary_usd INTEGER,
+
+    -- Achievements (for O-1, EB-1A eligibility)
+    publications_count INTEGER DEFAULT 0,
+    citations_count INTEGER DEFAULT 0,
+    patents_count INTEGER DEFAULT 0,
+    awards TEXT,  -- JSON array of awards
+    media_coverage TEXT,  -- JSON array of media mentions
+
+    -- Additional qualifications
+    skills TEXT,  -- JSON array of skills
+    languages TEXT,  -- JSON array of languages
+    notes TEXT,  -- Attorney's private notes
+
+    -- Metadata
+    status VARCHAR(50) DEFAULT 'active',  -- active, archived
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMP NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX idx_clients_firm ON clients(firm_id);
+CREATE INDEX idx_clients_attorney ON clients(attorney_id);
+CREATE INDEX idx_clients_status ON clients(firm_id, status);
+CREATE INDEX idx_clients_name ON clients(firm_id, last_name, first_name);
+
+-- 4. Eligibility Checks (async jobs for LLM analysis)
+CREATE TABLE eligibility_checks (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    client_id UUID NOT NULL REFERENCES clients(id) ON DELETE CASCADE,
+    firm_id UUID NOT NULL REFERENCES law_firms(id) ON DELETE CASCADE,
+    requested_by UUID NOT NULL REFERENCES attorneys(id),
+
+    -- Job status
+    status VARCHAR(50) NOT NULL DEFAULT 'pending',  -- pending, processing, completed, failed, retrying
+    error_message TEXT,
+    retry_count INTEGER DEFAULT 0,
+
+    -- LLM interaction
+    llm_model VARCHAR(100),  -- gpt-4, claude-3-opus, etc.
+    llm_prompt_tokens INTEGER,
+    llm_completion_tokens INTEGER,
+    llm_cost_usd DECIMAL(10, 4),
+
+    -- Results (stored as JSONB for flexibility)
+    results JSONB,  -- Array of visa recommendations with scores
+
+    -- Timestamps
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    started_at TIMESTAMP,
+    completed_at TIMESTAMP
+);
+
+CREATE INDEX idx_checks_client ON eligibility_checks(client_id);
+CREATE INDEX idx_checks_firm ON eligibility_checks(firm_id);
+CREATE INDEX idx_checks_status ON eligibility_checks(status);
+CREATE INDEX idx_checks_created ON eligibility_checks(created_at DESC);
+
+-- 5. Visa Recommendations (normalized results from eligibility checks)
+CREATE TABLE visa_recommendations (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    eligibility_check_id UUID NOT NULL REFERENCES eligibility_checks(id) ON DELETE CASCADE,
+    firm_id UUID NOT NULL REFERENCES law_firms(id) ON DELETE CASCADE,
+    client_id UUID NOT NULL REFERENCES clients(id) ON DELETE CASCADE,
+
+    -- Visa details
+    visa_type VARCHAR(50) NOT NULL,  -- O-1, H-1B, EB-1A, EB-2-NIW, TN
+    eligibility_score INTEGER NOT NULL,  -- 0-100
+    success_probability DECIMAL(5, 2),  -- Percentage (0.00-100.00)
+    estimated_timeline_months INTEGER,
+
+    -- Requirements
+    required_documents JSONB,  -- Array of document types needed
+    missing_qualifications TEXT,
+    strengths TEXT,
+    weaknesses TEXT,
+    recommendation_summary TEXT,
+
+    -- Metadata
+    created_at TIMESTAMP NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX idx_recommendations_check ON visa_recommendations(eligibility_check_id);
+CREATE INDEX idx_recommendations_client ON visa_recommendations(client_id);
+CREATE INDEX idx_recommendations_firm ON visa_recommendations(firm_id);
+CREATE INDEX idx_recommendations_visa ON visa_recommendations(visa_type);
+
+-- ============================================================================
+-- SUPPORTING TABLES
+-- ============================================================================
+
+-- 6. Historical Success Data (for calculating success probability)
+CREATE TABLE historical_cases (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    firm_id UUID REFERENCES law_firms(id),  -- NULL means industry-wide data
+
+    -- Case details
+    visa_type VARCHAR(50) NOT NULL,
+    client_profile JSONB,  -- Anonymized profile data
+    outcome VARCHAR(50) NOT NULL,  -- approved, denied, rfe_then_approved
+
+    -- Qualifications at time of application
+    degree_level VARCHAR(100),
+    years_experience INTEGER,
+    publications_count INTEGER,
+    salary_usd INTEGER,
+
+    -- Timestamps
+    filed_date DATE,
+    decision_date DATE,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX idx_historical_visa ON historical_cases(visa_type);
+CREATE INDEX idx_historical_outcome ON historical_cases(visa_type, outcome);
+CREATE INDEX idx_historical_firm ON historical_cases(firm_id);
+
+-- 7. Audit Log (track all changes for compliance)
+CREATE TABLE audit_log (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    firm_id UUID NOT NULL REFERENCES law_firms(id) ON DELETE CASCADE,
+    attorney_id UUID REFERENCES attorneys(id),
+
+    -- What changed
+    entity_type VARCHAR(50) NOT NULL,  -- client, eligibility_check, etc.
+    entity_id UUID NOT NULL,
+    action VARCHAR(50) NOT NULL,  -- create, update, delete, view
+    changes JSONB,  -- { "field": { "old": ..., "new": ... } }
+
+    -- Metadata
+    ip_address INET,
+    user_agent TEXT,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX idx_audit_firm ON audit_log(firm_id);
+CREATE INDEX idx_audit_entity ON audit_log(entity_type, entity_id);
+CREATE INDEX idx_audit_created ON audit_log(created_at DESC);
+```
+
+================================================================================
+YOUR EXPLANATION:
+================================================================================
+
+**Why these tables?**
+
+**Core entities:**
+1. **law_firms** - Root of multi-tenancy. All data isolates by firm_id.
+2. **attorneys** - Users who log in and use the system.
+3. **clients** - Visa applicants (50K profiles). Comprehensive profile data.
+4. **eligibility_checks** - Async job tracking for LLM analysis.
+5. **visa_recommendations** - Normalized results from LLM (allows querying).
+
+**Supporting tables:**
+6. **historical_cases** - Training data for "success probability" feature.
+7. **audit_log** - Compliance requirement (who accessed/changed what).
+
+**How they relate:**
+
+```
+law_firms (1) ──< attorneys (M)
+law_firms (1) ──< clients (M)
+attorneys (1) ──< clients (M)  (attorney manages multiple clients)
+clients (1) ──< eligibility_checks (M)  (client can have multiple checks over time)
+eligibility_checks (1) ──< visa_recommendations (M)  (one check yields multiple visa options)
+```
+
+**Common queries:**
+
+1. **List all clients for an attorney:**
+   ```sql
+   SELECT * FROM clients
+   WHERE firm_id = '...' AND attorney_id = '...'
+   ORDER BY last_name, first_name;
+   ```
+   Index: `idx_clients_attorney`
+
+2. **Get eligibility check results:**
+   ```sql
+   SELECT ec.*, vr.*
+   FROM eligibility_checks ec
+   JOIN visa_recommendations vr ON vr.eligibility_check_id = ec.id
+   WHERE ec.id = '...' AND ec.firm_id = '...';
+   ```
+   Indexes: `idx_checks_firm`, `idx_recommendations_check`
+
+3. **Find all pending jobs:**
+   ```sql
+   SELECT * FROM eligibility_checks
+   WHERE status IN ('pending', 'processing')
+   ORDER BY created_at;
+   ```
+   Index: `idx_checks_status`
+
+4. **Get client's eligibility history:**
+   ```sql
+   SELECT ec.*, vr.*
+   FROM eligibility_checks ec
+   LEFT JOIN visa_recommendations vr ON vr.eligibility_check_id = ec.id
+   WHERE ec.client_id = '...' AND ec.firm_id = '...'
+   ORDER BY ec.created_at DESC;
+   ```
+   Indexes: `idx_checks_client`, `idx_checks_created`
+
+**Why these indexes?**
+
+- **firm_id everywhere** - Multi-tenancy requires filtering by firm on EVERY query
+- **status on eligibility_checks** - Workers query for pending jobs constantly
+- **created_at DESC** - Recent checks are viewed most often
+- **Composite indexes** - (firm_id, status), (firm_id, last_name) for common filter combinations
+
+**Data type choices:**
+
+- **UUID** - Primary keys (better for distributed systems, no collisions)
+- **VARCHAR(255)** - Emails, names (standard text limits)
+- **JSONB** - Flexible data (awards, skills, LLM results) that doesn't need strict schema
+- **DECIMAL(10,4)** - Money (LLM costs) - never use FLOAT for money!
+- **TIMESTAMP** - All dates with timezone awareness
+- **TEXT** - Unbounded text (notes, summaries)
+
+**Multi-tenancy enforcement:**
+
+- firm_id in EVERY table except law_firms itself
+- Foreign key constraints ensure data integrity
+- Application layer MUST filter by firm_id on every query
+- JWT tokens contain firm_id for access control
+
+**No audit trail on clients table itself** - using separate audit_log table
+instead, which is more flexible and doesn't bloat main table.
+
+================================================================================
+INTERVIEWER PROBING QUESTIONS ON DATABASE
+================================================================================
+
+**Question 1: "Show me the SQL to get all pending eligibility checks that need
+to be processed by workers."**
+
+**Answer:**
+```sql
+SELECT ec.id, ec.client_id, ec.retry_count, c.first_name, c.last_name
+FROM eligibility_checks ec
+JOIN clients c ON c.id = ec.client_id
+WHERE ec.status = 'pending'
+ORDER BY ec.created_at ASC  -- FIFO: first-in, first-out
+LIMIT 10;
+```
+
+This query:
+- Filters by status (uses `idx_checks_status`)
+- Orders by creation time (FIFO queue behavior)
+- Limits to 10 (workers process in batches)
+- Joins client data (needed to build LLM prompt)
+
+---
+
+**Question 2: "An attorney searches for a client by name. Show me the query."**
+
+**Answer:**
+```sql
+SELECT id, first_name, last_name, email, current_job_title, status
+FROM clients
+WHERE firm_id = '...'  -- CRITICAL: Must filter by firm!
+  AND (
+    last_name ILIKE '%smith%'
+    OR first_name ILIKE '%smith%'
+  )
+ORDER BY last_name, first_name
+LIMIT 50;
+```
+
+Uses `idx_clients_name` for the firm_id + last_name filter.
+
+**Performance note:** ILIKE with leading wildcard ('%smith%') can't use index
+efficiently. For better search, consider:
+- Full-text search (PostgreSQL tsvector)
+- Separate search service (Elasticsearch)
+
+For 50K clients, basic ILIKE is probably fine.
+
+---
+
+**Question 3: "How do you calculate 'success probability' for a visa recommendation?"**
+
+**Answer:**
+
+Use the `historical_cases` table to find similar cases:
+
+```sql
+SELECT
+    outcome,
+    COUNT(*) as case_count,
+    ROUND(
+        100.0 * COUNT(*) FILTER (WHERE outcome = 'approved') / COUNT(*),
+        2
+    ) as success_rate
+FROM historical_cases
+WHERE visa_type = 'O-1'
+  AND degree_level = 'PhD'
+  AND years_experience >= 5
+  AND publications_count >= 10
+GROUP BY outcome;
+```
+
+This calculates success rate for O-1 visas with similar qualifications.
+
+**In practice:**
+- LLM suggests visa types
+- Backend queries historical_cases for similar profiles
+- Calculates success probability based on historical outcomes
+- Stores in visa_recommendations table
+
+---
+
+**Question 4: "What if a law firm is deleted? What happens to their data?"**
+
+**Answer:**
+
+Due to `ON DELETE CASCADE` on foreign keys:
+
+```sql
+-- When law_firm is deleted:
+DELETE FROM law_firms WHERE id = '...';
+
+-- PostgreSQL automatically deletes (in order):
+1. All attorneys WHERE firm_id = '...'
+2. All clients WHERE firm_id = '...'
+3. All eligibility_checks WHERE firm_id = '...'
+4. All visa_recommendations WHERE firm_id = '...'
+5. All audit_log entries WHERE firm_id = '...'
+```
+
+**But wait!** Deleting a firm is DANGEROUS. Better approach:
+
+```sql
+-- Soft delete: Mark firm as inactive
+UPDATE law_firms SET status = 'inactive' WHERE id = '...';
+
+-- Application layer prevents access to inactive firms
+```
+
+This preserves historical data for compliance/legal reasons.
+
+---
+
+**Question 5: "How do you prevent one firm from seeing another firm's data?"**
+
+**Answer:**
+
+**Application-level enforcement (CRITICAL):**
+
+Every query MUST include firm_id filter:
+
+```python
+# BAD - Security vulnerability!
+client = db.query(Client).filter(Client.id == client_id).first()
+
+# GOOD - Always filter by firm_id
+client = db.query(Client).filter(
+    Client.id == client_id,
+    Client.firm_id == attorney.firm_id  # From JWT token
+).first()
+```
+
+**Database-level enforcement (optional extra layer):**
+
+PostgreSQL Row-Level Security (RLS):
+
+```sql
+ALTER TABLE clients ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY firm_isolation_policy ON clients
+    USING (firm_id = current_setting('app.current_firm_id')::UUID);
+```
+
+Application sets firm_id context:
+```python
+db.execute("SET app.current_firm_id = %s", [attorney.firm_id])
+# Now all queries automatically filter by firm_id
+```
+
+This provides defense-in-depth security
+
+
+
+
+
+================================================================================
+PHASE 4: API DESIGN (Minutes 35-45)
+================================================================================
+
+COACH'S COMPLETE API DESIGN:
+
+```
+BASE URL: https://api.casium-eligibility.com/v1
+Authentication: Bearer JWT token (contains attorney_id, firm_id)
+```
+
+**1. Authentication**
+```
+POST /auth/login
+Request:
+{
+  "email": "attorney@lawfirm.com",
+  "password": "securePassword123"
+}
+
+Response: 200 OK
+{
+  "access_token": "eyJhbGciOiJI...",
+  "token_type": "bearer",
+  "expires_in": 3600,
+  "attorney": {
+    "id": "uuid",
+    "first_name": "John",
+    "last_name": "Doe",
+    "firm_id": "uuid",
+    "firm_name": "Acme Immigration Law"
+  }
+}
+
+Error: 401 Unauthorized
+{
+  "error": "invalid_credentials",
+  "message": "Email or password is incorrect"
+}
+```
+
+---
+
+**2. List Clients (with pagination)**
+```
+GET /clients?page=1&limit=20&status=active&search=smith
+
+Query Parameters:
+- page: integer (default 1)
+- limit: integer (default 20, max 100)
+- status: string (active, archived)
+- search: string (optional, searches name and email)
+
+Response: 200 OK
+{
+  "data": [
+    {
+      "id": "uuid",
+      "first_name": "Jane",
+      "last_name": "Smith",
+      "email": "jane@example.com",
+      "current_job_title": "Software Engineer",
+      "status": "active",
+      "last_check_date": "2025-10-01T14:30:00Z",
+      "created_at": "2025-09-15T10:00:00Z"
+    }
+  ],
+  "pagination": {
+    "page": 1,
+    "limit": 20,
+    "total_items": 156,
+    "total_pages": 8,
+    "has_next": true,
+    "has_prev": false
+  }
+}
+```
+
+---
+
+**3. Get Single Client Profile**
+```
+GET /clients/{client_id}
+
+Response: 200 OK
+{
+  "id": "uuid",
+  "first_name": "Jane",
+  "last_name": "Smith",
+  "email": "jane@example.com",
+  "phone": "+1-555-0123",
+  "date_of_birth": "1990-05-15",
+  "country_of_birth": "India",
+  "current_location": "San Francisco, CA",
+
+  "education": {
+    "highest_degree": "PhD",
+    "field_of_study": "Computer Science",
+    "university": "Stanford University",
+    "graduation_year": 2018
+  },
+
+  "work_history": {
+    "current_job_title": "Senior Software Engineer",
+    "current_employer": "Google",
+    "years_of_experience": 8,
+    "annual_salary_usd": 200000
+  },
+
+  "achievements": {
+    "publications_count": 15,
+    "citations_count": 450,
+    "patents_count": 2,
+    "awards": ["Best Paper Award at ICML 2022"],
+    "media_coverage": ["TechCrunch interview"]
+  },
+
+  "skills": ["Python", "Machine Learning", "Distributed Systems"],
+  "languages": ["English", "Hindi"],
+  "notes": "Strong O-1A candidate",
+
+  "status": "active",
+  "created_at": "2025-09-15T10:00:00Z",
+  "updated_at": "2025-10-10T15:30:00Z"
+}
+
+Error: 404 Not Found
+{
+  "error": "client_not_found",
+  "message": "Client not found or you don't have access"
+}
+```
+
+---
+
+**4. Create Client Profile**
+```
+POST /clients
+
+Request:
+{
+  "first_name": "Jane",
+  "last_name": "Smith",
+  "email": "jane@example.com",
+  "phone": "+1-555-0123",
+  "date_of_birth": "1990-05-15",
+  "country_of_birth": "India",
+  "highest_degree": "PhD",
+  "field_of_study": "Computer Science",
+  "university": "Stanford University",
+  "graduation_year": 2018,
+  "current_job_title": "Senior Software Engineer",
+  "current_employer": "Google",
+  "years_of_experience": 8,
+  "annual_salary_usd": 200000,
+  "publications_count": 15,
+  "citations_count": 450,
+  "patents_count": 2
+}
+
+Response: 201 Created
+{
+  "id": "uuid",
+  "first_name": "Jane",
+  "last_name": "Smith",
+  ...
+  "created_at": "2025-10-13T16:00:00Z"
+}
+
+Error: 400 Bad Request
+{
+  "error": "validation_error",
+  "message": "Invalid input data",
+  "details": {
+    "email": "Invalid email format",
+    "graduation_year": "Must be between 1950 and 2025"
+  }
+}
+```
+
+---
+
+**5. Update Client Profile**
+```
+PATCH /clients/{client_id}
+
+Request (partial update):
+{
+  "annual_salary_usd": 220000,
+  "publications_count": 18,
+  "notes": "Updated salary and recent publications"
+}
+
+Response: 200 OK
+{
+  "id": "uuid",
+  ...
+  "annual_salary_usd": 220000,
+  "publications_count": 18,
+  "updated_at": "2025-10-13T16:30:00Z"
+}
+```
+
+---
+
+**6. Check Eligibility (ASYNC - Most Important)**
+```
+POST /clients/{client_id}/eligibility-checks
+
+Request:
+{
+  "client_id": "uuid"  // Optional, can derive from URL
+}
+
+Response: 202 Accepted (NOT 200!)
+{
+  "check_id": "uuid",
+  "status": "pending",
+  "message": "Eligibility check started. Poll status endpoint for results.",
+  "status_url": "/eligibility-checks/uuid",
+  "estimated_completion_seconds": 10
+}
+
+Error: 400 Bad Request
+{
+  "error": "incomplete_profile",
+  "message": "Client profile missing required fields",
+  "missing_fields": ["highest_degree", "years_of_experience"]
+}
+
+Error: 429 Too Many Requests
+{
+  "error": "rate_limit_exceeded",
+  "message": "Too many eligibility checks. Please try again in 60 seconds.",
+  "retry_after": 60
+}
+```
+
+---
+
+**7. Get Eligibility Check Status (POLLING)**
+```
+GET /eligibility-checks/{check_id}
+
+Response (while processing): 200 OK
+{
+  "check_id": "uuid",
+  "client_id": "uuid",
+  "status": "processing",
+  "message": "Analyzing profile...",
+  "progress_percent": 50,
+  "created_at": "2025-10-13T16:00:00Z",
+  "started_at": "2025-10-13T16:00:05Z"
+}
+
+Response (completed): 200 OK
+{
+  "check_id": "uuid",
+  "client_id": "uuid",
+  "status": "completed",
+  "completed_at": "2025-10-13T16:00:12Z",
+  "processing_time_seconds": 7,
+  "recommendations": [
+    {
+      "visa_type": "O-1A",
+      "eligibility_score": 92,
+      "success_probability": 85.5,
+      "estimated_timeline_months": 4,
+      "recommendation_summary": "Strong candidate for O-1A...",
+      "strengths": "15 publications, 450 citations, PhD from Stanford",
+      "weaknesses": "Could benefit from more media coverage",
+      "required_documents": [
+        "CV/Resume",
+        "Publications list",
+        "Letters of recommendation (minimum 5)",
+        "Evidence of extraordinary ability"
+      ]
+    },
+    {
+      "visa_type": "EB-1A",
+      "eligibility_score": 78,
+      "success_probability": 65.0,
+      "estimated_timeline_months": 18,
+      "recommendation_summary": "Viable candidate for EB-1A...",
+      ...
+    }
+  ]
+}
+
+Response (failed): 200 OK
+{
+  "check_id": "uuid",
+  "status": "failed",
+  "error_message": "LLM service temporarily unavailable. Please try again.",
+  "completed_at": "2025-10-13T16:00:15Z",
+  "retry_allowed": true
+}
+```
+
+---
+
+**8. List Eligibility Checks for Client**
+```
+GET /clients/{client_id}/eligibility-checks?limit=10
+
+Response: 200 OK
+{
+  "data": [
+    {
+      "check_id": "uuid",
+      "status": "completed",
+      "top_recommendation": "O-1A",
+      "created_at": "2025-10-13T16:00:00Z",
+      "completed_at": "2025-10-13T16:00:12Z"
+    },
+    {
+      "check_id": "uuid-2",
+      "status": "completed",
+      "top_recommendation": "H-1B",
+      "created_at": "2025-09-20T10:00:00Z",
+      "completed_at": "2025-09-20T10:00:09Z"
+    }
+  ],
+  "pagination": {
+    "total_items": 2,
+    "limit": 10
+  }
+}
+```
+
+---
+
+**9. Delete Client (Soft Delete)**
+```
+DELETE /clients/{client_id}
+
+Response: 204 No Content
+// Client status set to 'archived', not actually deleted
+```
+
+================================================================================
+YOUR EXPLANATION:
+================================================================================
+
+**Why these endpoints?**
+
+Core workflows supported:
+1. **Authentication** - Secure login with JWT
+2. **Client management** - CRUD operations on client profiles
+3. **Eligibility checking** - Main feature, async workflow
+4. **Status polling** - Check progress of LLM analysis
+5. **History viewing** - See past eligibility checks
+
+**RESTful Design Principles:**
+- Resources: /clients, /eligibility-checks
+- HTTP verbs: GET (read), POST (create), PATCH (partial update), DELETE (delete)
+- Status codes: 200 (OK), 201 (Created), 202 (Accepted), 400 (Bad Request), 401 (Unauthorized), 404 (Not Found), 429 (Rate Limit)
+- Pagination on list endpoints
+- Versioning (/v1/)
+
+**Async Operations (Critical!):**
+
+Eligibility check flow:
+1. POST /clients/{id}/eligibility-checks → Returns **202 Accepted** immediately
+2. Frontend polls GET /eligibility-checks/{check_id} every 2 seconds
+3. When status = "completed", display results
+4. If status = "failed", show error with retry button
+
+**Why 202 instead of 200?**
+- 200 means "request completed successfully"
+- 202 means "request accepted, processing asynchronously"
+- Communicates to client that they need to poll for results
+
+**Error Handling:**
+
+Standardized error format:
+```json
+{
+  "error": "error_code",
+  "message": "Human-readable message",
+  "details": { ... }  // Optional extra context
+}
+```
+
+**Pagination:**
+
+All list endpoints return:
+```json
+{
+  "data": [...],
+  "pagination": {
+    "page": 1,
+    "limit": 20,
+    "total_items": 156,
+    "total_pages": 8,
+    "has_next": true,
+    "has_prev": false
+  }
+}
+```
+
+Prevents loading 50K clients at once.
+
+**Rate Limiting:**
+
+- 10 eligibility checks per hour per attorney (prevents LLM API cost abuse)
+- Return 429 Too Many Requests with Retry-After header
+- Enforce at API gateway level
+
+================================================================================
+INTERVIEWER PROBING QUESTIONS ON API
+================================================================================
+
+**Question 1: "What happens if the eligibility check fails?"**
+
+**Answer:**
+
+GET /eligibility-checks/{check_id} returns:
+```json
+{
+  "check_id": "uuid",
+  "status": "failed",
+  "error_message": "LLM service temporarily unavailable. Please try again.",
+  "retry_allowed": true,
+  "completed_at": "2025-10-13T16:00:15Z"
+}
+```
+
+Frontend shows:
+- Error message to attorney
+- "Retry" button (POST new eligibility check)
+- Option to contact support if persistent
+
+Backend logs error for engineering team to investigate.
+
+---
+
+**Question 2: "How does the client know when processing is done?"**
+
+**Answer:**
+
+**Polling approach (simple, recommended for this scale):**
+
+```javascript
+// Frontend code
+async function checkEligibility(clientId) {
+    // 1. Initiate check
+    const response = await fetch(`/clients/${clientId}/eligibility-checks`, {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${token}` }
+    });
+    const { check_id } = await response.json();
+
+    // 2. Poll for completion
+    pollStatus(check_id);
+}
+
+async function pollStatus(checkId) {
+    const response = await fetch(`/eligibility-checks/${checkId}`);
+    const result = await response.json();
+
+    if (result.status === 'completed') {
+        displayResults(result.recommendations);
+    } else if (result.status === 'failed') {
+        displayError(result.error_message);
+    } else if (result.status === 'processing' || result.status === 'pending') {
+        // Poll again in 2 seconds
+        setTimeout(() => pollStatus(checkId), 2000);
+    }
+}
+```
+
+**Alternative: WebSockets (more complex, real-time)**
+
+```javascript
+// Frontend connects to WebSocket
+const ws = new WebSocket('wss://api.casium.com/v1/ws');
+
+ws.send(JSON.stringify({
+    action: 'subscribe',
+    check_id: 'uuid'
+}));
+
+ws.onmessage = (event) => {
+    const data = JSON.parse(event.data);
+    if (data.status === 'completed') {
+        displayResults(data.recommendations);
+    }
+};
+```
+
+For 1,000 checks/day, **polling is simpler and sufficient**. WebSockets add complexity for minimal benefit.
+
+---
+
+**Question 3: "How do you handle pagination?"**
+
+**Answer:**
+
+**Cursor-based pagination (recommended for large datasets):**
+
+```
+GET /clients?cursor=eyJpZCI6InV1aWQifQ&limit=20
+
+Response:
+{
+  "data": [...],
+  "pagination": {
+    "next_cursor": "eyJpZCI6Im5leHQtdXVpZCJ9",
+    "has_more": true
+  }
+}
+```
+
+**Why cursor-based?**
+- Page-based breaks if items are added/deleted between requests
+- Cursor points to specific record, stable across changes
+- Better performance for large offsets
+
+**Implementation:**
+```sql
+-- Cursor = base64({"id": "last-uuid", "created_at": "2025-10-13"})
+SELECT * FROM clients
+WHERE firm_id = '...'
+  AND (created_at, id) < ('2025-10-13', 'last-uuid')  -- Cursor condition
+ORDER BY created_at DESC, id DESC
+LIMIT 20;
+```
+
+---
+
+**Question 4: "What if the LLM call takes 10 seconds?"**
+
+**Answer:**
+
+That's exactly why we use **async design**!
+
+**Flow:**
+1. POST /clients/{id}/eligibility-checks → Returns **202 Accepted** in < 100ms
+2. Job added to RabbitMQ queue
+3. Worker processes job (calls LLM, takes 10 seconds)
+4. Worker updates database with results
+5. Frontend polling detects completion
+
+**Attorney experience:**
+- Sees "Processing..." spinner for 10 seconds
+- Can navigate away and come back later
+- Can continue working on other clients
+- No timeout errors
+
+**What if it takes longer than expected (30+ seconds)?**
+- Worker has 30-second timeout on LLM call
+- If exceeded, marks job as "failed" with retry option
+- Attorney sees error: "Processing took too long. Please try again."
+- Engineering team gets alerted to investigate
+
+**Monitoring:**
+- Track p50, p95, p99 processing times
+- Alert if p95 > 15 seconds (indicates LLM API degradation)
+
+
+
+
+
+================================================================================
+PHASE 5: SCALING & TRADE-OFFS (Minutes 45-55)
+================================================================================
+
+SCALING QUESTION FROM INTERVIEWER:
+
+"Your design works for 150 law firms and 1,000 eligibility checks per day.
+What if we grow 10x - 1,500 firms and 10,000 checks per day? What breaks first?"
+
+================================================================================
+COACH'S COMPLETE BOTTLENECK ANALYSIS:
+================================================================================
+
+**Current Capacity (1,000 checks/day):**
+- ~12 checks per hour during business hours (8am-6pm)
+- Peak: maybe 3-5 concurrent checks
+- Very manageable with minimal infrastructure
+
+**10x Growth (10,000 checks/day):**
+- ~120 checks per hour during business hours
+- Peak: 30-50 concurrent checks
+- This WILL expose bottlenecks
+
+---
+
+**Bottleneck #1: LLM API Rate Limits (FIRST TO BREAK)**
+
+**Why it's the bottleneck:**
+- OpenAI/Anthropic have rate limits (requests per minute, tokens per minute)
+- Example: OpenAI GPT-4 tier 1 = 500 requests/minute = 30K requests/hour
+- 50 concurrent checks = 50 LLM calls within ~10 seconds
+- If each prompt = 5K tokens, that's 250K tokens/minute
+- OpenAI tier 1 token limit = 300K tokens/minute
+- **You'd hit token limits at peak!**
+
+**Metrics to monitor:**
+- LLM API response time (p50, p95, p99)
+- LLM API error rate (especially 429 rate limit errors)
+- Token usage per hour
+- Queue backlog size
+
+**Solution:**
+1. **Upgrade LLM API tier** ($$ but necessary)
+   - OpenAI tier 2: 5M tokens/min (16x capacity)
+   - Cost: ~$50-100/month additional
+
+2. **Batch LLM requests where possible**
+   - Group multiple client profiles in one API call
+   - Trade-off: Slightly higher latency per check, but higher throughput
+
+3. **Multi-provider fallback**
+   - Primary: OpenAI GPT-4
+   - Fallback: Anthropic Claude, Google Gemini
+   - If one hits rate limit, use another
+   - Trade-off: More complex code, need to normalize responses
+
+4. **Aggressive caching**
+   - If client profile unchanged, return cached recommendation
+   - Cache LLM results for 30 days
+   - Trade-off: Slightly stale data if visa rules change
+
+---
+
+**Bottleneck #2: Database Connections**
+
+**Why it's the bottleneck:**
+- PostgreSQL default: 100 max connections
+- Each API server holds connection pool (10-20 connections)
+- Each worker holds connection pool (5-10 connections)
+- With scaling: 5 API servers × 15 connections = 75 connections
+- Plus: 20 workers × 7 connections = 140 connections
+- **Total: 215 connections needed > 100 max!**
+
+**Metrics to monitor:**
+- Database connection count
+- Connection pool wait time
+- Query latency (p95, p99)
+- Database CPU and memory usage
+
+**Solution:**
+1. **Increase max_connections in PostgreSQL**
+   ```sql
+   ALTER SYSTEM SET max_connections = 300;
+   ```
+   Trade-off: More RAM usage (~10MB per connection)
+
+2. **Use connection pooler (PgBouncer)**
+   - Sits between application and database
+   - Multiplexes connections (100 app connections → 20 DB connections)
+   - Trade-off: Adds network hop, can't use prepared statements in transaction mode
+
+3. **Optimize connection pool sizes**
+   - API servers: 10 connections each (reduced from 15)
+   - Workers: 5 connections each (reduced from 7)
+   - Formula: connections = ((core_count * 2) + effective_spindle_count)
+   - Trade-off: May increase connection wait times under load
+
+---
+
+**Bottleneck #3: Message Queue Backlog**
+
+**Why it's the bottleneck:**
+- Workers process LLM calls sequentially (10 seconds each)
+- 10 workers = 3,600 checks/hour max throughput
+- Peak: 120 checks/hour = well within capacity
+- BUT: If LLM API slows down (15 seconds per check), throughput drops to 2,400 checks/hour
+- During outages/slowdowns, queue backs up
+
+**Metrics to monitor:**
+- Queue depth (number of pending jobs)
+- Worker throughput (jobs processed per minute)
+- Average job processing time
+- Jobs stuck in "processing" state (> 2 minutes)
+
+**Solution:**
+1. **Auto-scale workers based on queue depth**
+   ```python
+   # AWS Auto Scaling policy
+   if queue_depth > 50:
+       scale_up_workers(target=20)
+   elif queue_depth < 10:
+       scale_down_workers(target=5)
+   ```
+   Trade-off: Takes 2-3 minutes to spin up new workers (EC2 launch time)
+
+2. **Priority queues**
+   - High priority: Paying customers, pro tier
+   - Low priority: Free tier
+   - Ensures revenue-generating customers aren't blocked
+   - Trade-off: Free tier users may wait longer
+
+3. **Circuit breaker on LLM API**
+   - If LLM API degraded (>50% failure rate), stop sending requests for 60 seconds
+   - Prevents queue from filling with doomed jobs
+   - Trade-off: Temporarily stops all processing
+
+---
+
+**Bottleneck #4: Database Query Performance**
+
+**Why it's the bottleneck:**
+- As client count grows (50K → 500K profiles), queries slow down
+- Full table scans on unindexed queries
+- Example: Search by name without index
+
+**Current state (50K clients):**
+```sql
+-- This is fast (uses idx_clients_firm)
+SELECT * FROM clients WHERE firm_id = '...' LIMIT 20;
+-- Takes ~5ms
+
+-- This is SLOW (no index on current_employer)
+SELECT * FROM clients WHERE current_employer ILIKE '%google%';
+-- Takes ~500ms (full table scan)
+```
+
+**At 500K clients:** Slow query takes 5+ seconds → times out
+
+**Metrics to monitor:**
+- Slow query log (queries > 100ms)
+- Query execution plans (EXPLAIN ANALYZE)
+- Database cache hit ratio
+- Table bloat
+
+**Solution:**
+1. **Add missing indexes**
+   ```sql
+   CREATE INDEX idx_clients_employer ON clients(current_employer);
+   CREATE INDEX idx_clients_degree ON clients(highest_degree);
+   ```
+   Trade-off: Slower writes (inserts/updates maintain indexes)
+
+2. **Use full-text search for name/email searches**
+   ```sql
+   ALTER TABLE clients ADD COLUMN search_vector tsvector;
+   CREATE INDEX idx_clients_search ON clients USING GIN(search_vector);
+
+   -- Update trigger to maintain search_vector
+   CREATE TRIGGER update_search_vector ...
+   ```
+   Trade-off: More complex queries, slightly slower writes
+
+3. **Read replicas for analytics queries**
+   - Primary database: handles writes and reads
+   - Read replica: handles expensive analytics queries
+   - Offloads read traffic from primary
+   - Trade-off: Replication lag (replica 1-2 seconds behind)
+
+---
+
+**Bottleneck #5: API Server CPU (Less Likely)**
+
+**Why it's NOT a bottleneck yet:**
+- API servers are mostly I/O bound (waiting on database, cache)
+- CPU usage for JSON parsing, JWT validation is minimal
+- With 5 API servers behind load balancer, plenty of capacity
+
+**When it WOULD become a bottleneck:**
+- If doing expensive computations (complex business logic, encryption)
+- If serving thousands of concurrent connections
+
+**Solution (if needed):**
+- Horizontal scaling: Add more API server instances (easy with load balancer)
+- Trade-off: More costs (~$100/month per server)
+
+---
+
+**Bottleneck #6: Redis Cache Memory**
+
+**Current:** 2GB Redis cache
+**10x growth:** Cache hit rate drops if not enough memory
+
+**Solution:**
+1. **Increase cache size to 10GB**
+   - Cost: ~$50/month additional
+   - Trade-off: More expensive
+
+2. **Smarter cache eviction**
+   - Evict eligibility checks older than 7 days
+   - Keep client profiles cached longer (90 days)
+   - Trade-off: Requires custom eviction logic
+
+---
+
+**PRIORITY ORDER (What breaks FIRST):**
+
+1. **LLM API rate limits** ← FIRST TO BREAK
+2. **Database connections** ← Second
+3. **Message queue backlog** ← Third (only if LLM slows down)
+4. **Database query performance** ← Gradual degradation
+5. **API server CPU** ← Unlikely to break
+6. **Redis cache memory** ← Least critical
+
+================================================================================
+INTERVIEWER FOLLOW-UP QUESTIONS:
+================================================================================
+
+**Question 1: "How much would it cost to scale 10x?"**
+
+**Answer:**
+
+**Current costs (1,000 checks/day):**
+- API servers (2): $100/month
+- Workers (5): $150/month
+- Database (Postgres): $100/month
+- Redis cache (2GB): $30/month
+- LLM API (GPT-4): $500/month (1K checks × $0.50 avg)
+- **Total: ~$880/month**
+
+**10x costs (10,000 checks/day):**
+- API servers (5): $250/month
+- Workers (20, autoscaled): $600/month (average)
+- Database (larger instance + read replica): $300/month
+- Redis cache (10GB): $80/month
+- LLM API tier upgrade + usage: $5,500/month (10K checks × $0.50 + tier fees)
+- Load balancer, monitoring: $100/month
+- **Total: ~$6,830/month**
+
+**Growth: ~8x cost for 10x usage** (economies of scale on infrastructure)
+
+**Revenue required to break even:**
+- $6,830/month ÷ 10,000 checks/month = $0.68 per check
+- If charging law firms $50/check, profit margin = 98.6%
+- Very healthy business model!
+
+---
+
+**Question 2: "What if one of your workers crashes while processing a job?"**
+
+**Answer:**
+
+**Problem:**
+- Worker pulls job from RabbitMQ
+- Worker crashes mid-processing (server dies, out of memory, etc.)
+- Job is lost! Attorney never sees result.
+
+**Solution: Message acknowledgment + visibility timeout**
+
+```python
+# Worker code
+def process_job():
+    # 1. Pull job from queue (NOT acknowledged yet)
+    job = queue.get(acknowledge=False)
+
+    try:
+        # 2. Call LLM API
+        result = llm_client.create(...)
+
+        # 3. Store results in database
+        db.save(result)
+
+        # 4. ONLY acknowledge after success
+        queue.ack(job)
+
+    except Exception as e:
+        # 5. On failure, NACK (negative acknowledgment)
+        # RabbitMQ will re-queue the job
+        queue.nack(job, requeue=True)
+
+        # Log error for debugging
+        logger.error(f"Job failed: {e}")
+```
+
+**Visibility timeout:**
+- Job becomes invisible to other workers for 60 seconds
+- If worker doesn't ACK within 60 seconds, job becomes visible again
+- Another worker can pick it up
+- Prevents jobs from being stuck forever
+
+**Edge case: Worker crashes AFTER calling LLM but BEFORE storing results:**
+- Job gets re-queued
+- New worker calls LLM again (duplicate LLM call, costs $$$)
+
+**Solution: Idempotency check**
+```python
+# Before calling LLM, check if job already started
+existing = db.get_check(job_id)
+if existing and existing.status == 'completed':
+    # Job already done! Just acknowledge and skip.
+    queue.ack(job)
+    return
+
+# ... proceed with LLM call ...
+```
+
+---
+
+**Question 3: "What monitoring and alerting would you set up?"**
+
+**Answer:**
+
+**Key metrics to track:**
+
+**1. LLM API Health:**
+- ✅ LLM API success rate (alert if < 95%)
+- ✅ LLM API latency p95 (alert if > 15 seconds)
+- ✅ LLM API cost per day (alert if > budget)
+- ✅ Rate limit errors (alert if > 10/hour)
+
+**2. Queue Health:**
+- ✅ Queue depth (alert if > 100 jobs)
+- ✅ Jobs stuck in "processing" > 5 minutes (possible worker crash)
+- ✅ Worker throughput (jobs/minute)
+
+**3. Database Health:**
+- ✅ Connection pool utilization (alert if > 80%)
+- ✅ Slow queries (> 500ms)
+- ✅ Replication lag (alert if > 10 seconds)
+- ✅ Database CPU (alert if > 80%)
+
+**4. API Health:**
+- ✅ API response time p95 (alert if > 1 second)
+- ✅ API error rate (alert if > 1%)
+- ✅ 4xx errors (alert if spike indicates client issues)
+- ✅ 5xx errors (alert immediately - server errors)
+
+**5. Business Metrics:**
+- ✅ Eligibility checks completed per hour
+- ✅ Average check completion time
+- ✅ User-facing errors (jobs failed after retries)
+
+**Alerting channels:**
+- PagerDuty for critical alerts (wakes engineer on-call)
+- Slack for warnings (queue depth growing)
+- Email for daily summaries
+
+**Dashboard:**
+- Grafana dashboard showing all metrics in real-time
+- Status page for customers (public-facing uptime)
+
+================================================================================
+OVERALL SCALING STRATEGY SUMMARY:
+================================================================================
+
+**Phase 1: 1,000 checks/day (Current)**
+- 2 API servers
+- 5 workers
+- Single PostgreSQL database
+- 2GB Redis cache
+- OpenAI GPT-4 tier 1
+- **Cost: $880/month**
+
+**Phase 2: 5,000 checks/day**
+- 3 API servers (add 1)
+- 10 workers (double)
+- Upgrade LLM API tier
+- Add database connection pooler (PgBouncer)
+- **Cost: ~$3,000/month**
+
+**Phase 3: 10,000 checks/day**
+- 5 API servers
+- 20 workers (auto-scaling)
+- Larger database + read replica
+- 10GB Redis cache
+- Multi-LLM provider fallback
+- **Cost: ~$6,830/month**
+
+**Phase 4: 50,000+ checks/day (Future)**
+- Database sharding by firm_id
+- Multiple message queue instances
+- CDN for static assets
+- Elasticsearch for client search
+- **Cost: $30K+/month**
+
+**Key principle: Scale horizontally (add more servers) rather than vertically (bigger servers)**
+- Easier to add/remove capacity
+- Better fault tolerance
+- More cost-effective
+
+
+
+
+
+================================================================================
+PHASE 6: WRAP-UP & FEEDBACK (Minutes 55-60)
+================================================================================
+
+================================================================================
+COACH'S COMPREHENSIVE FEEDBACK
+================================================================================
+
+This is a COMPLETE REFERENCE SOLUTION for a Casium-style system design interview.
+Let's evaluate what we covered and what you should learn from it.
+
+**KEY EVALUATION CRITERIA:**
+
+**Database Design (30%):**
+- [✅] Proper table structure and relationships (7 tables with clear relationships)
+- [✅] Appropriate data types (UUID, VARCHAR, JSONB, DECIMAL for money, TIMESTAMP)
+- [✅] Indexes on frequently queried fields (firm_id, status, created_at, composite indexes)
+- [✅] Multi-tenancy consideration (firm_id in EVERY table, filtered on EVERY query)
+- [✅] Audit trail (separate audit_log table for compliance)
+- [✅] No files in DB (not applicable - this system has no file uploads)
+
+**Grade: A+ (Comprehensive schema with all best practices)**
+
+---
+
+**API Design (30%):**
+- [✅] RESTful conventions (proper resource naming, HTTP verbs match semantics)
+- [✅] Proper HTTP verbs and status codes (202 Accepted for async, 201 Created, 429 Rate Limit)
+- [✅] Async operations handled correctly (eligibility checks return 202, polling endpoint)
+- [✅] Pagination on list endpoints (cursor-based pagination explained)
+- [✅] Clear request/response formats (JSON with standardized error format)
+
+**Additional strengths:**
+- Rate limiting (10 checks/hour per attorney)
+- Idempotent operations (retry-safe)
+- Versioning (/v1/)
+- Clear async workflow with polling
+
+**Grade: A+ (Production-ready API design)**
+
+---
+
+**Distributed Components (40%):**
+- [✅] Load balancer rationale (horizontal scaling, high availability)
+- [✅] Cache strategy (Redis for profiles + eligibility results, cache-aside pattern)
+- [✅] Message queue for slow operations (RabbitMQ for LLM calls, explained async flow)
+- [✅] No object storage needed (no file uploads in this system)
+- [✅] Clear explanation of WHY each component (not just listing components)
+
+**Additional strengths:**
+- Worker auto-scaling strategy
+- Message acknowledgment for reliability
+- Circuit breaker pattern for LLM API
+- Multi-LLM provider fallback
+- Comprehensive monitoring and alerting
+
+**Grade: A+ (Production-grade distributed system design)**
+
+---
+
+**Scaling Analysis (Bonus):**
+- [✅] Identified correct bottleneck order (LLM API rate limits first!)
+- [✅] Specific, actionable solutions for each bottleneck
+- [✅] Cost analysis ($880/month → $6,830/month for 10x growth)
+- [✅] Monitoring metrics defined (p95 latency, queue depth, etc.)
+- [✅] Phased scaling strategy (1K → 5K → 10K → 50K checks/day)
+
+**Grade: A+ (Showed deep understanding of production scaling)**
+
+================================================================================
+OVERALL ASSESSMENT
+================================================================================
+
+**What makes this solution EXCELLENT:**
+
+1. **Multi-tenancy is EVERYWHERE**
+   - firm_id in every table
+   - Explained security enforcement (application layer + optional RLS)
+   - JWT tokens contain firm_id
+   - This is CRITICAL for B2B SaaS - many candidates forget this!
+
+2. **Async design is CORRECT**
+   - 202 Accepted (not 200 OK) for async operations
+   - Message queue with background workers
+   - Polling endpoint for status
+   - Explained alternatives (WebSockets) and why polling is simpler
+
+3. **Error handling is COMPREHENSIVE**
+   - LLM timeout, rate limit, service down, invalid response
+   - Retry with exponential backoff
+   - Circuit breaker pattern
+   - User-friendly error messages
+   - Engineering alerts
+
+4. **Database design is PRODUCTION-READY**
+   - Proper indexing strategy
+   - JSONB for flexible data
+   - Audit log for compliance
+   - Soft deletes (status='archived')
+   - Historical data for ML features
+
+5. **Scaling analysis is SPECIFIC**
+   - Not vague "add more servers"
+   - Identified LLM API as first bottleneck (candidates often miss this!)
+   - Concrete solutions with trade-offs
+   - Cost analysis shows business understanding
+
+6. **Communication is CLEAR**
+   - Explained WHY, not just WHAT
+   - Used specific examples (SQL queries, API calls, code snippets)
+   - Showed trade-offs for every decision
+   - Demonstrated production experience thinking
+
+**What Casium would LOVE about this design:**
+
+- ✅ Understands immigration domain (visa types, eligibility scoring)
+- ✅ LLM integration is thoughtful (validation, cost tracking, fallbacks)
+- ✅ Zero-error mindset (audit logs, retry logic, monitoring)
+- ✅ B2B SaaS understanding (multi-tenancy, rate limiting, tiered pricing)
+- ✅ Cost-conscious (explained infrastructure costs, profit margins)
+
+================================================================================
+KEY TAKEAWAYS FOR YOUR ACTUAL INTERVIEW
+================================================================================
+
+**1. Always Start with Clarifying Questions**
+   - Users and roles
+   - Scale and performance requirements
+   - Multi-tenancy
+   - Data retention
+   - Integration points
+
+**2. Multi-Tenancy is NON-NEGOTIABLE for B2B**
+   - Add firm_id/company_id to EVERY table
+   - Filter by it in EVERY query
+   - Explain security enforcement
+   - Casium interviews WILL test this!
+
+**3. Async Operations for Slow Tasks**
+   - Return 202 Accepted (not 200 OK)
+   - Use message queue + workers
+   - Provide status polling endpoint
+   - Explain user experience (spinner, can navigate away)
+
+**4. Database Design Gets 30% Weight**
+   - Spend 15 minutes on this phase
+   - Show indexes, foreign keys, data types
+   - Explain common queries
+   - Demonstrate understanding of relationships
+
+**5. Identify SPECIFIC Bottlenecks**
+   - Not "the database" - say "database connections exceed max_connections=100"
+   - Not "add more servers" - say "upgrade LLM API tier to 5M tokens/min"
+   - Show you've built production systems before
+
+**6. Always Explain Trade-offs**
+   - Every decision has pros and cons
+   - "We could use WebSockets, but polling is simpler and sufficient for this scale"
+   - Shows maturity and production experience
+
+**7. Think About the User**
+   - "Attorney sees Processing... spinner for 10 seconds"
+   - "If it fails, show error with Retry button"
+   - Interviewers want to know you care about UX
+
+**8. Relate to Your Experience**
+   - "Like GridCOP, this has zero-tolerance for errors, so we need validation"
+   - "Similar to the drone tool's RAG system, we cache LLM results"
+   - Shows you can apply past experience to new problems
+
+================================================================================
+WHAT TO PRACTICE NEXT
+================================================================================
+
+**You should practice:**
+
+1. **Drawing this system on a whiteboard** (or drawing tool)
+   - Components: Load Balancer, API Servers, Database, Cache, Queue, Workers, LLM API
+   - Data flow arrows with labels
+   - Takes 5 minutes - practice until fluent
+
+2. **Writing database schema by hand**
+   - 5-7 tables with relationships
+   - Indexes on right fields
+   - firm_id everywhere
+   - Do this 3-5 times for different problems
+
+3. **Explaining async workflow verbally**
+   - "When attorney clicks Check Eligibility..."
+   - Walk through all 11 steps fluently
+   - Practice saying this out loud
+
+4. **Identifying bottlenecks for different scales**
+   - 1K, 10K, 100K requests/day
+   - What breaks first? LLM API? Database? Queue?
+   - Practice quick mental math
+
+5. **Another mock interview with DIFFERENT problem**
+   - Document processing system (from system_design_coaching.md)
+   - Case tracking system
+   - Workflow approval system
+
+================================================================================
+CONFIDENCE CHECK
+================================================================================
+
+After studying this solution, you should be able to:
+
+- [ ] Draw high-level architecture in 5 minutes
+- [ ] Design database schema for immigration platform in 15 minutes
+- [ ] Explain async workflow (11 steps) fluently
+- [ ] Design REST API with proper status codes (202, 429, etc.)
+- [ ] Identify LLM API rate limits as first bottleneck
+- [ ] Calculate infrastructure costs ($880/month → $6,830/month)
+- [ ] Explain multi-tenancy with firm_id in every table
+- [ ] Show caching strategy (what to cache, what not to cache)
+- [ ] Demonstrate error handling (retry, circuit breaker, alerts)
+- [ ] Relate to your experience (GridCOP, drone tool)
+
+**If you can do all of these, you're READY for the Casium system design interview.**
+
+================================================================================
+FINAL ADVICE
+================================================================================
+
+**On interview day:**
+
+1. **Don't memorize this solution word-for-word**
+   - Understand the PRINCIPLES
+   - Apply them to whatever problem they give you
+   - They might ask about document processing, not eligibility checks
+
+2. **Start with clarifying questions (5-10 minutes)**
+   - Don't jump straight to designing
+   - Show you understand requirements first
+   - Ask about multi-tenancy, scale, integration points
+
+3. **Draw while you talk**
+   - Sketch architecture as you explain it
+   - Draw database schema on whiteboard
+   - Visual communication is powerful
+
+4. **Explain your reasoning**
+   - "I'm using a message queue because LLM calls take 10 seconds"
+   - "I'm adding firm_id to every table because 150 law firms need isolation"
+   - Show your thought process
+
+5. **Don't panic if you forget something**
+   - Interviewer will ask probing questions
+   - "How do you handle multi-tenancy?" → "Good question, let me add firm_id..."
+   - It's a conversation, not a test with one right answer
+
+6. **Relate to your experience naturally**
+   - "This is similar to GridCOP where we needed validation..."
+   - "Like the drone tool, we should cache LLM results..."
+   - Shows you're not just theoretical
+
+7. **End with trade-offs and next steps**
+   - "For 1,000 checks/day, this design is solid"
+   - "If we grow 10x, we'd need to upgrade the LLM API tier first"
+   - Shows you think about production evolution
+
+**You've got this!** This solution demonstrates staff/principal engineer level thinking.
+Study it, practice it, then show Casium what you can do. 🚀
+
+================================================================================
+SESSION NOTES & NEXT STEPS
+================================================================================
+
+**What you learned from this complete solution:**
+
+1. **System Design Interview Structure:**
+   - Clarifying questions (5-10 min)
+   - High-level architecture (10 min)
+   - Database design deep dive (15 min) ⭐ MOST IMPORTANT
+   - API design (10 min)
+   - Scaling & trade-offs (10 min)
+   - Wrap-up (5 min)
+
+2. **Casium-Specific Patterns:**
+   - Multi-tenancy with firm_id everywhere
+   - Async LLM processing with queue + workers
+   - Immigration domain entities (clients, eligibility_checks, visa_recommendations)
+   - Historical data for ML features (success_probability)
+   - Audit logging for compliance
+
+3. **Production-Grade Thinking:**
+   - Error handling (retry, circuit breaker, alerts)
+   - Monitoring (metrics, dashboards, paging)
+   - Cost analysis (infrastructure + LLM API costs)
+   - Scaling bottlenecks (LLM API rate limits first!)
+   - Security (multi-tenancy isolation, JWT authentication)
+
+**Next practice session:**
+- Try another Casium-themed problem WITHOUT looking at this solution
+- Time yourself (60 minutes)
+- Compare your design to these principles
+- Iterate until confident
+
+**Resources to review:**
+- `system_design_coaching.md` - Full coaching methodology
+- `CLAUDE.md` - Casium interview context and 7-step live coding framework
+- Your GridCOP and drone tool experience - practice explaining these
+
+**When you're ready for the real interview, you'll crush it!** 💪
+
+
+
+
+
+================================================================================

@@ -1,0 +1,101 @@
+{
+  "_comment": "Resume for Broccoli AI Product Engineer - Unique ID: 20251031-1843-product-engineer",
+  "selectedTemplate": 1,
+  "basics": {
+    "name": "Viresh Duvvuri",
+    "summary": "Product Engineer with 5+ years building and shipping AI-powered products from prototype to production, specializing in 0→1 development with fast iteration cycles and user-driven design. Proven track record collaborating directly with users to understand workflows, owning full product lifecycle from UX to deployment, and shipping MVPs that delivered 70-80% efficiency improvements within 2-3 months. Strong expertise in full-stack development (Python, TypeScript, React), AI agent systems, real-time natural language interfaces, and product-first thinking that translates user needs into measurable business impact in high-velocity startup environments.",
+    "email": "vireshduvvuri@gmail.com",
+    "phone": "+1-509-964-5469",
+    "website": "linkedin.com/in/viresh-duvvuri",
+    "location": {"address": "Seattle, WA"}
+  },
+  "work": [
+    {
+      "company": "Grid CoOperator",
+      "position": "AI Engineer",
+      "location": "Seattle, WA",
+      "startDate": "03/2025",
+      "endDate": "Present",
+      "highlights": [
+        "Built and shipped AI agent product from concept to production, collaborating directly with users (power grid analysts) to understand workflows, rapidly prototyping features based on real-time feedback, and iterating weekly to deliver 70% efficiency improvement within 2 months through user-driven development and fast iteration cycles that validated product-market fit",
+        "Owned full product lifecycle including UX design for natural language interfaces enabling non-technical users to query databases conversationally, backend API development (FastAPI), real-time data pipelines connecting multiple sources, and production deployment on AWS, building reliable systems serving 50-100 daily customer interactions with 99%+ uptime through comprehensive monitoring and observability",
+        "Drove product roadmap through user interviews and post-launch learning, shipped MVPs to production for rapid validation with real users, collaborated cross-functionally with stakeholders to prioritize features by impact, demonstrated product-first thinking by translating user needs into technical solutions that delivered measurable business value and continuous product improvements"
+      ]
+    },
+    {
+      "company": "Freefly Systems",
+      "position": "Senior Software Engineer",
+      "location": "Woodinville, WA",
+      "startDate": "11/2021",
+      "endDate": "10/2025",
+      "highlights": [
+        "Shipped AI-powered diagnostic product from early prototype to production serving 200+ daily customer interactions, owned end-to-end product experience from user research with engineering teams to deployment, built natural language interface enabling non-technical users to interact with complex technical systems through conversational AI, reduced troubleshooting time by 80% through fast iteration cycles and user feedback integration",
+        "Contributed to enterprise-scale drone platform codebases implementing new features and system optimizations for flight control and payload integration across multiple product lines, managed software integration projects from planning through production release in fast-paced environment",
+        "Led release management for mission-critical drone platforms coordinating testing phases from alpha through production deployment, troubleshooting firmware integration issues, executing comprehensive testing protocols with cross-functional teams under tight deadlines",
+        "Built automated systems to process complex technical data and identify system failures, developing support tools that streamlined operations for technical teams in data-intensive environment"
+      ]
+    },
+    {
+      "company": "Lumenier",
+      "position": "Drone Software Developer",
+      "location": "Sarasota, FL",
+      "startDate": "07/2020",
+      "endDate": "10/2021",
+      "highlights": [
+        "Wrote embedded code in C++ to integrate LiDAR and optical flow sensors for obstacle avoidance and position holding with/without GPS under various lighting conditions",
+        "Collaborated with open-source flight control software maintainers for integration, testing, and deployment of autonomous flight algorithms, prototyped innovative features like toss-to-launch for product roadmap development"
+      ]
+    },
+    {
+      "company": "York Exponential",
+      "position": "Software Engineer - R&D",
+      "location": "York, PA",
+      "startDate": "08/2018",
+      "endDate": "05/2020",
+      "highlights": [
+        "Developed prototype software for in-house autonomous surveillance mobile robots using ROS2, SLAM, and computer vision technologies",
+        "Built Human Machine Interface for Universal Robot welding applications using Python and Kivy framework, implemented multi-robot control systems with platform independence"
+      ]
+    }
+  ],
+  "skills": [
+    {"name": "Programming & Full-Stack", "keywords": ["Python", "TypeScript", "JavaScript", "SQL", "C++", "FastAPI", "Flask", "React", "NumPy", "Pandas", "Full-Stack Development", "API Design", "System Architecture"]},
+    {"name": "AI Agent Development", "keywords": ["LLMs (GPT-4, Claude, Ollama, Llama)", "Multi-Agent Systems", "LangChain", "RAG Pipelines", "Conversational AI", "Real-Time AI Systems", "Natural Language Interfaces", "Prompt Engineering", "Voice Agents", "Function Calling"]},
+    {"name": "Product Development", "keywords": ["User Research", "Rapid Prototyping", "MVP Testing", "0→1 Product Development", "User Feedback Integration", "Product Roadmap Planning", "Cross-Functional Collaboration", "Post-Launch Learning", "Iteration Cycles"]},
+    {"name": "Cloud & Infrastructure", "keywords": ["AWS", "Azure", "Docker", "CI/CD Pipelines", "REST APIs", "Production Deployment", "Real-Time Systems", "Monitoring", "Observability", "Scalability", "Performance Optimization"]},
+    {"name": "Data & Databases", "keywords": ["Vector Databases (FAISS, Pinecone)", "SQL", "PostgreSQL", "Data Pipelines", "Real-Time Data Integration", "ETL", "Data Processing"]}
+  ],
+  "projects": [
+    {
+      "name": "GridCOP: AI Agent Product for Enterprise Users | Grid CoOperator",
+      "highlights": [
+        "Problem: Power grid analysts needed AI-powered product to automate database querying workflows through natural language interactions, requiring product engineer to build user-facing system from concept to production, rapidly iterate based on feedback, and deliver measurable productivity improvements for non-technical business users",
+        "Solution: Built and shipped full-stack AI agent product using Python (LangChain for multi-agent orchestration), designed conversational UX enabling natural language queries, developed backend APIs (FastAPI) and real-time data pipelines, integrated LLMs (GPT-4, Claude) with RAG retrieval (FAISS vector databases), deployed on AWS with monitoring/observability, tested MVPs in production with real users for fast learning cycles",
+        "Impact: Shipped product from 0→1 within 2 months through weekly iterations and user collaboration, enhanced user productivity by 70% through AI-powered workflow automation, served 50-100 daily customer interactions at 99%+ uptime, validated product-market fit through user interviews and post-launch metrics showing 40% improvement in data accuracy and strong adoption"
+      ],
+      "keywords": ["Python", "LangChain", "Multi-Agent Systems", "Conversational AI", "Natural Language Interface", "FastAPI", "REST APIs", "Data Pipelines", "GPT-4", "Claude", "RAG", "FAISS", "AWS", "MVP Testing", "User Research", "Product-Market Fit"]
+    },
+    {
+      "name": "AI Diagnostic Product for Technical Teams | Freefly Systems",
+      "highlights": [
+        "Problem: Engineering teams needed customer-facing AI product to troubleshoot complex system failures through natural language interface, requiring product engineer to ship from prototype to production, own full user experience, and enable self-service diagnostics for non-technical users",
+        "Solution: Built full-stack product with React frontend for conversational UI, Python Flask backend, integrated foundation model APIs (Ollama, Llama 3.2) for real-time natural language processing, implemented RAG pipeline with semantic search for contextual responses, deployed to production with monitoring, iterated based on user feedback and usage patterns",
+        "Impact: Shipped AI product to production serving 200+ daily customer interactions, reduced troubleshooting time from hours to minutes (80% reduction) through natural language interface, enabled self-service for technical teams, demonstrated fast shipping mindset by moving from early prototype to production deployment in 3 months with continuous iteration"
+      ],
+      "keywords": ["React", "Python", "Flask", "Ollama", "Llama", "Conversational AI", "Natural Language Interface", "RAG", "Real-Time Systems", "User Feedback", "Fast Shipping", "Customer Interactions"]
+    },
+    {
+      "name": "AI Travel Planner Agent | Personal",
+      "highlights": [
+        "Problem: Needed rapid 0→1 prototyping demonstrating ability to build conversational AI products quickly, integrate real-time data sources, and deliver functional user experiences for multi-step planning tasks",
+        "Solution: Built AI agent product using Claude API with LangChain orchestration, implemented function calling for tool integration with DuckDuckGo Search API enabling real-time information retrieval, developed conversational interface using Streamlit, applied prompt engineering for natural multi-turn conversations, tested with real users for feedback",
+        "Impact: Demonstrated rapid product development from concept to functional prototype, showcased conversational AI and real-time system integration skills, validated ability to ship meaningful products quickly and adapt to emerging AI technologies through hands-on experimentation"
+      ],
+      "keywords": ["Claude", "LangChain", "Conversational AI", "Function Calling", "API Integration", "Real-Time Data", "Streamlit", "Rapid Prototyping", "0→1 Development"]
+    }
+  ],
+  "education": [
+    {"institution": "Washington State University", "area": "Computer Science", "studyType": "Master of Science", "startDate": "01/2015", "endDate": "01/2017", "location": "Pullman, WA"},
+    {"institution": "GITAM University", "area": "Information Technology", "studyType": "Bachelor of Technology", "startDate": "01/2011", "endDate": "01/2015", "location": "Visakhapatnam, India"}
+  ]
+}

@@ -1,0 +1,319 @@
+================================================================================
+SYSTEM DESIGN MOCK INTERVIEW - PRACTICE SESSION 3
+================================================================================
+
+Problem: Case Assignment & Attorney Workload Management System
+
+You're designing a system for Casium that intelligently assigns new immigration cases to attorneys based on their current workload, expertise, and availability.
+
+Context:
+- Law firms have multiple attorneys with different specialties (H-1B, O-1, EB-2, etc.)
+- New clients sign up daily and need to be assigned to an attorney
+- Attorneys have capacity limits (can handle 15-25 active cases)
+- Case complexity varies (simple renewals vs. complex first-time applications)
+- Firms want fair distribution and expertise matching
+
+Scale:
+- 150 law firms
+- 600 attorneys total
+- 50,000 active cases
+- 200 new case assignments per day
+- Average case duration: 4-8 months
+- Peak season: 500 new cases per day (H-1B filing season)
+
+Requirements:
+1. Assign new cases to attorneys automatically based on:
+   - Attorney expertise (visa type specialization)
+   - Current workload (# of active cases)
+   - Case complexity score (1-10)
+   - Attorney availability (out of office, vacation)
+
+2. Attorneys can manually reassign cases (handoff to colleague)
+
+3. System must track:
+   - Current workload per attorney
+   - Historical assignment data (for performance reviews)
+   - Reassignment history (who handed off to whom)
+
+4. Firm admins can configure:
+   - Assignment rules (round-robin, workload-based, expertise-first)
+   - Capacity limits per attorney
+   - Complexity thresholds
+
+5. Generate reports:
+   - "Attorney workload distribution" per firm
+   - "Cases assigned this month" per attorney
+   - "Reassignment frequency" (flag potential issues)
+
+6. Must be multi-tenant (firm data isolation)
+
+Your task: Design this system end-to-end
+
+You have 60 minutes. Spend your time like this:
+- 5 min: Clarifying questions
+- 15 min: Database schema design
+- 15 min: API design
+- 15 min: Architecture (how does auto-assignment work?)
+- 10 min: Scaling & edge cases
+
+================================================================================
+START YOUR DESIGN BELOW
+================================================================================
+
+PHASE 1: CLARIFYING QUESTIONS (5 minutes)
+-------------------------------------------
+
+[Write your clarifying questions here - what would you ask the interviewer?]
+
+- is there a limit to how many clients can attorney handle atmost? or they can take how many ever they want till their workload fills up? 
+- how is the workload determined or calculated? is this something we need to desing aswell? 
+- is client to attorney an async process? where a client subimits a request, and out application matches application to attorney? 
+- what if there are no avaliable lawers for the application? do they need to file  a new application later? or we retain info? if yes then for how long? 
+- what is the core import pieces in this system? reponse time, accuracy or the availablity / storage? 
+
+
+>> database shema 
+
+users 
+uuid id 
+varchar name 
+varchar email 
+varchar case_id cases.id 
+varchar assigned_to attorneys.id # none if its a new sign-in 
+varchar case_status case.status
+
+attorney 
+uuid id 
+varchar name 
+varchar email 
+varchar law_firm law_firm.id 
+varchar assigned_case cases.id 
+varchar workload workload_tracker.status 
+int last_assigned_ts # when as case assigned to this attorney the last time 
+
+law firms
+uuid id 
+varchar name 
+varchar location 
+int attorney_count 
+varchar assignment_rules  #(round-robin, workload-based, expertise-first)
+varchar capacity_limits_per_attorney
+varchar complexity_thresholds
+
+cases 
+uuid id
+int lastupdated # timestamp
+varchar user_id users.id 
+varchar current_attorneys_assigned attorneys.id 
+varchar complexity_score 
+int started_on # timestamp of when it was first started 
+id complexity
+varchar attorney_history case_history.id 
+varchar notes case_history.notes  
+int deadline 
+varchar status # is this resolved yet
+
+case_history
+uuid id 
+varchar past assingments Attorneys,id # list of the attorneys assigned to this case 
+varchar user_id users.id
+varchar notes # notes added by attorney 
+varchar actions_taken 
+varchar status cases.status
+
+workload_tracker
+uuid id 
+varchar attorney attorneys.id 
+int last_updated 
+int number_of cases_assinged
+int status # this gives an estiamte on the workload status 
+bool can_take_more_work # yes / no bases on the workload status 
+
+
+
+>> api design 
+POST /user/sign-up
+
+GET /attorney/{id}/workload_status_avaliablilty 
+{
+   id: "1234", # attorney_id
+   name: "attorney_name", 
+   law_firm : "associated firm", 
+   workload_status : computed workload status 
+   avalilbilty: computed_availablitity # based on workload and holidays 
+
+}  
+
+
+GET /attorney/{id}/reassign_task
+{
+ id: attorney_id
+ reassingned_to: attorney_id 
+ reassigned_date: reassingment date 
+ case : case id reassigned 
+ days_held_for: how many days was this held for before reassingment?   
+}
+
+GET /attorney/{id}/historical_assingment
+
+GET /generate_report 
+{
+   id:case_id 
+   user_id: user whom this case belongs to 
+   attorney_id: the one who wrote the report
+   details: report details
+   complexity: how long it took to solve 
+   format: report format 
+   generated_on: when was this geneated 
+}
+
+POST /law_firm/configure_limits
+
+
+
+
+
+1. Assign new cases to attorneys automatically based on:
+   - Attorney expertise (visa type specialization)
+   - Current workload (# of active cases)
+   - Case complexity score (1-10)
+   - Attorney availability (out of office, vacation)
+
+2. Attorneys can manually reassign cases (handoff to colleague)
+
+3. System must track:
+   - Current workload per attorney
+   - Historical assignment data (for performance reviews)
+   - Reassignment history (who handed off to whom)
+
+4. Firm admins can configure:
+   - Assignment rules (round-robin, workload-based, expertise-first)
+   - Capacity limits per attorney
+   - Complexity thresholds
+
+5. Generate reports:
+   - "Attorney workload distribution" per firm
+   - "Cases assigned this month" per attorney
+   - "Reassignment frequency" (flag potential issues)
+
+
+here is the system diagram I made for this 
+/home/virus/Pictures/Screenshots/Screenshot from 2025-10-14 13-46-34.png
+
+
+================================================================================
+
+PHASE 2: DATABASE SCHEMA (15 minutes)
+--------------------------------------
+
+[Design your database tables here - include columns, data types, indexes, foreign keys]
+
+HINT: Think about:
+- How do you track "current workload"?
+- How do you store assignment rules (per firm)?
+- How do you track reassignment history (audit trail)?
+- What indexes do you need for "find attorney with lowest workload in firm X for visa type Y"?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+================================================================================
+
+PHASE 3: API DESIGN (15 minutes)
+---------------------------------
+
+[Design your REST API endpoints - include method, path, request/response]
+
+HINT: Think about:
+- How does a new case get assigned? (POST request? What's the response?)
+- How does attorney manually reassign? (PUT? POST?)
+- How do you fetch "available attorneys for case X"?
+- What does the workload report endpoint look like?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+================================================================================
+
+PHASE 4: ARCHITECTURE (15 minutes)
+-----------------------------------
+
+[Draw/describe your system architecture - how does auto-assignment work?]
+
+HINT: Think about:
+- Is assignment synchronous (client waits) or async (background job)?
+- How do you calculate "best attorney"? (Algorithm? Database query? Scoring system?)
+- Where is workload cached? (Redis? Materialized view?)
+- What if two cases get assigned to same attorney simultaneously? (Race condition?)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+================================================================================
+
+PHASE 5: SCALING & EDGE CASES (10 minutes)
+-----------------------------------------------
+
+[What breaks first at 10x scale? What edge cases need handling?]
+
+HINT: Think about:
+- 5,000 new assignments per day (H-1B season)
+- Race condition: two cases assigned to attorney at same time → exceeds capacity
+- Attorney goes on vacation mid-case
+- No available attorneys (all at capacity)
+- Firm changes assignment algorithm mid-day
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+================================================================================
+END OF YOUR DESIGN
+================================================================================

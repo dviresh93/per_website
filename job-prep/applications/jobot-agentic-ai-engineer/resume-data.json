@@ -1,0 +1,198 @@
+{
+  "_comment": "CUSTOMIZED RESUME for Jobot - Agentic AI Engineer | Following RESUME_TEMPLATE.md exactly | Customizations: AI Engineer focus, LangChain/LangGraph, multi-agent, guardrails",
+  "selectedTemplate": 1,
+  "basics": {
+    "name": "Viresh Duvvuri",
+    "summary": "AI Engineer specializing in designing, developing, and deploying production-ready AI agents and multi-node agentic systems, with 5+ years shipping GenAI solutions from rapid prototyping to production deployment. Builder-first mindset with proven track record delivering agent-based systems with guardrails and human-in-the-loop workflows that improved business efficiency by 50-80% within 3 months, establishing evaluation frameworks, model governance, and scalable AI infrastructure on AWS Lambda and cloud platforms.",
+    "email": "vireshduvvuri@gmail.com",
+    "phone": "+1-509-964-5469",
+    "website": "https://www.linkedin.com/in/viresh-duvvuri/",
+    "location": {
+      "address": "Seattle, WA"
+    }
+  },
+  "skills": [
+    {
+      "name": "Programming Languages",
+      "keywords": [
+        "Python",
+        "C++",
+        "JavaScript",
+        "TypeScript",
+        "SQL",
+        "FastAPI",
+        "Flask",
+        "React",
+        "NumPy",
+        "Pandas"
+      ]
+    },
+    {
+      "name": "AI Agent Development",
+      "keywords": [
+        "Agentic AI",
+        "LangChain",
+        "LangGraph",
+        "Multi-Agent Systems",
+        "Agent-to-Agent (A2A)",
+        "AI Orchestration",
+        "GenAI",
+        "RAG",
+        "Prompt Engineering",
+        "Model Evaluation",
+        "Model Selection",
+        "Model Context Protocol (MCP)",
+        "Human-in-the-Loop",
+        "Guardrails",
+        "Response Verification",
+        "State Graphs",
+        "Semantic Search",
+        "LangSmith",
+        "OpenAI API",
+        "Reflection"
+      ]
+    },
+    {
+      "name": "AI/ML Frameworks",
+      "keywords": [
+        "PyTorch",
+        "TensorFlow",
+        "Scikit-learn",
+        "MLOps",
+        "Context Engineering",
+        "Model Deployment",
+        "Responsible AI",
+        "Feature Engineering",
+        "Fine-tuning"
+      ]
+    },
+    {
+      "name": "Cloud & Infrastructure",
+      "keywords": [
+        "AWS",
+        "AWS Lambda",
+        "AWS S3",
+        "AWS Gateway",
+        "AWS ECR",
+        "Azure",
+        "Docker",
+        "Kubernetes",
+        "CI/CD Pipelines",
+        "API Design",
+        "DevOps",
+        "Monitoring",
+        "Performance Tuning",
+        "Scalability",
+        "Observability"
+      ]
+    },
+    {
+      "name": "Data & Databases",
+      "keywords": [
+        "Vector Databases (FAISS, Pinecone)",
+        "SQL",
+        "PostgreSQL",
+        "Data Pipelines",
+        "Data Processing",
+        "Data Integration",
+        "Analytics"
+      ]
+    }
+  ],
+  "work": [
+    {
+      "company": "Grid CoOperator",
+      "position": "AI Engineer",
+      "location": "Seattle, WA",
+      "startDate": "03/2025",
+      "endDate": "Present",
+      "highlights": [
+        "Built and shipped production AI agent system with multi-node decision models from prototype to deployment, designing agentic AI architecture automating complex analyst workflows with 70% manual effort reduction within 2 months using LangChain/LangGraph orchestration and greenfield engineering approach",
+        "Designed and deployed AI orchestration infrastructure with guardrails and response verification where specialized agents communicate through state graphs, deployed on AWS Lambda with API Gateway, cost monitoring and observability, built comprehensive evaluation datasets with human-in-the-loop workflows measuring agent performance and preventing hallucinations across 50-100 daily queries",
+        "Shipped iterative improvements optimizing agent performance and cost, built monitoring dashboards tracking business outcomes, established AI governance practices including citing sources, reflection mechanisms, and safety guardrails for production-ready multi-agent systems"
+      ]
+    },
+    {
+      "company": "Freefly Systems",
+      "position": "Senior Software Engineer",
+      "location": "Woodinville, WA",
+      "startDate": "11/2021",
+      "endDate": "10/2025",
+      "highlights": [
+        "Built and deployed GenAI-powered agentic AI co-pilot for automated log analysis from concept to production, integrating OpenAI API with RAG, semantic search, and vector databases for intelligent document retrieval, implementing guardrails and evaluation frameworks with model governance practices, serving 200+ daily queries",
+        "Contributed to drone platform codebases implementing new features and optimizations for flight control systems and payload integration across multiple product lines, managed software integration projects from planning through release",
+        "Led release management for drone platforms overseeing testing phases from alpha through production deployment, coordinating firmware updates and executing comprehensive testing protocols with cross-functional teams",
+        "Built automated systems to process complex technical data and identify system failures, developing knowledge base enhancements and support tools that streamlined operations"
+      ]
+    },
+    {
+      "company": "Lumenier",
+      "position": "Drone Software Developer",
+      "location": "Sarasota, FL",
+      "startDate": "07/2020",
+      "endDate": "10/2021",
+      "highlights": [
+        "Wrote embedded code in C++ to integrate LiDAR and optical flow sensors for obstacle avoidance and position holding with/without GPS under various lighting conditions",
+        "Collaborated with open-source flight control software maintainers for integration, testing, and deployment of autonomous flight algorithms, prototyped innovative features like toss-to-launch for product roadmap development"
+      ]
+    },
+    {
+      "company": "York Exponential",
+      "position": "Software Engineer - R&D",
+      "location": "York, PA",
+      "startDate": "08/2018",
+      "endDate": "05/2020",
+      "highlights": [
+        "Developed prototype software for in-house autonomous surveillance mobile robots using ROS2, SLAM, and computer vision technologies",
+        "Built Human Machine Interface for Universal Robot welding applications using Python and Kivy framework, implemented multi-robot control systems with platform independence"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Washington State University",
+      "area": "Computer Science",
+      "studyType": "Master of Science",
+      "startDate": "Jan 2015",
+      "endDate": "Jan 2017",
+      "location": "Pullman, WA"
+    },
+    {
+      "institution": "GITAM University",
+      "area": "Information Technology",
+      "studyType": "Bachelor of Technology",
+      "startDate": "Jan 2011",
+      "endDate": "Jan 2015",
+      "location": "Visakhapatnam, India"
+    }
+  ],
+  "projects": [
+    {
+      "name": "GridCOP: Smart Grid Analytics Agent",
+      "keywords": ["LangChain", "LangGraph", "MCP", "Multi-Agent Systems", "RAG", "FAISS", "AWS Lambda", "Python", "FastAPI", "Guardrails"],
+      "highlights": [
+        "Problem: Power grid analysts needed automated database querying and intelligent insights from unstructured data to understand complex patterns beyond basic visualizations, requiring multi-node decision making and context awareness for enterprise analytics",
+        "Solution: Developed A2A multi-agent system using LangChain/LangGraph orchestration and MCP where specialized agents communicate through state graphs and coordinate tasks via API calls, implemented RAG with semantic search using FAISS vector database for intelligent document retrieval, added guardrails and response verification to prevent hallucinations, deployed on AWS Lambda with API Gateway, observability and logging",
+        "Impact: Enhanced analyst productivity by 70% through AI co-pilot that augments domain experts with automated workflows and cited sources, implemented human-in-the-loop (HIL) evaluation pipelines with reflection and multi-agent workflows for production-ready AI systems with robust error handling through rapid iteration"
+      ]
+    },
+    {
+      "name": "Production System Optimization Tool",
+      "keywords": ["React", "Python", "Flask", "OpenAI API", "RAG", "Docker", "Semantic Search", "Production Deployment"],
+      "highlights": [
+        "Problem: Manual system analysis taking hours of expert time, creating bottlenecks in product development and customer support resolution",
+        "Solution: Built full-stack proof of concept with React frontend, Python Flask backend, integrated OpenAI API for real-time log processing, implemented RAG with semantic search for intelligent document retrieval, added guardrails and response verification to ensure accuracy, deployed with Docker containerization and model evaluation metrics",
+        "Impact: Transformed expert analysis from hours to minutes, deployed to production serving 200+ daily queries with significant performance improvements through rapid iteration and continuous optimization"
+      ]
+    },
+    {
+      "name": "AI Travel Planner Agent",
+      "keywords": ["Claude API", "LangChain", "Streamlit", "Python", "API Integration", "Multi-Agent"],
+      "highlights": [
+        "Problem: Manual travel planning requiring hours of research across multiple sources with inconsistent and outdated information",
+        "Solution: Built agentic AI system using Claude API, LangChain orchestration, and Streamlit frontend, implementing multi-agent workflow with data scraping and API integration (DuckDuckGo Search) for personalized itinerary generation using prompt engineering and context engineering techniques",
+        "Impact: Demonstrated end-to-end AI application development, learned conversational AI patterns and real-time data integration techniques through iterative development"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,263 @@
+================================================================================
+SYSTEM DESIGN MOCK INTERVIEW - PRACTICE SESSION 2
+================================================================================
+
+Problem: Case Document Expiration Tracking & Notification System
+
+You're designing a system for Casium that tracks document expirations across immigration cases and sends proactive notifications to attorneys and clients.
+
+Context:
+- Immigration documents have expiration dates (passports, visas, work permits, etc.)
+- Attorneys need to be notified BEFORE documents expire to renew them
+- Clients need reminders to submit updated documents
+- Different document types have different lead times (passport: 6 months notice, visa: 3 months, etc.)
+
+Scale:
+- 200 law firms
+- 800 attorneys
+- 100,000 active immigration cases
+- Each case has 5-15 documents
+- ~500,000 total documents being tracked
+- Notification requirements: Check daily, send emails/SMS
+- Peak renewal season: 20,000 documents expiring per month
+
+Requirements:
+1. Track document expiration dates for all cases
+2. Send notifications at configurable intervals (e.g., 90 days, 60 days, 30 days, 7 days before expiration)
+3. Support email and SMS notifications
+4. Attorneys can configure notification preferences per document type
+5. Track which notifications were sent and when
+6. Support "snooze" functionality (attorney acknowledges and postpones notification)
+7. Generate reports: "Documents expiring in next 30 days" per firm
+8. Must be multi-tenant (firm data isolation)
+
+Your task: Design this system end-to-end
+
+You have 60 minutes. Spend your time like this:
+- 5 min: Clarifying questions
+- 15 min: Database schema design
+- 15 min: API design
+- 15 min: Architecture (how do notifications actually get sent?)
+- 10 min: Scaling & error handling
+
+================================================================================
+START YOUR DESIGN BELOW
+================================================================================
+
+PHASE 1: CLARIFYING QUESTIONS (5 minutes)
+-------------------------------------------
+
+[Write your clarifying questions here - what would you ask the interviewer?]
+
+Requirements: 
+
+- monitor_data / process handler: 
+ - monitor the database, for document expiry 
+ - once documents about to expire are gathered, check when was the last noitification sent, and then resend 
+    - escalate to lawyer if no response   
+
+monitoring the db base - for document expiry
+
+- notification - handler: 
+    - send_notification: notify lawyers & users about upcoming expirations 
+        - need to notify via email,and SMS
+    - snooze_enable: option to snooze the notification  
+        - will call / trigger send_noitification once the timeout expires 
+    - notification_tracker : track which notifications were sent when, will be used to trigger noitifications 
+    - configure_settings: be able to configure notication settings 
+
+document handlerL: 
+- this will validate the documents incoming documents
+- update / reteritve documents from db 
+- interact with cache to make sure its up to date : optional 
+
+- need to have cache to handle for peak usage 
+- databases need to be replicaated to help with availablity - and handle peak surege 
+- database shredding can help with data islation between different firms 
+
+- database: we can use a mix of relational and no-sql database and some could 
+    - relational: to manitaing the integrity of data for fast retrieval 
+    - no sql: to keep track of distributed databses and cache 
+    - s3 buckets to store static data like documents 
+    - vector db (optional): for embedding documents for llm usage 
+
+- report generation
+
+- questions: 
+    - how many users will be interacting with this database / application at once? 
+    - where are most of the clients located at? espcially during the peak hours 
+    - how are handling and managing the state data? to keep it clean and avoid noise 
+
+
+
+>> Database schema 
+
+law_firms: 
+int ID 
+varchar firm_name 
+varchar associated_attorneys # list of associated attorney
+varchar email 
+varchar phone 
+
+attorneys: 
+int ID 
+varchar name 
+varchar email 
+varchar associated_law_firm 
+varchar list of supporting clients 
+
+clients: 
+int ID 
+varchar name
+varchar email 
+varchar application_case_id  
+varchar assigned_lawer 
+
+application_deadlines
+int ID 
+varchar case_type 
+varchar application_type
+int deadline
+
+application_status 
+int ID 
+varchar application.status 
+varchar case_id 
+int client.id 
+int last_notification_sent_ts notification_tacker.last_upadated_ts
+
+applications: 
+int ID 
+int client_id clients.id 
+int attorney_id attorneys.id
+int deadline 
+ 
+documents: 
+int ID 
+varchar updated_by
+int updated_on
+varchar document_type
+varchar document_location
+
+notification tracker 
+int ID
+varchar send_to 
+int last_upadated_ts
+int ack_status 
+bool escalated_to_attorney
+varchar case applications.id 
+varchar client client.id 
+varchar attorney attorney.id
+
+
+
+>> API design 
+
+/get/application_exiration/status 
+/get/application_expiration/notification
+/get/application/status
+/get/application/details  
+/get/{client_id}/info 
+/get/{attorney_id}/info
+/get/{law_firms_id}/info
+
+
+
+
+
+
+
+
+
+
+================================================================================
+
+PHASE 2: DATABASE SCHEMA (15 minutes)
+--------------------------------------
+
+[Design your database tables here - include columns, data types, indexes, foreign keys]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+================================================================================
+
+PHASE 3: API DESIGN (15 minutes)
+---------------------------------
+
+[Design your REST API endpoints - include method, path, request/response]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+================================================================================
+
+PHASE 4: ARCHITECTURE (15 minutes)
+-----------------------------------
+
+[Draw/describe your system architecture - how do notifications get sent?]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+================================================================================
+
+PHASE 5: SCALING & ERROR HANDLING (10 minutes)
+-----------------------------------------------
+
+[What breaks first at 10x scale? How do you handle failures?]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+================================================================================
+END OF YOUR DESIGN
+================================================================================

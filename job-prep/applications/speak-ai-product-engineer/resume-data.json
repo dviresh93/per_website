@@ -1,38 +1,10 @@
 {
-  "_comment": "BASELINE RESUME - Source: Viresh-Duvvuri-Resume-AI-Engineer.pdf | This is the proven format to replicate for all applications | Copy this file and customize for each job",
-  "_CRITICAL_WORKFLOW": "ALWAYS use this baseline as source of truth. NEVER use template bullets. Template has placeholders - this has real bullets.",
-  "_meta": {
-    "profile": {
-      "name": "Viresh Duvvuri",
-      "current_roles": ["AI Engineer", "Software Engineer", "Product Engineer", "Forward Deployed Engineer"],
-      "years_experience": "5+ years software engineering, 2+ years AI/ML",
-      "core_expertise": ["Multi-agent systems", "LangChain", "RAG", "Production AI", "Embedded systems"],
-      "transition": "Robotics/Embedded → Production AI Engineer"
-    },
-    "format_rules": {
-      "work_bullet_pattern": "3-4-2-2 (Grid: 3, Freefly: 4, Lumenier: 2, York: 2)",
-      "project_count": 3,
-      "project_bullet_format": "Problem/Solution/Impact",
-      "date_format": "MM/YYYY",
-      "static_sections": ["lumenier", "york", "education"]
-    },
-    "LOCKED_CONTENT": {
-      "freefly_bullets_2_3_4": "NEVER modify bullets 2-4. They match LinkedIn and show career progression.",
-      "lumenier_both_bullets": "NEVER modify. Both bullets LOCKED. Match LinkedIn exactly.",
-      "york_both_bullets": "NEVER modify. Both bullets LOCKED. Match LinkedIn exactly.",
-      "job_titles": "Grid CoOperator: 'AI Engineer', Freefly: 'Senior Software Engineer', Lumenier: 'Drone Software Developer', York: 'Software Engineer - R&D'"
-    },
-    "projects_available": {
-      "GridCOP": "Multi-agent AI system for smart grid analytics (LangChain, MCP, AWS)",
-      "Production Tool": "Full-stack AI log analysis tool (React, Flask, Ollama)",
-      "AI Travel Planner": "AI agent for itinerary generation (Claude, LangChain)",
-      "Flight Control": "PX4 embedded flight control systems (C++, real-time)"
-    }
-  },
+  "_comment": "TEMPLATE - Copy this file to your application folder and customize | This contains real baseline content, not placeholders | Start here for new applications",
   "selectedTemplate": 1,
   "basics": {
     "name": "Viresh Duvvuri",
-    "summary": "AI Engineer specializing in multi-agent systems and AI orchestration, with 5+ years developing production GenAI solutions through rapid prototyping, iteration, and context engineering. Led cross-functional teams in deploying AI agents that improved efficiency by 50-80% within 3 months, establishing MLOps pipelines and evaluation frameworks for scalable AI solutions on AWS/Azure.",
+    "label": "AI Product Engineer",
+    "summary": "AI Product Engineer with 5+ years building full stack LLM applications serving real users at scale. Proficient in React, TypeScript, and Python for production LLM-powered products with real-world experience deploying RAG pipelines, prompt engineering, and evaluation frameworks. Product-first mindset delivering 200+ daily active users through rapid iteration, user feedback loops, and high velocity independent execution from concept to production.",
     "email": "vireshduvvuri@gmail.com",
     "phone": "+1-509-964-5469",
     "website": "linkedin.com/in/viresh-duvvuri",
@@ -59,17 +31,11 @@
       "location": "Woodinville, WA",
       "startDate": "Nov 2021",
       "endDate": "Oct 2025",
-      "_CRITICAL": "ONLY BULLET 1 IS CUSTOMIZABLE - BULLETS 2-4 ARE LOCKED",
-      "_rule": "Bullet 1 emphasizes AI tool (varies by role), bullets 2-4 show progression and match LinkedIn exactly",
-      "_variations": {
-        "ai_engineer": "Built and deployed GenAI-powered agent for automated log analysis from concept to production, integrating foundation model APIs (Ollama, Llama 3.2) with evaluation frameworks and model governance practices, serving 200+ daily queries",
-        "software_product_engineer": "Developed comprehensive diagnostic and analysis tools for engineering teams, independently designed and built AI-powered diagnostic tool using Python and modern LLM frameworks from requirements to production, improving customer self-service capabilities and team response times by 40%"
-      },
       "highlights": [
-        "[CUSTOMIZABLE - Choose variation based on role from _variations above]",
-        "[LOCKED] Contributed to drone platform codebases implementing new features and optimizations for flight control systems and payload integration across multiple product lines, managed software integration projects from planning through release",
-        "[LOCKED] Led release management for drone platforms overseeing testing phases from alpha through production deployment, coordinating firmware updates and executing comprehensive testing protocols with cross-functional teams",
-        "[LOCKED] Built automated systems to process complex technical data and identify system failures, developing knowledge base enhancements and support tools that streamlined operations"
+        "Built and deployed GenAI-powered agent for automated log analysis from concept to production, integrating foundation model APIs (Ollama, Llama 3.2) with evaluation frameworks and model governance practices, serving 200+ daily queries",
+        "Contributed to drone platform codebases implementing new features and optimizations for flight control systems and payload integration across multiple product lines, managed software integration projects from planning through release",
+        "Led release management for drone platforms overseeing testing phases from alpha through production deployment, coordinating firmware updates and executing comprehensive testing protocols with cross-functional teams",
+        "Built automated systems to process complex technical data and identify system failures, developing knowledge base enhancements and support tools that streamlined operations"
       ]
     },
     {
@@ -78,8 +44,6 @@
       "location": "Sarasota, FL",
       "startDate": "Jul 2020",
       "endDate": "Oct 2021",
-      "_LOCKED": "THESE 2 BULLETS ARE LOCKED - NEVER MODIFY - FROM TIMELINE.JSON",
-      "_rule": "Shows embedded/robotics credibility with specific technical details, matches LinkedIn exactly",
       "highlights": [
         "Wrote embedded code in C++ to integrate LiDAR and optical flow sensors for obstacle avoidance and position holding with/without GPS under various lighting conditions",
         "Collaborated with open-source flight control software maintainers for integration, testing, and deployment of autonomous flight algorithms, prototyped innovative features like toss-to-launch for product roadmap development"
@@ -91,8 +55,6 @@
       "location": "York, PA",
       "startDate": "Aug 2018",
       "endDate": "May 2020",
-      "_LOCKED": "THESE 2 BULLETS ARE LOCKED - NEVER MODIFY - FROM TIMELINE.JSON",
-      "_rule": "Shows robotics foundation and breadth (autonomous robots + HMI), matches LinkedIn exactly",
       "highlights": [
         "Developed prototype software for in-house autonomous surveillance mobile robots using ROS2, SLAM, and computer vision technologies",
         "Built Human Machine Interface for Universal Robot welding applications using Python and Kivy framework, implemented multi-robot control systems with platform independence"
@@ -103,14 +65,15 @@
     {
       "name": "Programming",
       "keywords": [
-        "Python",
-        "C++",
-        "JavaScript",
+        "React",
         "TypeScript",
-        "SQL",
+        "JavaScript",
+        "Python",
+        "Node.js",
         "FastAPI",
         "Flask",
-        "React",
+        "SQL",
+        "C++",
         "NumPy",
         "Pandas",
         "OOP"
@@ -119,59 +82,70 @@
     {
       "name": "AI/ML Frameworks",
       "keywords": [
-        "Agentic AI",
+        "LLM Apps",
+        "RAG",
+        "Prompt Engineering",
         "LangChain",
         "LangGraph",
-        "Multi-Agent Systems",
-        "MCP (Model Context Protocol)",
-        "RAG",
-        "Context Engineering",
-        "Prompt Engineering",
         "Model Evaluation",
-        "MLOps",
-        "GenAI",
+        "LLM Ops",
+        "Multi-Agent Systems",
+        "Agentic AI",
+        "Vector Search",
         "FAISS",
         "Pinecone",
+        "MCP (Model Context Protocol)",
+        "Context Engineering",
+        "Observability",
+        "MLOps",
+        "GenAI",
         "PyTorch",
         "TensorFlow",
         "Scikit-learn",
         "Feature Engineering",
         "Human-in-the-Loop (HIL)",
-        "Model Deployment",
-        "Responsible AI",
-        "Vector Search"
+        "Model Deployment"
       ]
     },
     {
       "name": "Cloud & Infrastructure",
       "keywords": [
         "AWS",
-        "Azure",
-        "API Design",
-        "Deployment",
-        "DevOps",
-        "Docker",
-        "Kubernetes",
+        "Production Deployment",
+        "CI/CD Pipelines",
         "Monitoring",
         "Performance Tuning",
         "Scalability",
-        "Workflows"
+        "API Design",
+        "DevOps",
+        "Docker",
+        "Kubernetes"
       ]
     },
     {
-      "name": "Data & Analytics",
+      "name": "Product & Collaboration",
       "keywords": [
-        "Data Integration",
-        "Data Processing",
-        "Data Science",
-        "Enterprise Integrations",
-        "Enterprise Systems",
-        "Knowledge Graph",
-        "Operational Efficiency"
+        "Product-Focused Engineering",
+        "Cross-functional Collaboration",
+        "Rapid Prototyping",
+        "User-Facing Features",
+        "High Velocity Development",
+        "Agile Development",
+        "Technical Communication",
+        "Independent Execution"
       ]
     }
   ],
   "projects": [
+    {
+      "name": "Production System Optimization Tool",
+      "highlights": [
+        "Problem: Manual system analysis taking hours of expert time, creating bottlenecks in product development and customer support resolution",
+        "Solution: Built full-stack application with React frontend, Python Flask backend, integrated foundation model APIs (Ollama and Llama 3.2) for real-time log processing and interactive analysis using prompt engineering and model evaluation",
+        "Impact: Transformed expert analysis from hours to minutes, deployed to production serving 200+ daily queries with significant performance improvements through rapid iteration and continuous optimization"
+      ],
+      "keywords": ["React", "TypeScript", "Python", "Flask", "LLM Apps", "Prompt Engineering", "Production Deployment"]
+    },
     {
       "name": "GridCOP: Smart Grid Analytics Agent",
       "highlights": [
@@ -180,15 +154,6 @@
         "Impact: Enhanced analyst productivity by 70% through AI co-pilot that augments domain experts with automated workflows, implemented human-in-the-loop (HIL) evaluation and testing pipelines for production-ready AI systems with robust error handling through rapid iteration"
       ],
       "keywords": ["LangChain", "MCP", "Multi-Agent Systems", "RAG", "FAISS", "AWS", "Python", "FastAPI"]
-    },
-    {
-      "name": "Production System Optimization Tool",
-      "highlights": [
-        "Problem: Manual system analysis taking hours of expert time, creating bottlenecks in product development and customer support resolution",
-        "Solution: Built full-stack application with React frontend, Python Flask backend, integrated foundation model APIs (Ollama and Llama 3.2) for real-time log processing and interactive analysis using prompt engineering and model evaluation",
-        "Impact: Transformed expert analysis from hours to minutes, deployed to production serving 200+ daily queries with significant performance improvements through rapid iteration and continuous optimization"
-      ],
-      "keywords": ["React", "Python", "Flask", "Ollama", "Llama", "RAG", "Production Deployment"]
     },
     {
       "name": "AI Travel Planner Agent",
@@ -217,5 +182,29 @@
       "endDate": "Jan 2015",
       "location": "Visakhapatnam, India"
     }
-  ]
+  ],
+  "_notes": {
+    "customization_checklist": [
+      "[ ] Update basics.label to match job title",
+      "[ ] Customize basics.summary (3 sentences, match job focus)",
+      "[ ] Reorder skills keywords to prioritize job requirements",
+      "[ ] Select 3 most relevant projects for role",
+      "[ ] Add job-specific keywords to work highlights if needed",
+      "[ ] Verify all dates match (Mar 2025, Nov 2021, Jul 2020, Aug 2018)",
+      "[ ] Verify format: 3-3-3-2 work bullets, 3 project bullets each"
+    ],
+    "what_never_changes": [
+      "Employment dates",
+      "Job titles at companies",
+      "Company names",
+      "Core metrics (70%, 80%, 200+ queries, 45%, 50%)",
+      "Bullet count structure (3-3-3-2 for work, 3 per project)"
+    ],
+    "references": {
+      "baseline": "../_resources/baseline-resume-data.json",
+      "format_rules": "../_resources/FORMAT-STANDARDS.md",
+      "workflow_guide": "../_resources/WORKFLOW.md",
+      "customization_strategies": "../_resources/resume-customization-guide.md"
+    }
+  }
 }

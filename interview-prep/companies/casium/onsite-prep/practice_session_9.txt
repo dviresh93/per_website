@@ -1,0 +1,150 @@
+================================================================================
+PRACTICE SESSION 9: CASE FILING FEE PRORATION
+================================================================================
+
+Date: October 12, 2025
+Problem: Calculate Pro-Rated Government Filing Fees (Medium-Hard, 50 min)
+Interview Simulation - Realistic Format
+Pattern: Pro-rating + Date Logic + Cost Calculation
+
+================================================================================
+PROBLEM STATEMENT
+================================================================================
+
+You're building a billing system for immigration government filing fees. Law
+firms pay USCIS filing fees when cases are filed, and may receive partial
+refunds if cases are withdrawn before completion. You need to calculate the
+net fees for a given billing month by pro-rating refunds based on how long
+cases were in processing.
+
+BUSINESS CONTEXT:
+
+USCIS filing fees vary by visa type:
+- H-1B: $460 base fee + $500 fraud prevention fee = $960 total
+- O-1: $460 base fee = $460 total
+- EB-2: $700 base fee = $700 total
+
+Refund policy:
+- If withdrawn within first 30 days: 50% refund
+- If withdrawn after 30 days: No refund
+- If approved/denied: No refund (full fee charged)
+
+Your job is to calculate net fees for a specific month, accounting for filings
+and withdrawals.
+
+================================================================================
+BUSINESS RULES
+================================================================================
+
+1. When a case is filed, charge the full filing fee
+2. When a case is withdrawn within 30 days, refund 50% of the filing fee
+3. When a case is withdrawn after 30 days, no refund
+4. When a case is approved/denied, no refund (normal processing)
+5. Only count filings and withdrawals that occurred during the billing month
+6. Net fees = Total filing fees - Total refunds for the month
+
+================================================================================
+INPUT FORMAT
+================================================================================
+
+cases = [
+    {
+        'case_id': 1,
+        'client_name': 'Alice Smith',
+        'visa_type': 'H-1B',
+        'filing_fee': 960.00,
+        'filed_on': '2024-01-05',
+        'status': 'pending',
+        'withdrawn_on': None
+    },
+    {
+        'case_id': 2,
+        'client_name': 'Bob Johnson',
+        'visa_type': 'O-1',
+        'filing_fee': 460.00,
+        'filed_on': '2024-01-10',
+        'status': 'withdrawn',
+        'withdrawn_on': '2024-01-20'  # Within 30 days → 50% refund
+    },
+    {
+        'case_id': 3,
+        'client_name': 'Carol Martinez',
+        'visa_type': 'EB-2',
+        'filing_fee': 700.00,
+        'filed_on': '2023-12-01',
+        'status': 'withdrawn',
+        'withdrawn_on': '2024-01-15'  # After 30 days → no refund
+    },
+    {
+        'case_id': 4,
+        'client_name': 'David Lee',
+        'visa_type': 'H-1B',
+        'filing_fee': 960.00,
+        'filed_on': '2023-11-01',
+        'status': 'approved',
+        'withdrawn_on': None  # Approved → no refund
+    }
+]
+
+billing_month = '2024-01'  # Calculate net fees for January 2024
+
+================================================================================
+YOUR TASK
+================================================================================
+
+Implement: calculate_filing_fees(cases, billing_month)
+
+This function should return a dictionary with:
+- 'month': The billing month string
+- 'total_filed': Total fees for cases filed this month
+- 'total_refunded': Total refunds for cases withdrawn this month
+- 'net_fees': total_filed - total_refunded
+- 'filing_details': List of filings this month
+- 'refund_details': List of refunds this month
+
+================================================================================
+EXPECTED OUTPUT
+================================================================================
+
+{
+    'month': '2024-01',
+    'total_filed': 1420.00,  # Case 1: $960 + Case 2: $460
+    'total_refunded': 230.00,  # Case 2: $460 * 50%
+    'net_fees': 1190.00,
+    'filing_details': [
+        {
+            'case_id': 1,
+            'client_name': 'Alice Smith',
+            'visa_type': 'H-1B',
+            'filed_on': '2024-01-05',
+            'filing_fee': 960.00
+        },
+        {
+            'case_id': 2,
+            'client_name': 'Bob Johnson',
+            'visa_type': 'O-1',
+            'filed_on': '2024-01-10',
+            'filing_fee': 460.00
+        }
+    ],
+    'refund_details': [
+        {
+            'case_id': 2,
+            'client_name': 'Bob Johnson',
+            'visa_type': 'O-1',
+            'withdrawn_on': '2024-01-20',
+            'days_until_withdrawal': 10,  # Jan 10 to Jan 20
+            'refund_amount': 230.00,  # 50% of $460
+            'refund_reason': 'withdrawn_within_30_days'
+        }
+    ]
+}
+
+
+================================================================================
+START CODING
+================================================================================
+
+[Work below]
+
+

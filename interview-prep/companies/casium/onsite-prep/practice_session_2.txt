@@ -1,0 +1,622 @@
+================================================================================
+PRACTICE SESSION 2: CASE DEADLINE TRACKER
+================================================================================
+
+Date: October 9, 2025
+Problem: Case Deadline Tracker (Medium, 30-40 min)
+Reference: interview-prep/companies/casium/onsite-prep/practice_problems.md
+
+Coach: Claude
+Student: Viresh
+
+FORMAT: Faster pace - 3 phases instead of 7 steps
+
+================================================================================
+PROBLEM STATEMENT
+================================================================================
+
+Build a deadline tracking system for immigration cases. Different visa types
+have different processing times and deadlines.
+
+PROCESSING TIMES (from filing date):
+- O-1: 90 days standard, 15 days premium
+- H-1B: 180 days standard, 15 days premium
+- EB-1A: 365 days standard, 45 days premium
+- TN: 30 days (no premium available)
+
+ALERT THRESHOLDS:
+- Critical: < 7 days until deadline
+- Warning: < 30 days until deadline
+- Normal: > 30 days until deadline
+
+INPUT FORMAT:
+
+cases = [
+    {
+        "case_id": "CASE001",
+        "client_name": "John Doe",
+        "visa_type": "O-1",
+        "filing_date": "2025-09-01",
+        "premium_processing": True,
+        "status": "pending"
+    },
+    {
+        "case_id": "CASE002",
+        "client_name": "Jane Smith",
+        "visa_type": "H-1B",
+        "filing_date": "2025-08-15",
+        "premium_processing": False,
+        "status": "approved"  # Should not include in alerts
+    },
+    {
+        "case_id": "CASE003",
+        "client_name": "Bob Johnson",
+        "visa_type": "TN",
+        "filing_date": "2025-10-05",
+        "premium_processing": False,
+        "status": "pending"
+    }
+]
+
+today = "2025-10-07"
+
+TASKS:
+
+Implement THREE functions:
+
+1. calculate_deadline(case, today)
+   - Calculate expected decision deadline
+   - Consider premium processing
+   - Return deadline date and days remaining
+
+2. get_upcoming_deadlines(cases, today, days_ahead=30)
+   - Return cases with deadlines within specified days
+   - Only include "pending" cases
+   - Sort by deadline (nearest first)
+
+3. categorize_by_urgency(cases, today)
+   - Group cases by urgency level (critical/warning/normal)
+   - Only include "pending" cases
+   - Return dictionary with counts and case lists
+
+EXPECTED OUTPUT EXAMPLES:
+
+# calculate_deadline(cases[0], "2025-10-07")
+{
+    "case_id": "CASE001",
+    "deadline": "2025-09-16",  # 15 days from Sept 1 (premium)
+    "days_remaining": -21,  # Overdue!
+    "status": "overdue"
+}
+
+# get_upcoming_deadlines(cases, "2025-10-07", days_ahead=30)
+[
+    {
+        "case_id": "CASE003",
+        "client_name": "Bob Johnson",
+        "deadline": "2025-11-04",  # 30 days from Oct 5
+        "days_remaining": 28,
+        "urgency": "warning"
+    }
+]
+
+# categorize_by_urgency(cases, "2025-10-07")
+{
+    "critical": {
+        "count": 1,
+        "cases": ["CASE001"]  # Overdue counts as critical
+    },
+    "warning": {
+        "count": 1,
+        "cases": ["CASE003"]
+    },
+    "normal": {
+        "count": 0,
+        "cases": []
+    }
+}
+
+================================================================================
+PHASE 1: UNDERSTAND & PLAN (5-10 min)
+================================================================================
+
+YOUR NOTES:
+- Write what you understand about the problem
+- Ask any clarifying questions
+- Briefly explain your approach
+
+[Student writes here]
+- We will be  given a bunch of cases as inputs
+- we will be implementing a system / class  that will serve 3 funcationalities : 
+
+1. calculate_deadline(case, today)
+   - Calculate expected decision deadline
+   - Consider premium processing
+   - Return deadline date and days remaining
+
+2. get_upcoming_deadlines(cases, today, days_ahead=30)
+   - Return cases with deadlines within specified days
+   - Only include "pending" cases
+   - Sort by deadline (nearest first)
+
+3. categorize_by_urgency(cases, today)
+   - Group cases by urgency level (critical/warning/normal)
+   - Only include "pending" cases
+   - Return dictionary with counts and case lists
+
+
+calls will be mode to the pecific funcationalities
+
+edge cases to handle: 
+- for calculate_deadline(case, today), its already past the deadline
+- any of the cases have invalid or incomplete details 
+- do we need to have any function running in a seperate thread, to check and alert about deadline 
+- can a single applicant have several cases? do we need to handle such cases? 
+- is is possible for date to be invalid? what level of checks you want to me to make on it 
+
+
+
+================================================================================
+COACH FEEDBACK ON PLAN
+================================================================================
+
+Good understanding! ✅ Let me answer your questions:
+
+Q: "we will be implementing a system / class that will serve 3 functionalities"
+
+A: Just **3 separate functions** - no need for a class/system. Each function
+   stands alone. Keep it simple!
+
+Q: "for calculate_deadline(case, today), its already past the deadline"
+
+A: YES, handle overdue cases. Return negative days_remaining and
+   status="overdue" (shown in example output line 73-74)
+
+Q: "any of the cases have invalid or incomplete details"
+
+A: Assume input is valid for now. If you have time at the end, add validation.
+   Focus on core logic first.
+
+Q: "do we need to have any function running in a seperate thread, to check
+    and alert about deadline"
+
+A: NO - out of scope. Just implement the 3 functions. No background processes,
+   no alerting system. This is just calculation/filtering logic.
+
+Q: "can a single applicant have several cases? do we need to handle such cases?"
+
+A: Yes, one person can have multiple cases (different visa types). But you
+   don't need special handling - just process each case independently.
+
+Q: "is it possible for date to be invalid? what level of checks you want to
+    me to make on it"
+
+A: Assume dates are valid strings in "YYYY-MM-DD" format. You can add basic
+   error handling if you want, but not required.
+
+---
+
+**MISSING FROM YOUR PLAN:**
+
+You didn't mention your APPROACH! Before coding, tell me:
+- How will you calculate deadline? (filing_date + processing_days)
+- How will you handle date arithmetic? (datetime module?)
+- How will you determine urgency? (check days_remaining thresholds)
+
+Add 2-3 sentences about your approach, then START CODING! ⏱️
+
+You're doing great - good questions! Now explain approach briefly and code! 🚀
+
+
+================================================================================
+PHASE 2: formulating approach
+================================================================================
+
+
+we will have cases like: 
+
+cases = [
+    {
+        "case_id": "CASE001",
+        "client_name": "John Doe",
+        "visa_type": "O-1",
+        "filing_date": "2025-09-01",
+        "premium_processing": True,
+        "status": "pending"
+    },
+    {
+        "case_id": "CASE002",
+        "client_name": "Jane Smith",
+        "visa_type": "H-1B",
+        "filing_date": "2025-08-15",
+        "premium_processing": False,
+        "status": "approved"  # Should not include in alerts
+    },
+    {
+        "case_id": "CASE003",
+        "client_name": "Bob Johnson",
+        "visa_type": "TN",
+        "filing_date": "2025-10-05",
+        "premium_processing": False,
+        "status": "pending"
+    }
+]
+
+user will call diffenet functions like: 
+
+calculate_deadline(cases[0], "2025-10-07")
+# check for any invalid / empty fields in the dict 
+# days_remaining = deadline - today 
+
+if days_remaining < 0: 
+    status = "overdue"
+elif days_remaining < 10: 
+    status = "approaching deadline soon"
+else: 
+    status = "no rush" 
+
+how do u like my status? I do u like the naming? I can make this more modular if you like
+
+# populate the dict and return in the format like below: 
+{
+    "case_id": case["case_id"], 
+    "deadline": case["deadline"],  # 15 days from Sept 1 (premium)
+    "days_remaining": days_remaining,  # Overdue!
+    "status": status
+}
+
+# get_upcoming_deadlines(cases, "2025-10-07", days_ahead=30)
+# this will take all the cases as input
+# we need to return all the cases with dedline upto 30 days from today 
+
+upcoming deadlines = []
+
+for case in cases: 
+    if case[deadline] < today + 30 days: 
+        case[days_remaining] = deadline - today
+        case[status] = "warning"
+        upcoming deadlines.append(case)
+# return the list of upcoming cases 
+
+# for the function: categorize_by_urgency(cases, "2025-10-07")
+# it  will take all the cases as input
+# calcuate the difference between todays date and the application deadline 
+# we need to define thresholds for critica, warning and normal urgeency levels -- do u have anything in mind for this?
+# we will maitain list for each and bases on the days remaing & thresholds, we will add them to relevant urgency levels 
+
+# once done return the list like below, where we add cases to the relevant place holders and also populate their relevant 
+count and return similar to below 
+
+{
+    "critical": {
+        "count": 1,
+        "cases": ["CASE001"]  # Overdue counts as critical
+    },
+    "warning": {
+        "count": 1,
+        "cases": ["CASE003"]
+    },
+    "normal": {
+        "count": 0,
+        "cases": []
+    }
+}
+
+
+================================================================================
+PHASE 2: CODE (25-30 min)
+================================================================================
+
+YOUR CODE:
+- Write your implementation
+- Add comments as you go
+- Ask for hints if stuck
+
+[Student writes here]
+import datetime, timedelta
+
+def calculate_deadline(case, today): 
+    processing_time = {
+        "O-1" : [90, 15], 
+        "H1-B": [180, 15], 
+        "EB-1A" : [365, 45],
+        "TN" : [30, 0]
+    }
+
+    status_threshold = {
+
+        "critical" : 10, 
+        "warning" : 20,
+        "normal" : 30 # not needed 
+    }
+
+
+    filing_date = datetime.strptime(case["filing_date"], "%Y-%M-%D")
+    
+    if case["visa_type"] == "TN" and case["premium_processing"]:
+        return False # we can return early in this case
+
+    if case["premium_processing"]: 
+        visa_processing_time = timedelta(days = processing_time[case["visa_type"][1]])
+    else: 
+        visa_processing_time = timedelta(days = processing_time[case["visa_type"][0]])
+    
+    
+    deadline = visa_processing_time + filing_date
+
+    status = None
+    days_remaining = (deadline - today).days
+    if days_remaining < 0: 
+        status = "overdue"
+    elif days_remaining <= status_threshold["critical"]: 
+        status = "critical"
+    elif days_remaining > status_threshold["critical"] and days_remaining <= status_threshold["warning"]:
+        status = "warning"
+    elif days_remaining > status_threshold["warning"]: 
+        status = "normal"
+
+    # populate dict
+
+    output_dict = {
+    "case_id": case["case_id"], 
+    "deadline": deadline,  # 15 days from Sept 1 (premium)
+    "days_remaining": days_remaining,  # Overdue!
+    "status": status
+    }
+
+    return output_dict
+
+def get_upcoming_deadlines(cases, today, days_ahead=30)
+   - Return cases with deadlines within specified days
+   - Only include "pending" cases
+   - Sort by deadline (nearest first)
+
+def categorize_by_urgency(cases, today)
+   - Group cases by urgency level (critical/warning/normal)
+   - Only include "pending" cases
+   - Return dictionary with counts and case lists
+
+
+================================================================================
+PHASE 3: TEST & REVIEW (5 min)
+================================================================================
+
+YOUR TEST WALKTHROUGH:
+- Walk through one example for each function
+- Show the calculation with actual values
+
+[Student writes here]
+
+
+================================================================================
+COACH FEEDBACK
+================================================================================
+
+[Coach will review: bugs, edge cases, code quality, communication]
+
+
+================================================================================
+SESSION NOTES
+================================================================================
+
+[Final notes will go here]
+
+================================================================================
+COACH FEEDBACK ON PLAN
+================================================================================
+
+Good understanding! ✅ Let me answer your questions:
+
+Q: "we will be implementing a system / class that will serve 3 functionalities"
+
+A: Just **3 separate functions** - no need for a class/system. Each function 
+   stands alone. Keep it simple!
+
+Q: "for calculate_deadline(case, today), its already past the deadline"
+
+A: YES, handle overdue cases. Return negative days_remaining and 
+   status="overdue" (shown in example output line 73-74)
+
+Q: "any of the cases have invalid or incomplete details"
+
+A: Assume input is valid for now. If you have time at the end, add validation.
+   Focus on core logic first.
+
+Q: "do we need to have any function running in a seperate thread, to check 
+    and alert about deadline"
+
+A: NO - out of scope. Just implement the 3 functions. No background processes,
+   no alerting system. This is just calculation/filtering logic.
+
+Q: "can a single applicant have several cases? do we need to handle such cases?"
+
+A: Yes, one person can have multiple cases (different visa types). But you 
+   don't need special handling - just process each case independently.
+
+Q: "is it possible for date to be invalid? what level of checks you want to 
+    me to make on it"
+
+A: Assume dates are valid strings in "YYYY-MM-DD" format. You can add basic
+   error handling if you want, but not required.
+
+---
+
+**MISSING FROM YOUR PLAN:**
+
+You didn't mention your APPROACH! Before coding, tell me:
+- How will you calculate deadline? (filing_date + processing_days)
+- How will you handle date arithmetic? (datetime module?)
+- How will you determine urgency? (check days_remaining thresholds)
+
+Add 2-3 sentences about your approach, then START CODING! ⏱️
+
+You're doing great - good questions! Now explain approach briefly and code! 🚀
+
+
+================================================================================
+COACH FEEDBACK ON APPROACH
+================================================================================
+
+Good thinking! ✅ Your approach is mostly solid, but a few issues to fix:
+
+---
+
+**For calculate_deadline():**
+
+❌ Line 253: Your status values don't match the expected output!
+   - You wrote: "approaching deadline soon", "no rush"
+   - Expected: "overdue" (correct!) or nothing (just return days_remaining)
+   
+   The example output (line 73-74) only shows status="overdue" for overdue cases.
+   For non-overdue cases, don't add a status field at all.
+
+✅ Line 247-249: Good - check fields, calculate days_remaining
+✅ Line 261-266: Output structure is correct
+
+**FIX:** Remove the "approaching deadline soon" and "no rush" statuses.
+        Only set status="overdue" if days_remaining < 0.
+
+---
+
+**For get_upcoming_deadlines():**
+
+❌ Line 275: `case[deadline] < today + 30 days` - deadline hasn't been calculated yet!
+   - You need to CALL calculate_deadline() first for each case
+   - Or calculate the deadline inline
+
+❌ Line 277: Don't set status to "warning" here - that's for categorize_by_urgency()
+   - This function should set urgency based on days_remaining thresholds:
+     - < 7 days: "critical"
+     - < 30 days: "warning"
+     - else: "normal"
+
+✅ Line 272-278: Good idea to loop through cases and build a list
+
+**FIX:** Calculate deadline first, then determine urgency from days_remaining.
+
+---
+
+**For categorize_by_urgency():**
+
+Q: "do u have anything in mind for this?" (line 284)
+
+A: YES! The thresholds are in the problem statement (line 14-17):
+   - Critical: < 7 days until deadline
+   - Warning: < 30 days until deadline  
+   - Normal: > 30 days until deadline
+
+✅ Line 285: Good - maintain lists for each urgency level
+✅ Line 290-303: Output structure is correct
+
+---
+
+**MISSING FROM YOUR APPROACH:**
+
+1. ❌ You didn't mention HOW you'll calculate the deadline!
+   - filing_date + processing_days (where does processing_days come from?)
+   - Need to look up processing time based on visa_type + premium_processing
+   - Use datetime module for date arithmetic
+
+2. ❌ You didn't mention filtering by status="pending"
+   - Functions 2 & 3 should ONLY include pending cases
+   - Need to check: `if case["status"] == "pending"`
+
+---
+
+**ACTION:**
+
+Your approach is good but missing key details. Now START CODING and figure out:
+1. How to calculate deadline (visa type → processing days → add to filing_date)
+2. How to use datetime module for date math
+3. How to filter pending cases
+
+Don't overthink - just start writing code! I'll help if you get stuck. ⏱️🚀
+
+
+================================================================================
+COACH FEEDBACK ON FUNCTION 1
+================================================================================
+
+Good effort! ✅ You have the right idea, but **7 BUGS** to fix:
+
+---
+
+**BUG 1: Line 316 - Import syntax error**
+❌ `import datetime, timedelta`
+✅ `from datetime import datetime, timedelta`
+
+---
+
+**BUG 2: Line 321 - Wrong visa name**
+❌ `"H1-B": [180, 15]`
+✅ `"H-1B": [180, 15]` (hyphen, not digit 1)
+
+---
+
+**BUG 3: Line 328-330 - Wrong thresholds!**
+❌ critical: 10, warning: 20, normal: 30
+✅ critical: 7, warning: 30 (from problem statement line 14-17!)
+
+The problem explicitly says:
+- Critical: < 7 days
+- Warning: < 30 days
+- Normal: > 30 days
+
+---
+
+**BUG 4: Line 334 - Wrong datetime format string**
+❌ `"%Y-%M-%D"` (M = month number 00-12, D = day of year)
+✅ `"%Y-%m-%d"` (lowercase m and d!)
+
+---
+
+**BUG 5: Line 337 - Don't return False, return error dict**
+❌ `return False`
+✅ Return proper error structure (or just skip - problem says assume valid input)
+
+---
+
+**BUG 6: Line 348 - `today` is a string, not datetime!**
+❌ `days_remaining = (deadline - today).days`
+
+You need to parse `today` to datetime first:
+✅ `today_date = datetime.strptime(today, "%Y-%m-%d")`
+✅ `days_remaining = (deadline - today_date).days`
+
+---
+
+**BUG 7: Line 347-356 - Status logic doesn't match expected output!**
+
+Look at the expected output (line 68-74):
+- It only has `"status": "overdue"` for overdue cases
+- For non-overdue cases, there's NO status field at all!
+
+You're adding "critical", "warning", "normal" - but those are for 
+categorize_by_urgency(), NOT for calculate_deadline()!
+
+**FIX:** Only set status if overdue:
+```python
+if days_remaining < 0:
+    output_dict["status"] = "overdue"
+# Don't add status field otherwise
+```
+
+---
+
+**BUG 8: Line 362 - deadline should be string, not datetime object**
+❌ `"deadline": deadline` (datetime object)
+✅ `"deadline": deadline.strftime("%Y-%m-%d")` (convert to string)
+
+---
+
+**POSITIVE THINGS:**
+
+✅ Good structure with processing_time dict
+✅ Correct logic for premium vs standard
+✅ Correct deadline calculation (filing_date + processing_days)
+✅ Good use of timedelta
+
+---
+
+**ACTION:** Fix these 8 bugs, then move to function 2! You're on the right track! 🚀
+

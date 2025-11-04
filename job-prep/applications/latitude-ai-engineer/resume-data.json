@@ -1,0 +1,172 @@
+{
+  "_comment": "Customized for Latitude.sh AI Engineer - Applied AI Team (First AI Engineer Role) | Emphasis: Agentic workflows, end-to-end ownership, internal tooling, measurable impact, move fast",
+  "selectedTemplate": 1,
+  "basics": {
+    "name": "Viresh Duvvuri",
+    "summary": "AI Engineer specializing in end-to-end agentic workflows and intelligent automation, with 5+ years building production AI systems that deliver measurable operational impact. Built multi-agent orchestration systems using LangChain, LangGraph, and custom pipelines, shipped internal AI tools serving 200+ daily users, and established evaluation frameworks tracking quality and performance metrics. Expert at identifying high-impact AI opportunities, rapid prototyping, and enabling teams through documentation and workshops.",
+    "email": "vireshduvvuri@gmail.com",
+    "phone": "+1-509-964-5469",
+    "website": "linkedin.com/in/viresh-duvvuri",
+    "location": {
+      "address": "Seattle, WA"
+    }
+  },
+  "work": [
+    {
+      "company": "Grid CoOperator",
+      "position": "AI Engineer",
+      "location": "Seattle, WA",
+      "startDate": "Mar 2025",
+      "endDate": "Present",
+      "highlights": [
+        "Identified high-impact AI opportunity in smart grid analytics and shipped end-to-end multi-agent system using LangChain, LangGraph, and MCP that reduced analyst research time by 70% within 2 months, delivering measurable ROI through automated workflows and intelligent query generation",
+        "Built custom agentic pipeline where specialized agents coordinate complex analytics tasks through orchestration and prompt engineering, deployed on AWS with monitoring, cost tracking, and evaluation metrics measuring quality, latency, and user satisfaction across 50-100 daily queries",
+        "Led internal enablement by documenting AI patterns, running workshops with business stakeholders, and establishing best practices for prompt engineering and model evaluation, making AI accessible to non-technical domain experts"
+      ]
+    },
+    {
+      "company": "Freefly Systems",
+      "position": "Senior Software Engineer",
+      "location": "Woodinville, WA",
+      "startDate": "Nov 2021",
+      "endDate": "Oct 2025",
+      "highlights": [
+        "Built and shipped internal AI diagnostic tool using React, Python Flask, and LLM APIs (Ollama, Llama 3.2) that improved engineer productivity by 80%, serving 200+ daily queries with measurable impact on support resolution time and customer satisfaction",
+        "Owned end-to-end implementation from identifying use case to production deployment, including evaluation framework, monitoring dashboards, and continuous iteration based on user feedback and performance metrics",
+        "Enabled engineering teams to adopt AI tools through documentation, demos, and training sessions, establishing patterns for responsible AI use in production environments"
+      ]
+    },
+    {
+      "company": "Lumenier",
+      "position": "Software Engineer - Embedded Systems",
+      "location": "Sarasota, FL",
+      "startDate": "Jul 2020",
+      "endDate": "Oct 2021",
+      "highlights": [
+        "Built autonomous flight features using C++, data structures, and algorithms for real-time embedded systems, improving operational efficiency by 45% through performance optimization and intelligent automation",
+        "Collaborated with product team to identify high-impact features, prototyped solutions, and shipped improvements within 8-week cycles using rapid experimentation and iterative development"
+      ]
+    },
+    {
+      "company": "York Exponential",
+      "position": "Software Engineer - R&D",
+      "location": "York, PA",
+      "startDate": "Aug 2018",
+      "endDate": "May 2020",
+      "highlights": [
+        "Created internal tools for robot operators using Python, Kivy, and ROS2, reducing programming complexity by 50% and enabling non-experts to configure autonomous workflows",
+        "Applied computer vision and machine learning to autonomous robot prototypes, demonstrating end-to-end ownership from requirements gathering to working deployment"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "name": "AI & Agent Frameworks",
+      "keywords": [
+        "LangChain",
+        "LangGraph",
+        "Multi-Agent Systems",
+        "Agentic AI",
+        "OpenAI API",
+        "Anthropic Claude",
+        "Ollama",
+        "Custom Pipelines",
+        "Prompt Engineering",
+        "Context Engineering",
+        "Model Evaluation",
+        "RAG",
+        "MCP (Model Context Protocol)",
+        "Agent Orchestration"
+      ]
+    },
+    {
+      "name": "Software Engineering",
+      "keywords": [
+        "Python",
+        "JavaScript",
+        "TypeScript",
+        "FastAPI",
+        "Flask",
+        "React",
+        "REST APIs",
+        "WebSocket",
+        "SQL",
+        "Git",
+        "CI/CD",
+        "Testing"
+      ]
+    },
+    {
+      "name": "Cloud & Infrastructure",
+      "keywords": [
+        "AWS (EC2, S3, CloudWatch)",
+        "Docker",
+        "Kubernetes",
+        "Monitoring & Observability",
+        "Performance Optimization",
+        "Cost Tracking",
+        "Production Deployment"
+      ]
+    },
+    {
+      "name": "AI Operations",
+      "keywords": [
+        "MLOps",
+        "Evaluation Frameworks",
+        "Human-in-the-Loop",
+        "A/B Testing",
+        "Metrics Tracking",
+        "Responsible AI",
+        "Internal Enablement",
+        "Documentation"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "GridCOP: Multi-Agent Analytics System",
+      "highlights": [
+        "Problem: Power grid analysts needed intelligent automation for database querying and insights generation to handle complex data patterns at scale",
+        "Solution: Built end-to-end agentic system using LangChain orchestration, MCP for agent coordination, RAG with FAISS for intelligent querying, deployed on AWS with monitoring, evaluation metrics, and cost tracking",
+        "Impact: 70% reduction in analyst research time (measured over 2 months), 50-100 daily automated queries, established evaluation framework tracking quality, latency, and user satisfaction, enabled domain experts through AI co-pilot interface"
+      ],
+      "keywords": ["LangChain", "MCP", "Multi-Agent", "RAG", "AWS", "Python", "FastAPI"]
+    },
+    {
+      "name": "AI Diagnostic Tool for Engineering Teams",
+      "highlights": [
+        "Problem: Manual diagnostic workflows taking hours of expert time, creating bottlenecks in customer support and product development cycles",
+        "Solution: Shipped full-stack internal AI tool with React frontend, Python Flask backend, LLM APIs (Ollama, Llama 3.2), WebSocket streaming for real-time responses, evaluation metrics, and monitoring dashboards",
+        "Impact: 80% productivity improvement for engineers, 200+ daily queries served, reduced support resolution time from hours to minutes, delivered measurable ROI within 3 months of deployment"
+      ],
+      "keywords": ["React", "Python", "Flask", "Ollama", "Llama", "Internal Tools", "Production"]
+    },
+    {
+      "name": "AI Travel Planner Agent",
+      "highlights": [
+        "Problem: Manual travel planning requiring hours of research across fragmented information sources",
+        "Solution: Built AI agent using Claude 3.5 Sonnet, LangChain, Streamlit, and DuckDuckGo Search API with custom prompt engineering for personalized itinerary generation",
+        "Impact: Demonstrated rapid prototyping skills, learned conversational AI patterns, and real-time data integration through iterative experimentation"
+      ],
+      "keywords": ["Claude", "LangChain", "Streamlit", "Python", "Rapid Prototyping"]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Washington State University",
+      "area": "Computer Science",
+      "studyType": "Master of Science",
+      "startDate": "Jan 2015",
+      "endDate": "Jan 2017",
+      "location": "Pullman, WA"
+    },
+    {
+      "institution": "GITAM University",
+      "area": "Information Technology",
+      "studyType": "Bachelor of Technology",
+      "startDate": "Jan 2011",
+      "endDate": "Jan 2015",
+      "location": "Visakhapatnam, India"
+    }
+  ]
+}

@@ -1,0 +1,240 @@
+================================================================================
+PRACTICE SESSION 7: PREMIUM PROCESSING FEE CALCULATOR
+================================================================================
+
+Date: October 12, 2025
+Problem: Calculate Pro-Rated USCIS Premium Processing Fees (Medium-Hard, 50 min)
+Interview Simulation - Realistic Format
+Pattern: Pro-rating + Date Logic + Cost Calculation
+
+================================================================================
+PROBLEM STATEMENT
+================================================================================
+
+You're building a billing system for an immigration services platform. USCIS
+offers premium processing services that expedite case reviews. Clients can
+request premium processing at any time during their case, and may cancel it
+mid-period. You need to calculate the total premium processing fees for a
+given billing month by pro-rating fees based on the days premium processing
+was active.
+
+BUSINESS CONTEXT:
+
+Premium processing costs vary by visa type:
+- H-1B: $2,500 per month
+- O-1: $2,805 per month
+- EB-2: $2,500 per month
+- EB-1: $2,500 per month
+
+When clients activate or cancel premium processing mid-month, they are only
+charged for the days it was active.
+
+Your job is to calculate billing for a specific month.
+
+================================================================================
+BUSINESS RULES
+================================================================================
+
+1. Clients are charged based on the number of days premium processing was active
+2. If activated mid-month, charge only from activation date onwards
+3. If cancelled mid-month, charge only until cancellation date
+4. Handle service periods that span multiple years
+5. Both activation and cancellation dates are inclusive (charge for both days)
+6. Services with cancelled_on = None are still active (charge through end of month)
+
+================================================================================
+INPUT FORMAT
+================================================================================
+
+premium_services = [
+    {
+        'case_id': 1,
+        'client_name': 'Alice Smith',
+        'visa_type': 'H-1B',
+        'activated_on': '2024-01-01',
+        'cancelled_on': None,  # Still active
+        'monthly_fee': 2500.00
+    },
+    {
+        'case_id': 2,
+        'client_name': 'Bob Johnson',
+        'visa_type': 'O-1',
+        'activated_on': '2024-01-15',
+        'cancelled_on': '2024-01-25',
+        'monthly_fee': 2805.00
+    },
+    {
+        'case_id': 3,
+        'client_name': 'Carol Martinez',
+        'visa_type': 'EB-2',
+        'activated_on': '2023-12-20',
+        'cancelled_on': '2024-02-10',
+        'monthly_fee': 2500.00
+    }
+]
+
+billing_month = '2024-01'  # Calculate fees for January 2024
+
+================================================================================
+YOUR TASK
+================================================================================
+
+Implement: calculate_premium_processing_fees(premium_services, billing_month)
+
+This function should return a dictionary with:
+- 'month': The billing month string
+- 'total_fees': Total fees across all services (rounded to cents)
+- 'service_charges': List of charge details for each service
+
+================================================================================
+EXPECTED OUTPUT
+================================================================================
+
+{
+    'month': '2024-01',
+    'total_fees': 5991.13,
+    'service_charges': [
+        {
+            'case_id': 1,
+            'client_name': 'Alice Smith',
+            'visa_type': 'H-1B',
+            'days_active': 31,
+            'charge': 2500.00
+        },
+        {
+            'case_id': 2,
+            'client_name': 'Bob Johnson',
+            'visa_type': 'O-1',
+            'days_active': 11,
+            'charge': 995.00
+        },
+        {
+            'case_id': 3,
+            'client_name': 'Carol Martinez',
+            'visa_type': 'EB-2',
+            'days_active': 31,
+            'charge': 2500.00
+        }
+    ]
+}
+
+================================================================================
+START CODING
+================================================================================
+
+[Work below]
+
+
+build a function  calculate_premium_processing_fees(premium_services, billing_month)
+ - a user can opt and out of premium processing anytime 
+ - goal is to get the number of days premium processing -from the day it started to the billing_month
+ - if started & ended inbetween the billing month, then get the number of days used and multiply with the daily rate 
+ - u  service was used and usage cost 
+ follow rest of the business rules 
+
+Edge cases: 
+ - handle leap years
+ - handle cases where the end data is not specified 
+ - handle cases whose start date is not specified 
+
+ questions: 
+ - will  a user be allowed to switch on and off premium processing several times?
+ - are we going to handle premium processing fee changes?
+
+>> Approach:
+
+
+
+from datetime import datetime 
+
+def calculate_premium_processing_fees(premium_services, billing_month): 
+    processing_fee = {
+        "H-1B" : 2500,
+        "O-1" : 2805, 
+        "EB-2" : 2500, 
+        "EB-1" : 2500, 
+    }
+
+
+    # get the billing month
+    b_year, b_month = map(int, billing_month.split("-"))
+
+    # get the number of days in billing month - good to have it as a function, for more flexibility
+    billing_month_days = get_days_in_month(b_month, b_year)
+    
+    # get start end dates of the month 
+    b_start_date, b_end_date = get_start_end_date(b_month, b_year)
+    
+    usage_days = 0
+    
+    total_fee = 0
+    output_dict = {
+        'month': billing_month,
+        'total_fees': 0,
+        'service_charges': []
+    }
+
+     
+    for services in premium_services:
+
+        service_dict = {
+            'case_id': services['case_id'],
+            'client_name': 'services['client_name'],
+            'visa_type': services['visa_type'],
+            'days_active': 0,
+            'charge': 0
+        }
+
+        start_date = datetime.strptime(services["activated_on"], "%Y-%m-%d")
+        
+
+
+        effective_start_day = max(start_date, b_start_date) 
+
+
+        if  services["cancelled_on"] is None: 
+
+            usage_days = (b_end_date - effective_start_day).days + 1
+        else: 
+            end_date = datetime.strptime(services["cancelled_on"], "%Y-%m-%d")
+            effective_end_date = min(end_date, b_end_date)
+                
+            usage_days = (effective_end_date - effective_start_date).days + 1 
+
+        computed_cost = (processing_fee[services["visa_type"]]/billing_month_days) * usage_days
+        total_fee += computed_cost
+
+        service_dict["days_active"] = usage_days
+        service_dict["charge"] = computed_cost
+        output_dict["service_charges"].append(service_dict)
+    output_dict["total_fees"] = total_fee
+
+    return output_dict
+
+# if the service started month is > billing month and the year is < billing month year, 
+#, then get the days in this month
+# for evey service, check if its end date is none, 
+# if it none, then get the start date, compute the days from its start date to end of the billing month 
+
+# if there is and end date, and its before the billing month, then it can be ignored 
+
+# else if the start and the end date are in the same month, then get the number of days and compute the cost 
+
+# if the start date is from  a previous year, and the end date: 
+- if the end date is in the billing month, then just compute billing date from start of this month to end of billing date 
+- if the end data is > than this month, then bill for this entire month
+
+def get_start_end_date(b_month, b_year):
+    start_date = datetime(b_year, b_month, 1)
+    last_day = get_days_in_month(b_month, b_year)
+    end_date = datetime(b_year, b_month, last_day)
+    return start_date, end_date
+
+def get_days_in_month(year, month): 
+    return calendar.monthrange(year, month)[1]
+
+# helper functions needed: 
+- get total days in the month 
+- get the days between the two dates 
+- get the first day of the month 
+- compute_cost (visa_type, number_of_days)

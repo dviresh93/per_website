@@ -1,0 +1,37 @@
+# LM Studio Application Question Response
+
+**Question:** "What made you apply for this role, and how do you see yourself contributing to the 👾 LM Studio team?"
+
+---
+
+Leading agentic work for on-device AI at the scale you're operating at? That's exactly the kind of problem I want to be working on.
+
+**What drew me here:**
+
+The way you describe the role—scientific method mindset, practitioner first, ships features immediately—that's how I already work. When I built GridCOP (a multi-agent system with LangGraph), I spent as much time on evaluation frameworks and ablation testing as I did on the actual agents. Not because it's the "right way" to do AI, but because I genuinely wanted to understand what was moving the quality needle. That rigor got us 70% efficiency gains in 2 months, then I shipped it to production in 6 weeks.
+
+I really like that you emphasize being a practitioner first. I've seen too many AI projects that look great in notebooks but fall apart in production. I care about building systems that actually work—monitoring, CI/CD, handling edge cases, all of it. The AI tool I built at my last job still serves 200+ people daily, and I still think about how to make it better.
+
+The on-device piece is what makes this particularly interesting. I did embedded C++ work earlier in my career (sensor integration, real-time constraints), so I get why performance matters and what it takes to optimize for it. Making agentic systems actually useful on-device—not just functional but legitimately better than what people expect—that's a hard problem worth solving.
+
+**How I'd contribute:**
+
+I have real production experience with multi-agent systems, RAG pipelines, and evaluation frameworks. That's not theoretical—I've debugged these systems at 2am and know where they break. I can bring that to your desktop app and API work immediately.
+
+On the experimentation side: I know how to design good ablations, visualize what's actually happening, and communicate results to the team. I've done this before and have opinions on what works and what wastes time.
+
+I'm product-minded in the sense that I care about the feedback loop with users. I want to understand why developers choose LM Studio, what frustrates them, what makes them excited. That informs what I build.
+
+Stack-wise, I can work across Python, C++, and TypeScript. I'm comfortable jumping between MLX optimization work and building SDK features—wherever makes sense.
+
+The small IC-focused team environment is honestly a big part of the appeal. I like owning problems end-to-end and seeing my work ship to real users quickly. That's when I'm at my best.
+
+---
+
+## LM Studio Application Status: COMPLETE ✅
+
+**Resume PDF:** vireshduvvuri_applied-ai-engineer_lm-studio_2025-11-03.pdf
+**Fit Score:** 85%
+**Location:** job-prep/applications/lm-studio-applied-ai-engineer/
+
+Ready to submit!

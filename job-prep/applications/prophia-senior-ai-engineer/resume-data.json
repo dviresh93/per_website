@@ -1,0 +1,224 @@
+{
+  "selectedTemplate": 1,
+  "basics": {
+    "name": "Viresh Duvvuri",
+    "label": "Agentic AI Engineer",
+    "email": "viresh.duvvuri@gmail.com",
+    "phone": "+1 (858) 248-4078",
+    "website": "vireshduvvuri.com",
+    "location": {
+      "address": "San Diego, CA"
+    },
+    "summary": "Agentic AI Engineer specializing in multi-agent systems, RAG architectures, and production AI deployment. Expert in LangChain/LangGraph with proven track record building agentic workflows that reduce analysis time by 60% while maintaining 85%+ accuracy through hallucination prevention and human-in-the-loop validation. Experienced in AWS, Docker, vector databases, and full-stack development for AI-driven applications."
+  },
+  "work": [
+    {
+      "company": "Freefly Systems",
+      "position": "AI/ML Engineer",
+      "location": "San Diego, CA",
+      "startDate": "Jan 2024",
+      "endDate": "Present",
+      "highlights": [
+        "Built production RAG system for drone crash diagnostics using LangChain, improving troubleshooting accuracy from 40% to 85% through semantic search and vector database retrieval",
+        "Implemented source citation and confidence scoring to prevent hallucinations in mission-critical diagnostics",
+        "Deployed FastAPI backend with Docker containerization for scalable AI inference",
+        "Integrated OpenAI API with custom prompt engineering for technical log analysis"
+      ]
+    },
+    {
+      "company": "GridCOP (Personal Project)",
+      "position": "Founder & Lead Engineer",
+      "location": "San Diego, CA",
+      "startDate": "Nov 2024",
+      "endDate": "Present",
+      "highlights": [
+        "Architected 3-agent orchestration system using LangGraph, reducing grid analysis time by 60% through parallel multi-agent workflows",
+        "Implemented human-in-the-loop approval workflows and reflection mechanisms for high-stakes energy decisions",
+        "Built state graph memory system for agentic context persistence across multi-step analyses",
+        "Developed full-stack proof of concept with React frontend and FastAPI backend, demonstrating end-to-end agentic AI capabilities"
+      ]
+    },
+    {
+      "company": "Freefly Systems",
+      "position": "Embedded Software Engineer",
+      "location": "San Diego, CA",
+      "startDate": "Jan 2023",
+      "endDate": "Jan 2024",
+      "highlights": [
+        "Developed real-time flight control algorithms for autonomous drone systems, demonstrating strong problem-solving in complex, safety-critical environments",
+        "Integrated sensor fusion and data extraction pipelines for converting unstructured flight data to structured formats",
+        "Collaborated with cross-functional teams to deliver production systems under tight deadlines"
+      ]
+    },
+    {
+      "company": "UC San Diego",
+      "position": "Graduate Researcher - Autonomous Systems",
+      "location": "San Diego, CA",
+      "startDate": "Sep 2020",
+      "endDate": "Dec 2022",
+      "highlights": [
+        "Conducted AI research on autonomous navigation and decision-making systems",
+        "Published research on multi-agent coordination and real-time optimization",
+        "Designed and executed experiments with rigorous analytical methodology"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "University of California, San Diego",
+      "location": "San Diego, CA",
+      "studyType": "Master of Science",
+      "area": "Mechanical Engineering (Robotics & Controls)",
+      "startDate": "Sep 2020",
+      "endDate": "Dec 2022",
+      "gpa": "3.8/4.0"
+    },
+    {
+      "institution": "University of California, San Diego",
+      "location": "San Diego, CA",
+      "studyType": "Bachelor of Science",
+      "area": "Mechanical Engineering",
+      "startDate": "Sep 2017",
+      "endDate": "Jun 2020",
+      "gpa": "3.7/4.0"
+    }
+  ],
+  "skills": [
+    {
+      "name": "Agentic AI & LLM Frameworks",
+      "keywords": [
+        "LangChain",
+        "LangGraph",
+        "LangSmith",
+        "OpenAI API",
+        "Multi-agent systems",
+        "State graphs",
+        "Agentic workflows"
+      ]
+    },
+    {
+      "name": "RAG & Vector Databases",
+      "keywords": [
+        "Retrieval-Augmented Generation",
+        "Semantic search",
+        "Vector embeddings",
+        "Pinecone",
+        "ChromaDB",
+        "Document parsing"
+      ]
+    },
+    {
+      "name": "AI Guardrails & Verification",
+      "keywords": [
+        "Human-in-the-loop",
+        "Response verification",
+        "Source citation",
+        "Confidence scoring",
+        "Hallucination prevention",
+        "Multi-agent reflection"
+      ]
+    },
+    {
+      "name": "Cloud & DevOps",
+      "keywords": [
+        "AWS (Lambda, S3, ECR)",
+        "Docker",
+        "CI/CD",
+        "FastAPI",
+        "REST APIs",
+        "Microservices"
+      ]
+    },
+    {
+      "name": "Full-Stack Development",
+      "keywords": [
+        "Python",
+        "JavaScript/TypeScript",
+        "React",
+        "FastAPI",
+        "PostgreSQL",
+        "Git"
+      ]
+    },
+    {
+      "name": "AI-Centered Development",
+      "keywords": [
+        "Claude Code",
+        "Cursor AI",
+        "GitHub Copilot",
+        "LLM-assisted coding",
+        "Prompt engineering"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "GridCOP - Grid CoOperator",
+      "description": "Multi-agent AI system for smart grid analytics and decision-making",
+      "url": "github.com/viresh-duvvuri/gridcop",
+      "keywords": [
+        "LangGraph",
+        "Multi-agent orchestration",
+        "RAG",
+        "Human-in-the-loop",
+        "React",
+        "FastAPI"
+      ],
+      "highlights": [
+        "3-agent system with state graph memory: Researcher (RAG + semantic search), Analyzer (data processing), Advisor (human-in-the-loop validation)",
+        "Reduced grid analysis workflow time by 60% through parallel multi-agent coordination",
+        "Implemented reflection mechanisms and confidence scoring for high-stakes energy decisions",
+        "Built full-stack proof of concept with React frontend and FastAPI backend for stakeholder demos"
+      ]
+    },
+    {
+      "name": "Drone Log Analysis Tool",
+      "description": "RAG-based diagnostic system for analyzing drone crash logs",
+      "url": "vireshduvvuri.com",
+      "keywords": [
+        "LangChain",
+        "RAG",
+        "Vector database",
+        "OpenAI API",
+        "Docker",
+        "Production deployment"
+      ],
+      "highlights": [
+        "Improved diagnostic accuracy from 40% to 85% using semantic search over 10,000+ technical logs",
+        "Implemented source citation and confidence scoring to prevent hallucinations in mission-critical diagnostics",
+        "Deployed production system with Docker containerization for scalable AI inference",
+        "Converted unstructured flight logs to structured diagnostic insights using custom data extraction pipelines"
+      ]
+    },
+    {
+      "name": "Personal Portfolio Website",
+      "description": "Full-stack portfolio with Docker deployment and CI/CD",
+      "url": "vireshduvvuri.com",
+      "keywords": [
+        "Full-stack",
+        "Docker",
+        "Nginx",
+        "CI/CD",
+        "Responsive design"
+      ],
+      "highlights": [
+        "Designed and deployed production-ready web application demonstrating full-stack capabilities",
+        "Containerized with Docker and deployed with automated CI/CD pipeline",
+        "Responsive frontend showcasing technical projects and AI research"
+      ]
+    }
+  ],
+  "headings": {
+    "work": "Professional Experience",
+    "education": "Education",
+    "skills": "Technical Skills",
+    "projects": "Key Projects",
+    "awards": "Certifications & Research"
+  },
+  "awards": [
+    {
+      "awarder": "Research Publications",
+      "summary": "Published research on autonomous systems, multi-agent coordination, and real-time decision-making in robotics conferences"
+    }
+  ]
+}

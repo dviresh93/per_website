@@ -1,0 +1,810 @@
+================================================================================
+CASIUM INTERVIEW PRACTICE SESSION 1
+================================================================================
+Date: October 7, 2025
+Problem: Visa Eligibility Checker (Problem 1)
+Coach: Claude
+Student: Viresh
+
+================================================================================
+PROBLEM STATEMENT
+================================================================================
+
+Scenario:
+You're building an eligibility checker for O-1 visa applications.
+The O-1 visa is for individuals with extraordinary ability.
+
+Eligibility Rules:
+1. Must have at least 3 of the following criteria:
+   - major_award
+   - prestigious_memberships
+   - media_coverage
+   - judging_work
+   - original_contributions
+   - scholarly_articles
+   - high_salary
+   - distinguished_employment
+
+2. Must have a job offer in the U.S.
+3. Must have evidence documents for each claimed criterion
+
+Input Format:
+applicant = {
+    "name": "Dr. Jane Smith",
+    "field": "Artificial Intelligence",
+    "has_job_offer": True,
+    "achievements": [
+        {
+            "type": "major_award",
+            "name": "Turing Award",
+            "year": 2022,
+            "evidence_documents": ["award_certificate.pdf"]
+        },
+        {
+            "type": "scholarly_articles",
+            "count": 45,
+            "citations": 12000,
+            "evidence_documents": ["publications_list.pdf", "google_scholar.pdf"]
+        },
+        {
+            "type": "judging_work",
+            "description": "Conference reviewer for NeurIPS, ICML",
+            "years": [2020, 2021, 2022, 2023],
+            "evidence_documents": ["reviewer_invitations.pdf"]
+        },
+        {
+            "type": "high_salary",
+            "current_salary": 450000,
+            "field_average": 180000,
+            "evidence_documents": ["offer_letter.pdf"]
+        }
+    ]
+}
+
+Expected Output:
+{
+    "eligible": True,
+    "criteria_met": 4,
+    "criteria_required": 3,
+    "has_job_offer": True,
+    "met_criteria": ["major_award", "scholarly_articles", "judging_work", "high_salary"],
+    "missing_evidence": [],
+    "summary": "Applicant is ELIGIBLE for O-1 visa. Met 4 of 3 required criteria with valid evidence and has U.S. job offer."
+}
+
+Your Task: Implement check_eligibility(applicant)
+
+================================================================================
+STEP 1: LISTEN & TAKE NOTES
+================================================================================
+
+[COACH: Read the problem and write down your understanding. What are the key
+requirements? What edge cases come to mind? Don't code yet - just notes.]
+
+[YOUR NOTES HERE - Write below this line]
+
+So we are creting a function / api that will check the if the applicant is eligible to apply 
+for the particular visa category they want to apply for
+
+I have the applicat details, and I have eligibility criteria
+
+I need to compare those two to make sure - applicant is ready to apply or if we need more details 
+
+Questions: 
+- Do we need to validate each of the listed eligibility claim?
+- Do we need to validate the US job offer? 
+
+Edge cases: 
+- Evidence for the requirement is incomplete 
+- In the presented evidence, there are multiple associated people 
+- data and time on the listed evidence is following a different format than whats expected
+- There are missing values, types in the presented evidence  
+
+Expected output: A dictionary that contains notes about the eligibility status
+
+{
+    "eligible": bool, 
+    "criteria_met": int,
+    "criteria_required": int,
+    "has_job_offer": bool,
+    "met_criteria": list,
+    "missing_evidence": list,
+    "summary": sting
+}
+
+================================================================================
+[COACH FEEDBACK ON STEP 1 - UPDATED]
+================================================================================
+
+✅ EXCELLENT! You've added edge cases and output structure.
+
+📝 EDGE CASES REVIEW:
+
+✅ GOOD:
+- "Evidence for the requirement is incomplete" - YES! Important
+- "Missing values, types in the presented evidence" - YES! Handle None/missing fields
+
+🤔 CLARIFICATION NEEDED:
+- "Multiple associated people in evidence" - For this problem, we're checking
+  ONE applicant at a time. You don't need to worry about this edge case.
+
+- "Date/time in different format" - For this problem, the date/time fields
+  are just metadata (like "year": 2022). You don't need to validate formats.
+  Just check if evidence_documents list exists and is not empty.
+
+✅ YOU MISSED (important for this problem):
+- Empty achievements list (what if achievements = []?)
+- Invalid achievement type (what if type = "invalid_type"?)
+- has_job_offer is None or False
+
+💡 SIMPLIFY YOUR EDGE CASES TO:
+1. Empty or missing achievements list
+2. Achievement with no evidence_documents (None or empty list)
+3. Invalid achievement type (not in the 8 allowed types)
+4. has_job_offer is False or None
+5. Less than 3 valid criteria met
+
+📝 OUTPUT STRUCTURE:
+✅ Perfect! You captured all 7 fields correctly.
+(Small typo: "sting" should be "string" but that's fine!)
+
+================================================================================
+READY FOR STEP 2?
+================================================================================
+
+You've completed Step 1! In a real interview, this is what you'd do:
+- ✅ Read problem
+- ✅ Ask clarifying questions
+- ✅ Think about edge cases
+- ✅ Understand output format
+
+NEXT: Step 2 - Explain Your Approach (BEFORE coding!)
+
+When you're ready, tell me "Ready for Step 2" and I'll guide you through
+explaining your approach to the interviewer.
+
+
+ To handle this problem better - I will create class - Eligibility checker class, with lot of
+ helper functions in them 
+
+ This is what it might look like: 
+
+ class eligibilityChecker: 
+    def __init__(self, application):
+        self.application =  application # store the application as a class variable
+        self.applicant_name = None
+        self.field = None
+        self.has_job_offer = None 
+        self.achievements = None
+
+        self.eligibility_status = {
+            "eligible": None, # bool 
+            "criteria_met": None, # int
+            "criteria_required": None, # int
+            "has_job_offer": None, # bool
+            "met_criteria": None, # list
+            "missing_evidence": None, # list
+            "summary": None, # sting
+        }
+        
+    def status_update(self): 
+        # this will be the main entry point class that can be called to start the checks
+
+        # 1. get the requirements for the application
+        # 2. get the required documents for the application
+        # 3. Check the validity of the presented documents 
+        # 4. Compute / calculate the eligibity - required vs presented 
+
+        return eligibility_status
+    
+    def _extract_application_details(self): 
+        # extract from dict and store to class variables
+        # validate the documents
+        
+    def _get_requiremets(self, application_type): 
+        # return the requieremetns per the application
+    
+    def _compute_eligibility(self, application_reqirements): 
+        # check the eligibility per the requirements 
+        # return the status dictionary
+
+
+================================================================================
+[COACH FEEDBACK ON STEP 2 - CRITICAL]
+================================================================================
+
+⚠️ STOP! This approach is TOO COMPLEX for the problem.
+
+Let me explain why as your interviewer:
+
+📊 WHAT YOU PROPOSED:
+- Create a class with __init__, multiple methods
+- Store state in class variables
+- Multiple helper methods (_extract, _get_requirements, _compute)
+- Over-engineered for a simple function
+
+❌ PROBLEMS WITH THIS APPROACH:
+
+1. **OVER-ENGINEERING**
+   - The problem asks for ONE function: check_eligibility(applicant)
+   - You're creating a whole class with state management
+   - This is like using a sledgehammer to crack a nut
+
+2. **UNNECESSARY COMPLEXITY**
+   - Why store applicant_name, field as class variables? They're not used.
+   - Why _get_requirements(application_type)? There's only O-1 visa (fixed rules)
+   - The requirements are HARDCODED (must have 3 of 8 criteria)
+
+3. **DOESN'T MATCH THE PROBLEM**
+   - Problem: "Implement check_eligibility(applicant)"
+   - Your approach: Create EligibilityChecker class
+   - Interviewer expectation: Simple function, maybe 1-2 helpers
+
+4. **TIME CONSTRAINT**
+   - You have 40 minutes to solve this
+   - Building a class architecture will take too long
+   - You'll run out of time before getting working code
+
+💡 REAL INTERVIEW SCENARIO:
+
+If you proposed this in the Casium interview, I (as interviewer) would say:
+
+"I appreciate the systems thinking, but let's keep it simple. The problem
+just needs a function that takes an applicant dict and returns eligibility.
+Can you walk me through a simpler approach?"
+
+================================================================================
+WHAT YOU SHOULD DO INSTEAD (Simpler Approach)
+================================================================================
+
+✅ SIMPLE, CLEAN APPROACH:
+
+def check_eligibility(applicant):
+    """Main function - takes applicant dict, returns eligibility dict"""
+    
+    # Step 1: Extract data from input
+    has_job_offer = applicant.get('has_job_offer', False)
+    achievements = applicant.get('achievements', [])
+    
+    # Step 2: Count valid achievements (those with evidence)
+    valid_criteria = []
+    missing_evidence = []
+    
+    for achievement in achievements:
+        if has_valid_evidence(achievement):
+            valid_criteria.append(achievement['type'])
+        else:
+            missing_evidence.append(achievement)
+    
+    # Step 3: Determine eligibility
+    criteria_met = len(valid_criteria)
+    eligible = criteria_met >= 3 and has_job_offer
+    
+    # Step 4: Build summary
+    summary = generate_summary(eligible, criteria_met, has_job_offer)
+    
+    # Step 5: Return result
+    return {
+        "eligible": eligible,
+        "criteria_met": criteria_met,
+        "criteria_required": 3,
+        "has_job_offer": has_job_offer,
+        "met_criteria": valid_criteria,
+        "missing_evidence": missing_evidence,
+        "summary": summary
+    }
+
+def has_valid_evidence(achievement):
+    """Helper: Check if achievement has evidence documents"""
+    evidence = achievement.get('evidence_documents', [])
+    return evidence is not None and len(evidence) > 0
+
+def generate_summary(eligible, criteria_met, has_job_offer):
+    """Helper: Generate human-readable summary"""
+    if eligible:
+        return f"Applicant is ELIGIBLE. Met {criteria_met} of 3 required criteria with job offer."
+    else:
+        # Build failure reason...
+
+================================================================================
+WHY THIS SIMPLER APPROACH IS BETTER:
+================================================================================
+
+✅ Matches the problem exactly (function, not class)
+✅ Clear step-by-step logic (easy to explain)
+✅ Two small helper functions (not over-engineered)
+✅ Can code this in 30-40 minutes
+✅ Easy to test and debug
+✅ Pythonic and clean
+
+📝 LEARNING POINT:
+
+In coding interviews (especially practical ones like Casium):
+- SIMPLE > COMPLEX
+- WORKING CODE > PERFECT ARCHITECTURE
+- CLEAR LOGIC > CLEVER DESIGN
+
+Save the class-based architecture for system design rounds or when
+the problem explicitly needs it (e.g., "Design a visa processing system").
+
+For "Implement check_eligibility()", keep it simple!
+
+================================================================================
+YOUR TASK NOW:
+================================================================================
+
+Rewrite your approach using the simpler pattern:
+
+1. One main function: check_eligibility(applicant)
+2. 1-2 small helper functions
+3. Clear steps: extract → validate → count → determine → return
+
+Write this in plain English (not code yet), like:
+
+"My approach:
+1. I'll create check_eligibility() as the main function
+2. Extract has_job_offer and achievements from input
+3. Loop through achievements, count ones with valid evidence
+4. Helper function: has_valid_evidence() to check evidence_documents
+5. Check if count >= 3 AND has_job_offer is True
+6. Build and return result dictionary"
+
+Write your SIMPLIFIED approach below the class code in the file.
+
+
+applicant = {
+    "name": "Dr. Jane Smith",
+    "field": "Artificial Intelligence",
+    "has_job_offer": True,
+    "achievements": [
+        {
+            "type": "major_award",
+            "name": "Turing Award",
+            "year": 2022,
+            "evidence_documents": ["award_certificate.pdf"]
+        },
+        {
+            "type": "scholarly_articles",
+            "count": 45,
+            "citations": 12000,
+            "evidence_documents": ["publications_list.pdf", "google_scholar.pdf"]
+        },
+        {
+            "type": "judging_work",
+            "description": "Conference reviewer for NeurIPS, ICML",
+            "years": [2020, 2021, 2022, 2023],
+            "evidence_documents": ["reviewer_invitations.pdf"]
+        },
+        {
+            "type": "high_salary",
+            "current_salary": 450000,
+            "field_average": 180000,
+            "evidence_documents": ["offer_letter.pdf"]
+        }
+    ]
+}
+
+Must have at least 3 of the following criteria:
+   - major_award
+   - prestigious_memberships
+   - media_coverage
+   - judging_work
+   - original_contributions
+   - scholarly_articles
+   - high_salary
+   - distinguished_employment
+
+{
+    "eligible": True,
+    "criteria_met": 4,
+    "criteria_required": 3,
+    "has_job_offer": True,
+    "met_criteria": ["major_award", "scholarly_articles", "judging_work", "high_salary"],
+    "missing_evidence": [],
+    "summary": "Applicant is ELIGIBLE for O-1 visa. Met 4 of 3 required criteria with valid evidence and has U.S. job offer."
+}
+
+def check_eligibility(applicant):
+    # check if there is job offer 
+    # check if minimum number of requirements are met
+
+    # validate each of the criteria
+    # has evidence document for each of the criteria
+
+    has_job_offer = applicant.get("has_job_offer", False)
+    achievements = applicant.get("achievements", [])
+    eligible = None # initializing it to None 
+    summary = None 
+
+    if not has_job_offer or len(achievements) < 3: # dont bother processing this application 
+        eligible = False # we can modify this later to update the dict 
+    
+    valid_achivement = []
+    met_criteria = []
+    missing_evidence = []
+
+    required_criteria = get_number_of_requirements("O1")
+
+    for achivement in achievements:
+        if _met_requirement(achivement): 
+            if _has_req_evidence(achivement): 
+                met_criteria.append(achivement.type)
+            else:
+                missing_evidence.append(achivement.type)
+    
+    if len(met_requirement) > required_criteria:
+        eligible = True 
+    
+    summary = _get_summary(eligible, met_requirement, required_criteria, missing_evidence)
+
+    status_dict = {
+        "eligible": eligible,
+        "criteria_met": len(met_requirement),
+        "criteria_required": required_criteria,
+        "has_job_offer": applicant.get("has_job_offer", False),
+        "met_criteria": met_requirement,
+        "missing_evidence": missing_evidence,
+        "summary": summary
+    }
+
+    return status_dict
+
+
+def _get_summary(eligible, met_requirement, required_criteria, missing_evidence):
+    # generate summary as a string based on the requirements and the arguments 
+
+def _met_requirement(requirement): # we will need to handle case where if the requirements are duplicates
+    list_of_requirements = [
+        "major_award", 
+        "prestigious_memberships", 
+        "media_coverage", 
+        "judging_work", 
+        "original_contributions", 
+        "scholarly_articles", 
+        "high_salary",
+        "distinguished_employment"
+        ]
+    
+    if requirement in list_of_requirements: 
+        return True
+
+def _has_req_evidence(requirement): 
+    # need to check if evidence is present for the requiement
+    # returning true for now, but need to handle this better 
+    return True
+
+================================================================================
+[COACH FEEDBACK - YOU SKIPPED STEPS!]
+================================================================================
+
+⏸️ PAUSE! You jumped from Step 2 (Explain) to Step 6 (Code)!
+
+In a REAL interview, you should:
+- Step 2: EXPLAIN your approach in WORDS (not code)
+- Step 3: Get interviewer approval ("Does this make sense?")
+- Step 4: Write pseudocode/comments
+- Step 5: THEN start coding
+
+You went straight to code without explaining! This is a COMMUNICATION problem.
+
+================================================================================
+FEEDBACK ON YOUR CODE (Even though it's too early)
+================================================================================
+
+✅ GOOD THINGS:
+1. Much simpler than the class approach!
+2. You're using helper functions (_met_requirement, _has_req_evidence)
+3. You're handling edge cases (no job offer, empty achievements)
+4. Clear variable names
+
+❌ BUGS & ISSUES:
+
+🐛 BUG 1: Early exit logic is WRONG
+Line 419: if not has_job_offer or len(achievements) < 3:
+    eligible = False
+
+Problem: This checks if achievements LIST has < 3 items, not if they have
+< 3 VALID criteria. An applicant with 2 achievements might still be ineligible,
+but you should process them and return proper breakdown.
+
+Also: You set eligible=False but then CONTINUE processing! The code after
+line 420 will overwrite this.
+
+🐛 BUG 2: Variable name inconsistency
+You use: met_criteria, met_requirement, valid_achivement
+Pick ONE name and stick with it! This will cause NameError.
+
+Line 435: if len(met_requirement) > required_criteria
+But you never defined met_requirement! You defined met_criteria.
+
+🐛 BUG 3: Unnecessary function
+Line 426: required_criteria = get_number_of_requirements("O1")
+
+Why call a function? The requirement is ALWAYS 3 (hardcoded in problem).
+Just use: required_criteria = 3
+
+🐛 BUG 4: _met_requirement() logic is wrong
+Line 456-469: This checks if requirement TYPE is valid
+Line 468: if requirement in list_of_requirements
+
+But you're passing the whole achievement dict, not just the type!
+Should be: if requirement.get('type') in list_of_requirements
+
+🐛 BUG 5: _has_req_evidence() doesn't actually check!
+Line 471-474: You return True always!
+This defeats the whole purpose. You need to actually check evidence_documents.
+
+🐛 BUG 6: achievement.type should be achievement['type']
+Line 431-433: achivement.type won't work for dict
+
+Should be: achivement['type'] or achivement.get('type')
+
+🐛 BUG 7: Typo - 'achivement' vs 'achievement'
+Pick one spelling! Python is case-sensitive.
+
+================================================================================
+WHAT YOU SHOULD HAVE DONE (Step 2)
+================================================================================
+
+Before coding, you should have EXPLAINED in plain English:
+
+"My approach:
+
+1. Extract has_job_offer and achievements from applicant dict
+2. Initialize counters: met_criteria (list), missing_evidence (list)  
+3. Loop through each achievement:
+   a. Check if achievement type is valid (one of 8 allowed types)
+   b. Check if achievement has evidence (evidence_documents not empty)
+   c. If both valid: add to met_criteria
+   d. If no evidence: add to missing_evidence
+4. Count valid criteria
+5. Determine eligible: (count >= 3) AND has_job_offer
+6. Generate summary string
+7. Return result dictionary with all 7 fields
+
+Helper functions:
+- has_valid_evidence(achievement): check if evidence_documents exists and not empty
+- Maybe generate_summary() for the summary string
+
+Edge cases:
+- Empty achievements: count will be 0, eligible=False
+- No job offer: eligible=False regardless of criteria
+- Invalid achievement type: skip it
+- Missing evidence: count it in missing_evidence list
+
+Does this approach make sense?"
+
+THEN wait for me (interviewer) to say "yes, go ahead and code"
+
+================================================================================
+WHAT TO DO NOW
+================================================================================
+
+I see you have the right idea but jumped ahead too fast with buggy code.
+
+Let's reset and do this properly:
+
+Option A: FIX THE CODE
+- I'll guide you through fixing all the bugs
+- You'll complete Steps 3-7 with coaching
+
+Option B: START OVER (Better for learning)
+- Delete the code you wrote
+- Write approach in PLAIN ENGLISH first
+- Get my approval
+- THEN code it properly
+
+Which do you prefer?
+
+In a REAL interview, jumping to code without explaining would make the
+interviewer stop you and say: "Before you code, can you walk me through
+your approach?"
+
+COMMUNICATION > CODING SPEED
+
+
+
+
+================================================================================
+SESSION PAUSED - CLOSING THOUGHTS & RESUME GUIDE
+================================================================================
+Date: October 8, 2025
+Status: PAUSED at Step 2 (Explain Approach)
+Progress: ~30% complete
+
+================================================================================
+WHAT WE COVERED
+================================================================================
+
+✅ STEP 1: LISTEN & TAKE NOTES (COMPLETED)
+- You understood the problem
+- Asked excellent clarifying questions
+- Identified edge cases
+- Captured output structure
+
+✅ STEP 2: EXPLAIN YOUR APPROACH (PARTIALLY COMPLETED)
+- First attempt: Over-engineered class-based solution
+- Coach feedback: Keep it simple, match problem scope
+- Second attempt: Jumped to code without explaining in words
+- Coach feedback: 7 bugs found, skipped communication step
+
+================================================================================
+KEY LESSONS LEARNED
+================================================================================
+
+💡 LESSON 1: Don't Over-Engineer
+- Problem asks for ONE function → Don't build a class
+- SIMPLE > COMPLEX in timed interviews
+- Match solution complexity to problem scope
+- Save architecture for system design rounds
+
+💡 LESSON 2: Communication > Speed
+- EXPLAIN approach in WORDS before coding
+- Get interviewer approval ("Does this make sense?")
+- Don't code in silence
+- Framework: Step 2 (Explain) → Step 3 (Approval) → Step 4 (Pseudocode) → Step 5-6 (Code)
+
+💡 LESSON 3: The Right Process
+1. Read & understand problem
+2. Ask clarifying questions ✅ (you did great!)
+3. Explain approach in plain English (you skipped this)
+4. Get approval
+5. Write pseudocode/comments
+6. Code with narration
+7. Test out loud
+
+================================================================================
+BUGS FOUND IN YOUR CODE (For When You Return)
+================================================================================
+
+🐛 BUG 1: Early exit logic
+Line 419: if not has_job_offer or len(achievements) < 3
+Problem: Checks list length, not valid criteria count
+Fix: Remove early exit, process all achievements first
+
+🐛 BUG 2: Variable naming inconsistency
+You use: met_criteria, met_requirement, valid_achivement
+Fix: Pick ONE name (met_criteria) and use consistently
+
+🐛 BUG 3: Unnecessary function call
+Line 426: required_criteria = get_number_of_requirements("O1")
+Fix: Just use required_criteria = 3 (hardcoded in problem)
+
+🐛 BUG 4: _met_requirement() wrong logic
+Line 468: if requirement in list_of_requirements
+Problem: Passing whole dict, treating as string
+Fix: requirement.get('type') in list_of_requirements
+
+🐛 BUG 5: _has_req_evidence() doesn't check
+Line 471-474: Always returns True
+Fix: Check if evidence_documents exists and is not empty
+
+🐛 BUG 6: Dict access syntax
+Line 431-433: achivement.type
+Fix: achivement['type'] or achivement.get('type')
+
+🐛 BUG 7: Spelling typo
+'achivement' vs 'achievement'
+Fix: Pick one spelling consistently
+
+================================================================================
+WHAT TO DO WHEN YOU RESUME
+================================================================================
+
+📍 OPTION A: Fix the Code (Faster)
+1. Review the 7 bugs listed above
+2. Fix each bug systematically
+3. Test the code with examples
+4. Complete Steps 7 (Testing)
+
+📍 OPTION B: Start Over Properly (Better Learning)
+1. Delete the code you wrote
+2. Write approach in PLAIN ENGLISH (not code):
+   "My approach:
+   1. Extract has_job_offer and achievements
+   2. Loop through achievements...
+   3. Count valid ones...
+   etc."
+3. Say "Ready for approval"
+4. I'll say "Looks good, go ahead"
+5. THEN write pseudocode/comments
+6. THEN code properly
+7. Test out loud
+
+================================================================================
+RESUME PROMPT (Use this when you come back)
+================================================================================
+
+To resume this practice session, say:
+
+"I'm ready to continue the Casium practice session. We paused at Step 2
+(Explain Approach). I want to [Option A: fix the buggy code | Option B: start
+over properly].
+
+Review: interview-prep/companies/casium/onsite-prep/practice_session_1.txt"
+
+================================================================================
+PROGRESS TRACKING
+================================================================================
+
+Completed:
+[✅] Step 1: Listen & Take Notes
+[⚠️] Step 2: Explain Approach (attempted but needs redo)
+
+Remaining:
+[  ] Step 2: Explain Approach (properly, in plain English)
+[  ] Step 3: Get Approval
+[  ] Step 4: Write Pseudocode/Comments
+[  ] Step 5: Code with Narration
+[  ] Step 6: Test Out Loud
+[  ] Step 7: Discuss Improvements
+
+Estimated time remaining: 60-90 minutes
+
+================================================================================
+WHAT YOU'RE DOING WELL
+================================================================================
+
+✅ Asking clarifying questions (excellent!)
+✅ Thinking about edge cases
+✅ Simpler approach after feedback (good learning)
+✅ Using helper functions
+✅ Clear variable names (mostly)
+
+================================================================================
+WHAT TO IMPROVE
+================================================================================
+
+⚠️ Explain before coding (don't jump to code)
+⚠️ Get approval before typing
+⚠️ Consistent variable naming
+⚠️ Don't over-engineer for simple problems
+⚠️ Test helper functions (don't just return True)
+
+================================================================================
+FINAL THOUGHTS
+================================================================================
+
+You're on the right track! The biggest thing to work on is COMMUNICATION:
+
+In a real Casium interview:
+1. They present problem
+2. You ask questions ✅ (you did this perfectly!)
+3. You EXPLAIN approach in words (you skipped this)
+4. They say "sounds good" 
+5. You code while narrating
+6. You test out loud
+
+The middle step (explain approach) is CRITICAL. It:
+- Shows you think before coding
+- Lets interviewer correct you early (saves time)
+- Demonstrates communication skills
+- Proves you're collaborative
+
+Practice this step! It's more important than perfect code.
+
+================================================================================
+RECOMMENDED NEXT STEPS
+================================================================================
+
+When you're ready to practice again:
+
+1. **Short session (30 min):** Fix the 7 bugs, test the code
+2. **Full session (90 min):** Start over, do it properly with all 7 steps
+3. **New problem (90 min):** Try Problem 2 (Case Deadline Tracker) from scratch
+
+For your Casium interview, you need to be comfortable with the FULL process,
+not just writing code. Practice explaining out loud!
+
+================================================================================
+END OF SESSION 1
+================================================================================
+
+Good work today! You learned important lessons about:
+- Not over-engineering
+- Communication over speed  
+- The right interview process
+
+See you next session! 🚀
+
+
