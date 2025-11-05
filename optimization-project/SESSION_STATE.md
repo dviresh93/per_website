@@ -7,19 +7,19 @@
 
 ## Current Task
 
-**Phase:** Phase 1, Task 1.1
-**Task Name:** Split Baseline Resume Files
+**Phase:** Phase 1, Task 1.2
+**Task Name:** Template-Based Locked Content
 **Status:** ✅ COMPLETE
 
 ---
 
 ## What We Just Did (Last 5 Actions)
 
-1. ✅ Read baseline-resume-data.json (221 lines, analyzed structure)
-2. ✅ Created baseline-resume-rules.md (format rules only, ~900 tokens)
-3. ✅ Created baseline-resume-data-minimal.json (data only, no metadata)
-4. ✅ Committed both files to git
-5. ✅ Pushed to remote (GitHub backup complete)
+1. ✅ Installed micromustache template engine in resumake-mcp
+2. ✅ Created lib/locked-templates.js (template registry with all locked content)
+3. ✅ Created lib/template-expander.js (expansion logic for {{template-id}})
+4. ✅ Integrated template expander into server.js (expands before PDF generation)
+5. ✅ Committed all changes and pushed to remote
 
 ---
 
@@ -47,39 +47,38 @@
 ## Next Session: Start Here
 
 ### ✅ Phase 1, Task 1.1 COMPLETE!
+- Created `baseline-resume-rules.md` and `baseline-resume-data-minimal.json`
+- Token savings: ~800 tokens
 
-**What was done:**
-- Created `baseline-resume-rules.md` (format rules, ~900 tokens)
-- Created `baseline-resume-data-minimal.json` (data only, no metadata)
-- Both files committed and pushed to remote
+### ✅ Phase 1, Task 1.2 COMPLETE!
+- Installed micromustache
+- Created `lib/locked-templates.js` (template registry)
+- Created `lib/template-expander.js` (expansion logic)
+- Integrated into `server.js` (expands before PDF generation)
+- Token savings: ~425 tokens
 
-**Token savings achieved:** ~800 tokens
+**Total Phase 1 savings so far:** ~1,225 tokens
 
 ---
 
-### Next: Phase 1, Task 1.2: Template-Based Locked Content
-
-**Location:** `/home/virus/Documents/repo/resumake-mcp/`
+### Next: Phase 1, Task 1.3: Job-Aware Context Loading
 
 **What to do:**
-1. Install micromustache: `npm install micromustache`
-2. Create `lib/locked-templates.js` (template registry)
-3. Create `lib/template-expander.js` (expansion logic)
-4. Update `server.js` to use template expander
-5. Write tests in `tests/template-expander.test.js`
-6. Test: `npm test`
+1. Create `role-classifier.js` (classify job type from posting)
+2. Update resume agent to load only relevant rules
+3. Test with 3 different role types (AI Engineer, Robotics, Full-Stack)
 
 **Expected outcome:**
-- Template system working
-- Locked content never sent to LLM (only IDs)
-- Token savings: ~425 tokens
+- Only load context relevant to role type
+- Token savings: ~600 tokens
 
 **Command to start:**
 ```
-"Let's start Phase 1, Task 1.2: Template-based locked content.
- Follow MASTER_PLAN.md Phase 1, Task 1.2 instructions.
- First, cd to resumake-mcp and install micromustache."
+"Let's start Phase 1, Task 1.3: Job-aware context loading.
+ Create role-classifier.js to classify job types."
 ```
+
+**OR end session here (good stopping point, all committed)**
 
 ---
 
