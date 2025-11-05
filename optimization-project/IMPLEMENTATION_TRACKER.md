@@ -1,0 +1,184 @@
+# Implementation Progress Tracker
+
+**Project:** Resume Generation Optimization
+**Started:** TBD
+**Target Completion:** 2-3 weeks
+
+---
+
+## Phase 1: Quick Wins (2-3 days)
+
+### Task 1.1: Split Baseline Resume Files
+- [ ] Create `baseline-resume-rules.md` (format rules only)
+- [ ] Create `baseline-resume-data-minimal.json` (data only, no metadata)
+- [ ] Test: Verify both files load correctly
+- [ ] Git commit: `git commit -m "Phase 1.1: Split baseline files"`
+- **Token savings:** 800 tokens
+- **Status:** Not started
+
+### Task 1.2: Template-Based Locked Content
+- [ ] Install micromustache in resumake-mcp
+- [ ] Create `lib/locked-templates.js` (template registry)
+- [ ] Create `lib/template-expander.js` (expansion logic)
+- [ ] Update `server.js` to expand templates before PDF generation
+- [ ] Write tests for template expansion
+- [ ] Git commit: `git commit -m "Phase 1.2: Template-based locked content"`
+- **Token savings:** 425 tokens
+- **Status:** Not started
+
+### Task 1.3: Job-Aware Context Loading
+- [ ] Create `role-classifier.js` (classify job type)
+- [ ] Update resume agent to load only relevant rules
+- [ ] Test with 3 different role types
+- [ ] Git commit: `git commit -m "Phase 1.3: Job-aware context loading"`
+- **Token savings:** 600 tokens
+- **Status:** Not started
+
+### Phase 1 Validation
+- [ ] Generate test resume and compare token usage
+- [ ] Expected: ~2,000 token reduction (20%)
+- [ ] Quality check: Resume looks identical to before
+- **Phase 1 Complete:** ☐
+
+---
+
+## Phase 2: Memory & Knowledge Graph (5-7 days)
+
+### Task 2.1: Setup Memory MCP Server
+- [ ] Create `resume-memory-mcp/` directory structure
+- [ ] Install dependencies (MCP SDK, better-sqlite3)
+- [ ] Implement basic server with database
+- [ ] Add MCP server to `.claude.json`
+- [ ] Test: Server starts and responds to ping
+- [ ] Git commit: `git commit -m "Phase 2.1: Memory MCP server setup"`
+- **Status:** Not started
+
+### Task 2.2: Profile Compression
+- [ ] Implement `get_profile_summary()` tool
+- [ ] Create profile compression logic (8k → 200 tokens)
+- [ ] Test: Summary captures key info
+- [ ] Update resume agent to use compressed profile
+- [ ] Git commit: `git commit -m "Phase 2.2: Profile compression"`
+- **Token savings:** 7,800 tokens
+- **Status:** Not started
+
+### Task 2.3: Knowledge Graph
+- [ ] Create `knowledge-graph.json` (structure all resume data)
+- [ ] Implement `query_knowledge_graph()` tool
+- [ ] Test: Queries return relevant projects
+- [ ] Update resume agent to use knowledge graph
+- [ ] Git commit: `git commit -m "Phase 2.3: Knowledge graph"`
+- **Token savings:** 1,500 tokens
+- **Status:** Not started
+
+### Task 2.4: Semantic Search (Optional)
+- [ ] Install txtai (Python)
+- [ ] Create semantic search API
+- [ ] Integrate with knowledge graph
+- [ ] Test: Semantic search returns better results than keywords
+- [ ] Git commit: `git commit -m "Phase 2.4: Semantic search (optional)"`
+- **Token savings:** 500 tokens (better relevance)
+- **Status:** Not started
+
+### Phase 2 Validation
+- [ ] Generate test resume with Memory MCP
+- [ ] Expected: ~8,000 token reduction (70% total)
+- [ ] Cost: $0.28 → $0.09 per resume
+- **Phase 2 Complete:** ☐
+
+---
+
+## Phase 3: Learning & Deduplication (2-3 days)
+
+### Task 3.1: Application History Tracking
+- [ ] Add `applications` table to database schema
+- [ ] Implement `track_application()` tool
+- [ ] Update resume agent to track after generation
+- [ ] Test: Applications saved to database
+- [ ] Git commit: `git commit -m "Phase 3.1: Application tracking"`
+- **Status:** Not started
+
+### Task 3.2: Pattern Learning
+- [ ] Implement `get_learned_patterns()` tool
+- [ ] Create pattern analysis logic
+- [ ] Update resume agent to use learned patterns
+- [ ] Test: Patterns learned after 3+ applications
+- [ ] Git commit: `git commit -m "Phase 3.2: Pattern learning"`
+- **Token savings:** 1,500 tokens
+- **Status:** Not started
+
+### Task 3.3: Smart Resume Deduplication
+- [ ] Install txtai for similarity checking
+- [ ] Create `semantic-search-api/similarity_checker.py`
+- [ ] Create FastAPI server for similarity checks
+- [ ] Implement `check_resume_similarity()` MCP tool
+- [ ] Update resume agent workflow (check similarity FIRST)
+- [ ] Test: Apply to 2 similar roles, verify reuse
+- [ ] Git commit: `git commit -m "Phase 3.3: Smart deduplication"`
+- **Token savings:** 7,500 tokens per reused resume
+- **Status:** Not started
+
+### Phase 3 Validation
+- [ ] Test scenario: 5 AI Engineer applications
+- [ ] Expected: 1 new resume + 4 reused = 80% cost reduction
+- [ ] Average cost: $0.09 → $0.02 (with 80% reuse)
+- **Phase 3 Complete:** ☐
+
+---
+
+## Final Validation
+
+- [ ] Generate 10 test resumes across different role types
+- [ ] Measure actual token usage vs predictions
+- [ ] Quality check: All resumes professional and accurate
+- [ ] Document actual savings achieved
+- [ ] Create case study: Before/after comparison
+
+**Project Complete:** ☐
+
+---
+
+## Session Tracking
+
+### Session 1: [Date]
+- **Time:** [start - end]
+- **Tasks completed:**
+- **Token usage:** X / 200,000
+- **Blockers:** None
+- **Next session:** Continue with Task X.X
+
+### Session 2: [Date]
+- **Time:** [start - end]
+- **Tasks completed:**
+- **Token usage:** X / 200,000
+- **Blockers:**
+- **Next session:**
+
+### Session 3: [Date]
+- (and so on...)
+
+---
+
+## Git Commit Strategy
+
+After each task:
+```bash
+git add .
+git commit -m "Phase X.X: [Task name] - [Brief description]"
+git push origin main
+```
+
+Example commits:
+- `Phase 1.1: Split baseline files - Separate rules from data`
+- `Phase 1.2: Template-based locked content - Add micromustache expansion`
+- `Phase 2.1: Memory MCP server setup - Basic server with SQLite`
+- `Phase 3.3: Smart deduplication - txtai similarity checks`
+
+---
+
+## Notes
+
+- Update this file after completing each task
+- Mark checkboxes with `[x]` when done
+- Add session notes at end of each Claude Code session
+- Git commit this tracker file regularly to preserve progress
