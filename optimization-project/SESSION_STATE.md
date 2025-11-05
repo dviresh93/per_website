@@ -7,19 +7,19 @@
 
 ## Current Task
 
-**Phase:** Planning complete, ready to start Phase 1
-**Task Name:** None (awaiting user to start Phase 1.1)
-**Status:** Planning complete
+**Phase:** Phase 1, Task 1.1
+**Task Name:** Split Baseline Resume Files
+**Status:** ✅ COMPLETE
 
 ---
 
 ## What We Just Did (Last 5 Actions)
 
-1. ✅ Created comprehensive MASTER_PLAN.md with 3 phases
-2. ✅ Added smart resume deduplication strategy (Phase 3, Task 3.3)
-3. ✅ Created DEDUPLICATION_STRATEGY.md (detailed guide)
-4. ✅ Created COST_COMPARISON.md (ROI analysis)
-5. ✅ Created session recovery guides (this file + WORKING_WITH_CLAUDE_CODE.md)
+1. ✅ Read baseline-resume-data.json (221 lines, analyzed structure)
+2. ✅ Created baseline-resume-rules.md (format rules only, ~900 tokens)
+3. ✅ Created baseline-resume-data-minimal.json (data only, no metadata)
+4. ✅ Committed both files to git
+5. ✅ Pushed to remote (GitHub backup complete)
 
 ---
 
@@ -46,34 +46,39 @@
 
 ## Next Session: Start Here
 
-### When Ready to Begin Implementation
+### ✅ Phase 1, Task 1.1 COMPLETE!
 
-**Phase 1, Task 1.1: Split Baseline Resume Files**
+**What was done:**
+- Created `baseline-resume-rules.md` (format rules, ~900 tokens)
+- Created `baseline-resume-data-minimal.json` (data only, no metadata)
+- Both files committed and pushed to remote
 
-**Location:** `job-prep/applications/_resources/`
+**Token savings achieved:** ~800 tokens
+
+---
+
+### Next: Phase 1, Task 1.2: Template-Based Locked Content
+
+**Location:** `/home/virus/Documents/repo/resumake-mcp/`
 
 **What to do:**
-1. Read current `baseline-resume-data.json`
-2. Extract format rules → create `baseline-resume-rules.md`
-3. Keep only data → create `baseline-resume-data-minimal.json`
-4. Test: Load both files, verify resume generation still works
-5. Commit: `git commit -m "Phase 1.1: Split baseline files"`
+1. Install micromustache: `npm install micromustache`
+2. Create `lib/locked-templates.js` (template registry)
+3. Create `lib/template-expander.js` (expansion logic)
+4. Update `server.js` to use template expander
+5. Write tests in `tests/template-expander.test.js`
+6. Test: `npm test`
 
 **Expected outcome:**
-- 2 new files created
-- Original file can be archived
-- Token savings: ~800 tokens
-
-**Files to modify:**
-- `/home/virus/Documents/repo/per_wesite/job-prep/applications/_resources/baseline-resume-data.json` (read)
-- `/home/virus/Documents/repo/per_wesite/job-prep/applications/_resources/baseline-resume-rules.md` (create)
-- `/home/virus/Documents/repo/per_wesite/job-prep/applications/_resources/baseline-resume-data-minimal.json` (create)
-- `/home/virus/Documents/repo/per_wesite/.claude/agents/resume-agent.md` (update to load both files)
+- Template system working
+- Locked content never sent to LLM (only IDs)
+- Token savings: ~425 tokens
 
 **Command to start:**
 ```
-"Let's start Phase 1, Task 1.1: Split baseline resume files.
- Read the current baseline-resume-data.json and split it into rules and data."
+"Let's start Phase 1, Task 1.2: Template-based locked content.
+ Follow MASTER_PLAN.md Phase 1, Task 1.2 instructions.
+ First, cd to resumake-mcp and install micromustache."
 ```
 
 ---
