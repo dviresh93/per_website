@@ -4,9 +4,20 @@
   "_meta": {
     "profile": {
       "name": "Viresh Duvvuri",
-      "current_roles": ["AI Engineer", "Software Engineer", "Product Engineer", "Forward Deployed Engineer"],
+      "current_roles": [
+        "AI Engineer",
+        "Software Engineer",
+        "Product Engineer",
+        "Forward Deployed Engineer"
+      ],
       "years_experience": "5+ years software engineering, 2+ years AI/ML",
-      "core_expertise": ["Multi-agent systems", "LangChain", "RAG", "Production AI", "Embedded systems"],
+      "core_expertise": [
+        "Multi-agent systems",
+        "LangChain",
+        "RAG",
+        "Production AI",
+        "Embedded systems"
+      ],
       "transition": "Robotics/Embedded → Production AI Engineer"
     },
     "format_rules": {
@@ -14,7 +25,11 @@
       "project_count": 3,
       "project_bullet_format": "Problem/Solution/Impact",
       "date_format": "MM/YYYY",
-      "static_sections": ["lumenier", "york", "education"]
+      "static_sections": [
+        "lumenier",
+        "york",
+        "education"
+      ]
     },
     "LOCKED_CONTENT": {
       "freefly_bullets_2_3_4": "NEVER modify bullets 2-4. They match LinkedIn and show career progression.",
@@ -32,7 +47,7 @@
   "selectedTemplate": 1,
   "basics": {
     "name": "Viresh Duvvuri",
-    "summary": "AI Engineer building production software systems that solve real technical problems. Currently developing AI agents and automation tools using LangChain, MCP, and Python that improve operational efficiency by 50-80%. Recent work includes multi-agent systems for analytics and RAG-based diagnostic tools in production use. Experience spans full-stack development, embedded systems, and distributed applications across robotics and cloud platforms. 5+ years developing production systems across robotics, AI applications, and distributed systems.",
+    "summary": "AI Engineer with 7+ years of experience developing multi-modal agents for enterprise applications. Specialized in MLOps and building intelligent systems, from training TensorFlow/Keras models for object detection to deploying scalable RAG architectures on AWS. Proven track record of engineering data pipelines that detect anomalies and optimize complex workflows by 70%.",
     "email": "vireshduvvuri@gmail.com",
     "phone": "+1-509-964-5469",
     "website": "linkedin.com/in/viresh-duvvuri",
@@ -70,10 +85,10 @@
         "software_product_engineer": "Developed comprehensive diagnostic and analysis tools for engineering teams, independently designed and built AI-powered diagnostic tool using Python and modern LLM frameworks from requirements to production, improving customer self-service capabilities and team response times by 40%"
       },
       "highlights": [
-        "[CUSTOMIZABLE - Choose variation based on role from _variations above]",
-        "[LOCKED] Built automated systems to process complex technical data and identify system failures, developing knowledge base enhancements and support tools that streamlined operations",
-        "[LOCKED] Contributed to drone platform codebases implementing new features and optimizations for flight control systems and payload integration across multiple product lines, managed software integration projects from planning through release",
-        "[LOCKED] Led release management for drone platforms overseeing testing phases from alpha through production deployment, coordinating firmware updates and executing comprehensive testing protocols with cross-functional teams"
+        "Built AI-powered diagnostic tool for drone log analysis, fine-tuning small LLM models (Llama 3.2) to optimize query understanding and response generation. Processed flight data to identify system failures, serving 200+ daily users in production",
+        "Built automated systems to process complex technical data and identify system failures, developing knowledge base enhancements and support tools that streamlined operations",
+        "Contributed to drone platform codebases implementing new features and optimizations for flight control systems and payload integration across multiple product lines, managed software integration projects from planning through release",
+        "Led release management for drone platforms overseeing testing phases from alpha through production deployment, coordinating firmware updates and executing comprehensive testing protocols with cross-functional teams"
       ]
     },
     {
@@ -85,7 +100,7 @@
       "_LOCKED": "THESE 2 BULLETS ARE LOCKED - NEVER MODIFY - FROM TIMELINE.JSON",
       "_rule": "Shows embedded/robotics credibility with specific technical details, matches LinkedIn exactly",
       "highlights": [
-        "Wrote embedded code in C++ to integrate LiDAR and optical flow sensors for obstacle avoidance and position holding with/without GPS under various lighting conditions",
+        "Trained and deployed AI models for object detection and wrote embedded C++ code to integrate LiDAR/optical flow sensors, enabling robust obstacle avoidance and position holding in GPS-denied environments",
         "Collaborated with open-source flight control software maintainers for integration, testing, and deployment of autonomous flight algorithms, prototyped innovative features like toss-to-launch for product roadmap development"
       ]
     },
@@ -105,51 +120,42 @@
   ],
   "skills": [
     {
-      "name": "Programming",
-      "keywords": [
-        "Python",
-        "C++",
-        "C#",
-        "JavaScript",
-        "TypeScript",
-        "SQL",
-        "FastAPI",
-        "Flask",
-        "React",
-        "NumPy",
-        "Pandas",
-        "OOP"
-      ]
-    },
-    {
       "name": "AI/ML Frameworks",
       "keywords": [
+        "TensorFlow",
+        "Keras",
+        "Object Detection",
+        "Anomaly Detection",
         "Agentic AI",
+        "NLP",
+        "Microsoft Copilot Studio",
         "LangChain",
-        "LangGraph",
         "Multi-Agent Systems",
-        "MCP (Model Context Protocol)",
         "RAG",
-        "Context Engineering",
-        "Prompt Engineering",
-        "Model Evaluation",
-        "deepeval",
-        "LangSmith",
+        "MCP",
+        "AWS Bedrock",
+        "SageMaker",
         "MLOps",
         "Fine-tuning",
         "LoRA",
-        "PEFT",
         "GenAI",
         "FAISS",
-        "Pinecone",
         "PyTorch",
-        "TensorFlow",
         "Scikit-learn",
-        "Feature Engineering",
-        "Human-in-the-Loop (HIL)",
-        "Model Deployment",
-        "Responsible AI",
         "Vector Search"
+      ]
+    },
+    {
+      "name": "Data & Analytics",
+      "keywords": [
+        "Data Science",
+        "Data Pipelines",
+        "ETL",
+        "Data Processing",
+        "Enterprise Systems",
+        "Knowledge Graph",
+        "Operational Efficiency",
+        "Data Integration"
       ]
     },
     {
@@ -157,31 +163,28 @@
       "keywords": [
         "AWS",
         "Azure",
-        "GCP",
-        "API Design",
-        "Deployment",
-        "DevOps",
         "Docker",
         "Kubernetes",
+        "CI/CD",
+        "API Design",
+        "Deployment",
         "Monitoring",
-        "Performance Tuning",
-        "Scalability",
-        "Workflows"
+        "Scalability"
       ]
     },
     {
-      "name": "Data & Analytics",
+      "name": "Programming",
       "keywords": [
-        "Data Integration",
-        "Data Processing",
-        "Data Pipelines",
-        "ETL",
-        "Data Annotation",
-        "Data Science",
-        "Enterprise Integrations",
-        "Enterprise Systems",
-        "Knowledge Graph",
-        "Operational Efficiency"
+        "Python",
+        "C++",
+        "SQL",
+        "FastAPI",
+        "Flask",
+        "React",
+        "JavaScript",
+        "TypeScript",
+        "NumPy",
+        "Pandas"
       ]
     }
   ],
@@ -193,25 +196,49 @@
         "Solution: Developed A2A multi-agent system using LangChain orchestration and MCP where specialized agents coordinate tasks, implemented RAG with vector search (FAISS), monitored agent decision quality using LangSmith tracing and deepeval for retrieval assessment achieving 0.85+ context precision, built data pipeline to collect and annotate 500+ user queries for continuous model refinement, deployed on AWS with observability",
         "Impact: Enhanced analyst productivity by 70% through AI co-pilot that augments domain experts with automated workflows, implemented human-in-the-loop (HIL) evaluation and testing pipelines for production-ready AI systems with robust error handling through rapid iteration"
       ],
-      "keywords": ["LangChain", "MCP", "Multi-Agent Systems", "RAG", "FAISS", "AWS", "Python", "FastAPI"]
+      "keywords": [
+        "LangChain",
+        "MCP",
+        "Multi-Agent Systems",
+        "RAG",
+        "FAISS",
+        "AWS",
+        "Python",
+        "FastAPI"
+      ]
     },
     {
       "name": "Production System Optimization Tool",
       "highlights": [
         "Problem: Manual system analysis taking hours of expert time, creating bottlenecks in product development and customer support resolution",
-        "Solution: Built full-stack application with React frontend, Python Flask backend, integrated foundation model APIs (Ollama and Llama 3.2) for real-time log processing and interactive analysis using prompt engineering and model evaluation",
+        "Solution: Built full-stack anomaly detection application with React frontend and Python Flask backend, integrating foundation models (Ollama, Llama 3.2) to process drone telemetry data and identify system failures, implementing automated pattern recognition algorithms",
         "Impact: Transformed expert analysis from hours to minutes, deployed to production serving 200+ daily queries with significant performance improvements through rapid iteration and continuous optimization"
       ],
-      "keywords": ["React", "Python", "Flask", "Ollama", "Llama", "RAG", "Production Deployment"]
+      "keywords": [
+        "React",
+        "Python",
+        "Flask",
+        "Ollama",
+        "Llama",
+        "Anomaly Detection",
+        "Production Deployment"
+      ]
     },
     {
-      "name": "AI Travel Planner Agent",
+      "name": "Autonomous Obstacle Avoidance System",
       "highlights": [
-        "Problem: Manual travel planning requiring hours of research across multiple sources with inconsistent and outdated information",
-        "Solution: Built AI agent using Claude 3.5 Sonnet, LangChain, Streamlit, and DuckDuckGo Search API for personalized itinerary generation using prompt engineering techniques",
-        "Impact: Demonstrated end-to-end AI application development, learned conversational AI patterns and real-time data integration techniques through iterative development"
+        "Problem: Drone platforms required robust safety mechanisms to detect and avoid obstacles in real-time during autonomous flight missions",
+        "Solution: Trained and deployed TensorFlow/Keras object detection models on embedded edge devices, tuning control algorithms based on computer vision inputs to execute evasive maneuvers with low latency",
+        "Impact: Delivered a critical safety feature for autonomous flight systems, enabling safe operation in complex environments and reducing collision risks by significant margins"
       ],
-      "keywords": ["Claude", "LangChain", "Streamlit", "Python", "API Integration"]
+      "keywords": [
+        "TensorFlow",
+        "Keras",
+        "Object Detection",
+        "Embedded AI",
+        "Computer Vision",
+        "Control Systems"
+      ]
     }
   ],
   "education": [

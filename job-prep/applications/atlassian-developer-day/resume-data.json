@@ -1,0 +1,180 @@
+{
+  "selectedTemplate": 1,
+  "basics": {
+    "name": "Viresh Duvvuri",
+    "summary": "Software Engineer specializing in AI/ML systems and backend infrastructure, with 5+ years building production applications from concept to deployment. Experienced in multi-agent AI systems, RESTful APIs, CI/CD pipelines, and cloud infrastructure (AWS). Led cross-functional teams deploying GenAI solutions and scalable backend platforms that improved efficiency by 50-80%, serving 200+ daily users with focus on reliability, monitoring, and operational excellence.",
+    "email": "vireshduvvuri@gmail.com",
+    "phone": "+1-509-964-5469",
+    "website": "linkedin.com/in/viresh-duvvuri",
+    "location": {
+      "address": "Seattle, WA"
+    }
+  },
+  "work": [
+    {
+      "company": "Grid CoOperator",
+      "position": "AI Engineer",
+      "location": "Seattle, WA",
+      "startDate": "Mar 2025",
+      "endDate": "Present",
+      "highlights": [
+        "Led design and deployment of domain-specific agentic AI agents for smart grid analytics, collaborating cross-functionally with business stakeholders to translate operational requirements into multi-agent systems using LangChain orchestration and prompt engineering strategies that reduced analyst workflows by 70% within 2 months through rapid iteration",
+        "Architected AI orchestration system where specialized agents communicate and coordinate for complex analytics tasks, deployed on AWS with observability and cost monitoring, established model evaluation pipelines tracking quality metrics, latency, and performance to achieve reliable enterprise performance within 6 weeks across 50-100 daily queries",
+        "Deployed production AI system to cloud infrastructure with CI/CD pipelines, monitoring, and performance optimization, accelerating deliverables by 60% within first quarter through rapid experimentation, iterative prompt engineering, and continuous improvement"
+      ]
+    },
+    {
+      "company": "Freefly Systems",
+      "position": "Senior Software Engineer",
+      "location": "Woodinville, WA",
+      "startDate": "Nov 2021",
+      "endDate": "Oct 2025",
+      "highlights": [
+        "Built and deployed GenAI-powered agent for automated log analysis from concept to production, integrating foundation model APIs (Ollama, Llama 3.2) with evaluation frameworks and model governance practices, serving 200+ daily queries",
+        "Built automated systems to process complex technical data and identify system failures, developing knowledge base enhancements and support tools that streamlined operations",
+        "Contributed to drone platform codebases implementing new features and optimizations for flight control systems and payload integration across multiple product lines, managed software integration projects from planning through release",
+        "Led release management for drone platforms overseeing testing phases from alpha through production deployment, coordinating firmware updates and executing comprehensive testing protocols with cross-functional teams"
+      ]
+    },
+    {
+      "company": "Lumenier",
+      "position": "Drone Software Developer",
+      "location": "Sarasota, FL",
+      "startDate": "Jul 2020",
+      "endDate": "Oct 2021",
+      "highlights": [
+        "Wrote embedded code in C++ to integrate LiDAR and optical flow sensors for obstacle avoidance and position holding with/without GPS under various lighting conditions",
+        "Collaborated with open-source flight control software maintainers for integration, testing, and deployment of autonomous flight algorithms, prototyped innovative features like toss-to-launch for product roadmap development"
+      ]
+    },
+    {
+      "company": "York Exponential",
+      "position": "Software Engineer - R&D",
+      "location": "York, PA",
+      "startDate": "Aug 2018",
+      "endDate": "May 2020",
+      "highlights": [
+        "Developed prototype software for in-house autonomous surveillance mobile robots using ROS2, SLAM, and computer vision technologies",
+        "Built Human Machine Interface for Universal Robot welding applications using Python and Kivy framework, implemented multi-robot control systems with platform independence"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "name": "Programming & Development",
+      "keywords": [
+        "Python",
+        "JavaScript",
+        "TypeScript",
+        "C++",
+        "SQL",
+        "FastAPI",
+        "Flask",
+        "React",
+        "REST APIs",
+        "API Design",
+        "NumPy",
+        "Pandas",
+        "OOP"
+      ]
+    },
+    {
+      "name": "AI/ML Frameworks",
+      "keywords": [
+        "Agentic AI",
+        "LangChain",
+        "LangGraph",
+        "Multi-Agent Systems",
+        "MCP (Model Context Protocol)",
+        "RAG",
+        "Context Engineering",
+        "Prompt Engineering",
+        "Model Evaluation",
+        "MLOps",
+        "GenAI",
+        "FAISS",
+        "Pinecone",
+        "PyTorch",
+        "TensorFlow",
+        "Scikit-learn",
+        "Vector Search"
+      ]
+    },
+    {
+      "name": "Cloud & DevOps",
+      "keywords": [
+        "AWS",
+        "Azure",
+        "Docker",
+        "CI/CD",
+        "Kubernetes",
+        "NGINX",
+        "Deployment",
+        "DevOps",
+        "Monitoring",
+        "Observability",
+        "Performance Tuning",
+        "Scalability"
+      ]
+    },
+    {
+      "name": "Data & Integration",
+      "keywords": [
+        "Data Processing",
+        "Data Integration",
+        "Enterprise Integrations",
+        "Enterprise Systems",
+        "Data Science",
+        "Knowledge Graph",
+        "Operational Efficiency"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "GridCOP: Smart Grid Analytics Agent",
+      "highlights": [
+        "Problem: Power grid analysts needed automated database querying and intelligent insights to understand complex data patterns beyond basic visualizations",
+        "Solution: Developed A2A multi-agent system using LangChain orchestration and MCP where specialized agents coordinate tasks through prompt engineering strategies, implemented RAG and vector search (FAISS) for intelligent querying, implemented model evaluation frameworks to monitor quality and cost metrics, deployed on AWS with observability and logging",
+        "Impact: Enhanced analyst productivity by 70% through AI co-pilot that augments domain experts with automated workflows, implemented human-in-the-loop (HIL) evaluation and testing pipelines for production-ready AI systems with robust error handling through rapid iteration"
+      ],
+      "keywords": ["LangChain", "MCP", "Multi-Agent Systems", "RAG", "FAISS", "AWS", "Python", "FastAPI"]
+    },
+    {
+      "name": "Automated Drone Diagnostics System",
+      "highlights": [
+        "Problem: Manual analysis of drone flight logs required deep expertise and took hours per incident, limiting support team scalability and slowing customer issue resolution",
+        "Solution: Developed full-stack application (React + Flask) with GenAI-powered analysis engine using Ollama and Llama 3.2, implemented RAG for context-aware diagnostic recommendations and failure pattern recognition",
+        "Impact: Automated 80% of routine diagnostics, serving 200+ daily queries, enabling support team to handle 3x more cases with faster resolution times"
+      ],
+      "keywords": ["React", "Python", "Flask", "Ollama", "Llama", "RAG", "Production Deployment"]
+    },
+    {
+      "name": "Embedded Flight Control Systems",
+      "highlights": [
+        "Problem: Autonomous drone systems required real-time flight control with sensor integration and reliable performance in varied conditions",
+        "Solution: Developed embedded C++ software for PX4 flight controller integrating LiDAR and optical flow sensors, implemented obstacle avoidance and position control algorithms, collaborated with open-source maintainers for testing and deployment",
+        "Impact: Delivered production-ready autonomous flight capabilities, demonstrated strong systems engineering skills with real-time constraints, performance optimization, and cross-team collaboration"
+      ],
+      "keywords": ["C++", "PX4", "Embedded Systems", "Real-time", "Sensor Integration", "Git Collaboration"]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Washington State University",
+      "area": "Computer Science",
+      "studyType": "Master of Science",
+      "startDate": "Jan 2015",
+      "endDate": "Jan 2017",
+      "location": "Pullman, WA"
+    },
+    {
+      "institution": "GITAM University",
+      "area": "Information Technology",
+      "studyType": "Bachelor of Technology",
+      "startDate": "Jan 2011",
+      "endDate": "Jan 2015",
+      "location": "Visakhapatnam, India"
+    }
+  ]
+}

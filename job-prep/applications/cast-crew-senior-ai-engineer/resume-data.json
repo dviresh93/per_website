@@ -1,0 +1,194 @@
+{
+  "_comment": "CUSTOMIZED FOR: Cast & Crew - Senior AI Software Engineer | Emphasizes: MCP, chatbots, multi-agent, explainable AI",
+  "_customization_notes": {
+    "key_differentiators": [
+      "Model Context Protocol (MCP) - they specifically require this, rare skill",
+      "Production chatbot (Freefly: 200+ daily users)",
+      "Multi-agent orchestration (GridCOP with LangChain)",
+      "Explainable AI (confidence scoring, transparent decisions)"
+    ],
+    "emphasis_order": ["MCP", "Context-aware chatbots", "Multi-agent systems", "Explainable AI", "Production experience"],
+    "customized_sections": ["summary", "gridcop_bullets", "freefly_bullet_1", "skills_order", "projects"]
+  },
+  "selectedTemplate": 1,
+  "basics": {
+    "name": "Viresh Duvvuri",
+    "summary": "AI Engineer specializing in production AI systems with Model Context Protocol (MCP), context-aware chatbots, and multi-agent orchestration. 5+ years developing GenAI solutions including AI assistants serving 200+ daily users, explainable AI features, and intelligent task automation. Expert in LangChain, RAG, and deploying transparent, user-facing AI experiences on AWS that improve workflow efficiency by 50-80%.",
+    "email": "vireshduvvuri@gmail.com",
+    "phone": "+1-509-964-5469",
+    "website": "linkedin.com/in/viresh-duvvuri",
+    "location": {
+      "address": "Seattle, WA"
+    }
+  },
+  "work": [
+    {
+      "company": "Grid CoOperator",
+      "position": "AI Engineer",
+      "location": "Seattle, WA",
+      "startDate": "Mar 2025",
+      "endDate": "Present",
+      "highlights": [
+        "Architected multi-agent AI system using LangChain and Model Context Protocol (MCP) for smart grid analytics, where specialized agents coordinate complex workflows and maintain long-lived context across user interactions, implementing explainable AI with confidence scoring and transparent decision reasoning that reduced analyst workflows by 70% within 2 months",
+        "Built context-aware AI assistant that proactively surfaces recommendations, automates data retrieval, and provides interactive analytics through natural language queries over structured grid data, deployed on AWS (Lambda, DynamoDB) with observability tracking quality metrics, latency, and user satisfaction across 50-100 daily queries",
+        "Implemented production AI features with human-in-the-loop validation, model evaluation pipelines, and MLOps best practices, establishing robust error handling and graceful degradation patterns that achieve 99%+ uptime and accelerated deliverables by 60% through rapid iteration"
+      ]
+    },
+    {
+      "company": "Freefly Systems",
+      "position": "Senior Software Engineer",
+      "location": "Woodinville, WA",
+      "startDate": "Nov 2021",
+      "endDate": "Oct 2025",
+      "highlights": [
+        "Built and deployed context-aware AI chatbot for automated diagnostic analysis, integrating foundation model APIs (Ollama, Llama 3.2) with RAG and vector embeddings, implementing explainable AI features (source citations, confidence scoring) that provide transparent insights to users, serving 200+ daily queries in production with 80% reduction in analysis time",
+        "Built automated systems to process complex technical data and identify system failures, developing knowledge base enhancements and support tools that streamlined operations",
+        "Contributed to drone platform codebases implementing new features and optimizations for flight control systems and payload integration across multiple product lines, managed software integration projects from planning through release",
+        "Led release management for drone platforms overseeing testing phases from alpha through production deployment, coordinating firmware updates and executing comprehensive testing protocols with cross-functional teams"
+      ]
+    },
+    {
+      "company": "Lumenier",
+      "position": "Drone Software Developer",
+      "location": "Sarasota, FL",
+      "startDate": "Jul 2020",
+      "endDate": "Oct 2021",
+      "highlights": [
+        "Wrote embedded code in C++ to integrate LiDAR and optical flow sensors for obstacle avoidance and position holding with/without GPS under various lighting conditions",
+        "Collaborated with open-source flight control software maintainers for integration, testing, and deployment of autonomous flight algorithms, prototyped innovative features like toss-to-launch for product roadmap development"
+      ]
+    },
+    {
+      "company": "York Exponential",
+      "position": "Software Engineer - R&D",
+      "location": "York, PA",
+      "startDate": "Aug 2018",
+      "endDate": "May 2020",
+      "highlights": [
+        "Developed prototype software for in-house autonomous surveillance mobile robots using ROS2, SLAM, and computer vision technologies",
+        "Built Human Machine Interface for Universal Robot welding applications using Python and Kivy framework, implemented multi-robot control systems with platform independence"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "name": "AI/ML & Orchestration",
+      "keywords": [
+        "Model Context Protocol (MCP)",
+        "LangChain",
+        "LangGraph",
+        "Multi-Agent Systems",
+        "Agentic AI",
+        "RAG (Retrieval-Augmented Generation)",
+        "Context Engineering",
+        "Prompt Engineering",
+        "Explainable AI (XAI)",
+        "Model Evaluation",
+        "MLOps",
+        "LLMs (GPT-4, Claude, Llama)",
+        "Embeddings",
+        "Vector Search (FAISS, Pinecone)",
+        "Human-in-the-Loop (HIL)"
+      ]
+    },
+    {
+      "name": "Programming & Backend",
+      "keywords": [
+        "Python",
+        "JavaScript",
+        "TypeScript",
+        "Node.js",
+        "FastAPI",
+        "Flask",
+        "SQL",
+        "PostgreSQL",
+        "Redis",
+        "C++",
+        "NumPy",
+        "Pandas"
+      ]
+    },
+    {
+      "name": "Cloud & Deployment",
+      "keywords": [
+        "AWS (Lambda, SageMaker, Bedrock, DynamoDB, S3)",
+        "Azure",
+        "Docker",
+        "Kubernetes",
+        "CI/CD",
+        "API Design",
+        "Monitoring",
+        "Performance Tuning",
+        "Scalability"
+      ]
+    },
+    {
+      "name": "Frontend & UX",
+      "keywords": [
+        "React",
+        "Streamlit",
+        "Interactive Dashboards",
+        "Data Visualization",
+        "User-Facing AI"
+      ]
+    },
+    {
+      "name": "Data & Analytics",
+      "keywords": [
+        "Time-Series Analysis",
+        "Data Processing",
+        "Knowledge Graphs",
+        "Forecasting",
+        "Analytics Pipelines",
+        "Data Integration"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "GridCOP: Multi-Agent AI Assistant with MCP",
+      "highlights": [
+        "Problem: Power grid analysts needed intelligent automation for complex workflows—querying databases, analyzing patterns, generating forecasts—with transparent, explainable decisions",
+        "Solution: Architected multi-agent system using LangChain and Model Context Protocol (MCP) where specialized agents coordinate tasks, maintain context across interactions, and provide explainable recommendations. Implemented RAG with vector search (FAISS), confidence scoring for transparent AI decisions, and interactive analytics dashboards. Deployed on AWS with MLOps pipelines for monitoring quality, latency, and cost",
+        "Impact: 70% reduction in analyst workflows, 50-100 daily queries, 99%+ uptime. Demonstrated production-ready explainable AI with human-in-the-loop validation and robust error handling through rapid iteration"
+      ],
+      "keywords": ["LangChain", "MCP", "Multi-Agent", "Explainable AI", "RAG", "FAISS", "AWS Lambda", "Python", "FastAPI", "Interactive Analytics"]
+    },
+    {
+      "name": "AI Diagnostic Chatbot for Engineering Teams",
+      "highlights": [
+        "Problem: Manual system diagnostics taking hours of expert analysis, creating bottlenecks in product development and customer support",
+        "Solution: Built production context-aware chatbot with React frontend and Python Flask backend, integrated foundation model APIs (Ollama, Llama 3.2) with RAG for natural language queries over technical logs. Implemented explainable AI features: source citations, confidence scoring, transparent reasoning traces. Deployed with session management and real-time streaming responses",
+        "Impact: Transformed hours of analysis into minutes, 200+ daily users in production, 80% time reduction. Proved value of user-facing AI with transparent, trustworthy insights"
+      ],
+      "keywords": ["React", "Python", "Flask", "Ollama", "Llama", "RAG", "Chatbot", "Explainable AI", "Production Deployment", "Context Management"]
+    },
+    {
+      "name": "AI Travel Planning Agent",
+      "highlights": [
+        "Problem: Travel planning requiring hours of research across fragmented sources with inconsistent information",
+        "Solution: Developed AI agent using Claude 3.5 Sonnet, LangChain orchestration, and real-time web search integration (DuckDuckGo API) for personalized itinerary generation. Implemented conversational interface with Streamlit for interactive user experience",
+        "Impact: End-to-end demonstration of AI agent development, conversational AI patterns, API integration, and iterative prompt engineering for user-facing applications"
+      ],
+      "keywords": ["Claude", "LangChain", "Streamlit", "Python", "API Integration", "Conversational AI", "Task Automation"]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Washington State University",
+      "area": "Computer Science",
+      "studyType": "Master of Science",
+      "startDate": "Jan 2015",
+      "endDate": "Jan 2017",
+      "location": "Pullman, WA"
+    },
+    {
+      "institution": "GITAM University",
+      "area": "Information Technology",
+      "studyType": "Bachelor of Technology",
+      "startDate": "Jan 2011",
+      "endDate": "Jan 2015",
+      "location": "Visakhapatnam, India"
+    }
+  ]
+}

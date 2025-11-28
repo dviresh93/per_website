@@ -69,3 +69,6 @@ Thumbs.db
 # Local development
 .local
 .cache
+
+# Separate git repository (resume-memory-mcp)
+resume-memory-mcp/

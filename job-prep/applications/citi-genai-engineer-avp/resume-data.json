@@ -1,0 +1,209 @@
+{
+  "_comment": "Customized for Citi - Generative AI Engineer - AVP | Focus: RAG, Agentic AI, LangChain, MLOps, Production GenAI",
+  "selectedTemplate": 1,
+  "basics": {
+    "name": "Viresh Duvvuri",
+    "label": "Generative AI Engineer",
+    "summary": "AI Engineer specializing in production Generative AI systems with expertise in Retrieval Augmented Generation (RAG), agentic AI architectures, and LLM integration. Proven track record deploying end-to-end GenAI solutions using LangChain, vector databases, and MLOps practices that reduced analyst workflows by 70% and manual processes by 80%. Experienced in cross-functional collaboration, prompt engineering, and building scalable AI systems on cloud infrastructure with robust evaluation metrics and monitoring.",
+    "email": "vireshduvvuri@gmail.com",
+    "phone": "+1-509-964-5469",
+    "website": "linkedin.com/in/viresh-duvvuri",
+    "location": {
+      "address": "Seattle, WA"
+    }
+  },
+  "work": [
+    {
+      "company": "Grid CoOperator",
+      "position": "AI Engineer",
+      "location": "Seattle, WA",
+      "startDate": "Mar 2025",
+      "endDate": "Present",
+      "highlights": [
+        "Led design and deployment of domain-specific agentic AI agents for smart grid analytics, collaborating cross-functionally with business stakeholders to translate operational requirements into multi-agent systems using LangChain orchestration and prompt engineering strategies that reduced analyst workflows by 70% within 2 months through rapid iteration",
+        "Architected AI orchestration system where specialized agents communicate and coordinate for complex analytics tasks, deployed on AWS with observability and cost monitoring, established model evaluation pipelines tracking quality metrics, latency, and performance to achieve reliable enterprise performance within 6 weeks across 50-100 daily queries",
+        "Deployed production AI system to cloud infrastructure with CI/CD pipelines, monitoring, and performance optimization, accelerating deliverables by 60% within first quarter through rapid experimentation, iterative prompt engineering, and continuous improvement"
+      ]
+    },
+    {
+      "company": "Freefly Systems",
+      "position": "Senior Software Engineer",
+      "location": "Woodinville, WA",
+      "startDate": "Nov 2021",
+      "endDate": "Oct 2025",
+      "highlights": [
+        "Built AI co-pilot for automated log analysis using React, Python Flask, and foundation model APIs (Ollama, Llama 3.2), deployed to production on cloud infrastructure with model evaluation metrics and monitoring, reducing manual workflows by 80% within 3 months through rapid iteration and prompt engineering",
+        "Coordinated cross-functional projects translating business requirements into technical solutions, implementing software design principles and testing frameworks across engineering divisions",
+        "Enhanced flight control systems with microservices architecture and CI/CD pipelines, improving deployment efficiency by 60% over 6 months"
+      ]
+    },
+    {
+      "company": "Lumenier",
+      "position": "Software Engineer - Embedded Systems",
+      "location": "Sarasota, FL",
+      "startDate": "Jul 2020",
+      "endDate": "Oct 2021",
+      "highlights": [
+        "Implemented custom software using C++ and data structures for specialized applications, enabling autonomous capabilities within 8 weeks",
+        "Enhanced system performance through algorithms and data ingestion pipelines, improving operational efficiency by 45% across environments",
+        "Architected testing frameworks with software design principles, reducing implementation issues by 30% within 3 months"
+      ]
+    },
+    {
+      "company": "York Exponential",
+      "position": "Software Engineer - R&D",
+      "location": "York, PA",
+      "startDate": "Aug 2018",
+      "endDate": "May 2020",
+      "highlights": [
+        "Created Human Machine Interface for collaborative welding using Python, Kivy, and ROS2, reducing operator programming complexity by 50% within 4 months",
+        "Developed autonomous robot prototype using computer vision and machine learning from requirements to working deployment"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "name": "Programming",
+      "keywords": [
+        "Python",
+        "TensorFlow",
+        "PyTorch",
+        "Scikit-learn",
+        "Pandas",
+        "NumPy",
+        "FastAPI",
+        "Flask",
+        "SQL",
+        "JavaScript",
+        "TypeScript",
+        "React",
+        "C++",
+        "OOP"
+      ]
+    },
+    {
+      "name": "Generative AI & LLMs",
+      "keywords": [
+        "RAG (Retrieval Augmented Generation)",
+        "LangChain",
+        "LlamaIndex",
+        "Agentic AI",
+        "LangGraph",
+        "Multi-Agent Systems",
+        "Large Language Models (LLMs)",
+        "Prompt Engineering",
+        "Fine-tuning",
+        "Model Evaluation",
+        "MLOps",
+        "Vector Databases",
+        "Vector Search",
+        "FAISS",
+        "Pinecone",
+        "Context Engineering",
+        "MCP (Model Context Protocol)",
+        "GenAI",
+        "Transformer Models",
+        "Human-in-the-Loop (HIL)",
+        "Model Deployment",
+        "Responsible AI"
+      ]
+    },
+    {
+      "name": "Cloud & Infrastructure",
+      "keywords": [
+        "AWS",
+        "Azure",
+        "GCP",
+        "API Design",
+        "Deployment",
+        "DevOps",
+        "Docker",
+        "Kubernetes",
+        "Monitoring",
+        "Performance Tuning",
+        "Scalability",
+        "CI/CD",
+        "Workflows"
+      ]
+    },
+    {
+      "name": "Data Science & Analytics",
+      "keywords": [
+        "Data Processing",
+        "Data Integration",
+        "Data Science",
+        "Feature Engineering",
+        "Knowledge Graph",
+        "Enterprise Integrations",
+        "Enterprise Systems",
+        "Operational Efficiency"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "GridCOP: Smart Grid Analytics Agent",
+      "highlights": [
+        "Problem: Power grid analysts needed automated database querying and intelligent insights to understand complex data patterns beyond basic visualizations",
+        "Solution: Developed A2A multi-agent system using LangChain orchestration and MCP where specialized agents coordinate tasks through prompt engineering strategies, implemented RAG and vector search (FAISS) for intelligent querying, implemented model evaluation frameworks to monitor quality and cost metrics, deployed on AWS with observability and logging",
+        "Impact: Enhanced analyst productivity by 70% through AI co-pilot that augments domain experts with automated workflows, implemented human-in-the-loop (HIL) evaluation and testing pipelines for production-ready AI systems with robust error handling through rapid iteration"
+      ],
+      "keywords": ["LangChain", "MCP", "Multi-Agent Systems", "RAG", "FAISS", "AWS", "Python", "FastAPI"]
+    },
+    {
+      "name": "Production System Optimization Tool",
+      "highlights": [
+        "Problem: Manual system analysis taking hours of expert time, creating bottlenecks in product development and customer support resolution",
+        "Solution: Built full-stack application with React frontend, Python Flask backend, integrated foundation model APIs (Ollama and Llama 3.2) for real-time log processing and interactive analysis using prompt engineering and model evaluation",
+        "Impact: Transformed expert analysis from hours to minutes, deployed to production serving 200+ daily queries with significant performance improvements through rapid iteration and continuous optimization"
+      ],
+      "keywords": ["React", "Python", "Flask", "Ollama", "Llama", "RAG", "Production Deployment"]
+    },
+    {
+      "name": "AI Travel Planner Agent",
+      "highlights": [
+        "Problem: Manual travel planning requiring hours of research across multiple sources with inconsistent and outdated information",
+        "Solution: Built AI agent using Claude 3.5 Sonnet, LangChain, Streamlit, and DuckDuckGo Search API for personalized itinerary generation using prompt engineering techniques",
+        "Impact: Demonstrated end-to-end AI application development, learned conversational AI patterns and real-time data integration techniques through iterative development"
+      ],
+      "keywords": ["Claude", "LangChain", "Streamlit", "Python", "API Integration"]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Washington State University",
+      "area": "Computer Science",
+      "studyType": "Master of Science",
+      "startDate": "Jan 2015",
+      "endDate": "Jan 2017",
+      "location": "Pullman, WA"
+    },
+    {
+      "institution": "GITAM University",
+      "area": "Information Technology",
+      "studyType": "Bachelor of Technology",
+      "startDate": "Jan 2011",
+      "endDate": "Jan 2015",
+      "location": "Visakhapatnam, India"
+    }
+  ],
+  "_notes": {
+    "customization_summary": "Citi GenAI Engineer - Prioritized RAG, agentic AI, LangChain, vector databases, MLOps. All projects highly relevant.",
+    "key_alignments": [
+      "RAG expertise (Drone Log Analysis + GridCOP)",
+      "Agentic AI (GridCOP multi-agent system)",
+      "LangChain/LlamaIndex frameworks",
+      "Production deployment with MLOps",
+      "Vector databases (FAISS, Pinecone)",
+      "Prompt engineering & fine-tuning",
+      "Python ML stack (TensorFlow, PyTorch, scikit-learn)",
+      "Cross-functional collaboration",
+      "End-to-end GenAI solutions"
+    ],
+    "gaps_addressed": [
+      "Finance domain - positioned as transferable from robotics/embedded complex data",
+      "Table transformers - emphasize quick learning + strong ML foundation",
+      "Cloud platforms - highlighted AWS, added Azure/GCP to skills"
+    ]
+  }
+}

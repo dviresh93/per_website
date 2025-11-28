@@ -1,0 +1,238 @@
+{
+  "_comment": "TEMPLATE - Copy this file to your application folder and customize | This contains real baseline content, not placeholders | Start here for new applications",
+  "selectedTemplate": 1,
+  "basics": {
+    "name": "Viresh Duvvuri",
+    "label": "Senior AI Engineer",
+    "summary": "Senior AI Engineer with 7+ years of experience architecting intelligent solutions and building production-grade systems. Background in engineering robotics systems and embedded control, now focused on designing scalable multi-agent ecosystems and optimizing AI infrastructure. Proven track record of leading cross-functional teams to deliver enterprise solutions that solve complex technical problems.",
+    "email": "vireshduvvuri@gmail.com",
+    "phone": "+1-509-964-5469",
+    "website": "linkedin.com/in/viresh-duvvuri",
+    "location": {
+      "address": "Seattle, WA"
+    }
+  },
+  "work": [
+    {
+      "company": "Grid CoOperator",
+      "position": "AI Engineer",
+      "location": "Seattle, WA",
+      "startDate": "Mar 2025",
+      "endDate": "Present",
+      "highlights": [
+        "Architected and deployed domain-specific agentic AI agents for smart grid analytics, collaborating cross-functionally with business stakeholders to translate operational requirements into multi-agent systems using LangChain orchestration and prompt engineering strategies that reduced analyst workflows by 70% within 2 months through rapid iteration",
+        "Designed AI orchestration system where specialized agents communicate and coordinate for complex analytics tasks, deployed on AWS with observability and cost monitoring, established model evaluation pipelines tracking quality metrics, latency, and performance to achieve reliable enterprise performance within 6 weeks across 50-100 daily queries",
+        "Defined technical strategy for production AI system on cloud infrastructure with CI/CD pipelines, monitoring, and performance optimization, accelerating deliverables by 60% within first quarter through rapid experimentation, iterative prompt engineering, and continuous improvement"
+      ]
+    },
+    {
+      "company": "Freefly Systems",
+      "position": "Senior Software Engineer",
+      "location": "Woodinville, WA",
+      "startDate": "Nov 2021",
+      "endDate": "Oct 2025",
+      "highlights": [
+        "Built AI co-pilot for automated log analysis using React, Python Flask, and foundation model APIs (Ollama, Llama 3.2), deployed to production on cloud infrastructure with model evaluation metrics and monitoring, reducing manual workflows by 80% within 3 months through rapid iteration and prompt engineering",
+        "Coordinated cross-functional projects translating business requirements into technical solutions, implementing software design principles and testing frameworks across engineering divisions, supporting product roadmap development and stakeholder demos",
+        "Enhanced flight control systems with microservices architecture and CI/CD pipelines, improving deployment efficiency by 60% over 6 months",
+        "Led release management for drone platforms overseeing testing phases from alpha through production deployment, coordinating firmware updates and executing comprehensive testing protocols with cross-functional teams"
+      ]
+    },
+    {
+      "company": "Lumenier",
+      "position": "Software Engineer - Embedded Systems",
+      "location": "Sarasota, FL",
+      "startDate": "Jul 2020",
+      "endDate": "Oct 2021",
+      "highlights": [
+        "Implemented custom software using C++ and data structures for specialized applications, enabling autonomous capabilities within 8 weeks, prototyping innovative features for product roadmap development",
+        "Enhanced system performance through algorithms and data ingestion pipelines, improving operational efficiency by 45% across environments",
+        "Architected testing frameworks with software design principles, reducing implementation issues by 30% within 3 months"
+      ]
+    },
+    {
+      "company": "York Exponential",
+      "position": "Software Engineer - R&D",
+      "location": "York, PA",
+      "startDate": "Aug 2018",
+      "endDate": "May 2020",
+      "highlights": [
+        "Created Human Machine Interface for collaborative welding using Python, Kivy, and ROS2, reducing operator programming complexity by 50% within 4 months",
+        "Developed autonomous robot prototype using computer vision and machine learning from requirements to working deployment"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "name": "Programming",
+      "keywords": [
+        "Python",
+        "C++",
+        "JavaScript",
+        "TypeScript",
+        "SQL",
+        "FastAPI",
+        "Flask",
+        "React",
+        "NumPy",
+        "Pandas",
+        "OOP"
+      ]
+    },
+    {
+      "name": "AI/ML Frameworks",
+      "keywords": [
+        "System Design",
+        "Solution Architecture",
+        "Technical Strategy",
+        "Stakeholder Management",
+        "Compliance",
+        "Regulatory Requirements",
+        "Agentic AI",
+        "LangChain",
+        "LangGraph",
+        "Multi-Agent Systems",
+        "MCP (Model Context Protocol)",
+        "RAG",
+        "Context Engineering",
+        "Prompt Engineering",
+        "Model Evaluation",
+        "MLOps",
+        "GenAI",
+        "FAISS",
+        "Pinecone",
+        "PyTorch",
+        "TensorFlow",
+        "Scikit-learn",
+        "Feature Engineering",
+        "Human-in-the-Loop (HIL)",
+        "Model Deployment",
+        "Responsible AI",
+        "Vector Search"
+      ]
+    },
+    {
+      "name": "Cloud & Infrastructure",
+      "keywords": [
+        "AWS",
+        "Azure",
+        "API Design",
+        "Deployment",
+        "DevOps",
+        "Docker",
+        "Kubernetes",
+        "Monitoring",
+        "Performance Tuning",
+        "Scalability",
+        "Workflows"
+      ]
+    },
+    {
+      "name": "Data & Analytics",
+      "keywords": [
+        "Data Integration",
+        "Data Processing",
+        "Data Science",
+        "Enterprise Integrations",
+        "Enterprise Systems",
+        "Knowledge Graph",
+        "Operational Efficiency"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "GridCOP: Smart Grid Analytics Agent",
+      "highlights": [
+        "Problem: Power grid analysts needed automated database querying and intelligent insights to understand complex data patterns beyond basic visualizations",
+        "Solution: Developed A2A multi-agent system using LangChain orchestration and MCP where specialized agents coordinate tasks through prompt engineering strategies, implemented RAG and vector search (FAISS) for intelligent querying, implemented model evaluation frameworks to monitor quality and cost metrics, deployed on AWS with observability and logging",
+        "Impact: Enhanced analyst productivity by 70% through AI co-pilot that augments domain experts with automated workflows, implemented human-in-the-loop (HIL) evaluation and testing pipelines for production-ready AI systems with robust error handling through rapid iteration"
+      ],
+      "keywords": [
+        "LangChain",
+        "MCP",
+        "Multi-Agent Systems",
+        "RAG",
+        "FAISS",
+        "AWS",
+        "Python",
+        "FastAPI"
+      ]
+    },
+    {
+      "name": "Enterprise AI Architecture Optimization",
+      "highlights": [
+        "Problem: Manual system analysis taking hours of expert time, creating bottlenecks in product development and customer support resolution",
+        "Solution: Built full-stack application with React frontend, Python Flask backend, integrated foundation model APIs (Ollama and Llama 3.2) for real-time log processing and interactive analysis using prompt engineering and model evaluation",
+        "Impact: Transformed expert analysis from hours to minutes, deployed to production serving 200+ daily queries with significant performance improvements through rapid iteration and continuous optimization"
+      ],
+      "keywords": [
+        "React",
+        "Python",
+        "Flask",
+        "Ollama",
+        "Llama",
+        "RAG",
+        "Production Deployment"
+      ]
+    },
+    {
+      "name": "Autonomous Obstacle Avoidance System",
+      "highlights": [
+        "Problem: Drone platforms required robust safety mechanisms to detect and avoid obstacles in real-time during autonomous flight missions",
+        "Solution: Trained and deployed TensorFlow/Keras object detection models on embedded edge devices, tuning control algorithms based on computer vision inputs to execute evasive maneuvers with low latency",
+        "Impact: Delivered a critical safety feature for autonomous flight systems, enabling safe operation in complex environments and reducing collision risks by significant margins"
+      ],
+      "keywords": [
+        "TensorFlow",
+        "Keras",
+        "Object Detection",
+        "Embedded AI",
+        "Computer Vision",
+        "Control Systems"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Washington State University",
+      "area": "Computer Science",
+      "studyType": "Master of Science",
+      "startDate": "Jan 2015",
+      "endDate": "Jan 2017",
+      "location": "Pullman, WA"
+    },
+    {
+      "institution": "GITAM University",
+      "area": "Information Technology",
+      "studyType": "Bachelor of Technology",
+      "startDate": "Jan 2011",
+      "endDate": "Jan 2015",
+      "location": "Visakhapatnam, India"
+    }
+  ],
+  "_notes": {
+    "customization_checklist": [
+      "[ ] Update basics.label to match job title",
+      "[ ] Customize basics.summary (3 sentences, match job focus)",
+      "[ ] Reorder skills keywords to prioritize job requirements",
+      "[ ] Select 3 most relevant projects for role",
+      "[ ] Add job-specific keywords to work highlights if needed",
+      "[ ] Verify all dates match (Mar 2025, Nov 2021, Jul 2020, Aug 2018)",
+      "[ ] Verify format: 3-3-3-2 work bullets, 3 project bullets each"
+    ],
+    "what_never_changes": [
+      "Employment dates",
+      "Job titles at companies",
+      "Company names",
+      "Core metrics (70%, 80%, 200+ queries, 45%, 50%)",
+      "Bullet count structure (3-3-3-2 for work, 3 per project)"
+    ],
+    "references": {
+      "baseline": "../_resources/baseline-resume-data.json",
+      "format_rules": "../_resources/FORMAT-STANDARDS.md",
+      "workflow_guide": "../_resources/WORKFLOW.md",
+      "customization_strategies": "../_resources/resume-customization-guide.md"
+    }
+  }
+}

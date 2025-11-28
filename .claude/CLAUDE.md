@@ -81,14 +81,41 @@ per_wesite/
 | Mock interview practice | `interview-prep/mock-interviews/{type}/` | General practice by interview type |
 | General Python practice | `practice-problems/python/fundamentals/` | Warmup exercises, NOT company-specific |
 
-**IMPORTANT WORKFLOWS:**
+**CRITICAL: OPTIMIZED RESUME WORKFLOW (MANDATORY)**
 
-**New Job Application (Fast Workflow):**
-1. `cp -r job-prep/applications/_template/ job-prep/applications/{company-role}/`
-2. Edit `job-posting.md` (requirements, fit assessment, customization strategy)
-3. Edit `resume-data.json` (customize summary, highlights, projects for THIS role)
-4. Generate resume with MCP tool → saves as `resume.pdf`
-5. Apply and update master tracker
+⚠️ **WHEN USER PROVIDES A JOB POSTING OR SAYS "HELP ME APPLY":**
+
+**You MUST follow this workflow:** `job-prep/RESUME_APPLICATION_WORKFLOW.md`
+
+### Quick Summary:
+
+**Step 0:** Analyze fit (parse requirements, compare to profile, recommend)
+**Step 1:** Check similarity (top 3 matches)
+**Step 2:** Generate reasoning (if match ≥80%)
+**Step 3:** Present 3 options (Use/Tailor/Create) & wait for user choice
+**Step 4:** Execute choice (load baseline, customize, validate, generate)
+
+**Key Rules:**
+- ✅ ALWAYS start with fit analysis
+- ✅ ALWAYS check similarity before creating anything
+- ✅ WAIT for user approval at 3 checkpoints (fit, option choice, JSON draft)
+- ✅ VALIDATE before PDF generation
+- ❌ NEVER modify locked content (Freefly 2-4, Lumenier, York)
+
+**Full details, examples, troubleshooting:** See `job-prep/RESUME_APPLICATION_WORKFLOW.md`
+
+---
+
+**For Other Use Cases:**
+
+- **Interview prep:** Work normally, no workflow triggered
+- **Draft messages:** Work normally
+- **Manual tool use:** User can call MCP tools directly anytime
+- **Research:** Use tools as needed
+
+**The workflow is ONLY triggered for job applications.**
+
+---
 
 **Company-Specific Interview Prep:**
 - ALL materials for ONE company go in `interview-prep/companies/{company-name}/`
@@ -123,7 +150,7 @@ per_wesite/
 1. **Copy template:** `cp -r applications/_template/ applications/{company-role}/`
 2. **Fill job-posting.md:** Requirements, fit assessment, customization strategy
 3. **Customize resume-data.json:** Summary, highlights, projects tailored for THIS role
-4. **Generate resume:** MCP tool → `resume.pdf` in application folder
+4. **Generate resume:** MCP tool → `viresh-duvvuri_YYMMDD-HHMM_position-title.pdf` in application folder
 5. **Apply & track:** Update master tracker, network on LinkedIn
 
 ### File Organization
@@ -131,8 +158,13 @@ per_wesite/
 - **Three core files:**
   - `job-posting.md` - Job details, metadata, customization notes
   - `resume-data.json` - Resume generation data (for MCP tool)
-  - `resume.pdf` - Latest generated resume
-- **No duplicates:** Always overwrite `resume.pdf` (git tracks history)
+  - `viresh-duvvuri_YYMMDD-HHMM_position-title.pdf` - Generated resume (timestamped)
+- **Resume naming convention (PERMANENT):** `viresh-duvvuri_YYMMDD-HHMM_position-title.pdf`
+  - Example: `viresh-duvvuri_251110-1435_ai-agent-developer.pdf`
+  - Format: fullname_timestamp_position-title
+  - Position title: lowercase, hyphenated (e.g., `ai-agent-developer`)
+  - NO generic `resume.pdf` - use timestamped names only
+- **Storage location:** All resumes stored INSIDE repo at `applications/{company-role}/`
 - **Archive completed apps:** Move to `_archive/` when done
 
 ### Resume Customization Strategy

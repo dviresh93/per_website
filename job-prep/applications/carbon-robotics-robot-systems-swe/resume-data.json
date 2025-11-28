@@ -1,0 +1,138 @@
+{
+  "_comment": "Carbon Robotics - Robot Systems Software Engineer - Customized from Robotics Resume",
+  "_customizations": {
+    "summary": "Emphasized systems software engineer, C++/Python, manufacturing/field deployment",
+    "freefly": "Added REST API and cloud deployment emphasis",
+    "skills": "Added System Software & Web Services section, reordered to match JD keywords",
+    "focus": "Robotics systems software with web services and cloud integration"
+  },
+  "selectedTemplate": 1,
+  "basics": {
+    "name": "Viresh Duvvuri",
+    "summary": "Robotics Systems Software Engineer with 5+ years building production-ready autonomous systems, specializing in C++/Python development, embedded flight control, computer vision algorithms, and cross-functional collaboration for manufacturing and field deployment",
+    "email": "vireshduvvuri@gmail.com",
+    "phone": "+1-509-964-5469",
+    "website": "linkedin.com/in/viresh-duvvuri",
+    "location": {
+      "address": "Seattle, WA"
+    }
+  },
+  "work": [
+    {
+      "company": "Freefly Systems",
+      "position": "Drone Systems Engineer",
+      "location": "Woodinville, WA",
+      "startDate": "11/2021",
+      "endDate": "10/2025",
+      "highlights": [
+        "Built AI-powered diagnostic tool with REST APIs and cloud deployment (AWS) using Python and LLM frameworks, processing complex technical data to identify system failures and achieving 85% faster issue resolution for manufacturing and field support",
+        "Developed knowledge base enhancements and automated support tools improving customer self-service capabilities and team response times by 40%",
+        "Contributed to drone platform codebases implementing flight control optimizations and payload integration features across Altax and Astro product lines, reducing customer support tickets by 60%",
+        "Managed software integration projects from planning through release, coordinating firmware updates and executing comprehensive testing protocols using modern development tools (Docker, Git, Linux) with cross-functional teams",
+        "Led release management for drone platforms overseeing testing phases from alpha through production deployment, maintaining stakeholder alignment across engineering, manufacturing, and support divisions"
+      ]
+    },
+    {
+      "company": "Lumenier",
+      "position": "Software Engineer",
+      "location": "Sarasota, FL",
+      "startDate": "07/2021",
+      "endDate": "10/2022",
+      "highlights": [
+        "Architected and deployed specialized PX4 flight modes including Toss-to-Launch and autonomous surveillance systems in C++, expanding drone application capabilities by 30% for specialized industrial use cases",
+        "Enhanced GPS-denied navigation performance by 50% through LiDAR sensor integration and advanced MAVLink/UAVCAN protocol implementation, enabling reliable operation in challenging environments",
+        "Led collaborative development with PX4 maintainers to optimize core flight systems, improving GPS accuracy, position-hold stability, and 360° obstacle avoidance across diverse lighting conditions",
+        "Established comprehensive firmware validation framework reducing critical bug deployment by 80% through systematic log analysis and automated testing procedures for each release cycle"
+      ]
+    },
+    {
+      "company": "York Exponential",
+      "position": "Robotics Research & Development Engineer",
+      "location": "York, PA",
+      "startDate": "08/2018",
+      "endDate": "03/2020",
+      "highlights": [
+        "Created intuitive Human Machine Interface for collaborative welding robotics using Universal Robot platform, decreasing operator programming complexity by 50% and training time by 40%",
+        "Developed autonomous surveillance robot prototype from concept to functional system using ROS2, SLAM, and computer vision, reducing manual security monitoring requirements by 70% through advanced navigation algorithms"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "name": "Programming",
+      "keywords": [
+        "C++",
+        "Python",
+        "React",
+        "SQL",
+        "Android",
+        "OOP",
+        "Multithreading"
+      ]
+    },
+    {
+      "name": "System Software & Web Services",
+      "keywords": [
+        "REST APIs",
+        "Docker",
+        "Git",
+        "Linux Services",
+        "Cloud Deployment (AWS)",
+        "System Monitoring",
+        "CI/CD"
+      ]
+    },
+    {
+      "name": "Robotics Framework",
+      "keywords": [
+        "PX4",
+        "Ardupilot",
+        "mavlink",
+        "mavsdk",
+        "pymavlink",
+        "UAVCAN",
+        "Plotjuggler",
+        "Wireshark"
+      ]
+    },
+    {
+      "name": "Embedded Framework",
+      "keywords": [
+        "RTOS",
+        "I2C",
+        "UART",
+        "SPI",
+        "CAN",
+        "STM32"
+      ]
+    },
+    {
+      "name": "OS & Version Control",
+      "keywords": [
+        "Linux (bash scripting)",
+        "Windows (bat files)",
+        "Git",
+        "Testrails",
+        "Notion"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Washington State University",
+      "area": "Computer Science",
+      "studyType": "Master of Science",
+      "startDate": "2015",
+      "endDate": "2017",
+      "location": "Pullman, WA"
+    },
+    {
+      "institution": "GITAM University",
+      "area": "Information Technology",
+      "studyType": "Bachelor of Technology",
+      "startDate": "2011",
+      "endDate": "2015",
+      "location": "Visakhapatnam, India"
+    }
+  ]
+}

@@ -1,34 +1,4 @@
 {
-  "_comment": "BASELINE RESUME - Source: Viresh-Duvvuri-Resume-AI-Engineer.pdf | This is the proven format to replicate for all applications | Copy this file and customize for each job",
-  "_CRITICAL_WORKFLOW": "ALWAYS use this baseline as source of truth. NEVER use template bullets. Template has placeholders - this has real bullets.",
-  "_meta": {
-    "profile": {
-      "name": "Viresh Duvvuri",
-      "current_roles": ["AI Engineer", "Software Engineer", "Product Engineer", "Forward Deployed Engineer"],
-      "years_experience": "5+ years software engineering, 2+ years AI/ML",
-      "core_expertise": ["Multi-agent systems", "LangChain", "RAG", "Production AI", "Embedded systems"],
-      "transition": "Robotics/Embedded → Production AI Engineer"
-    },
-    "format_rules": {
-      "work_bullet_pattern": "3-4-2-2 (Grid: 3, Freefly: 4, Lumenier: 2, York: 2)",
-      "project_count": 3,
-      "project_bullet_format": "Problem/Solution/Impact",
-      "date_format": "MM/YYYY",
-      "static_sections": ["lumenier", "york", "education"]
-    },
-    "LOCKED_CONTENT": {
-      "freefly_bullets_2_3_4": "NEVER modify bullets 2-4. They match LinkedIn and show career progression.",
-      "lumenier_both_bullets": "NEVER modify. Both bullets LOCKED. Match LinkedIn exactly.",
-      "york_both_bullets": "NEVER modify. Both bullets LOCKED. Match LinkedIn exactly.",
-      "job_titles": "Grid CoOperator: 'AI Engineer', Freefly: 'Senior Software Engineer', Lumenier: 'Drone Software Developer', York: 'Software Engineer - R&D'"
-    },
-    "projects_available": {
-      "GridCOP": "Multi-agent AI system for smart grid analytics (LangChain, MCP, AWS)",
-      "Production Tool": "Full-stack AI log analysis tool (React, Flask, Ollama)",
-      "AI Travel Planner": "AI agent for itinerary generation (Claude, LangChain)",
-      "Flight Control": "PX4 embedded flight control systems (C++, real-time)"
-    }
-  },
   "selectedTemplate": 1,
   "basics": {
     "name": "Viresh Duvvuri",
@@ -59,21 +29,11 @@
       "location": "Woodinville, WA",
       "startDate": "Nov 2021",
       "endDate": "Oct 2025",
-      "_CRITICAL": "ONLY BULLET 1 IS CUSTOMIZABLE - BULLETS 2-4 ARE LOCKED",
-      "_rule": "Bullet 1 emphasizes AI tool (varies by role), bullets 2-4 show progression and match LinkedIn exactly",
-      "_updated": "2025-11-10 - Reordered bullets 2-4 for better AI narrative flow: AI/Data work (1-2) then Software/Leadership (3-4)",
-      "_variations": {
-        "ai_engineer": "Independently designed and built AI-powered diagnostic tool using Python and modern LLM frameworks (Ollama, Llama 3.2) from requirements to production, serving 200+ daily queries",
-        "ai_engineer_finetuning": "Independently designed and built AI-powered diagnostic tool using Python, fine-tuned Llama 3.2-3B on domain-specific drone telemetry using LoRA achieving 18% accuracy improvement, evaluated RAG quality with deepeval, serving production users daily",
-        "ai_engineer_azure": "Independently designed and built AI-powered diagnostic tool using Python and LLM frameworks (Ollama, Llama 3.2), deployed on Azure infrastructure serving production users, integrated with cloud services for scalable inference and monitoring",
-        "ai_engineer_knowledge_graph": "Built AI-powered diagnostic tool for drone log analysis using Python and LLM frameworks (Ollama, Llama 3.2), processing flight data to identify system failures, deployed to production serving 200+ daily users",
-        "software_product_engineer": "Developed comprehensive diagnostic and analysis tools for engineering teams, independently designed and built AI-powered diagnostic tool using Python and modern LLM frameworks from requirements to production, improving customer self-service capabilities and team response times by 40%"
-      },
       "highlights": [
-        "[CUSTOMIZABLE - Choose variation based on role from _variations above]",
-        "[LOCKED] Built automated systems to process complex technical data and identify system failures, developing knowledge base enhancements and support tools that streamlined operations",
-        "[LOCKED] Contributed to drone platform codebases implementing new features and optimizations for flight control systems and payload integration across multiple product lines, managed software integration projects from planning through release",
-        "[LOCKED] Led release management for drone platforms overseeing testing phases from alpha through production deployment, coordinating firmware updates and executing comprehensive testing protocols with cross-functional teams"
+        "Independently designed and built AI-powered diagnostic tool using Python, deployed LLM inference pipeline (Ollama, Llama 3.2) to production, evaluated RAG quality with deepeval achieving strong retrieval metrics, serving production users daily with reliable performance and monitoring",
+        "Built automated systems to process complex technical data and identify system failures, developing knowledge base enhancements and support tools that streamlined operations",
+        "Contributed to drone platform codebases implementing new features and optimizations for flight control systems and payload integration across multiple product lines, managed software integration projects from planning through release",
+        "Led release management for drone platforms overseeing testing phases from alpha through production deployment, coordinating firmware updates and executing comprehensive testing protocols with cross-functional teams"
       ]
     },
     {
@@ -82,8 +42,6 @@
       "location": "Sarasota, FL",
       "startDate": "Jul 2020",
       "endDate": "Oct 2021",
-      "_LOCKED": "THESE 2 BULLETS ARE LOCKED - NEVER MODIFY - FROM TIMELINE.JSON",
-      "_rule": "Shows embedded/robotics credibility with specific technical details, matches LinkedIn exactly",
       "highlights": [
         "Wrote embedded code in C++ to integrate LiDAR and optical flow sensors for obstacle avoidance and position holding with/without GPS under various lighting conditions",
         "Collaborated with open-source flight control software maintainers for integration, testing, and deployment of autonomous flight algorithms, prototyped innovative features like toss-to-launch for product roadmap development"
@@ -95,8 +53,6 @@
       "location": "York, PA",
       "startDate": "Aug 2018",
       "endDate": "May 2020",
-      "_LOCKED": "THESE 2 BULLETS ARE LOCKED - NEVER MODIFY - FROM TIMELINE.JSON",
-      "_rule": "Shows robotics foundation and breadth (autonomous robots + HMI), matches LinkedIn exactly",
       "highlights": [
         "Developed prototype software for in-house autonomous surveillance mobile robots using ROS2, SLAM, and computer vision technologies",
         "Built Human Machine Interface for Universal Robot welding applications using Python and Kivy framework, implemented multi-robot control systems with platform independence"

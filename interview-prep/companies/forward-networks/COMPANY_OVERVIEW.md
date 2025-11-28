@@ -6,6 +6,122 @@
 
 ---
 
+# Interview details: 
+length = 1hr
+technical round, topics that will be covered : Project deep dive, troubleshooting, and AI knowledge.
+Role : AI engineer 
+Interviewer profile: As the Founding ML Engineer at Forward Networks, I lead and build the company’s machine learning initiatives from the ground up. I wear multiple hats as an ML Researcher, Data Scientist, and ML Ops Specialist, driving the full lifecycle of machine learning models—from research and experimentation to deployment, scaling, and maintaining robust systems.
+
+In my role, I leverage Large Language Models (LLMs) to solve complex, domain-specific challenges. This includes generating code for proprietary query languages, summarizing code, and building LLM-powered conversational agents to improve interaction with documentation. I architect systems that use vector databases to enable Retrieval-Augmented Generation (RAG) and work with both handcrafted and synthetically generated data for instruction tuning.
+
+At Forward, I've built and optimized large-scale, self-hosted LLM systems to meet diverse business needs. I've developed custom tooling for unbiased model evaluation, streamlined processes for monitoring models in production, and ensured ongoing performance improvements. By owning the entire model deployment lifecycle and scaling ML infrastructure, I ensure the seamless integration of AI features into the Forward platform.
+
+With a passion for driving innovation through AI, I turn abstract challenges into practical, impactful solutions that deliver real business value.As the Founding ML Engineer at Forward Networks, I lead and build the company’s machine learning initiatives from the ground up. I wear multiple hats as an ML Researcher, Data Scientist, and ML Ops Specialist, driving the full lifecycle of machine learning models—from research and experimentation to deployment, scaling, and maintaining robust systems. In my role, I leverage Large Language Models (LLMs) to solve complex, domain-specific challenges. This includes generating code for proprietary query languages, summarizing code, and building LLM-powered conversational agents to improve interaction with documentation. I architect systems that use vector databases to enable Retrieval-Augmented Generation (RAG) and work with both handcrafted and synthetically generated data for instruction tuning. At Forward, I've built and optimized large-scale, self-hosted LLM systems to meet diverse business needs. I've developed custom tooling for unbiased model evaluation, streamlined processes for monitoring models in production, and ensured ongoing performance improvements. By owning the entire model deployment lifecycle and scaling ML infrastructure, I ensure the seamless integration of AI features into the Forward platform. With a passion for driving innovation through AI, I turn abstract challenges into practical, impactful solutions that deliver real business value.
+FeaturedFeatured
+Document
+Document
+Image for Resume
+ResumeResume
+Post
+Post
+I'm thrilled to announce that our team's paper titled "XLCoST: A Benchmark Dataset for Cross-lingual Code Intelligence" w/ Ming Zhu, Karthik Suresh, Roshan Ravindran, Sindhu Tipirneni, Chandan Reddy has been accepted at the ICLR 2023 Workshop on Deep Learning for Code! XLCoST is a new benchmark dataset for cross-lingual code intelligence.
+
+XLCoST provides fine-grained parallel data from 8 languages, including 7 commonly used programming languages(Java, Python, C++, C#, PHP, Javascript and C) and their English comments. Moreover, programs are aligned across the different languages at the full program as well as snippet level, facilitating multiple cross-lingual code tasks including code translation, code summarization, code synthesis and code search.
+
+Our paper also includes the performance of several state-of-the-art baseline models for each task. 
+
+For more information, checkout the preprint here: https://lnkd.in/giztHaYB
+
+The code is available on Github: https://lnkd.in/gNiCuNQZ
+
+hashtag#ICLR hashtag#deeplearning hashtag#DL4C hashtag#datasets hashtag#ml 
+likecelebratelove
+46
+13 comments
+Post
+Post
+No alternative text description for this image
+likecelebratelove
+108
+6 comments
+ActivityActivity
+693 followers693 followers
+
+Aneesh hasn’t posted yet
+Recent posts Aneesh shares will be displayed here.
+Show all activity
+ExperienceExperience
+Forward Networks, Inc. logo
+Machine Learning Engineer
+Machine Learning Engineer
+Forward Networks, Inc. · Full-timeForward Networks, Inc. · Full-time
+Aug 2023 - Present · 2 yrs 4 mosAug 2023 to Present · 2 yrs 4 mos
+San Francisco Bay AreaSan Francisco Bay Area
+Cadence logo
+ML Engineering Intern
+ML Engineering Intern
+Cadence · InternshipCadence · Internship
+May 2022 - Apr 2023 · 1 yrMay 2022 to Apr 2023 · 1 yr
+Automated manual evaluation of clinical reports for hypertensive patients using Neural Question Answering
+• Used NLP, Named Entity Recognition(NER), OCR, Redis, Python and AWS to design, develop and deploy an ML service for parsing medical reports.
+• The service saved 50 work hours/week worth of clinician time and doubled the number of patients enrolled per week by virtue of processing a larger volume of documents and identifying more eligible patients.
+• Reports were originally manually perused by clinicians.Automated manual evaluation of clinical reports for hypertensive patients using Neural Question Answering • Used NLP, Named Entity Recognition(NER), OCR, Redis, Python and AWS to design, develop and deploy an ML service for parsing medical reports. • The service saved 50 work hours/week worth of clinician time and doubled the number of patients enrolled per week by virtue of processing a larger volume of documents and identifying more eligible patients. • Reports were originally manually perused by clinicians.
+Jupyter, Python (Programming Language) and +13 skills
+Virginia Tech logo
+Virginia Tech
+Virginia Tech
+Apprenticeship · 1 yr 5 mosApprenticeship · 1 yr 5 mos
+Blacksburg, Virginia, United StatesBlacksburg, Virginia, United States
+Graduate Teaching Assistant
+Graduate Teaching Assistant
+Aug 2022 - Dec 2022 · 5 mosAug 2022 to Dec 2022 · 5 mos
+Teaching Assistant for CS1064: Introduction to Programming in PythonTeaching Assistant for CS1064: Introduction to Programming in Python
+Jupyter, Python (Programming Language) and +10 skills
+Research Assistant
+Research Assistant
+Aug 2021 - Dec 2022 · 1 yr 5 mosAug 2021 to Dec 2022 · 1 yr 5 mos
+Master’s Thesis in Deep Learning for Code Generation and AI assisted Software Development
+• Released a novel, large, parallel programming language dataset to foster Deep Learning research in code search, translation, summarization and synthesis; presented benchmarks for all tasks.
+• Developed a Reinforcement Learning(RL) algorithm and reward function in PyTorch, that uses code compilation signal, syntax trees and data flow graphs as feedback to improve code translation quality.
+• Achieved a 6.5% improvement in the compilation rate of generated translations using the RL algorithm.
+• Developed an evaluation framework for code translation quality using Python which automated compilation, test generation and execution.
+• Investigated impact of label noise on stochastic neural Information Retrieval frameworks. Evaluated
+performance under three label noise variations with varying label noise ratios. Concluded that these frameworks are highly susceptible to adversarial attacks and manipulation.Master’s Thesis in Deep Learning for Code Generation and AI assisted Software Development • Released a novel, large, parallel programming language dataset to foster Deep Learning research in code search, translation, summarization and synthesis; presented benchmarks for all tasks. • Developed a Reinforcement Learning(RL) algorithm and reward function in PyTorch, that uses code compilation signal, syntax trees and data flow graphs as feedback to improve code translation quality. • Achieved a 6.5% improvement in the compilation rate of generated translations using the RL algorithm. • Developed an evaluation framework for code translation quality using Python which automated compilation, test generation and execution. • Investigated impact of label noise on stochastic neural Information Retrieval frameworks. Evaluated performance under three label noise variations with varying label noise ratios. Concluded that these frameworks are highly susceptible to adversarial attacks and manipulation.
+Jupyter, Python (Programming Language) and +12 skills
+Unilever logo
+Project Lead
+Project Lead
+Unilever · Full-timeUnilever · Full-time
+Jul 2019 - Jun 2020 · 1 yrJul 2019 to Jun 2020 · 1 yr
+Bengaluru, Karnataka, IndiaBengaluru, Karnataka, India
+• Led a team of 3 engineers to build data pipelines for parsing financial documents using OCR.
+• End-to-end Project Management – planning sprints, designing solutions and negotiating costs.• Led a team of 3 engineers to build data pipelines for parsing financial documents using OCR. • End-to-end Project Management – planning sprints, designing solutions and negotiating costs.
+Jupyter, AWS Lambda and +5 skills
+Unilever logo
+Software Development Intern
+Software Development Intern
+Unilever · InternshipUnilever · Internship
+Aug 2018 - Dec 2018 · 5 mosAug 2018 to Dec 2018 · 5 mos
+Bengaluru, Karnataka, IndiaBengaluru, Karnataka, India
+• Developed an end-to-end ETL pipeline for automated attendance verification using Microsoft Face API and deployed it to AWS Lambda which reduced verification time by 75% and cost by ∼ $50, 000.
+• Deployed internal automation solutions to production on AWS leveraging Lambda Functions and SageMaker.• Developed an end-to-end ETL pipeline for automated attendance verification using Microsoft Face API and deployed it to AWS Lambda which reduced verification time by 75% and cost by ∼ $50, 000. • Deployed internal automation solutions to production on AWS leveraging Lambda Functions and SageMaker.
+Jupyter, AWS Lambda and +5 skills
+EducationEducation
+Virginia Tech log, i 
+Virginia Tech
+Virginia Tech
+Master's degree, Computer ScienceMaster's degree, Computer Science
+Jan 2021 - Dec 2022Jan 2021 - Dec 2022
+Grade: 4.0/4.0Grade: 4.0/4.0
+Algorithms, Reinforcement Learning and +6 skills
+Thapar Institute of Engineering & Technology logo
+Thapar Institute of Engineering & Technology
+Thapar Institute of Engineering & Technology
+Bachelor of Engineering, Computer ScienceBachelor of Engineering, Computer Science
+2015 - 20192015 - 2019
+Grade: 8.24/10.0Grade: 8.24/10.0
+Algorithms, Jupyter and +2 skills
+
 ## Company Quick Facts
 
 **Founded:** 2013 (celebrated 10-year anniversary recently)
