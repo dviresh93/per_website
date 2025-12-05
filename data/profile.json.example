@@ -1,0 +1,24 @@
+{
+  "_comment": "Example profile data - Replace with your information",
+  "name": "Your Name",
+  "email": "your.email@example.com",
+  "phone": "+1-555-123-4567",
+  "location": {
+    "city": "Your City",
+    "state": "YS",
+    "country": "USA"
+  },
+  "website": "https://yourportfolio.com",
+  "linkedin": "https://linkedin.com/in/yourprofile",
+  "github": "https://github.com/yourusername",
+  "summary": "Your professional summary goes here. 2-3 sentences about your expertise and what you're looking for.",
+  "title": "Your Professional Title",
+  "yearsExperience": 5,
+  "availability": "Available for full-time opportunities",
+  "preferences": {
+    "remoteWork": true,
+    "relocation": false,
+    "roles": ["Software Engineer", "AI Engineer"],
+    "industries": ["Technology", "SaaS"]
+  }
+}

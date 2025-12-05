@@ -1,0 +1,47 @@
+{
+  "version": "1.0.0",
+  "agent": {
+    "type": "auto-detect",
+    "supported": ["claude", "gemini", "openai", "custom"],
+    "current": "claude",
+    "detection": {
+      "claude": "CLAUDE_CODE_SESSION or .claude/ directory",
+      "gemini": "GEMINI_API_KEY or GOOGLE_AI_STUDIO",
+      "openai": "OPENAI_API_KEY and OPENAI_ORGANIZATION",
+      "custom": "User-specified in this config"
+    }
+  },
+  "features": {
+    "mcp_servers": {
+      "enabled": true,
+      "servers": ["resume-memory", "resume-generator"],
+      "fallback_mode": "standalone"
+    },
+    "context_loading": {
+      "method": "auto",
+      "claude": "slash-commands",
+      "gemini": "explicit-injection",
+      "openai": "function-calling",
+      "custom": "explicit-injection"
+    },
+    "similarity_checking": {
+      "enabled": true,
+      "semantic_api_required": false,
+      "fallback": "keyword-based"
+    }
+  },
+  "paths": {
+    "database": "./resume-memory-mcp/data/memory.db",
+    "knowledge_graph": "./resume-memory-mcp/data/knowledge-graph.json",
+    "applications": "./job-prep/applications",
+    "templates": "./job-prep/applications/_resources",
+    "baseline_resume": "./job-prep/applications/_resources/baseline-resume-data.json",
+    "output": "./generated-resumes"
+  },
+  "workflow": {
+    "approval_checkpoints": ["fit_analysis", "option_selection", "json_draft"],
+    "auto_track_applications": true,
+    "similarity_threshold": 0.80,
+    "validation_required": true
+  }
+}

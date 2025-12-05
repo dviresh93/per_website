@@ -72,3 +72,175 @@ Thumbs.db
 
 # Separate git repository (resume-memory-mcp)
 resume-memory-mcp/
+
+# ============================================================================
+# Personal Data (Exclude from Distribution)
+# ============================================================================
+
+# Job applications (personal data)
+job-prep/applications/*/
+!job-prep/applications/_template/
+!job-prep/applications/_resources/
+!job-prep/applications/README.md
+
+# Interview prep materials (personal company-specific data)
+interview-prep/companies/*/
+!interview-prep/companies/_template/
+
+# Practice problems (personal solutions)
+practice-problems/
+
+# Personal working notes
+scratchpad.txt
+*.personal.md
+*.private.md
+
+# ============================================================================
+# Databases & Generated Data
+# ============================================================================
+
+# SQLite databases (auto-generated)
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+data/*.db
+
+# Generated resumes (optional - remove if you want to commit resumes)
+# generated-resumes/
+# job-prep/applications/*/resume.pdf
+
+# ============================================================================
+# Python (for semantic-search-api)
+# ============================================================================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv
+
+# Python testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+*.egg
+
+# ============================================================================
+# Sensitive Files
+# ============================================================================
+
+# API keys and credentials
+.credentials.json
+*credentials*.json
+*secrets*.json
+
+# Local configuration overrides
+.env.local
+.env.*.local
+config.local.json
+
+# ============================================================================
+# Claude Code & MCP
+# ============================================================================
+
+# Claude Code session data
+.claude/session-env/
+.claude/debug/
+.claude/file-history/
+.claude/shell-snapshots/
+.claude/todos/
+.claude/history.jsonl
+.claude/.credentials.json
+
+# MCP server logs
+.claude/mcp-logs/
+
+# ============================================================================
+# Additional IDE & Tools
+# ============================================================================
+
+# JetBrains IDEs
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+.*.sw[a-p]
+
+# Emacs
+*~
+\#*\#
+.\#*
+
+# ============================================================================
+# OS & System Files
+# ============================================================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+
+# Linux
+.directory
+.Trash-*
+
+# ============================================================================
+# Project-Specific
+# ============================================================================
+
+# User-specific example files (keep templates, ignore copies)
+!*.example
+!*.template
+!*_template*
+
+# Temporary working files
+*.tmp
+*.temp
+working/
+scratch/
+
+# Local testing
+test-output/
+test-results/
