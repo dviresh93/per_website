@@ -81,28 +81,113 @@ per_wesite/
 | Mock interview practice | `interview-prep/mock-interviews/{type}/` | General practice by interview type |
 | General Python practice | `practice-problems/python/fundamentals/` | Warmup exercises, NOT company-specific |
 
-**CRITICAL: OPTIMIZED RESUME WORKFLOW (MANDATORY)**
+🚨 **CRITICAL: RESUME WORKFLOW ENFORCEMENT SYSTEM** 🚨
 
-⚠️ **WHEN USER PROVIDES A JOB POSTING OR SAYS "HELP ME APPLY":**
+⚠️ **TRIGGER CONDITION: User mentions job posting, role application, or says "help me apply"**
 
-**You MUST follow this workflow:** `job-prep/RESUME_APPLICATION_WORKFLOW.md`
+## MANDATORY WORKFLOW STEPS - NO EXCEPTIONS
 
-### Quick Summary:
+### 🛑 STEP 0: IMMEDIATE VALIDATION (DO THIS FIRST)
+```
+BEFORE any resume work, ask yourself:
+"Am I about to start Step 0: FIT ANALYSIS from RESUME_APPLICATION_WORKFLOW.md?"
 
-**Step 0:** Analyze fit (parse requirements, compare to profile, recommend)
-**Step 1:** Check similarity (top 3 matches)
-**Step 2:** Generate reasoning (if match ≥80%)
-**Step 3:** Present 3 options (Use/Tailor/Create) & wait for user choice
-**Step 4:** Execute choice (load baseline, customize, validate, generate)
+IF NO: STOP. Start with fit analysis.
+IF YES: Proceed with validation checks below.
+```
 
-**Key Rules:**
-- ✅ ALWAYS start with fit analysis
-- ✅ ALWAYS check similarity before creating anything
-- ✅ WAIT for user approval at 3 checkpoints (fit, option choice, JSON draft)
-- ✅ VALIDATE before PDF generation
-- ❌ NEVER modify locked content (Freefly 2-4, Lumenier, York)
+### 📋 PRE-WORKFLOW VALIDATION CHECKLIST
+**Load these files in order and validate access:**
 
-**Full details, examples, troubleshooting:** See `job-prep/RESUME_APPLICATION_WORKFLOW.md`
+1. **Load Role Context** (saves 600 tokens):
+   ```
+   Read: job-prep/applications/_resources/role-based-context-loading.md
+   ```
+
+2. **Load Validation Rules** (prevents violations):
+   ```
+   Read: job-prep/applications/_resources/VALIDATION_RULES.md
+   Read: job-prep/applications/_resources/RESUME_VALIDATION_CHECKLIST.md
+   ```
+
+3. **Verify Baseline Access** (source of truth):
+   ```
+   Read: job-prep/applications/_resources/baseline-resume-data.json
+   ```
+
+4. **Load Workflow Document** (mandatory process):
+   ```
+   Read: job-prep/RESUME_APPLICATION_WORKFLOW.md
+   ```
+
+### 🔒 ENFORCEMENT SAFEGUARDS
+
+**LOCKED CONTENT - NEVER MODIFY:**
+- 🔒 Freefly bullets 2-4 (LinkedIn verified)
+- 🔒 Lumenier bullets 1-2 (both locked)
+- 🔒 York bullets 1-2 (both locked)
+- 🔒 All job titles, company names, dates
+- 🔒 Education section, contact information
+
+**VALIDATION REQUIREMENTS:**
+- ✅ 3-4-2-2 bullet count pattern enforced
+- ✅ Human approval at 3 checkpoints mandatory
+- ✅ JSON draft review before PDF generation
+- ✅ Automated validation against baseline required
+
+**CHECKPOINT GATES (user approval required):**
+1. **Fit Assessment** - "Does this job match? Proceed?"
+2. **Option Selection** - "Choose: Use Existing/Tailor/Create New"
+3. **JSON Draft Review** - "Does this content look correct?"
+
+### ⛔ FAILURE CONDITIONS
+**If any of these occur, STOP workflow immediately:**
+- Cannot access baseline-resume-data.json
+- User skips fit analysis confirmation
+- Locked content is modified in any way
+- Validation rules are violated
+- User doesn't approve at checkpoints
+
+### 🔄 WORKFLOW EXECUTION
+
+**MANDATORY ORDER:**
+```
+Step 0: FIT ANALYSIS (must complete first)
+   ↓
+Step 1: SIMILARITY CHECK (if user confirmed)
+   ↓
+Step 2: REASONING (if match ≥80%)
+   ↓
+Step 3: PRESENT OPTIONS + USER CHOICE
+   ↓
+Step 4: EXECUTE WITH VALIDATION
+```
+
+**TECHNICAL IMPLEMENTATION:**
+- Start from `baseline-resume-data.json` (never from scratch)
+- Use role-based context loading for optimization
+- Apply format standards from `FORMAT-STANDARDS.md`
+- Run `validate-resume.js` checks programmatically
+- Generate with proper naming convention
+
+### 🎯 SUCCESS CRITERIA
+```markdown
+✅ All validation files loaded
+✅ Fit analysis completed and confirmed
+✅ Similarity check performed (saved cost/effort)
+✅ User choice obtained at each checkpoint
+✅ Baseline data used as starting point
+✅ Locked content preserved exactly
+✅ Validation rules passed
+✅ PDF generated with proper naming
+✅ Application tracked in system
+```
+
+### 📚 COMPLETE REFERENCE SYSTEM
+**Full workflow details:** `job-prep/RESUME_APPLICATION_WORKFLOW.md`
+**Technical validation:** `job-prep/applications/_resources/VALIDATION_RULES.md`
+**Format standards:** `job-prep/applications/_resources/reference/FORMAT-STANDARDS.md`
+**Troubleshooting:** See workflow document for common issues and fixes
 
 ---
 
