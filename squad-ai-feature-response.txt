@@ -1,0 +1,5 @@
+I built GridCOP, a multi-agent AI system that automates smart grid analytics. Analysts were spending 6-8 hours per analysis running manual database queries, processing data, and generating reports - doing this 10-15 times per week.
+
+I shipped a LangChain-based system with specialized agents: one handles database queries, another does analysis, another generates reports. Used Claude Sonnet for orchestration, built the backend with FastAPI and SQL, deployed on AWS. The agents coordinate automatically based on the user's question, pulling the right data and running the right analysis without manual intervention.
+
+Impact: 70% reduction in analyst workflows (6 hours down to ~2 hours), 40% improvement in data accuracy. It's handling 50-100 queries daily with 99%+ uptime. I owned it end-to-end - architecture, implementation, deployment, and I keep improving it based on which queries users struggle with.
