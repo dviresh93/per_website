@@ -137,8 +137,7 @@ IF YES: Proceed with validation checks below.
 
 **CHECKPOINT GATES (user approval required):**
 1. **Fit Assessment** - "Does this job match? Proceed?"
-2. **Option Selection** - "Choose: Use Existing/Tailor/Create New"
-3. **JSON Draft Review** - "Does this content look correct?"
+2. **Scratchpad Review** - "Does this customization look correct? Approve to generate PDF?"
 
 ### ⛔ FAILURE CONDITIONS
 **If any of these occur, STOP workflow immediately:**
@@ -154,13 +153,11 @@ IF YES: Proceed with validation checks below.
 ```
 Step 0: FIT ANALYSIS (must complete first)
    ↓
-Step 1: SIMILARITY CHECK (if user confirmed)
+Step 1: CUSTOMIZE RESUME + SCRATCHPAD (if user confirmed)
    ↓
-Step 2: REASONING (if match ≥80%)
+Step 2: USER APPROVES SCRATCHPAD
    ↓
-Step 3: PRESENT OPTIONS + USER CHOICE
-   ↓
-Step 4: EXECUTE WITH VALIDATION
+Step 3: GENERATE JSON → VALIDATE → GENERATE PDF
 ```
 
 **TECHNICAL IMPLEMENTATION:**
@@ -174,8 +171,7 @@ Step 4: EXECUTE WITH VALIDATION
 ```markdown
 ✅ All validation files loaded
 ✅ Fit analysis completed and confirmed
-✅ Similarity check performed (saved cost/effort)
-✅ User choice obtained at each checkpoint
+✅ Scratchpad generated and approved by user
 ✅ Baseline data used as starting point
 ✅ Locked content preserved exactly
 ✅ Validation rules passed

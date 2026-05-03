@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "resume-memory": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["resume-memory-mcp/server.js"]
+    },
+    "resume-generator": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["resumake-mcp/server.js"]
+    }
+  }
+}

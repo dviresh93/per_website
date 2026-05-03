@@ -37,15 +37,15 @@ Before generating resume draft or PDF, Claude MUST verify:
 ### Work Experience Bullet Counts
 - [ ] **Lumenier:** EXACTLY 2 bullets (LOCKED - never modify)
 - [ ] **York Exponential:** EXACTLY 2 bullets (LOCKED - never modify)
-- [ ] **Freefly Systems:** EXACTLY 4 bullets (1 customizable + 3 LOCKED)
-- [ ] **Grid CoOperator:** EXACTLY 3 bullets (all customizable)
+- [ ] **Freefly Systems:** EXACTLY 5 bullets (2 customizable + 3 LOCKED)
+- [ ] **Grid CoOperator:** EXACTLY 4 bullets (all customizable)
 
 ### Locked Content Verification
 - [ ] **Lumenier bullet 1:** Contains "LiDAR and optical flow sensors"
 - [ ] **Lumenier bullet 2:** Contains "open-source flight control software maintainers" (NOT "PX4")
 - [ ] **York bullet 1:** Contains "ROS2, SLAM, and computer vision"
 - [ ] **York bullet 2:** Contains "Human Machine Interface" and "Python and Kivy"
-- [ ] **Freefly bullets 2-4:** Match LOCKED template exactly (flight control, release management, automated systems)
+- [ ] **Freefly bullets 3-5:** Match LOCKED template exactly (flight control, release management, automated systems)
 
 ### Date Verification
 - [ ] **Grid CoOperator:** 03/2025 - Present (NOT 07/2025)

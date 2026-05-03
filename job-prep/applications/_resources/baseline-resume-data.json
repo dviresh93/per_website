@@ -6,25 +6,29 @@
       "name": "Viresh Duvvuri",
       "current_roles": ["AI Engineer", "Software Engineer", "Product Engineer", "Forward Deployed Engineer"],
       "years_experience": "5+ years software engineering, 2+ years AI/ML",
-      "core_expertise": ["Multi-agent systems", "LangChain", "RAG", "Production AI", "Embedded systems"],
-      "transition": "Robotics/Embedded → Production AI Engineer"
+      "core_expertise": ["Multi-agent systems", "LangChain", "RAG", "Production AI", "Vector databases", "Graph databases", "A2A coordination", "LangSmith monitoring", "Embedded systems"],
+      "transition": "Robotics/Embedded → Production AI Engineer",
+      "technical_details": {
+        "freefly_technologies": "Vector databases, Graph databases for context modeling, Agent-to-agent coordination with orchestrator managing expert agents (codebase expert, customer ticket expert, Jira expert)",
+        "gridcop_technologies": "LangSmith for monitoring and evaluation, A2A multi-agent coordination, MCP framework"
+      }
     },
     "format_rules": {
-      "work_bullet_pattern": "3-4-2-2 (Grid: 3, Freefly: 4, Lumenier: 2, York: 2)",
+      "work_bullet_pattern": "3-4-5-2-2 (Grid: 3, Bizgenie: 4, Freefly: 5, Lumenier: 2, York: 2)",
       "project_count": 3,
       "project_bullet_format": "Problem/Solution/Impact",
       "date_format": "MM/YYYY",
       "static_sections": ["lumenier", "york", "education"]
     },
     "LOCKED_CONTENT": {
-      "freefly_bullets_2_3_4": "NEVER modify bullets 2-4. They match LinkedIn and show career progression.",
+      "freefly_bullets_3_4_5": "NEVER modify bullets 3-5. They match LinkedIn and show career progression. Bullets 1-2 are customizable.",
       "lumenier_both_bullets": "NEVER modify. Both bullets LOCKED. Match LinkedIn exactly.",
       "york_both_bullets": "NEVER modify. Both bullets LOCKED. Match LinkedIn exactly.",
       "job_titles": "Grid CoOperator: 'AI Engineer', Freefly: 'Senior Software Engineer', Lumenier: 'Drone Software Developer', York: 'Software Engineer - R&D'"
     },
     "projects_available": {
-      "GridCOP": "Multi-agent AI system for smart grid analytics (LangChain, MCP, AWS)",
-      "Production Tool": "Full-stack AI log analysis tool (React, Flask, Ollama)",
+      "GridCOP": "Multi-agent AI system with LangSmith monitoring and A2A coordination (LangChain, MCP, AWS)",
+      "Production Tool": "Full-stack AI tool with vector + graph databases and A2A agent orchestration (React, Flask, Ollama)",
       "AI Travel Planner": "AI agent for itinerary generation (Claude, LangChain)",
       "Flight Control": "PX4 embedded flight control systems (C++, real-time)"
     }
@@ -32,7 +36,7 @@
   "selectedTemplate": 1,
   "basics": {
     "name": "Viresh Duvvuri",
-    "summary": "AI Engineer building production software systems that solve real technical problems. Currently developing AI agents and automation tools using LangChain, MCP, and Python that improve operational efficiency by 50-80%. Recent work includes multi-agent systems for analytics and RAG-based diagnostic tools in production use. Experience spans full-stack development, embedded systems, and distributed applications across robotics and cloud platforms. 5+ years developing production systems across robotics, AI applications, and distributed systems.",
+    "summary": "AI Software Engineer with 5+ years building production systems. Currently developing AI agents and automation tools using LangChain, MCP, and Python that improve operational efficiency by 50-80%. Recent work includes multi-agent systems for analytics and RAG-based diagnostic tools in production. Experience spans developing applications for drones and embedded systems, full-stack development, and distributed AI platforms.",
     "email": "vireshduvvuri@gmail.com",
     "phone": "+1-509-964-5469",
     "website": "linkedin.com/in/viresh-duvvuri",
@@ -42,9 +46,22 @@
   },
   "work": [
     {
+      "company": "Bizgenie",
+      "position": "AI Engineer - Voice",
+      "location": "Remote",
+      "startDate": "Oct 2025",
+      "endDate": "Present",
+      "highlights": [
+        "Architected and deployed production voice-based conversational AI agent serving as intelligent front desk automation, handling multi-turn dialogues for appointment scheduling, customer inquiries, and business workflow automation using MCP framework and advanced prompt engineering techniques",
+        "Implemented comprehensive AI safety and monitoring infrastructure using OpenTelemetry to track conversation quality, detect hallucinations, and maintain response accuracy above 90% with real-time alerting and escalation protocols for production voice systems",
+        "Built robust conversational AI pipelines with intent classification, entity extraction, and context management for business-specific scenarios, integrating with external APIs and knowledge bases to provide contextually appropriate responses across voice interactions",
+        "Designed and deployed guardrails and fallback mechanisms to prevent AI hallucinations and ensure reliable handoff protocols when confidence thresholds are not met, maintaining high user satisfaction and system reliability for customer-facing voice applications"
+      ]
+    },
+    {
       "company": "Grid CoOperator",
       "position": "AI Engineer",
-      "location": "Seattle, WA",
+      "location": "Remote",
       "startDate": "Mar 2025",
       "endDate": "Present",
       "highlights": [
@@ -63,10 +80,11 @@
       "_rule": "Bullet 1 emphasizes AI tool (varies by role), bullets 2-4 show progression and match LinkedIn exactly",
       "_updated": "2025-11-10 - Reordered bullets 2-4 for better AI narrative flow: AI/Data work (1-2) then Software/Leadership (3-4)",
       "_variations": {
-        "ai_engineer": "Independently designed and built AI-powered diagnostic tool using Python and modern LLM frameworks (Ollama, Llama 3.2) from requirements to production, serving 200+ daily queries",
+        "ai_engineer": "Independently designed and built AI-powered diagnostic tool using Python and modern LLM frameworks (Ollama, Llama 3.2) from requirements to production, deployed to production",
         "ai_engineer_finetuning": "Independently designed and built AI-powered diagnostic tool using Python, fine-tuned Llama 3.2-3B on domain-specific drone telemetry using LoRA achieving 18% accuracy improvement, evaluated RAG quality with deepeval, serving production users daily",
         "ai_engineer_azure": "Independently designed and built AI-powered diagnostic tool using Python and LLM frameworks (Ollama, Llama 3.2), deployed on Azure infrastructure serving production users, integrated with cloud services for scalable inference and monitoring",
-        "ai_engineer_knowledge_graph": "Built AI-powered diagnostic tool for drone log analysis using Python and LLM frameworks (Ollama, Llama 3.2), processing flight data to identify system failures, deployed to production serving 200+ daily users",
+        "ai_engineer_knowledge_graph": "Built AI-powered diagnostic tool for drone log analysis using Python and LLM frameworks (Ollama, Llama 3.2), processing flight data to identify system failures, deployed to production",
+        "ai_engineer_a2a_orchestrator": "Architected A2A multi-agent diagnostic system with central orchestrator coordinating specialized expert agents (codebase expert, customer ticket expert, Jira expert) using Python and LLM frameworks, deployed to production with intelligent context gathering and coordination",
         "software_product_engineer": "Developed comprehensive diagnostic and analysis tools for engineering teams, independently designed and built AI-powered diagnostic tool using Python and modern LLM frameworks from requirements to production, improving customer self-service capabilities and team response times by 40%"
       },
       "highlights": [
@@ -113,75 +131,85 @@
         "JavaScript",
         "TypeScript",
         "SQL",
+        "React",
+        "Node.js",
         "FastAPI",
         "Flask",
-        "React",
         "NumPy",
         "Pandas",
         "OOP"
       ]
     },
     {
-      "name": "AI/ML Frameworks",
+      "name": "AI/ML Frameworks & Tools",
       "keywords": [
-        "Agentic AI",
         "LangChain",
         "LangGraph",
-        "Multi-Agent Systems",
         "MCP (Model Context Protocol)",
         "RAG",
-        "Context Engineering",
-        "Prompt Engineering",
-        "Model Evaluation",
-        "deepeval",
-        "LangSmith",
-        "MLOps",
-        "Fine-tuning",
-        "LoRA",
-        "PEFT",
-        "GenAI",
         "FAISS",
         "Pinecone",
         "PyTorch",
         "TensorFlow",
         "Scikit-learn",
-        "Feature Engineering",
-        "Human-in-the-Loop (HIL)",
-        "Model Deployment",
-        "Responsible AI",
-        "Vector Search"
+        "Ollama",
+        "Llama",
+        "Claude"
       ]
     },
     {
-      "name": "Cloud & Infrastructure",
+      "name": "AI Engineering & Patterns",
       "keywords": [
+        "Agentic AI",
+        "Multi-Agent Systems",
+        "Tool Calling",
+        "Streaming",
+        "Vector Search",
+        "Context Engineering",
+        "Prompt Engineering",
+        "Model Evaluation",
+        "Fine-tuning",
+        "LoRA",
+        "PEFT",
+        "Human-in-the-Loop (HIL)",
+        "GenAI"
+      ]
+    },
+    {
+      "name": "MLOps & Infrastructure",
+      "keywords": [
+        "Model Deployment",
+        "LangSmith",
+        "deepeval",
+        "MLOps",
+        "Monitoring",
+        "Observability",
         "AWS",
         "Azure",
         "GCP",
-        "API Design",
-        "Deployment",
-        "DevOps",
         "Docker",
         "Kubernetes",
-        "Monitoring",
-        "Performance Tuning",
+        "CI/CD",
+        "DevOps",
+        "API Design",
         "Scalability",
-        "Workflows"
+        "Performance Tuning"
       ]
     },
     {
-      "name": "Data & Analytics",
+      "name": "Data & Domain Expertise",
       "keywords": [
-        "Data Integration",
         "Data Processing",
         "Data Pipelines",
         "ETL",
+        "Data Integration",
         "Data Annotation",
-        "Data Science",
-        "Enterprise Integrations",
-        "Enterprise Systems",
+        "Feature Engineering",
         "Knowledge Graph",
-        "Operational Efficiency"
+        "Enterprise Systems",
+        "Workflow Automation",
+        "Operational Efficiency",
+        "Responsible AI"
       ]
     }
   ],
@@ -190,17 +218,17 @@
       "name": "GridCOP: Smart Grid Analytics Agent",
       "highlights": [
         "Problem: Power grid analysts needed automated database querying and intelligent insights to understand complex data patterns beyond basic visualizations",
-        "Solution: Developed A2A multi-agent system using LangChain orchestration and MCP where specialized agents coordinate tasks, implemented RAG with vector search (FAISS), monitored agent decision quality using LangSmith tracing and deepeval for retrieval assessment achieving 0.85+ context precision, built data pipeline to collect and annotate 500+ user queries for continuous model refinement, deployed on AWS with observability",
+        "Solution: Developed multi-agent system using LangChain orchestration and MCP where specialized agents coordinate tasks, implemented RAG with vector search (FAISS), monitored agent decision quality using LangSmith tracing and deepeval for retrieval assessment achieving 0.85+ context precision, built data pipeline to collect and annotate 500+ user queries for continuous model refinement, deployed on AWS with observability",
         "Impact: Enhanced analyst productivity by 70% through AI co-pilot that augments domain experts with automated workflows, implemented human-in-the-loop (HIL) evaluation and testing pipelines for production-ready AI systems with robust error handling through rapid iteration"
       ],
       "keywords": ["LangChain", "MCP", "Multi-Agent Systems", "RAG", "FAISS", "AWS", "Python", "FastAPI"]
     },
     {
-      "name": "Production System Optimization Tool",
+      "name": "AI-Powered Log Analysis Platform",
       "highlights": [
         "Problem: Manual system analysis taking hours of expert time, creating bottlenecks in product development and customer support resolution",
         "Solution: Built full-stack application with React frontend, Python Flask backend, integrated foundation model APIs (Ollama and Llama 3.2) for real-time log processing and interactive analysis using prompt engineering and model evaluation",
-        "Impact: Transformed expert analysis from hours to minutes, deployed to production serving 200+ daily queries with significant performance improvements through rapid iteration and continuous optimization"
+        "Impact: Transformed expert analysis from hours to minutes, deployed to production with significant performance improvements through rapid iteration and continuous optimization"
       ],
       "keywords": ["React", "Python", "Flask", "Ollama", "Llama", "RAG", "Production Deployment"]
     },

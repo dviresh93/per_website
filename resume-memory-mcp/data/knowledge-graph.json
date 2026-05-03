@@ -1,0 +1,258 @@
+{
+  "nodes": {
+    "companies": [
+      {
+        "id": "grid-cooperator",
+        "name": "Grid CoOperator",
+        "role": "AI Engineer (Freelance)",
+        "duration": "March 2025 - Present",
+        "keywords": ["langchain", "mcp", "aws", "rag", "multi-agent", "sql", "faiss", "fastapi"]
+      },
+      {
+        "id": "freefly-senior",
+        "name": "Freefly Systems",
+        "role": "Senior Software Engineer",
+        "duration": "Nov 2023 - Oct 2025",
+        "keywords": ["genai", "ollama", "python", "react", "flask", "drone", "rag", "llm", "release-management"]
+      },
+      {
+        "id": "freefly",
+        "name": "Freefly Systems",
+        "role": "Software Engineer",
+        "duration": "Nov 2021 - Oct 2023",
+        "keywords": ["python", "react", "flask", "drone", "embedded", "px4"]
+      },
+      {
+        "id": "lumenier",
+        "name": "Lumenier",
+        "role": "Software Engineer - Embedded",
+        "duration": "Jul 2020 - Nov 2021",
+        "keywords": ["c++", "px4", "embedded", "lidar", "mavlink", "flight-control", "autonomous"]
+      },
+      {
+        "id": "york",
+        "name": "York Exponential",
+        "role": "Software Engineer - R&D",
+        "duration": "Aug 2018 - Mar 2020",
+        "keywords": ["ros2", "python", "robotics", "kivy", "computer-vision", "ml", "hmi"]
+      },
+      {
+        "id": "wsu",
+        "name": "Washington State University",
+        "role": "Research Assistant",
+        "duration": "Oct 2017 - Aug 2018",
+        "keywords": ["research", "computer-science"]
+      }
+    ],
+    "projects": [
+      {
+        "id": "gridcop",
+        "name": "GridCOP: Smart Grid Analytics Agent",
+        "technologies": ["LangChain", "MCP", "AWS", "RAG", "FAISS", "Python", "SQL", "FastAPI"],
+        "impact": "70% reduction in analyst workflows, 50-100 daily queries, 99%+ uptime, 40% improvement in data accuracy",
+        "role_fit": ["ai_engineer", "full_stack_engineer", "ml_engineer"],
+        "description": "Multi-agent AI system using LangChain and MCP for smart grid analytics. Intelligent SQL database querying with dual validation system. Context-aware response generation for utility data analysis."
+      },
+      {
+        "id": "drone-log-analyzer",
+        "name": "AI-Powered Drone Log Analysis Tool",
+        "technologies": ["React", "Python", "Flask", "Ollama", "Llama 3.2", "RAG"],
+        "impact": "Hours → minutes (80% reduction), 200+ daily queries in production",
+        "role_fit": ["ai_engineer", "full_stack_engineer"],
+        "description": "Built with React frontend, Python Flask backend, Ollama, and Llama 3.2. Real-time ULog processing with automated health checks across 11+ systems. Interactive AI chat interface for flight data insights. Transformed expert analysis from hours to minutes."
+      },
+      {
+        "id": "flight-control",
+        "name": "Advanced Flight Control Systems",
+        "technologies": ["C++", "PX4", "LiDAR", "MAVLink", "UAVCAN", "Optical Flow", "Embedded"],
+        "impact": "Custom flight modes, GPS-denied navigation, 360° obstacle avoidance, position hold",
+        "role_fit": ["robotics_engineer"],
+        "description": "Custom PX4 flight modes including Toss-to-Launch and room surveillance. GPS-denied navigation using LiDAR sensors and optical flow. 360° obstacle avoidance and position hold. MAVLink and UAVCAN protocol implementation."
+      },
+      {
+        "id": "welding-hmi",
+        "name": "Human Machine Interface for Collaborative Welding",
+        "technologies": ["Python", "Kivy", "ROS2", "Universal Robot"],
+        "impact": "50% reduction in operator programming complexity",
+        "role_fit": ["robotics_engineer", "full_stack_engineer"],
+        "description": "Built using Python, Kivy framework, and ROS2. Universal Robot integration with simplified programming interface. Reduced operator programming complexity by 50%. Platform-independent control system."
+      },
+      {
+        "id": "freefly-embedded",
+        "name": "PX4 Flight Control & Release Management",
+        "technologies": ["C++", "PX4", "Embedded", "CI/CD"],
+        "impact": "30% reduction in release cycle time",
+        "role_fit": ["robotics_engineer", "software_engineer"],
+        "description": "PX4 flight control, C++ codebases. Release management (alpha → production). 30% reduction in release cycle time."
+      },
+      {
+        "id": "lumenier-autonomous",
+        "name": "Autonomous Payload Delivery System",
+        "technologies": ["C++", "PX4", "Autonomous Navigation"],
+        "impact": "45% efficiency improvement, 8 weeks from concept to deployment",
+        "role_fit": ["robotics_engineer"],
+        "description": "Custom flight control (C++) for autonomous payload delivery. 45% efficiency improvement. 8 weeks from concept to deployment."
+      },
+      {
+        "id": "york-vision",
+        "name": "Computer Vision & ML for Autonomous Robots",
+        "technologies": ["Python", "Computer Vision", "ML", "ROS2"],
+        "impact": "Autonomous surveillance mobile robots",
+        "role_fit": ["robotics_engineer", "ml_engineer"],
+        "description": "Computer vision and ML for autonomous robots. HMI for robotics (Python + ROS2)."
+      }
+    ],
+    "skills": [
+      {
+        "id": "langchain",
+        "name": "LangChain",
+        "category": "AI/ML Frameworks",
+        "proficiency": "expert",
+        "projects": ["gridcop"]
+      },
+      {
+        "id": "mcp",
+        "name": "Model Context Protocol (MCP)",
+        "category": "AI/ML Frameworks",
+        "proficiency": "expert",
+        "projects": ["gridcop"]
+      },
+      {
+        "id": "crewai",
+        "name": "CrewAI",
+        "category": "AI/ML Frameworks",
+        "proficiency": "learning",
+        "projects": []
+      },
+      {
+        "id": "rag",
+        "name": "RAG (Retrieval-Augmented Generation)",
+        "category": "AI/ML Patterns",
+        "proficiency": "expert",
+        "projects": ["gridcop", "drone-log-analyzer"]
+      },
+      {
+        "id": "multi-agent",
+        "name": "Multi-Agent Systems",
+        "category": "AI/ML Patterns",
+        "proficiency": "expert",
+        "projects": ["gridcop"]
+      },
+      {
+        "id": "python",
+        "name": "Python",
+        "category": "Programming Languages",
+        "proficiency": "expert",
+        "projects": ["gridcop", "drone-log-analyzer", "welding-hmi", "york-vision"]
+      },
+      {
+        "id": "cpp",
+        "name": "C++",
+        "category": "Programming Languages",
+        "proficiency": "expert",
+        "projects": ["flight-control", "freefly-embedded", "lumenier-autonomous"]
+      },
+      {
+        "id": "javascript",
+        "name": "JavaScript",
+        "category": "Programming Languages",
+        "proficiency": "advanced",
+        "projects": ["drone-log-analyzer"]
+      },
+      {
+        "id": "sql",
+        "name": "SQL",
+        "category": "Programming Languages",
+        "proficiency": "advanced",
+        "projects": ["gridcop"]
+      },
+      {
+        "id": "react",
+        "name": "React",
+        "category": "Frontend Frameworks",
+        "proficiency": "advanced",
+        "projects": ["drone-log-analyzer"]
+      },
+      {
+        "id": "fastapi",
+        "name": "FastAPI",
+        "category": "Backend Frameworks",
+        "proficiency": "advanced",
+        "projects": ["gridcop"]
+      },
+      {
+        "id": "flask",
+        "name": "Flask",
+        "category": "Backend Frameworks",
+        "proficiency": "advanced",
+        "projects": ["drone-log-analyzer"]
+      },
+      {
+        "id": "aws",
+        "name": "AWS",
+        "category": "Cloud Platforms",
+        "proficiency": "advanced",
+        "projects": ["gridcop"]
+      },
+      {
+        "id": "azure",
+        "name": "Azure",
+        "category": "Cloud Platforms",
+        "proficiency": "learning",
+        "projects": []
+      },
+      {
+        "id": "docker",
+        "name": "Docker",
+        "category": "DevOps",
+        "proficiency": "advanced",
+        "projects": []
+      },
+      {
+        "id": "px4",
+        "name": "PX4 Flight Control",
+        "category": "Robotics/Embedded",
+        "proficiency": "expert",
+        "projects": ["flight-control", "freefly-embedded", "lumenier-autonomous"]
+      },
+      {
+        "id": "ros2",
+        "name": "ROS2",
+        "category": "Robotics/Embedded",
+        "proficiency": "advanced",
+        "projects": ["welding-hmi", "york-vision"]
+      },
+      {
+        "id": "mavlink",
+        "name": "MAVLink",
+        "category": "Robotics/Embedded",
+        "proficiency": "expert",
+        "projects": ["flight-control"]
+      },
+      {
+        "id": "embedded",
+        "name": "Embedded Systems",
+        "category": "Robotics/Embedded",
+        "proficiency": "expert",
+        "projects": ["flight-control", "freefly-embedded", "lumenier-autonomous"]
+      }
+    ]
+  },
+  "edges": [
+    { "from": "gridcop", "to": "langchain", "type": "uses" },
+    { "from": "gridcop", "to": "mcp", "type": "uses" },
+    { "from": "gridcop", "to": "rag", "type": "uses" },
+    { "from": "gridcop", "to": "python", "type": "uses" },
+    { "from": "grid-cooperator", "to": "gridcop", "type": "contains" },
+    { "from": "drone-log-analyzer", "to": "rag", "type": "uses" },
+    { "from": "drone-log-analyzer", "to": "python", "type": "uses" },
+    { "from": "drone-log-analyzer", "to": "react", "type": "uses" },
+    { "from": "freefly", "to": "drone-log-analyzer", "type": "contains" },
+    { "from": "flight-control", "to": "cpp", "type": "uses" },
+    { "from": "flight-control", "to": "px4", "type": "uses" },
+    { "from": "lumenier", "to": "flight-control", "type": "contains" },
+    { "from": "welding-hmi", "to": "python", "type": "uses" },
+    { "from": "welding-hmi", "to": "ros2", "type": "uses" },
+    { "from": "york", "to": "welding-hmi", "type": "contains" }
+  ]
+}

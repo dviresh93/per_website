@@ -70,8 +70,9 @@ Thumbs.db
 .local
 .cache
 
-# Separate git repository (resume-memory-mcp)
-resume-memory-mcp/
+# MCP server node_modules (code is tracked, dependencies are not)
+resume-memory-mcp/node_modules/
+resumake-mcp/node_modules/
 
 # ============================================================================
 # Personal Data (Exclude from Distribution)

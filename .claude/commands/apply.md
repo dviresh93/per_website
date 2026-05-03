@@ -1,24 +1,91 @@
-# Apply Command - Multi-Step Resume Generation with Scratchpad Review
+# Apply Command - MANDATORY RESUME WORKFLOW ENFORCEMENT
 
-You are helping Viresh apply for a specific job using a **human-in-the-loop workflow** that generates a scratchpad for review BEFORE creating the PDF.
+🚨 **CRITICAL: This command triggers the mandatory resume workflow from CLAUDE.md**
 
-## Prerequisites
-
-**ALWAYS load profile context first:**
-- Run `/profile` command to load Viresh's complete background
-- This provides employment history, skills, projects, and experience details
-
-**Load baseline resume:**
-- File: `job-prep/applications/_resources/baseline-resume-data.json`
-- This is the proven format to start from (don't start from scratch)
-
-**Follow format standards:**
-- File: `job-prep/applications/_resources/FORMAT-STANDARDS.md`
-- All resumes MUST follow: 3-3-3-2 work bullets, 3 projects with Problem/Solution/Impact format
+**TRIGGER CONDITION MET:** User said "apply" - MANDATORY WORKFLOW MUST BE FOLLOWED
 
 ---
 
-## NEW Workflow (Multi-Step with Review)
+## MANDATORY WORKFLOW STEPS - NO EXCEPTIONS
+
+### 🛑 STEP 0: IMMEDIATE VALIDATION (DO THIS FIRST)
+
+**Load these files in order and validate access:**
+
+1. **Load Role Context** (saves 600 tokens):
+   ```
+   Read: job-prep/applications/_resources/role-based-context-loading.md
+   ```
+
+2. **Load Validation Rules** (prevents violations):
+   ```
+   Read: job-prep/applications/_resources/VALIDATION_RULES.md
+   Read: job-prep/applications/_resources/RESUME_VALIDATION_CHECKLIST.md
+   ```
+
+3. **Verify Baseline Access** (source of truth):
+   ```
+   Read: job-prep/applications/_resources/baseline-resume-data.json
+   ```
+
+4. **Load Workflow Document** (mandatory process):
+   ```
+   Read: job-prep/RESUME_APPLICATION_WORKFLOW.md
+   ```
+
+**IF ANY FILE FAILS TO LOAD:** STOP workflow immediately and alert user.
+
+---
+
+## MANDATORY ORDER OF EXECUTION
+
+**MUST follow this exact sequence:**
+
+```
+Step 0: FIT ANALYSIS (must complete first)
+   ↓
+Step 1: CUSTOMIZE RESUME + SCRATCHPAD (if user confirmed)
+   ↓
+Step 2: USER APPROVES SCRATCHPAD
+   ↓
+Step 3: GENERATE JSON → VALIDATE → GENERATE PDF
+```
+
+---
+
+## CHECKPOINT GATES (USER APPROVAL REQUIRED)
+
+**Cannot proceed without user approval at each gate:**
+
+1. **Fit Assessment Gate**
+   - Question: "Does this job match your background? Proceed with application? (yes/no)"
+   - STOP if user says no
+
+2. **Scratchpad Review Gate**
+   - Show: Readable markdown scratchpad with all proposed changes
+   - Question: "Does this look correct? Approve to generate PDF?"
+   - STOP if user says no — iterate until approved
+
+---
+
+## ENFORCEMENT SAFEGUARDS
+
+**LOCKED CONTENT - NEVER MODIFY:**
+- 🔒 Freefly bullets 2-4 (LinkedIn verified)
+- 🔒 Lumenier bullets 1-2 (both locked)
+- 🔒 York bullets 1-2 (both locked)
+- 🔒 All job titles, company names, dates
+- 🔒 Education section, contact information
+
+**VALIDATION REQUIREMENTS:**
+- ✅ 3-4-2-2 bullet count pattern enforced
+- ✅ Must start from baseline-resume-data.json
+- ✅ Project validation against baseline required
+- ✅ Human approval at 3 checkpoints mandatory
+
+---
+
+## UPDATED Workflow Implementation
 
 ### Step 1: Job Analysis
 

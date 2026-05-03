@@ -1,13 +1,13 @@
-import { compilePDF } from '../resumake-mcp/lib/pdf-compiler.js';
-import { generateLatex } from '../resumake-mcp/lib/latex-generator.js';
-import { expandTemplates } from '../resumake-mcp/lib/template-expander.js';
+import { compilePDF } from './resumake-mcp/lib/pdf-compiler.js';
+import { generateLatex } from './resumake-mcp/lib/latex-generator.js';
+import { expandTemplates } from './resumake-mcp/lib/template-expander.js';
 import fs from 'fs/promises';
 import path from 'path';
 
 async function main() {
-    const resumePath = 'job-prep/applications/ntt-data-ai-architect/resume-data.json';
-    const outputDir = 'job-prep/applications/ntt-data-ai-architect';
-    const filename = 'viresh-duvvuri_251119-1350_ai-architect.pdf';
+    const resumePath = 'job-prep/applications/raspberry-ai-senior-ai-product-engineer/resume-data.json';
+    const outputDir = 'job-prep/applications/raspberry-ai-senior-ai-product-engineer';
+    const filename = 'vireshduvvuri_senior-ai-product-engineer_raspberry-ai_2026-04-04.pdf';
     const outputPath = path.join(outputDir, filename);
 
     console.log(`Reading resume data from ${resumePath}...`);

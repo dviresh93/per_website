@@ -6,11 +6,12 @@
 
 ### 1. LOCKED Bullets - Must Match Exactly
 
-**Freefly Systems (4 bullets total):**
+**Freefly Systems (5 bullets total):**
 - ✅ Bullet 1: CUSTOMIZABLE for role (AI tool emphasis)
-- ✅ Bullet 2: "Contributed to drone platform codebases implementing new features and optimizations for flight control systems and payload integration across multiple product lines, managed software integration projects from planning through release"
-- ✅ Bullet 3: "Led release management for drone platforms overseeing testing phases from alpha through production deployment, coordinating firmware updates and executing comprehensive testing protocols with cross-functional teams"
-- ✅ Bullet 4: "Built automated systems to process complex technical data and identify system failures, developing knowledge base enhancements and support tools that streamlined operations"
+- ✅ Bullet 2: CUSTOMIZABLE for role (database architecture emphasis)
+- ✅ Bullet 3: "Built automated systems to process complex technical data and identify system failures, developing knowledge base enhancements and support tools that streamlined operations"
+- ✅ Bullet 4: "Contributed to drone platform codebases implementing new features and optimizations for flight control systems and payload integration across multiple product lines, managed software integration projects from planning through release"
+- ✅ Bullet 5: "Led release management for drone platforms overseeing testing phases from alpha through production deployment, coordinating firmware updates and executing comprehensive testing protocols with cross-functional teams"
 
 **Lumenier (2 bullets total - BOTH LOCKED):**
 - ✅ Bullet 1: "Wrote embedded code in C++ to integrate LiDAR and optical flow sensors for obstacle avoidance and position holding with/without GPS under various lighting conditions"
@@ -34,13 +35,13 @@
 
 ### 3. Bullet Count Structure
 
-**Required structure: 3-4-2-2**
-- Grid CoOperator: 3 bullets (all customizable for role)
-- Freefly: 4 bullets (1 customizable + 3 LOCKED)
+**Required structure: 4-5-2-2**
+- Grid CoOperator: 4 bullets (all customizable for role)
+- Freefly: 5 bullets (2 customizable + 3 LOCKED)
 - Lumenier: 2 bullets (both LOCKED)
 - York: 2 bullets (both LOCKED)
 
-**Total: 11 work bullets**
+**Total: 13 work bullets**
 
 ### 4. No Keyword Stuffing
 
@@ -95,6 +96,20 @@ Before generating PDF, verify:
 1. Copy _template/ to new application folder
 2. **IMMEDIATELY replace work bullets with bullets from baseline-resume-data.json**
 3. Then customize only what's allowed (Grid bullets, Freefly bullet 1, summary, skills order)
+
+## PROJECT VALIDATION GUARDRAILS
+
+**BEFORE generating any resume PDF:**
+1. [ ] Load baseline-resume-data.json
+2. [ ] Extract ONLY the project names from the "projects" array
+3. [ ] Verify resume data contains ONLY those exact projects
+4. [ ] Reject any project not found in baseline data
+5. [ ] Never generate content for non-existent projects
+
+**Implementation Rule:**
+- ALWAYS cross-reference project names against baseline-resume-data.json
+- IF project not in baseline → STOP and error
+- No hardcoded project lists - validate dynamically against source
 
 ## Common Mistakes to Avoid
 

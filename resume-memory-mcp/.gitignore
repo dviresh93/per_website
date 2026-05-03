@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Python venv
+semantic-search-api/venv/
+semantic-search-api/__pycache__/
+*.pyc
+
+# Database files
+data/*.db
+data/*.db-*
+
+# OS files
+.DS_Store
+.env
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*

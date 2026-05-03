@@ -183,6 +183,133 @@ cp -r job-prep/applications/_template/ \
 
 ---
 
+## 🛠️ Resume Creation Tool - How It Works
+
+The resume system is a multi-layer pipeline that combines Claude Code orchestration, MCP servers, and a LaTeX PDF generator.
+
+### Architecture Overview
+
+```
+Job posting
+    ↓
+/apply command → Claude enforces workflow rules (CLAUDE.md)
+    ↓
+Fit analysis → Load baseline-resume-data.json (source of truth)
+    ↓
+Customize: summary, skills order, project selection
+    ↓ [user approves JSON]
+PDF generation via MCP tool or standalone script
+    ↓
+Saved as viresh-duvvuri_YYMMDD-HHMM_role-title.pdf
+```
+
+### Key Components
+
+| Component | Location | Purpose |
+| --- | --- | --- |
+| **Source of truth** | `job-prep/applications/_resources/baseline-resume-data.json` | All resume content, locked/unlocked sections |
+| **Apply command** | `.claude/commands/apply.md` | Enforces workflow, gates, validation |
+| **Workflow doc** | `job-prep/RESUME_APPLICATION_WORKFLOW.md` | Step-by-step mandatory process |
+| **PDF generator** | `generate-resume-standalone.mjs` | Node script → LaTeX pipeline → PDF |
+| **MCP server** | `resume-memory-mcp/` | Similarity check, validation, tracking tools |
+| **Semantic search** | `semantic-search-api/` | Python API for finding similar past resumes |
+
+### Locked vs Customizable Content
+
+**Locked (never modify):** Freefly bullets 2-4, Lumenier bullets 1-2, York bullets 1-2, all job titles, dates, education
+
+**Customizable per role:** Summary, skills order/grouping, Freefly bullet 1, project selection (3 of 4 available)
+
+### MCP Tools (resume-memory-mcp server)
+
+| Tool | Purpose |
+| --- | --- |
+| `get_profile_summary` | Returns compressed profile (200 tokens) for fit analysis |
+| `check_resume_similarity` | Semantic search against past applications, returns top 3 matches |
+| `validate_resume` | Checks locked content hasn't been modified |
+| `process_similarity_reasoning` | Analyzes best match, generates 3 options with cost estimates |
+| `track_application` | Logs application to SQLite DB for pattern learning |
+
+### Workflow Gates (mandatory user approval)
+
+1. **Fit Assessment** - Confirm the role is worth applying to
+2. **JSON Draft Review** - Approve customized resume content before PDF generation
+
+---
+
+## 💻 Deploying to a New Computer
+
+Everything in git travels automatically. The parts that don't are listed below.
+
+### Minimum Viable Deploy Checklist
+
+```text
+✅ git clone <repo>
+✅ npm install in resume-memory-mcp/
+✅ Install LaTeX (texlive)
+✅ Re-register MCP servers in Claude Code config
+✅ (Optional) Copy SQLite DB to preserve application history
+✅ (Optional) Set up semantic-search-api Python env
+```
+
+### Step-by-Step
+
+#### 1. Clone the repo
+
+```bash
+git clone <repo-url> && cd per_wesite
+```
+
+#### 2. Install Node dependencies
+
+```bash
+cd resume-memory-mcp && npm install
+# Packages: @modelcontextprotocol/sdk, better-sqlite3
+```
+
+#### 3. Install LaTeX (required for PDF generation)
+
+```bash
+sudo apt install texlive-xetex texlive-latex-extra   # Ubuntu/Debian
+brew install mactex                                    # macOS
+```
+
+#### 4. Re-register MCP servers in Claude Code (most critical step)
+
+MCP server registrations live in `~/.claude.json` — they do NOT travel with the git repo. On the new machine:
+
+```bash
+claude mcp add resume-memory-mcp node /absolute/path/to/resume-memory-mcp/server.js
+```
+
+To see what's registered on your current machine:
+
+```bash
+cat ~/.claude.json
+```
+
+#### 5. (Optional) Preserve application history
+
+The similarity checker and pattern learner use a local SQLite database. Copy it to the new machine:
+
+```bash
+# From old machine
+scp resume-memory-mcp/*.db user@newmachine:/path/to/resume-memory-mcp/
+```
+
+#### 6. (Optional) Set up semantic search
+
+```bash
+cd semantic-search-api
+python -m venv venv && source venv/bin/activate
+pip install -r requirements.txt
+python app.py   # runs on localhost
+```
+
+Without this, the similarity check step is skipped — everything else still works.
+
+---
+
 ## 🔄 Workflow Integration
 
 **Tools:**
