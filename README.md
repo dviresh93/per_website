@@ -239,74 +239,97 @@ Saved as viresh-duvvuri_YYMMDD-HHMM_role-title.pdf
 
 ## 💻 Deploying to a New Computer
 
-Everything in git travels automatically. The parts that don't are listed below.
+The resume tool is fully Dockerized — single dependency, works on Mac, Linux, and Windows.
 
-### Minimum Viable Deploy Checklist
+### Prerequisites
 
-```text
-✅ git clone <repo>
-✅ npm install in resume-memory-mcp/
-✅ Install LaTeX (texlive)
-✅ Re-register MCP servers in Claude Code config
-✅ (Optional) Copy SQLite DB to preserve application history
-✅ (Optional) Set up semantic-search-api Python env
-```
+- **Docker Desktop** — [docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop)
+  - Windows: enable "Use WSL 2 based engine" in Docker Desktop settings
+- **Git**
 
-### Step-by-Step
+That's it. No Node, no LaTeX, no Python needed on the host machine.
 
-#### 1. Clone the repo
+---
 
-```bash
-git clone <repo-url> && cd per_wesite
-```
+### Mac / Linux Setup
 
-#### 2. Install Node dependencies
+#### Step 1. Clone and build
 
 ```bash
-cd resume-memory-mcp && npm install
-# Packages: @modelcontextprotocol/sdk, better-sqlite3
+git clone <repo-url>
+cd per_wesite
+./setup.sh
 ```
 
-#### 3. Install LaTeX (required for PDF generation)
+First build takes ~5-10 minutes (LaTeX packages are large). Subsequent builds use cached layers.
+
+#### Step 2. Open in Claude Code
 
 ```bash
-sudo apt install texlive-xetex texlive-latex-extra   # Ubuntu/Debian
-brew install mactex                                    # macOS
+claude .
 ```
 
-#### 4. Re-register MCP servers in Claude Code (most critical step)
+MCP servers register automatically via `.mcp.json` — no manual configuration needed.
 
-MCP server registrations live in `~/.claude.json` — they do NOT travel with the git repo. On the new machine:
+---
 
-```bash
-claude mcp add resume-memory-mcp node /absolute/path/to/resume-memory-mcp/server.js
+### Windows Setup
+
+#### Step 1. Clone and build (Windows)
+
+```powershell
+git clone <repo-url>
+cd per_wesite
+powershell -ExecutionPolicy Bypass -File setup.ps1
 ```
 
-To see what's registered on your current machine:
+#### Step 2. Configure Claude Desktop (Windows)
 
-```bash
-cat ~/.claude.json
+Open `%APPDATA%\Claude\claude_desktop_config.json` and add (update the path to match where you cloned the repo):
+
+```json
+{
+  "mcpServers": {
+    "resume-memory": {
+      "command": "powershell",
+      "args": ["-ExecutionPolicy", "Bypass", "-File", "C:\\path\\to\\per_wesite\\docker-mcp.ps1", "resume-memory-mcp"]
+    },
+    "resume-generator": {
+      "command": "powershell",
+      "args": ["-ExecutionPolicy", "Bypass", "-File", "C:\\path\\to\\per_wesite\\docker-mcp.ps1", "resumake-mcp"]
+    }
+  }
+}
 ```
 
-#### 5. (Optional) Preserve application history
+Restart Claude Desktop after saving.
 
-The similarity checker and pattern learner use a local SQLite database. Copy it to the new machine:
+---
+
+### (Optional) Preserve Application History
+
+The memory server uses a local SQLite database that tracks past applications and learned patterns. Copy it over if you want to preserve history:
 
 ```bash
 # From old machine
-scp resume-memory-mcp/*.db user@newmachine:/path/to/resume-memory-mcp/
+scp resume-memory-mcp/data/memory.db user@newmachine:/path/to/per_wesite/resume-memory-mcp/data/
 ```
 
-#### 6. (Optional) Set up semantic search
+---
 
-```bash
-cd semantic-search-api
-python -m venv venv && source venv/bin/activate
-pip install -r requirements.txt
-python app.py   # runs on localhost
-```
+### How the Docker Setup Works
 
-Without this, the similarity check step is skipped — everything else still works.
+| File | Purpose |
+|---|---|
+| `Dockerfile.mcp` | Node 20 + pdflatex + LaTeX fonts baked into one image |
+| `docker-mcp.sh` | Wrapper script (Mac/Linux) — mounts only the two dirs that need persistence |
+| `docker-mcp.ps1` | Wrapper script (Windows) — same as above for PowerShell |
+| `.mcp.json` | Points Claude Code to `docker-mcp.sh` — auto-registers on project open |
+| `setup.sh` / `setup.ps1` | One-command build: checks Docker exists, runs `docker build` |
+
+**Volume mounts at runtime:**
+- `job-prep/applications/` → PDF output lands here on your host machine
+- `resume-memory-mcp/data/` → SQLite DB persists between container runs
 
 ---
 
