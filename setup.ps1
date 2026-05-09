@@ -5,30 +5,13 @@ $ErrorActionPreference = "Stop"
 
 Write-Host "Setting up resume tool..."
 
-# Node dependencies
-Write-Host "Installing MCP server dependencies..."
-npm install --prefix resume-memory-mcp --silent
-npm install --prefix resumake-mcp --silent
-Write-Host "✅ Node dependencies installed"
-
-# LaTeX
-if (Get-Command pdflatex -ErrorAction SilentlyContinue) {
-    Write-Host "✅ LaTeX already installed"
-} else {
-    Write-Host "Installing LaTeX via MiKTeX..."
-    if (Get-Command winget -ErrorAction SilentlyContinue) {
-        winget install MiKTeX.MiKTeX
-        Write-Host "✅ MiKTeX installed"
-    } elseif (Get-Command choco -ErrorAction SilentlyContinue) {
-        choco install miktex -y
-        Write-Host "✅ MiKTeX installed via Chocolatey"
-    } else {
-        Write-Host "⚠️  Could not auto-install LaTeX."
-        Write-Host "    Download MiKTeX manually: https://miktex.org/download"
-        Write-Host "    Then re-run this script."
-        exit 1
-    }
+if (-not (Get-Command docker -ErrorAction SilentlyContinue)) {
+    Write-Host "❌ Docker not found. Install Docker Desktop: https://www.docker.com/products/docker-desktop/"
+    exit 1
 }
+
+Write-Host "Building Docker image (first time takes a few minutes — LaTeX is large)..."
+docker build -f Dockerfile.mcp -t resume-tool .
 
 Write-Host ""
 Write-Host "✅ Setup complete. Open this folder in Claude Code — MCPs load automatically."

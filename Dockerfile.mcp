@@ -1,0 +1,24 @@
+FROM node:20-slim
+
+# Install pdflatex + required LaTeX packages + build tools for native Node modules
+RUN apt-get update && apt-get install -y \
+    texlive-latex-base \
+    texlive-latex-extra \
+    texlive-fonts-extra \
+    python3 \
+    make \
+    g++ \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /workspace
+
+# Install Node dependencies (separate step for Docker layer caching)
+COPY resumake-mcp/package*.json ./resumake-mcp/
+COPY resume-memory-mcp/package*.json ./resume-memory-mcp/
+
+RUN npm install --prefix resumake-mcp --silent && \
+    npm install --prefix resume-memory-mcp --silent
+
+# Copy server code
+COPY resumake-mcp/ ./resumake-mcp/
+COPY resume-memory-mcp/ ./resume-memory-mcp/
