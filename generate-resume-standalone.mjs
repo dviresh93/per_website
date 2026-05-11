@@ -5,9 +5,9 @@ import fs from 'fs/promises';
 import path from 'path';
 
 async function main() {
-    const resumePath = 'job-prep/applications/raspberry-ai-senior-ai-product-engineer/resume-data.json';
-    const outputDir = 'job-prep/applications/raspberry-ai-senior-ai-product-engineer';
-    const filename = 'vireshduvvuri_senior-ai-product-engineer_raspberry-ai_2026-04-04.pdf';
+    const resumePath = 'job-prep/applications/7ai-ai-engineer/resume-data.json';
+    const outputDir = 'job-prep/applications/7ai-ai-engineer';
+    const filename = 'vireshduvvuri_ai-engineer_7ai_2026-05-05.pdf';
     const outputPath = path.join(outputDir, filename);
 
     console.log(`Reading resume data from ${resumePath}...`);
