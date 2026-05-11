@@ -2,13 +2,13 @@
   "mcpServers": {
     "resume-memory": {
       "type": "stdio",
-      "command": "./docker-mcp.sh",
-      "args": ["resume-memory-mcp"]
+      "command": "node",
+      "args": ["resume-memory-mcp/server.js"]
     },
     "resume-generator": {
       "type": "stdio",
-      "command": "./docker-mcp.sh",
-      "args": ["resumake-mcp"]
+      "command": "node",
+      "args": ["resumake-mcp/server.js"]
     }
   }
 }

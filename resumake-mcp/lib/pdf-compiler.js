@@ -66,7 +66,8 @@ export async function compilePDF(latexCode) {
  */
 export async function testPdfLatex() {
   try {
-    await execAsync("which pdflatex");
+    const cmd = process.platform === "win32" ? "where pdflatex" : "which pdflatex";
+    await execAsync(cmd);
     return true;
   } catch (error) {
     return false;
