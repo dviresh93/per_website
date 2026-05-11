@@ -1,407 +1,278 @@
-# Apply Command - MANDATORY RESUME WORKFLOW ENFORCEMENT
+# /apply — Resume Application Workflow
 
-🚨 **CRITICAL: This command triggers the mandatory resume workflow from CLAUDE.md**
-
-**TRIGGER CONDITION MET:** User said "apply" - MANDATORY WORKFLOW MUST BE FOLLOWED
-
----
-
-## MANDATORY WORKFLOW STEPS - NO EXCEPTIONS
-
-### 🛑 STEP 0: IMMEDIATE VALIDATION (DO THIS FIRST)
-
-**Load these files in order and validate access:**
-
-1. **Load Role Context** (saves 600 tokens):
-   ```
-   Read: job-prep/applications/_resources/role-based-context-loading.md
-   ```
-
-2. **Load Validation Rules** (prevents violations):
-   ```
-   Read: job-prep/applications/_resources/VALIDATION_RULES.md
-   Read: job-prep/applications/_resources/RESUME_VALIDATION_CHECKLIST.md
-   ```
-
-3. **Verify Baseline Access** (source of truth):
-   ```
-   Read: job-prep/applications/_resources/baseline-resume-data.json
-   ```
-
-4. **Load Workflow Document** (mandatory process):
-   ```
-   Read: job-prep/RESUME_APPLICATION_WORKFLOW.md
-   ```
-
-**IF ANY FILE FAILS TO LOAD:** STOP workflow immediately and alert user.
+**Job Description:**
+$ARGUMENTS
 
 ---
 
-## MANDATORY ORDER OF EXECUTION
+If the job description above is empty, respond: "Please paste the job description and I'll run the full fit analysis and resume workflow." Stop here.
 
-**MUST follow this exact sequence:**
+---
 
+## PHASE 0: INIT
+
+Load in parallel:
+- `job-prep/applications/_resources/resume-profile.json`
+- `job-prep/applications/_resources/baseline-resume-data.json`
+
+If either fails, tell the user which file could not be loaded and stop.
+
+Parse the job description to extract company and role. Set:
 ```
-Step 0: FIT ANALYSIS (must complete first)
-   ↓
-Step 1: CUSTOMIZE RESUME + SCRATCHPAD (if user confirmed)
-   ↓
-Step 2: USER APPROVES SCRATCHPAD
-   ↓
-Step 3: GENERATE JSON → VALIDATE → GENERATE PDF
+run_id = {role-kebab}_{company-kebab}_{YYMMDD-HHMM}
+```
+
+Log:
+```bash
+echo '{"ts":"<now>","run_id":"<run_id>","company":"<company>","role":"<role>","folder":"<run_id>","event":"FILES_LOADED","data":{}}' >> job-prep/applications/_logs/apply-runs.jsonl
 ```
 
 ---
 
-## CHECKPOINT GATES (USER APPROVAL REQUIRED)
+## PHASE 1: FIT ANALYSIS
 
-**Cannot proceed without user approval at each gate:**
+Calculate the fit score internally using the rubric below. Do not write any files yet.
 
-1. **Fit Assessment Gate**
-   - Question: "Does this job match your background? Proceed with application? (yes/no)"
-   - STOP if user says no
+**Rubric:**
 
-2. **Scratchpad Review Gate**
-   - Show: Readable markdown scratchpad with all proposed changes
-   - Question: "Does this look correct? Approve to generate PDF?"
-   - STOP if user says no — iterate until approved
+- **Required skills (0–40):** List every required skill from the job description. Mark ✅ HAVE / ❌ MISSING / 🟡 PARTIAL. Score = (fully matched / total required) × 40, rounded.
+- **Preferred skills (0–20):** Same approach. Score = (fully matched / total preferred) × 20, rounded.
+- **Years of experience (0–20):** Meets/exceeds = 20. Within 1 yr short = 15. 1–2 yrs short = 10. 3+ yrs short = 0.
+- **Domain/context (0–20):** Direct match = 20. Same domain different context = 15. Adjacent/transferable = 10. Different domain = 0.
+
+**After calculating, write the following directly to the user as your response — this is your text output for this phase:**
+
+---
+## Fit Analysis — {Role} @ {Company}
+**Score: {N}/100**
+
+| Category | Score | Notes |
+|---|---|---|
+| Required skills | {N}/40 | matched {X} of {Y} — missing: {list} |
+| Preferred skills | {N}/20 | matched {X} of {Y} |
+| Years of experience | {N}/20 | {requirement vs actual} |
+| Domain/context | {N}/20 | {reasoning} |
+
+**Gaps:**
+- {gap — MINOR / MODERATE / MAJOR}
+
+**Recommendation:** {Strong / Moderate / Weak} Fit
+
+**Proceed with application? (yes / no)**
 
 ---
 
-## ENFORCEMENT SAFEGUARDS
+Then log:
+```bash
+echo '{"ts":"<now>","run_id":"<run_id>","company":"<company>","role":"<role>","folder":"<run_id>","event":"FIT_SCORED","data":{"score":<n>,"breakdown":{"required":<n>,"preferred":<n>,"experience":<n>,"domain":<n>},"gaps":[<gaps>]}}' >> job-prep/applications/_logs/apply-runs.jsonl
+```
 
-**LOCKED CONTENT - NEVER MODIFY:**
-- 🔒 Freefly bullets 2-4 (LinkedIn verified)
-- 🔒 Lumenier bullets 1-2 (both locked)
-- 🔒 York bullets 1-2 (both locked)
-- 🔒 All job titles, company names, dates
-- 🔒 Education section, contact information
+Wait for user response. Do not create any files or continue until the user replies.
 
-**VALIDATION REQUIREMENTS:**
-- ✅ 3-4-2-2 bullet count pattern enforced
-- ✅ Must start from baseline-resume-data.json
-- ✅ Project validation against baseline required
-- ✅ Human approval at 3 checkpoints mandatory
+**If no:**
+```bash
+echo '{"ts":"<now>","run_id":"<run_id>","company":"<company>","role":"<role>","folder":"<run_id>","event":"CHECKPOINT_FIT","data":{"decision":"rejected"}}' >> job-prep/applications/_logs/apply-runs.jsonl
+echo '{"ts":"<now>","run_id":"<run_id>","company":"<company>","role":"<role>","folder":"<run_id>","event":"RUN_COMPLETE","data":{"status":"ABORTED_FIT"}}' >> job-prep/applications/_logs/apply-runs.jsonl
+```
+Stop.
+
+**If yes:**
+```bash
+echo '{"ts":"<now>","run_id":"<run_id>","company":"<company>","role":"<role>","folder":"<run_id>","event":"CHECKPOINT_FIT","data":{"decision":"approved"}}' >> job-prep/applications/_logs/apply-runs.jsonl
+```
+Continue to Phase 2.
 
 ---
 
-## UPDATED Workflow Implementation
+## PHASE 2: SETUP + CUSTOMIZATION
 
-### Step 1: Job Analysis
+Now create the application files and generate customizations.
 
-When user provides a job description (text, file, or URL), analyze:
+**2a — Create files:**
 
-1. **Job Title** - Extract exact title from posting
-2. **Required Skills** - Must-have technical skills (mark ✅ HAVE or ❌ MISSING)
-3. **Preferred Skills** - Nice-to-have skills
-4. **Keywords** - Specific technologies, buzzwords, terminology
-5. **Company Culture** - Collaboration, innovation, fast-paced, enterprise, etc.
-6. **Fit Assessment** - Provide honest percentage (60-95%)
-
-**Output:**
-```
-## Job Analysis Summary
-
-**Company:** [Name]
-**Role:** [Exact title from posting]
-**Fit:** [X]%
-
-**Required Skills:**
-✅ Python - HAVE (5+ years)
-✅ LangChain - HAVE (GridCOP project)
-❌ CrewAI - MISSING
-🟡 Azure - PARTIAL (can emphasize)
-
-**Keywords:** keyword1, keyword2, keyword3
-**Culture:** [collaboration-focused, fast-paced startup, enterprise]
-
-**Recommendation:** [Apply now / Build skills first / Skip]
-```
-
----
-
-### Step 2: Generate Scratchpad (Markdown Format)
-
-**CRITICAL:** Do NOT generate PDF yet. Generate a readable markdown scratchpad for review.
-
-**Load baseline resume:**
-```
-Read: job-prep/applications/_resources/baseline-resume-data.json
-```
-
-**Generate scratchpad showing:**
-
-1. **Job analysis** (from Step 1)
-2. **Summary changes** (before → after with their keywords)
-3. **Skills reordering** (prioritize their requirements)
-4. **Work experience modifications** (which bullets to emphasize/modify)
-5. **Project selection** (which 3 projects + why)
-6. **Project bullet modifications** (any changes to Problem/Solution/Impact bullets)
-
-**Use template:** `job-prep/applications/_resources/resume-scratchpad-template.md`
-
-**IMPORTANT - Write to file:**
-- Save scratchpad to: `job-prep/applications/{company-role}/resume-scratchpad.md`
-- Tell user the file path so they can edit it directly
-- User can make changes in their editor
-- Read the file back when user says "approve" or "modify"
-
-**Output format:** Readable markdown with clear before/after comparisons
-
-**Example output:**
+Create `job-prep/applications/{run_id}/job-posting.md`:
 ```markdown
-# Resume Customization Scratchpad
-Company: Acme Corp | Role: Senior AI Engineer | Fit: 85%
+# {Role} @ {Company}
+**Date:** {YYYY-MM-DD}
 
-## Summary Changes
-**CURRENT:**
-AI Engineer specializing in multi-agent systems...
+## Fit Analysis
+**Score:** {N}/100
 
-**PROPOSED:**
-Senior AI Engineer specializing in multi-agent systems and LLM orchestration, with 5+ years...
-[Added "Senior", emphasized "LLM orchestration" from job]
+| Category | Score | Notes |
+|---|---|---|
+| Required skills | {N}/40 | {notes} |
+| Preferred skills | {N}/20 | {notes} |
+| Years of experience | {N}/20 | {notes} |
+| Domain/context | {N}/20 | {notes} |
 
-## Skills Reordering
-Moving their requirements to top:
-- LangChain (mentioned 3x in job)
-- Multi-Agent Systems (key requirement)
-- Azure (their cloud platform)
-
-## Work Experience
-Grid CoOperator - Bullet 2: Adding "Azure" keyword
-Freefly - Emphasizing "cross-functional collaboration" (their culture value)
-
-## Projects Selected
-1. GridCOP (matches multi-agent requirement)
-2. Production System Tool (shows production AI experience)
-3. AI Travel Planner (shows LLM integration breadth)
+**Gaps:** {gaps}
+**Recommendation:** {recommendation}
 
 ---
-**APPROVE to generate PDF?** (yes/no/modify)
+## Job Description
+{full raw job description}
+```
+
+Create `job-prep/applications/{run_id}/scratchpad.md` with Status: draft and these sections filled in:
+```markdown
+# {Role} @ {Company}
+**Date:** {YYYY-MM-DD HH:MM}
+**Fit Score:** {N}/100
+**Status:** draft
+
+---
+
+## Summary
+{customized summary for this role}
+
+---
+
+## Skills Order
+1. {most relevant section}
+2. {section}
+3. {section}
+4. {section}
+5. {section}
+
+---
+
+## {Customizable company from resume-profile.json} Bullet 1
+{best variation from baseline _variations for this role}
+
+---
+
+## Projects
+1. {project name from baseline}
+2. {project name from baseline}
+3. {project name from baseline}
+
+---
+
+## Notes
+
+```
+
+**Customization rules:**
+- Summary: rewrite for this role, lead with most relevant experience, match JD language where accurate
+- Skills order: reorder section names to put most relevant categories first (keep all keywords unchanged)
+- Bullet: choose or write the best variation from `baseline-resume-data.json` `_variations` for this role
+- Projects: select exactly 3 from `baseline-resume-data.json` projects, most relevant to this role
+
+**2b — Write the following directly to the user as your response:**
+
+---
+Scratchpad created at `job-prep/applications/{run_id}/scratchpad.md`
+
+Here's what I customized for this role:
+
+**Summary:**
+{summary text}
+
+**Skills order:** {section 1} → {section 2} → {section 3} → {section 4} → {section 5}
+
+**{Company} Bullet 1:**
+{bullet text}
+
+**Projects:** {project 1}, {project 2}, {project 3}
+
+You can edit `scratchpad.md` directly or tell me what to change. Say **approve** to generate the PDF.
+
+---
+
+Then log:
+```bash
+echo '{"ts":"<now>","run_id":"<run_id>","company":"<company>","role":"<role>","folder":"<run_id>","event":"SCRATCHPAD_WRITTEN","data":{"path":"job-prep/applications/<run_id>/scratchpad.md","iterations":1}}' >> job-prep/applications/_logs/apply-runs.jsonl
+```
+
+Wait for user response. Do not generate PDF until the user approves.
+
+**If change requested:** edit only the requested section(s) in `scratchpad.md`, confirm what changed in one sentence, show the updated section, wait again. Increment iterations in the next log entry.
+
+**If approved:** update `scratchpad.md` Status: draft → approved, then log:
+```bash
+echo '{"ts":"<now>","run_id":"<run_id>","company":"<company>","role":"<role>","folder":"<run_id>","event":"CHECKPOINT_SCRATCHPAD","data":{"decision":"approved"}}' >> job-prep/applications/_logs/apply-runs.jsonl
+```
+
+**If no / stop:**
+```bash
+echo '{"ts":"<now>","run_id":"<run_id>","company":"<company>","role":"<role>","folder":"<run_id>","event":"CHECKPOINT_SCRATCHPAD","data":{"decision":"rejected"}}' >> job-prep/applications/_logs/apply-runs.jsonl
+echo '{"ts":"<now>","run_id":"<run_id>","company":"<company>","role":"<role>","folder":"<run_id>","event":"RUN_COMPLETE","data":{"status":"ABORTED_SCRATCHPAD"}}' >> job-prep/applications/_logs/apply-runs.jsonl
+```
+Stop.
+
+---
+
+## PHASE 3: GENERATION
+
+Read `scratchpad.md`. Extract: Summary, Skills Order, bullet text(s), 3 project names.
+
+**Build resume JSON internally (do not save to disk):**
+- Start from `baseline-resume-data.json`
+- Replace `basics.summary` with scratchpad Summary
+- Reorder `skills` array to match scratchpad Skills Order (keywords unchanged)
+- For each `customizable_bullets` entry in `resume-profile.json`: replace `work[company].highlights[index]` with scratchpad bullet
+- Replace `projects` with the 3 full project objects from baseline matching scratchpad names (do not rewrite content)
+- Strip all keys starting with `_`
+
+**Validate:**
+
+For each `locked_bullets` entry in `resume-profile.json`, compare generated JSON `work[company].highlights[index]` against the same position in `baseline-resume-data.json` verbatim. If any mismatch:
+```bash
+echo '{"ts":"<now>","run_id":"<run_id>","company":"<company>","role":"<role>","folder":"<run_id>","event":"VALIDATION_FAILED","data":{"errors":["<detail>"]}}' >> job-prep/applications/_logs/apply-runs.jsonl
+echo '{"ts":"<now>","run_id":"<run_id>","company":"<company>","role":"<role>","folder":"<run_id>","event":"RUN_COMPLETE","data":{"status":"FAILED_VALIDATION"}}' >> job-prep/applications/_logs/apply-runs.jsonl
+```
+Show the exact mismatch to the user. Stop.
+
+Also verify bullet counts match `resume-profile.json` `bullet_counts` exactly.
+
+On pass:
+```bash
+echo '{"ts":"<now>","run_id":"<run_id>","company":"<company>","role":"<role>","folder":"<run_id>","event":"VALIDATION_PASSED","data":{}}' >> job-prep/applications/_logs/apply-runs.jsonl
+```
+
+**Generate PDF:**
+```
+mcp__resume-generator__generate_resume(
+  resumeData: <generated JSON>,
+  folderPath: "<run_id>",
+  filename: "resume_<username>_<role-kebab>"
+)
+```
+`username` from `resume-profile.json`. `role-kebab` = role lowercase hyphenated.
+
+If MCP fails:
+```bash
+echo '{"ts":"<now>","run_id":"<run_id>","company":"<company>","role":"<role>","folder":"<run_id>","event":"PDF_FAILED","data":{"error":"<error>"}}' >> job-prep/applications/_logs/apply-runs.jsonl
+echo '{"ts":"<now>","run_id":"<run_id>","company":"<company>","role":"<role>","folder":"<run_id>","event":"RUN_COMPLETE","data":{"status":"FAILED_PDF"}}' >> job-prep/applications/_logs/apply-runs.jsonl
+```
+Fallback: `node generate-resume-standalone.mjs`
+
+On success — update `scratchpad.md` Status: approved → generated, then log:
+```bash
+echo '{"ts":"<now>","run_id":"<run_id>","company":"<company>","role":"<role>","folder":"<run_id>","event":"PDF_GENERATED","data":{"filename":"resume_<username>_<role-kebab>.pdf"}}' >> job-prep/applications/_logs/apply-runs.jsonl
+echo '{"ts":"<now>","run_id":"<run_id>","company":"<company>","role":"<role>","folder":"<run_id>","event":"RUN_COMPLETE","data":{"status":"COMPLETED"}}' >> job-prep/applications/_logs/apply-runs.jsonl
+```
+
+Write to the user:
+```
+✅ Done.
+
+  job-prep/applications/{run_id}/
+    job-posting.md
+    scratchpad.md  (Status: generated)
+    resume_{username}_{role-kebab}.pdf
+
+To update: edit scratchpad.md and say "regenerate".
 ```
 
 ---
 
-### Step 3: Wait for User Approval ⏸️
+## Hard Rules
 
-**DO NOT proceed to PDF generation automatically.**
-
-**Scratchpad is now a file** - User can:
-- Edit the file directly in their editor
-- Make changes without asking Claude
-- Save and tell Claude "approve" when done
-
-User will either:
-- ✅ **APPROVE** → Read the scratchpad file and proceed to Step 4
-- 🔄 **REQUEST CHANGES** → User can edit file directly OR ask Claude to modify
-- ❌ **REJECT** → Stop process
-
-**If user requests changes:**
-- If user edited file: Read `resume-scratchpad.md` to see their changes
-- If user asks Claude to modify: Update the file and notify user
-- Always read the file before proceeding to ensure latest version
-
----
-
-### Step 4: Generate Resume JSON (Only After Approval)
-
-Once approved, convert scratchpad changes into `resume-data.json`:
-
-**Start from baseline:**
-```json
-{
-  "_comment": "Customized from baseline-resume-data.json for [Company] - [Role]",
-  "selectedTemplate": 1,
-  "basics": { ... },
-  "work": [ ... ],
-  "skills": [ ... ],
-  "projects": [ ... ],
-  "education": [ ... ]
-}
-```
-
-**Apply all approved customizations:**
-- Summary changes
-- Skills reordering
-- Work bullet modifications
-- Project selection and modifications
-
-**Verify format standards:**
-- [ ] Work: 3-3-3-2 bullet pattern
-- [ ] Projects: 3 projects, each with 3 bullets (Problem/Solution/Impact)
-- [ ] Projects use `highlights` array (not `description`)
-- [ ] Skills: 4 categories with comprehensive keywords
-- [ ] Education: Both degrees included
-
----
-
-### Step 5: Call MCP Tool to Generate PDF
-
-**Tool:** `mcp__resume-generator__generate_resume`
-
-**Parameters:**
-- `resumeData`: Complete JSON object from Step 4
-- `filename`: `viresh-duvvuri-[company-name]-[role]` (lowercase, hyphenated)
-- `folderPath`: `applications/[company-name]-[role]`
-
-**Example:**
-```json
-{
-  "resumeData": { ...complete JSON from Step 4... },
-  "filename": "viresh-duvvuri-acme-senior-ai-engineer",
-  "folderPath": "applications/acme-senior-ai-engineer"
-}
-```
-
----
-
-### Step 6: Confirmation
-
-After successful PDF generation, provide:
-
-1. **Success message** - "✅ Resume generated successfully!"
-2. **Fit summary** - "[X]% match for [Job Title] at [Company]"
-3. **Key tailoring** - List 3-5 main customizations made
-4. **File location** - Full path to generated PDF
-5. **Next steps** - Application strategy (networking, follow-up timeline)
-
-**Example:**
-```
-✅ Resume generated successfully!
-
-**Fit:** 85% match for Senior AI Engineer at Acme Corp
-
-**Key Tailoring:**
-1. Updated title to "Senior AI Engineer"
-2. Emphasized LangChain (mentioned 3x in job)
-3. Added Azure keywords to work bullets
-4. Selected projects demonstrating multi-agent systems
-5. Reordered skills to prioritize their tech stack
-
-**File:** /home/virus/Documents/generated-resumes/applications/acme-senior-ai-engineer/viresh-duvvuri-acme-senior-ai-engineer-2025-10-27.pdf
-
-**Next Steps:**
-1. Apply through company portal
-2. Network with 2-3 employees on LinkedIn within 24h
-3. Follow up after 5-7 days if no response
-```
-
----
-
-## Important Guidelines
-
-### Date Consistency (NEVER CHANGE)
-- Grid CoOperator: Mar 2025 - Present
-- Freefly Systems: Nov 2021 - Oct 2025
-- Lumenier: Jul 2020 - Oct 2021
-- York Exponential: Aug 2018 - May 2020
-
-### Metrics Consistency (NEVER CHANGE)
-- GridCOP: 70% workflow reduction, 40% accuracy improvement, 50-100 queries, 99% uptime
-- Freefly AI tool: 200+ daily queries, 80% time reduction
-- Lumenier: 45% efficiency improvement, 8 weeks delivery
-- York: 50% complexity reduction
-
-### What to Customize
-✅ Summary (role title, technology order, emphasis)
-✅ Skills keyword order (within categories)
-✅ Work bullet emphasis (can add keywords naturally)
-✅ Project selection (choose 3 most relevant)
-
-### What NEVER Changes
-❌ Employment dates
-❌ Job titles
-❌ Company names
-❌ Core metrics
-❌ Bullet count structure (3-3-3-2 work, 3 bullets per project)
-
-### Projects Format (CRITICAL)
-**Always use this structure:**
-```json
-{
-  "name": "Project Name | Context",
-  "highlights": [
-    "Problem: [Clear problem description]",
-    "Solution: [Technologies and approach with specifics]",
-    "Impact: [Quantified results and learnings]"
-  ],
-  "keywords": ["Tech1", "Tech2", "Tech3"]
-}
-```
-
-**Never use:**
-- ❌ `description` field for main content
-- ❌ Combined paragraph format
-- ❌ Technical bullets without Problem/Solution/Impact structure
-
----
-
-## Error Handling
-
-**If job description incomplete:**
-- Request: job title, required skills, company name
-
-**If profile not loaded:**
-- Automatically run `/profile` command first
-
-**If baseline not found:**
-- Alert user: "Cannot find baseline-resume-data.json"
-- Suggest checking file exists in _resources/
-
-**If MCP tool fails:**
-- Provide complete JSON for manual generation
-- Suggest checking MCP server status
-
----
-
-## Example Full Workflow
-
-```
-User: /apply [job description for Senior AI Engineer at Acme Corp]
-
-You (Step 1 - Analysis):
-"Analyzing job for Senior AI Engineer at Acme Corp...
-
-Required Skills:
-✅ Python - HAVE
-✅ LangChain - HAVE
-❌ Azure - Can emphasize (have AWS)
-
-Fit: 85% - Strong match!
-
-Generating scratchpad for review..."
-
-You (Step 2 - Scratchpad):
-[Shows detailed scratchpad with proposed changes]
-
-"Review the proposed customizations above. Reply:
-- 'approve' to generate PDF
-- 'modify [what to change]' to revise
-- 'reject' to stop"
-
-User: "approve"
-
-You (Steps 3-6):
-[Generates JSON, calls MCP tool, confirms success]
-
-"✅ Resume generated! File saved to: [path]
-Ready to apply!"
-```
-
----
-
-## Key Differences from Old Workflow
-
-**OLD:** `/apply [job]` → Immediately generates PDF (no review)
-**NEW:** `/apply [job]` → Scratchpad → User review → Approval → PDF
-
-**Benefits:**
-- ✅ Human review before final output
-- ✅ Catch errors early
-- ✅ Iterate on customizations
-- ✅ Learn what works (review decisions)
-- ✅ More control over final resume
-
----
-
-**Remember:** Always start from baseline, generate scratchpad for review, wait for approval, then generate PDF. Never skip the review step!
+- Always build from `baseline-resume-data.json` — never generate resume content from scratch
+- Locked bullets per `resume-profile.json` `locked_bullets` — never modify, validated verbatim
+- Job titles, company names, dates — never change
+- Education, contact info — never change
+- Bullet counts must match `resume-profile.json` `bullet_counts` exactly
+- Projects must exist in `baseline-resume-data.json` — never invent projects
+- No user approval at Phase 2 = no PDF

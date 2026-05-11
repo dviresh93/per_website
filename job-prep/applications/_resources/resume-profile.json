@@ -1,0 +1,20 @@
+{
+  "owner": "Viresh Duvvuri",
+  "username": "viresh-duvvuri",
+  "baseline": "job-prep/applications/_resources/baseline-resume-data.json",
+  "bullet_counts": {
+    "Bizgenie": 4,
+    "Grid CoOperator": 3,
+    "Freefly Systems": 4,
+    "Lumenier": 2,
+    "York Exponential": 2
+  },
+  "locked_bullets": [
+    { "company": "Freefly Systems", "indices": [1, 2, 3] },
+    { "company": "Lumenier", "indices": [0, 1] },
+    { "company": "York Exponential", "indices": [0, 1] }
+  ],
+  "customizable_bullets": [
+    { "company": "Freefly Systems", "index": 0 }
+  ]
+}
