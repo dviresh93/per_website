@@ -1,27 +1,59 @@
 {
   "journey": [
     {
-      "year": "07/2024-Present",
+      "year": "10/2025-03/2026",
       "location": "Seattle, WA",
-      "title": "Agentic AI Consultant",
-      "description": "Architecting intelligent AI agents for smart grid analytics and decision-making systems at Grid CoOperator.",
-      "detailedDescription": "As an Agentic AI consultant at Grid CoOperator, I architect AI agents that can answer questions, present reports, and raise alerts on smart grid data. I developed GridCOP agent, which is part of Grid CoOperator's RECOVER tool - a comprehensive analytics platform that models smart grid data to make predictions on power outages, helping operators and analysts plan troop deployment for power restoration.<br><br>GridCOP serves as an agentic extension of the RECOVER tool, enabling operators to chat about smart grid data and assisting in critical decision-making. The agent first understands the operator's question, then gathers relevant context to provide accurate answers. I developed GridCOP using agentic AI principles, allowing it to independently query databases, make additional tool calls as needed to gather relevant context, validate the data, and present comprehensive answers to users.<br><br>This role represents the culmination of my transition from robotics and drone systems engineering to intelligent automation, applying my systems engineering background to create AI agents that operate reliably in mission-critical environments.",
+      "title": "AI Engineer - Voice (Freelance)",
+      "description": "Built and deployed a production voice AI agent for drive-through order automation, handling multi-turn ordering conversations in real customer interactions.",
+      "detailedDescription": "As a freelance AI Engineer, I architected and deployed a production voice AI agent for drive-through order automation. The system manages multi-turn ordering conversations — taking orders, handling item clarifications, processing modifications, and confirming orders reliably with real customers.<br><br>A key focus was reliability — I built comprehensive monitoring infrastructure to track conversation quality, detect hallucinations, and maintain response accuracy in production. I designed guardrails and fallback mechanisms to ensure the system behaved predictably when confidence thresholds weren't met.<br><br>This project deepened my understanding of building AI systems that operate reliably under real-world conditions — applying the same traceability and failure-mode thinking I developed in physical systems engineering.",
       "responsibilities": [
-        "Architected AI agents for smart grid analytics and decision-making systems",
-        "Developed GridCOP agent as part of Grid CoOperator's RECOVER analytics platform",
-        "Implemented agentic AI principles for autonomous database querying and context gathering"
+        "Architected and deployed production voice AI agent for drive-through order automation",
+        "Built AI safety and monitoring infrastructure for hallucination detection and response quality",
+        "Designed guardrails and fallback mechanisms for reliable production operation"
       ],
       "detailedResponsibilities": [
-        "Architected AI agents capable of answering questions, presenting reports, and raising alerts on smart grid data",
-        "Developed GridCOP agent as an agentic extension of Grid CoOperator's RECOVER analytics platform",
-        "Implemented intelligent query understanding and context gathering systems for operator decision-making support",
-        "Built autonomous database querying capabilities with additional tool call integration for comprehensive context",
-        "Designed data validation systems to ensure accuracy before presenting answers to users",
-        "Applied agentic AI principles to create independent, reliable AI agents for mission-critical smart grid operations"
+        "Architected production voice-based conversational AI agent handling multi-turn dialogues",
+        "Built monitoring infrastructure using OpenTelemetry to track conversation quality and detect hallucinations",
+        "Designed guardrails and fallback mechanisms to prevent AI failures in customer-facing interactions",
+        "Implemented intent classification, entity extraction, and context management for business-specific scenarios",
+        "Integrated with external APIs and knowledge bases for contextually appropriate responses",
+        "Maintained response accuracy above 90% with real-time alerting and escalation protocols"
+      ],
+      "type": "career",
+      "company": "Bizgenie",
+      "skills": ["Voice AI", "Conversational AI", "MCP", "OpenTelemetry", "Guardrails", "Agent Evaluation", "Prompt Engineering", "Python"],
+      "projects": [
+        {
+          "name": "Voice AI Agent",
+          "description": "Production voice-based conversational AI agent for front desk automation",
+          "projectId": "voice-ai-agent",
+          "type": "featured",
+          "hasContent": true
+        }
+      ]
+    },
+    {
+      "year": "03/2025-03/2026",
+      "location": "Seattle, WA",
+      "title": "AI Engineer (Freelance)",
+      "description": "Built AI agents for smart grid analytics and decision-making systems at Grid CoOperator.",
+      "detailedDescription": "As a freelance AI Engineer at Grid CoOperator, I developed an AI agent that helps analysts query and understand smart grid data. The agent independently queries databases, gathers relevant context, validates data, and presents comprehensive answers to operators.<br><br>I built the system from concept to deployment — including the backend API, database integration, automated report generation, and a dual validation system to ensure data accuracy before surfacing results to users.<br><br>The work reinforced principles I carry from physical systems engineering: build around uncertainty, make every decision traceable, and design for reliability from day one.",
+      "responsibilities": [
+        "Built AI agent for smart grid data querying and analysis from concept to deployment",
+        "Implemented dual validation system for data accuracy and query reliability",
+        "Automated report generation pipeline for utility operations"
+      ],
+      "detailedResponsibilities": [
+        "Developed AI-enabled data processing system from concept to deployment, reducing analyst research workflows by 70%",
+        "Built scalable backend service with API architecture handling 50-100 daily queries",
+        "Implemented automated report generation pipeline accelerating stakeholder deliverables by 60%",
+        "Designed context-aware response framework with dual validation system, improving data accuracy by 40%",
+        "Applied agentic AI principles for autonomous database querying and context gathering",
+        "Deployed on AWS with observability and monitoring infrastructure"
       ],
       "type": "career",
       "company": "Grid CoOperator",
-      "skills": ["LangChain", "Python", "SQL", "MCP", "RAG", "Multi-Agent Systems", "Prompt Engineering", "Agent Validation", "System Testing"],
+      "skills": ["LangChain", "Python", "SQL", "MCP", "RAG", "Multi-Agent Systems", "Prompt Engineering", "Agent Validation", "AWS"],
       "projects": [
         {
           "name": "GridCOP: Smart Grid Analytics",
@@ -33,7 +65,7 @@
       ]
     },
     {
-      "year": "11/2021-Present",
+      "year": "11/2021-10/2025",
       "location": "Woodinville, WA",
       "title": "Software & Systems Engineer",
       "description": "Systems engineer at a leading aerial cinematography company, leveraging PX4 expertise across drone platforms serving global customer base.",
@@ -65,7 +97,7 @@
       ]
     },
     {
-      "year": "07/2020-10/2022",
+      "year": "07/2020-11/2021",
       "location": "Sarasota, FL",
       "title": "Software Engineer",
       "description": "Lead software developer for drone systems operating in harsh conditions, collaborating with PX4 maintainers on cutting-edge solutions for first responders.",

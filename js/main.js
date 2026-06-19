@@ -1,7 +1,7 @@
 // Main JavaScript for Portfolio Website
 class PortfolioApp {
     constructor() {
-        this.currentSection = 'journey';
+        this.currentSection = 'about';
         this.data = {
             profile: null,
             skills: null,
@@ -181,36 +181,27 @@ class PortfolioApp {
             console.error("profile-subtitle element not found!");
         }
 
-        // Update contact links
-        const contactLinks = document.getElementById('contact-links');
-        if (contactLinks && profile.contact) {
-            contactLinks.innerHTML = '';
-            
+        // Build social links HTML
+        const buildSocialLinks = (container, profile, navStyle = false) => {
+            if (!container || !profile.contact) return;
+            container.innerHTML = '';
             if (profile.contact.linkedin) {
-                contactLinks.innerHTML += `
-                    <a href="${profile.contact.linkedin}" target="_blank" title="LinkedIn">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                `;
+                container.innerHTML += `<a href="${profile.contact.linkedin}" target="_blank" title="LinkedIn" ${navStyle ? 'class="nav-social-link"' : ''}><i class="fab fa-linkedin"></i></a>`;
             }
-            
             if (profile.contact.github) {
-                contactLinks.innerHTML += `
-                    <a href="${profile.contact.github}" target="_blank" title="GitHub">
-                        <i class="fab fa-github"></i>
-                    </a>
-                `;
+                container.innerHTML += `<a href="${profile.contact.github}" target="_blank" title="GitHub" ${navStyle ? 'class="nav-social-link"' : ''}><i class="fab fa-github"></i></a>`;
             }
-            
             if (profile.contact.email) {
-                contactLinks.innerHTML += `
-                    <a href="#" onclick="showEmailPopup('${profile.contact.email}')" title="Show Email">
-                        <i class="fas fa-envelope"></i>
-                    </a>
-                `;
+                container.innerHTML += `<a href="#" onclick="showEmailPopup('${profile.contact.email}')" title="Email" ${navStyle ? 'class="nav-social-link"' : ''}><i class="fas fa-envelope"></i></a>`;
             }
-            
-        }
+        };
+
+        // Populate both contact areas
+        const contactLinks = document.getElementById('contact-links');
+        buildSocialLinks(contactLinks, profile, false);
+
+        const navContactLinks = document.getElementById('nav-contact-links');
+        buildSocialLinks(navContactLinks, profile, true);
         } catch (error) {
             console.error("Error in renderProfile:", error);
             console.error("Error stack:", error.stack);
@@ -304,15 +295,18 @@ class PortfolioApp {
                         </div>
                     ` : "";
                     
+                    const isContract = item.title.includes('Freelance');
+                    const displayTitle = item.title.replace(/\s*\(Freelance\)/gi, '').trim();
+                    const slugTitle = item.title.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
                     timelineHTML += `
-                        <div class="project-card career-card" onclick="showTimelineDetail('${item.title.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")}')">
+                        <div class="project-card career-card" onclick="showTimelineDetail('${slugTitle}')">
                             <div class="project-card-header">
                                 <div class="career-header-meta">
                                     <span class="project-tag timeline-year">${item.year}</span>
                                     <span class="project-tag timeline-location">${item.location}</span>
                                 </div>
-                                <h3>${item.title}</h3>
-                                <p>${companyInfo}</p>
+                                <h3>${displayTitle}</h3>
+                                <p>${companyInfo}${isContract ? '<span class="contract-badge">Contract</span>' : ''}</p>
                             </div>
                             <div class="project-card-body">
                                 <div class="career-summary">
@@ -320,7 +314,7 @@ class PortfolioApp {
                                     ${responsibilityHTML}
                                 </div>
                                 <div class="learn-more-section">
-                                    <button class="learn-more-btn" onclick="event.stopPropagation(); showTimelineDetail('${item.title.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")}')">Click me to learn more →</button>
+                                    <button class="learn-more-btn" onclick="event.stopPropagation(); showTimelineDetail('${slugTitle}')">Click me to learn more →</button>
                                 </div>
                                 ${keyProjectsHTML}
                             </div>
@@ -458,8 +452,8 @@ class PortfolioApp {
         this.currentSection = sectionId;
         this.setupNavigation();
         
-        // Scroll to top of content
-        targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     filterProjects(filter) {

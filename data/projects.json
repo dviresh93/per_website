@@ -1,6 +1,35 @@
 {
   "projects": [
     {
+      "id": "voice-ai-agent",
+      "title": "Voice AI Agent - Drive-Through Order Automation",
+      "subtitle": "Production voice agent for automated drive-through ordering",
+      "description": "Production voice-based conversational AI agent handling drive-through food ordering — managing multi-turn order dialogues, item clarifications, and order confirmations reliably in real customer interactions.",
+      "technologies": ["Python", "MCP", "OpenTelemetry", "Voice AI", "Guardrails", "Prompt Engineering"],
+      "impact": "Maintained response accuracy above 90% in production with real-time hallucination detection and fallback protocols",
+      "timeline": "2025-2026",
+      "category": "AI Agents",
+      "videos": [
+        {
+          "title": "Voice Ordering AI Agent Demo",
+          "url": "https://www.youtube.com/watch?v=TNmc9Z1LeKU",
+          "description": "Live demonstration of the production voice AI agent handling multi-turn customer conversations, appointment scheduling, and business workflow automation."
+        }
+      ],
+      "details": {
+        "overview": "Built and deployed a production voice AI agent for drive-through order automation. The system handles multi-turn ordering conversations — taking orders, clarifying items, handling modifications, and confirming orders. A key engineering focus was reliability — building around the non-determinism of the underlying model to ensure the system behaved predictably in real customer interactions.",
+        "features": [
+          "Multi-turn conversational ordering — item selection, modifications, and order confirmation",
+          "Comprehensive monitoring using OpenTelemetry to track conversation quality and detect hallucinations",
+          "Guardrails and fallback mechanisms when confidence thresholds are not met",
+          "Intent classification, entity extraction, and context management",
+          "Real-time alerting and escalation protocols for production voice systems",
+          "Integration with external APIs and knowledge bases for contextually accurate responses"
+        ],
+        "architecture": "Built using MCP framework with advanced prompt engineering. Monitoring infrastructure implemented with OpenTelemetry for full conversation traceability. Guardrails layer added to prevent AI failures from reaching end users."
+      }
+    },
+    {
       "id": "drone-log-analysis",
       "title": "AI-Powered Drone Log Analysis Tool",
       "subtitle": "Real-time ULog processing with interactive AI chat - Transforms drone debugging from hours to minutes",
@@ -40,29 +69,31 @@
     },
     {
       "id": "smart-grid",
-      "title": "GridCOP: Smart Grid Analytics",
+      "title": "GridCOP: Smart Grid Analytics Agent",
       "subtitle": "Agentic AI system for smart grid data analysis and operator decision support",
-      "description": "AI agent for smart grid data analysis, optimizing energy distribution patterns and predicting system performance.",
-      "technologies": ["Python", "Langchain", "MCP", "Agentic RAG", "Orchestration", "Claude CLI", "Cursor"],
-      "impact": "Improved energy distribution efficiency, predictive maintenance",
-      "timeline": "2024 - Present",
+      "description": "Built an AI agent that helps power grid analysts query and understand smart grid data — reducing analyst research workflows by 70% within 2 months of deployment.",
+      "technologies": ["Python", "LangChain", "MCP", "RAG", "SQL", "AWS", "FastAPI"],
+      "impact": "Reduced analyst research workflows by 70%, automated report generation by 60%, improved data accuracy by 40%",
+      "timeline": "2025-2026",
       "category": "AI Agents",
       "videos": [
         {
-          "title": "Smart Grid Analytics Agent in Action",
+          "title": "GridCOP Smart Grid Analytics Agent Demo",
           "url": "https://youtu.be/lbg38E8qwRk",
-          "description": "Demonstration of the AI agent analyzing power data from smart grid utility database using Langchain framework."
+          "description": "Demonstration of the AI agent analyzing power data from a smart grid utility database — showing autonomous query generation, data validation, and response generation."
         }
       ],
       "details": {
-        "overview": "Developed using Langchain framework, this AI agent works on power data from the smart grid (utility data) stored in a SQL database. When users enter queries, the LLM first analyzes the query, queries the SQL database if additional context is needed, validates both the SQL query and fetched data, then generates responses with complete data and context.",
+        "overview": "Built from concept to production deployment, GridCOP is an AI agent that helps power grid analysts query databases and surface insights automatically. The agent independently understands the operator's question, queries the SQL database, validates both the query and the returned data, then generates a comprehensive response. Built with the same reliability and traceability principles applied to physical systems engineering.",
         "features": [
-          "LLM-powered query analysis and understanding",
-          "Intelligent SQL database querying for additional context",
-          "Dual validation system for SQL queries and fetched data",
-          "Context-aware response generation with complete data analysis",
-          "Smart grid utility data processing and insights"
-        ]
+          "Autonomous SQL query generation and execution from natural language questions",
+          "Dual validation system — validates both the SQL query and the returned data before surfacing results",
+          "Automated report generation pipeline eliminating manual documentation",
+          "Scalable backend API handling 50-100 daily queries with reliable uptime",
+          "Context-aware responses with full data and analysis included",
+          "Deployed on AWS with observability and monitoring infrastructure"
+        ],
+        "architecture": "LangChain-based multi-agent system with MCP for tool orchestration. FastAPI backend with SQL database integration. Deployed on AWS with monitoring for production reliability."
       }
     },
     {

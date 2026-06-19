@@ -1,15 +1,15 @@
 {
   "name": "Viresh Duvvuri",
-  "tagline": "Building Intelligence That Works",
-  "subtitle": "Systems Engineer | Automation Specialist | Problem Solver",
-  "description": "Transitioning from robotics systems engineering to AI agent development, bringing hardware intuition to software intelligence.",
+  "tagline": "Building Production AI Systems",
+  "subtitle": "AI Engineer | Robotics & Embedded Systems Background",
+  "description": "Software engineer with a background in robotics and embedded systems, now focused on building production AI agents. I bring the reliability and traceability mindset from physical systems engineering to intelligent automation.",
   "profileImage": "VD",
   "contact": {
     "linkedin": "https://linkedin.com/in/viresh-duvvuri/",
     "github": "https://github.com/dviresh93",
     "email": "vireshduvvuri@gmail.com",
     "phone": "+1-509-964-5469",
-    "location": "Bothell, WA",
+    "location": "Seattle, WA",
     "resume": "resume/Viresh_Duvvuri_Resume.pdf"
   }
 }

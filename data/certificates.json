@@ -34,11 +34,21 @@
       "id": "coding-agents",
       "title": "Coding Essentials for Agents",
       "issuer": "Analytics Vidhya",
-      "issueDate": "March 2025", 
+      "issueDate": "March 2025",
       "credentialUrl": "https://courses.analyticsvidhya.com/certificates/iycndrsuvb",
       "description": "Specialized programming course focusing on coding practices and patterns essential for developing AI agents and autonomous systems",
       "skills": ["Agent Programming", "Python", "Autonomous Systems", "AI Development"],
       "category": "Programming"
+    },
+    {
+      "id": "intro-langchain",
+      "title": "Introduction to LangChain",
+      "issuer": "Analytics Vidhya",
+      "issueDate": "2025",
+      "credentialUrl": "",
+      "description": "Foundational course covering LangChain framework for building LLM-powered applications, chains, and agents",
+      "skills": ["LangChain", "LLM Integration", "Agent Development", "Python"],
+      "category": "AI/ML"
     },
     {
       "id": "supervised-ml",
