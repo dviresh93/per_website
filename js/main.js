@@ -97,10 +97,15 @@ class PortfolioApp {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
                 const filter = btn.dataset.filter;
-                this.filterProjects(filter);
-                
-                // Update active button
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                const group = btn.closest('.projects-filter');
+
+                if (group?.id === 'experience-filter') {
+                    this.filterTimeline(filter);
+                } else {
+                    this.filterProjects(filter);
+                }
+
+                group?.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
             });
         });
@@ -262,33 +267,22 @@ class PortfolioApp {
                         </ul>
                     ` : '';
                     
-                    const keyProjectsHTML = item.projects && item.projects.length > 0 ? `
-                        <div class="timeline-projects">
-                            <h4>Featured Projects:</h4>
-                            <div class="featured-projects-simple">
-                                ${item.projects.map(project => `
-                                    <div class="featured-project-card" onclick="event.stopPropagation(); showProject('${project.projectId}')">
-                                        <h5>${project.name}</h5>
-                                        <p>${project.description}</p>
-                                        <span class="learn-more">Click to learn more →</span>
-                                    </div>
-                                `).join("")}
-                            </div>
-                        </div>
-                    ` : "";
+                    const keyProjectsHTML = "";
                     
-                    const isContract = item.title.includes('Freelance');
+                    const employmentType = item.employmentType || 'full-time';
+                    const isFreelance = employmentType === 'freelance';
                     const displayTitle = item.title.replace(/\s*\(Freelance\)/gi, '').trim();
                     const slugTitle = item.title.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
                     timelineHTML += `
-                        <div class="project-card career-card" onclick="showTimelineDetail('${slugTitle}')">
+                        <div class="project-card career-card" data-employment-type="${employmentType}" onclick="showTimelineDetail('${slugTitle}')">
                             <div class="project-card-header">
                                 <div class="career-header-meta">
                                     <span class="project-tag timeline-year">${item.year}</span>
                                     <span class="project-tag timeline-location">${item.location}</span>
+                                    ${isFreelance ? '<span class="freelance-badge">Freelance</span>' : '<span class="fulltime-badge">Full-time</span>'}
                                 </div>
                                 <h3>${displayTitle}</h3>
-                                <p>${companyInfo}${isContract ? '<span class="contract-badge">Contract</span>' : ''}</p>
+                                <p>${companyInfo}</p>
                             </div>
                             <div class="project-card-body">
                                 <div class="career-summary">
@@ -296,7 +290,7 @@ class PortfolioApp {
                                     ${responsibilityHTML}
                                 </div>
                                 <div class="learn-more-section">
-                                    <button class="learn-more-btn" onclick="event.stopPropagation(); showTimelineDetail('${slugTitle}')">Click me to learn more →</button>
+                                    <button class="learn-more-btn" onclick="event.stopPropagation(); showTimelineDetail('${slugTitle}')">Learn More</button>
                                 </div>
                                 ${keyProjectsHTML}
                             </div>
@@ -374,6 +368,9 @@ class PortfolioApp {
                                     <p>${project.description}</p>
                                     <div class="project-meta">
                                         <span class="project-tag">${project.timeline}</span>
+                                    </div>
+                                    <div class="learn-more-section">
+                                        <button class="learn-more-btn" onclick="event.stopPropagation(); showProject('${project.id}')">Learn More</button>
                                     </div>
                                 </div>
                             </div>
@@ -511,16 +508,16 @@ class PortfolioApp {
     }
 
     filterProjects(filter) {
-        const projectCards = document.querySelectorAll('.project-card');
-        
-        projectCards.forEach(card => {
+        document.querySelectorAll('#projects-container .project-card').forEach(card => {
             const category = card.dataset.category;
-            if (filter === 'all' || category === filter) {
-                card.style.display = 'block';
-                card.style.animation = 'slideIn 0.5s ease';
-            } else {
-                card.style.display = 'none';
-            }
+            card.style.display = (filter === 'all' || category === filter) ? 'block' : 'none';
+        });
+    }
+
+    filterTimeline(filter) {
+        document.querySelectorAll('#timeline-container .project-card').forEach(card => {
+            const empType = card.dataset.employmentType;
+            card.style.display = (filter === 'all' || empType === filter) ? 'block' : 'none';
         });
     }
 
