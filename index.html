@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="page-title">Viresh Duvvuri - Building Production AI Systems</title>
-    <link rel="stylesheet" href="css/components.css?v=20260619-10">
-    <link rel="stylesheet" href="css/responsive.css?v=20260619-10">
-    <link rel="stylesheet" href="css/main.css?v=20260619-10">
+    <link rel="stylesheet" href="css/components.css?v=20260619-24">
+    <link rel="stylesheet" href="css/responsive.css?v=20260619-24">
+    <link rel="stylesheet" href="css/main.css?v=20260619-24">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -16,14 +16,14 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-identity">
-                <span class="nav-name">Viresh Duvvuri</span>
+                <span class="nav-name" onclick="showSection('about')">Viresh Duvvuri</span>
                 <div class="nav-social" id="nav-contact-links"></div>
             </div>
             <div class="nav-links">
                 <a href="#" class="nav-link active" data-section="about">About</a>
                 <a href="#" class="nav-link" data-section="journey">Experience</a>
                 <a href="#" class="nav-link" data-section="projects-list">Projects</a>
-                <a href="#" class="nav-link" data-section="certificates">Certifications</a>
+                <a href="#" class="nav-link" data-section="education">Education</a>
             </div>
         </div>
     </nav>
@@ -40,16 +40,6 @@
                     <div class="intro-photo">
                         <img src="profile-photo.jpg" alt="Viresh Duvvuri">
                     </div>
-                    <div class="sidebar-education">
-                        <div class="sidebar-edu-item">
-                            <div class="sidebar-edu-degree">M.S. Computer Science</div>
-                            <div class="sidebar-edu-school">Washington State University</div>
-                        </div>
-                        <div class="sidebar-edu-item">
-                            <div class="sidebar-edu-degree">B.Tech Information Technology</div>
-                            <div class="sidebar-edu-school">GITAM University</div>
-                        </div>
-                    </div>
                 </div>
                 <div class="intro-main">
                     <h1 id="profile-name" style="display:none"></h1>
@@ -57,6 +47,8 @@
                     <p id="profile-subtitle" style="display:none"></p>
                     <p class="intro-description">7+ years building physical systems in robotics startups — embedded software, flight controllers, sensor fusion, and field diagnostics across drone and robotic platforms. When I started applying those same disciplines to AI agents, the parallel was immediate: both make autonomous decisions, both fail in non-obvious ways under real-world conditions, and both need traceability built in from day one.</p>
                     <p class="intro-description">I now build production AI agents with a focus on reliability — monitoring, guardrails, and observability that makes AI systems predictable enough to trust on critical infrastructure.</p>
+
+
                 </div>
             </div>
 
@@ -106,8 +98,9 @@
             <div class="section-divider"></div>
 
             <!-- About Cards -->
-            <div class="section-header">
-                <h2>About Me</h2>
+            <div class="section-label">
+                <i class="fas fa-user"></i>
+                <span>About Me</span>
             </div>
 
             <div class="about-content">
@@ -133,9 +126,6 @@
 
         <!-- Experience Section -->
         <section id="journey" class="section">
-            <div class="section-header">
-                <h2>Experience</h2>
-            </div>
             <div class="projects-list" id="timeline-container"></div>
         </section>
 
@@ -144,24 +134,18 @@
 
         <!-- Projects Section -->
         <section id="projects-list" class="section">
-            <div class="section-header">
-                <h2>Projects</h2>
-            </div>
-            <div class="projects-filter">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="AI Agents">AI Agents</button>
-                <button class="filter-btn" data-filter="Robotics">Robotics</button>
-            </div>
-            <div class="projects-list" id="projects-container"></div>
+            <div id="projects-container"></div>
         </section>
 
         <!-- Project Detail -->
         <section id="project-detail" class="section"></section>
 
-        <!-- Certifications Section -->
-        <section id="certificates" class="section">
-            <div class="section-header">
-                <h2>Certifications</h2>
+        <!-- Education Section -->
+        <section id="education" class="section">
+            <div id="education-container"></div>
+            <div class="projects-category-header" style="margin-top: 2.5rem;">
+                <i class="fas fa-certificate"></i>
+                <span>Certifications</span>
             </div>
             <div class="certificates-container" id="certificates-container"></div>
         </section>
@@ -172,7 +156,7 @@
     <div id="sidebar-skills" style="display:none"></div>
     <div id="projects-dropdown" style="display:none"></div>
 
-    <script src="js/main.js?v=20260619-9"></script>
+    <script src="js/main.js?v=20260619-16"></script>
     <script src="js/timeline_detail.js?v=20250911-1"></script>
     <script src="js/projects.js?v=20250911-3"></script>
 </body>

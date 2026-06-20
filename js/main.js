@@ -30,6 +30,7 @@ class PortfolioApp {
             console.log("Timeline rendered");
             
             this.renderProjects();
+            this.renderEducation();
             this.renderCertificates();
             console.log("Projects rendered");
             
@@ -249,28 +250,9 @@ class PortfolioApp {
 
             const timeline = this.data.timeline;
             let timelineHTML = "";
-            let currentSection = null;
 
-            timeline.journey.forEach((item, index) => {
+            timeline.journey.filter(item => item.type === 'career').forEach((item, index) => {
                 try {
-                    // Add section header if we're starting a new section
-                    if (item.type !== currentSection) {
-                        if (item.type === 'career') {
-                            timelineHTML += `
-                                <h2 class="timeline-section-header">
-                                    <i class="fas fa-briefcase"></i> Career
-                                </h2>
-                            `;
-                        } else if (item.type === 'education') {
-                            timelineHTML += `
-                                <h2 class="timeline-section-header">
-                                    <i class="fas fa-graduation-cap"></i> Education
-                                </h2>
-                            `;
-                        }
-                        currentSection = item.type;
-                    }
-                    
                     const companyInfo = item.company || item.institution || "";
                     
                     // Use responsibilities if available, otherwise fall back to description parsing
@@ -352,43 +334,115 @@ class PortfolioApp {
     renderProjects() {
         const projectsContainer = document.getElementById('projects-container');
         const dropdownContainer = document.getElementById('projects-dropdown');
-        
+
         if (!projectsContainer || !this.data.projects) return;
 
-        const projects = this.data.projects;
-        
-        // Render projects list
+        const projects = this.data.projects.projects;
+
+        // Group by category preserving order
+        const grouped = {};
+        projects.forEach(project => {
+            const cat = project.category || 'Other';
+            if (!grouped[cat]) grouped[cat] = [];
+            grouped[cat].push(project);
+        });
+
+        const categoryIcons = {
+            'AI Agents': 'fas fa-robot',
+            'Robotics': 'fas fa-cog'
+        };
+
         let projectsHTML = '';
         let dropdownHTML = '';
 
-        projects.projects.forEach(project => {
-            // Main projects list
+        Object.entries(grouped).forEach(([category, items]) => {
+            const icon = categoryIcons[category] || 'fas fa-folder';
             projectsHTML += `
-                <div class="project-card" data-category="${project.category}" onclick="showProject('${project.id}')">
-                    <div class="project-card-header">
-                        <h3>${project.title}</h3>
-                        <p>${project.subtitle}</p>
+                <div class="projects-category-section">
+                    <div class="projects-category-header">
+                        <i class="${icon}"></i>
+                        <span>${category}</span>
                     </div>
-                    <div class="project-card-body">
-                        <p>${project.description}</p>
-                        <div class="project-meta">
-                            <span class="project-tag">${project.category}</span>
-                            <span class="project-tag">${project.timeline}</span>
-                        </div>
+                    <div class="projects-category-grid">
+                        ${items.map(project => `
+                            <div class="project-card" data-category="${project.category}" onclick="showProject('${project.id}')">
+                                <div class="project-card-header">
+                                    <h3>${project.title}</h3>
+                                    <p>${project.subtitle}</p>
+                                </div>
+                                <div class="project-card-body">
+                                    <p>${project.description}</p>
+                                    <div class="project-meta">
+                                        <span class="project-tag">${project.timeline}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('')}
                     </div>
                 </div>
             `;
 
-            // Dropdown menu
-            dropdownHTML += `
-                <a href="#" onclick="showProject('${project.id}')">${project.title}</a>
-            `;
+            items.forEach(project => {
+                dropdownHTML += `<a href="#" onclick="showProject('${project.id}')">${project.title}</a>`;
+            });
         });
 
         projectsContainer.innerHTML = projectsHTML;
         if (dropdownContainer) {
             dropdownContainer.innerHTML = dropdownHTML;
         }
+    }
+
+    renderEducation() {
+        const eduContainer = document.getElementById('education-container');
+        if (!eduContainer || !this.data.timeline) return;
+
+        const eduItems = this.data.timeline.journey.filter(item => item.type === 'education');
+        if (!eduItems.length) return;
+
+        let html = `
+            <div class="projects-category-header">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Education</span>
+            </div>
+            <div class="education-grid">
+        `;
+        eduItems.forEach(item => {
+            const degree = item.degree || item.title;
+            const institution = item.institution || '';
+            const year = item.year || '';
+            const location = item.location || '';
+            const description = item.description || '';
+            const projectId = item.projectId || (item.projects && item.projects[0]?.projectId);
+            const clickable = !!projectId;
+            const thesis = item.thesis || '';
+            const advisor = item.advisor || '';
+            html += `
+                <div class="education-card${clickable ? ' education-card--clickable' : ''}"
+                     ${clickable ? `onclick="showProject('${projectId}')" role="button" tabindex="0"` : ''}>
+                    <div class="education-card-header">
+                        <div class="education-card-icon"><i class="fas fa-graduation-cap"></i></div>
+                        <div class="education-card-title">
+                            <h3>${degree}</h3>
+                            <p class="edu-institution">${institution}</p>
+                            <div class="edu-meta">
+                                ${year ? `<span class="edu-tag">${year}</span>` : ''}
+                                ${location ? `<span class="edu-tag">📍 ${location}</span>` : ''}
+                            </div>
+                        </div>
+                        ${clickable ? '<i class="fas fa-arrow-right education-card-arrow"></i>' : ''}
+                    </div>
+                    <div class="education-card-body">
+                        <p>${description}</p>
+                        ${thesis ? `<div class="edu-thesis"><i class="fas fa-file-alt"></i><span>Thesis: <em>${thesis}</em></span></div>` : ''}
+                        ${advisor ? `<div class="edu-advisor"><i class="fas fa-user-tie"></i><span>Advisor: ${advisor}</span></div>` : ''}
+                        ${clickable ? '<div class="education-card-actions"><button class="education-view-btn"><i class="fas fa-external-link-alt"></i> View Project</button></div>' : ''}
+                    </div>
+                </div>
+            `;
+        });
+        html += '</div>';
+        eduContainer.innerHTML = html;
     }
 
     renderCertificates() {
@@ -692,23 +746,9 @@ function fallbackCopyToClipboard(text) {
 }
 
 function showToast(message) {
-    // Create toast notification
     const toast = document.createElement('div');
     toast.className = 'toast-notification';
     toast.textContent = message;
-    toast.style.cssText = `
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background: var(--accent-color);
-        color: white;
-        padding: 12px 20px;
-        border-radius: 6px;
-        z-index: 10000;
-        animation: slideInUp 0.3s ease;
-        box-shadow: var(--shadow-lg);
-        font-weight: 500;
-    `;
     
     document.body.appendChild(toast);
     

@@ -69,15 +69,6 @@
         grid-template-columns: 1fr;
     }
 
-    .section-header h2 {
-        font-size: 1.875rem;
-        margin-bottom: 1rem;
-    }
-    
-    .section-header p {
-        font-size: 1rem;
-    }
-    
     .journey-hero {
         padding: 2.5rem 1.5rem;
         margin-bottom: 2rem;
@@ -212,10 +203,6 @@
 
     .section-header h2 {
         font-size: 1.75rem;
-    }
-    
-    .section-header p {
-        font-size: 0.9rem;
     }
     
     .timeline {
